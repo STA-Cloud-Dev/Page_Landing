@@ -1,6 +1,8 @@
+import { sitePath } from '@/lib/site-path';
+
 export const siteConfig = {
   name: 'STACloud',
-  siteUrl: 'https://stacloud.dev/',
+  siteUrl: sitePath('/'),
   panelUrl: 'https://portal.stacloud.dev/',
   discordUrl: 'https://discord.gg/nq8B4JXmnm',
   zaloUrl: 'https://zalo.me/g/ekaldlnq5sqdn37lvikk',
@@ -189,7 +191,7 @@ export const servicePlans = [
 export const locations = [
   {
     name: 'Singapore',
-    flagSrc: '/flags/singapore.svg',
+    flagSrc: sitePath('/flags/singapore.svg'),
     speed: '10 Gbps',
     description:
       'OVH Singapore dành cho gói miễn phí và trả phí, phù hợp game server, web app, bot và VPS Xeon/EPYC.',
@@ -197,7 +199,7 @@ export const locations = [
   },
   {
     name: 'Hong Kong',
-    flagSrc: '/flags/hong-kong.svg',
+    flagSrc: sitePath('/flags/hong-kong.svg'),
     speed: '30 Gbps',
     description:
       'Proxy Hong Kong chỉ dành cho gói trả phí và hiện tạm ngưng do hết slot. Theo dõi Discord để nhận thông báo khi có slot mới.',
@@ -205,7 +207,7 @@ export const locations = [
   },
   {
     name: 'Thailand',
-    flagSrc: '/flags/thailand.svg',
+    flagSrc: sitePath('/flags/thailand.svg'),
     speed: '30 Gbps',
     description:
       'Proxy Thailand hỗ trợ gói miễn phí và trả phí, phù hợp nhu cầu proxy hoặc kết nối trong khu vực Đông Nam Á.',
@@ -213,7 +215,7 @@ export const locations = [
   },
   {
     name: 'Việt Nam',
-    flagSrc: '/flags/vietnam.svg',
+    flagSrc: sitePath('/flags/vietnam.svg'),
     speed: '1 Gbps',
     description:
       'Location Việt Nam dành cho dịch vụ trả phí, có độ trễ thấp cho người dùng trong nước.',

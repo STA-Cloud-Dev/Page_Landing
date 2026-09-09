@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { sitePath } from '@/lib/site-path';
 
 interface LocationNode {
   id: string;
@@ -21,7 +22,7 @@ const NODES: LocationNode[] = [
     id: 'sg',
     name: 'Singapore OVH Datacenter',
     country: 'Singapore',
-    flag: '/flags/singapore.svg',
+    flag: sitePath('/flags/singapore.svg'),
     badge: 'Tối Ưu Cho Việt Nam',
     basePing: 26,
     bandwidth: '10 Gbps Anti-DDoS',
@@ -34,7 +35,7 @@ const NODES: LocationNode[] = [
     id: 'vn',
     name: 'Việt Nam Local Hub',
     country: 'Việt Nam',
-    flag: '/flags/vietnam.svg',
+    flag: sitePath('/flags/vietnam.svg'),
     badge: 'Direct VN Routing',
     basePing: 8,
     bandwidth: '1 Gbps Dedicated',
@@ -47,7 +48,7 @@ const NODES: LocationNode[] = [
     id: 'hk',
     name: 'Hong Kong Shield Proxy',
     country: 'Hong Kong',
-    flag: '/flags/hong-kong.svg',
+    flag: sitePath('/flags/hong-kong.svg'),
     badge: 'Proxy Tunnel',
     basePing: 42,
     bandwidth: '30 Gbps Shield',
@@ -60,7 +61,7 @@ const NODES: LocationNode[] = [
     id: 'th',
     name: 'Thailand Edge Relay',
     country: 'Thái Lan',
-    flag: '/flags/thailand.svg',
+    flag: sitePath('/flags/thailand.svg'),
     badge: 'Edge Relay',
     basePing: 34,
     bandwidth: '30 Gbps Backbone',

@@ -18,6 +18,7 @@ import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { Reveal } from '@/components/ui/reveal';
+import { sitePath } from '@/lib/site-path';
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -165,10 +166,10 @@ export function HomePage() {
       <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-300/30 bg-[#063056]/85 px-4 py-3 shadow-[0_10px_40px_rgba(0,119,182,0.35)] backdrop-blur-xl sm:px-6">
           {/* Brand Logo */}
-          <a href="/" className="flex items-center gap-3 group">
+          <a href={sitePath('/')} className="flex items-center gap-3 group">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-300/40 bg-black/60 p-1.5 shadow-[0_0_25px_rgba(0,240,255,0.3)] transition group-hover:border-cyan-200 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.55)] sm:h-12 sm:w-12">
               <img
-                src="/picture/logoSTACloud.png"
+                src={sitePath('/picture/logoSTACloud.png')}
                 alt={homeConfig.logoAlt}
                 className="h-full w-full object-contain"
               />
@@ -204,7 +205,7 @@ export function HomePage() {
               Tùy Biến (Max 64C / 128G)
             </a>
             <a
-              href="/egg"
+              href={sitePath('/egg')}
               className="rounded-lg px-3.5 py-1.5 transition hover:bg-cyan-400/20 hover:text-white"
             >
               Eggs
@@ -690,7 +691,7 @@ export function HomePage() {
             </div>
 
             <a
-              href="/egg"
+              href={sitePath('/egg')}
               className="btn-cyber-primary inline-flex shrink-0 rounded-2xl px-6 py-3.5 text-sm font-bold shadow-[0_0_25px_rgba(0,180,216,0.45)]"
             >
               <span>Khám Phá Danh Mục Eggs</span>

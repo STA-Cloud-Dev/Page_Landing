@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { Reveal } from '@/components/ui/reveal';
+import { sitePath } from '@/lib/site-path';
 import { homeConfig } from '@/components/home/content';
 import { Section3DAccent } from '@/components/visual/section-3d-accent';
 import { eggGroups, eggTotals, type EggGroup, type EggItem } from './content';
@@ -81,11 +82,11 @@ function Header() {
     <header className="px-4 pt-6 sm:px-6 sm:pt-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 rounded-lg border border-cyan-300/15 bg-slate-950/80 px-4 py-4 backdrop-blur sm:px-5 lg:flex-row lg:items-center lg:justify-between">
         <a
-          href="/"
+          href={sitePath('/')}
           className="interactive-card group flex items-center gap-3 rounded-lg border border-cyan-300/15 bg-cyan-300/[0.04] px-3 py-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.07] sm:gap-4 sm:px-4"
         >
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-cyan-300/20 bg-slate-950/80 p-2 shadow-[0_0_24px_rgba(34,211,238,0.12)] sm:h-16 sm:w-16">
-            <img src="/picture/logoSTACloud.png" alt="STACloud" className="h-full w-full object-contain" />
+            <img src={sitePath('/picture/logoSTACloud.png')} alt="STACloud" className="h-full w-full object-contain" />
           </div>
           <div className="min-w-0">
             <p className="text-xl font-semibold text-white sm:text-2xl">STACloud</p>
@@ -97,13 +98,13 @@ function Header() {
 
         <nav className="grid grid-cols-2 gap-2 text-sm text-slate-300 sm:flex sm:flex-wrap sm:gap-3">
           <a
-            href="/"
+            href={sitePath('/')}
             className="inline-flex min-h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 transition hover:border-cyan-300/30 hover:text-white"
           >
             Trang chủ
           </a>
           <a
-            href="/free-server"
+            href={sitePath('/free-server')}
             className="inline-flex min-h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 transition hover:border-cyan-300/30 hover:text-white"
           >
             Gói dịch vụ

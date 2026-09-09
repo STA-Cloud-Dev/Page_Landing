@@ -1,5 +1,6 @@
 import { OpenClawSpotlight } from '@/components/shared/openclaw-spotlight';
 import { Reveal } from '@/components/ui/reveal';
+import { sitePath } from '@/lib/site-path';
 
 import { BenefitsSection } from '@/components/landing/benefits-section';
 import { FooterSection } from '@/components/landing/footer-section';
@@ -16,12 +17,12 @@ export function FreeServerPage() {
       <section className="px-4 pt-6 sm:px-6 sm:pt-8">
         <Reveal className="mx-auto flex max-w-6xl flex-col gap-4 rounded-lg border border-cyan-300/15 bg-black/70 px-4 py-4 shadow-[0_22px_70px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:px-5 lg:flex-row lg:items-center lg:justify-between">
           <a
-            href="/"
+            href={sitePath('/')}
             className="interactive-card group flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.035] px-3 py-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.06] sm:gap-4 sm:px-4"
           >
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-cyan-300/20 bg-black/60 p-2 shadow-[0_0_24px_rgba(34,211,238,0.12)] sm:h-16 sm:w-16">
               <img
-                src="/picture/logoSTACloud.png"
+                src={sitePath('/picture/logoSTACloud.png')}
                 alt="STACloud"
                 className="h-full w-full object-contain"
               />
@@ -36,7 +37,7 @@ export function FreeServerPage() {
 
           <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
             <a
-              href="/egg"
+              href={sitePath('/egg')}
               className="interactive-card inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.08] sm:w-auto"
             >
               Eggs

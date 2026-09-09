@@ -1,6 +1,7 @@
 import { Reveal } from '@/components/ui/reveal';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { homeConfig } from '@/components/home/content';
+import { sitePath } from '@/lib/site-path';
 import { Section3DAccent } from '@/components/visual/section-3d-accent';
 import type { LegalSection } from './legal-content';
 
@@ -21,9 +22,9 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
     <main className="legal-shell min-h-screen px-4 pb-14 pt-4 sm:px-6 sm:pb-20 sm:pt-6">
       <header className="sticky top-3 z-40 mx-auto max-w-7xl rounded-2xl border border-cyan-200/25 bg-[#031a2f]/90 p-3 shadow-[0_18px_55px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:p-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <a href="/" className="group flex min-w-0 items-center gap-3 rounded-xl px-2 py-1.5">
+          <a href={sitePath('/')} className="group flex min-w-0 items-center gap-3 rounded-xl px-2 py-1.5">
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-cyan-200/30 bg-black/45 p-2 shadow-[0_0_24px_rgba(72,202,228,0.18)]">
-              <img src="/picture/logoSTACloud.png" alt="STACloud" className="h-full w-full object-contain" />
+              <img src={sitePath('/picture/logoSTACloud.png')} alt="STACloud" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0">
               <p className="font-bold text-white transition group-hover:text-cyan-200">STACloud</p>
@@ -32,9 +33,9 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
           </a>
 
           <nav className="grid grid-cols-3 gap-2 text-xs font-semibold sm:flex sm:flex-wrap sm:text-sm">
-            <a href="/" className="inline-flex min-h-10 items-center justify-center rounded-xl border border-cyan-200/20 bg-white/[0.04] px-3 text-sky-100 transition hover:bg-cyan-300/10 hover:text-white">Trang chủ</a>
-            <a href="/free-server" className="inline-flex min-h-10 items-center justify-center rounded-xl border border-emerald-200/25 bg-emerald-400/10 px-3 text-emerald-100 transition hover:bg-emerald-400/20">Node Test Free</a>
-            <a href="/egg" className="inline-flex min-h-10 items-center justify-center rounded-xl border border-cyan-200/20 bg-white/[0.04] px-3 text-sky-100 transition hover:bg-cyan-300/10 hover:text-white">Eggs</a>
+            <a href={sitePath('/')} className="inline-flex min-h-10 items-center justify-center rounded-xl border border-cyan-200/20 bg-white/[0.04] px-3 text-sky-100 transition hover:bg-cyan-300/10 hover:text-white">Trang chủ</a>
+            <a href={sitePath('/free-server')} className="inline-flex min-h-10 items-center justify-center rounded-xl border border-emerald-200/25 bg-emerald-400/10 px-3 text-emerald-100 transition hover:bg-emerald-400/20">Node Test Free</a>
+            <a href={sitePath('/egg')} className="inline-flex min-h-10 items-center justify-center rounded-xl border border-cyan-200/20 bg-white/[0.04] px-3 text-sky-100 transition hover:bg-cyan-300/10 hover:text-white">Eggs</a>
             <a href={homeConfig.panelUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center justify-center rounded-xl bg-white px-4 text-slate-950 transition hover:bg-cyan-100">Mở Portal</a>
             <a href={homeConfig.discordUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center justify-center rounded-xl bg-sky-500 px-4 text-white transition hover:bg-sky-400">Discord</a>
           </nav>

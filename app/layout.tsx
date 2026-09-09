@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
+import { sitePath } from '@/lib/site-path';
 
 const SITE_URL = 'https://stacloud.dev';
 
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/picture/iconSTACloud.ico', type: 'image/x-icon', sizes: 'any' },
-      { url: '/picture/iconSTACloud.png', type: 'image/png' },
+      { url: sitePath('/picture/iconSTACloud.ico'), type: 'image/x-icon', sizes: 'any' },
+      { url: sitePath('/picture/iconSTACloud.png'), type: 'image/png' },
     ],
   },
   robots: 'index, follow',

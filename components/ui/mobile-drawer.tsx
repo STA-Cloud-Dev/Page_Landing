@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { sitePath } from '@/lib/site-path';
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -47,7 +48,7 @@ export function MobileDrawer({
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-300/40 bg-black/60 p-1.5 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
               <img
-                src="/picture/logoSTACloud.png"
+                src={sitePath('/picture/logoSTACloud.png')}
                 alt="STACloud"
                 className="h-full w-full object-contain"
               />
@@ -104,7 +105,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="/egg"
+            href={sitePath('/egg')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -144,16 +145,16 @@ export function MobileDrawer({
               Pháp Lý & Hợp Tác
             </p>
             <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs text-sky-200">
-              <a href="/partner" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              <a href={sitePath('/partner')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Partner 20%
               </a>
-              <a href="/sla" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              <a href={sitePath('/sla')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Cam kết SLA
               </a>
-              <a href="/terms" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              <a href={sitePath('/terms')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Điều khoản
               </a>
-              <a href="/privacy" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              <a href={sitePath('/privacy')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Bảo mật
               </a>
             </div>

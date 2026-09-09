@@ -1,4 +1,5 @@
 import { siteConfig } from './content';
+import { sitePath } from '@/lib/site-path';
 
 export function FooterSection() {
   return (
@@ -13,19 +14,19 @@ export function FooterSection() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <a href="/terms" className="transition hover:text-white">
+          <a href={sitePath('/terms')} className="transition hover:text-white">
             Điều khoản
           </a>
-          <a href="/privacy" className="transition hover:text-white">
+          <a href={sitePath('/privacy')} className="transition hover:text-white">
             Quyền riêng tư
           </a>
-          <a href="/sla" className="transition hover:text-white">
+          <a href={sitePath('/sla')} className="transition hover:text-white">
             SLA
           </a>
-          <a href="/partner" className="transition hover:text-white">
+          <a href={sitePath('/partner')} className="transition hover:text-white">
             Partner
           </a>
-          <a href="/egg" className="transition hover:text-white">
+          <a href={sitePath('/egg')} className="transition hover:text-white">
             Eggs
           </a>
           <a

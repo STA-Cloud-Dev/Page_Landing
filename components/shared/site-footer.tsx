@@ -1,4 +1,5 @@
 import { homeConfig } from '@/components/home/content';
+import { sitePath } from '@/lib/site-path';
 
 export function SiteFooter() {
   return (
@@ -7,10 +8,10 @@ export function SiteFooter() {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand Info */}
           <div className="space-y-4">
-            <a href="/" className="group inline-flex items-center gap-3">
+            <a href={sitePath('/')} className="group inline-flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-300/40 bg-black/60 p-2 shadow-[0_0_20px_rgba(0,240,255,0.3)] transition group-hover:border-cyan-200">
                 <img
-                  src="/picture/logoSTACloud.png"
+                  src={sitePath('/picture/logoSTACloud.png')}
                   alt={homeConfig.logoAlt}
                   className="h-full w-full object-contain"
                 />
@@ -38,16 +39,16 @@ export function SiteFooter() {
               ⚡ Dịch Vụ
             </p>
             <div className="mt-4 space-y-2.5 text-xs sm:text-sm text-sky-100">
-              <a href="/#plans" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/#plans')} className="block transition hover:text-cyan-200">
                 Bảng giá & Gói dịch vụ
               </a>
-              <a href="/#calculator" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/#calculator')} className="block transition hover:text-cyan-200">
                 Tùy biến cấu hình (Max 64C / 128G)
               </a>
-              <a href="/egg" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/egg')} className="block transition hover:text-cyan-200">
                 Kho Game & Softwares Eggs
               </a>
-              <a href="/free-server" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/free-server')} className="block transition hover:text-cyan-200">
                 Free Server Community
               </a>
               <a
@@ -91,7 +92,7 @@ export function SiteFooter() {
               >
                 <span>Messenger Group</span>
               </a>
-              <a href="/#faq" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/#faq')} className="block transition hover:text-cyan-200">
                 Câu hỏi thường gặp (FAQ)
               </a>
             </div>
@@ -103,16 +104,16 @@ export function SiteFooter() {
               🛡️ Chính Sách & SLA
             </p>
             <div className="mt-4 space-y-2.5 text-xs sm:text-sm text-sky-100">
-              <a href="/partner" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/partner')} className="block transition hover:text-cyan-200">
                 Chương trình Partner (Giảm 20%)
               </a>
-              <a href="/sla" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/sla')} className="block transition hover:text-cyan-200">
                 Cam kết chất lượng SLA
               </a>
-              <a href="/terms" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/terms')} className="block transition hover:text-cyan-200">
                 Điều khoản sử dụng
               </a>
-              <a href="/privacy" className="block transition hover:text-cyan-200">
+              <a href={sitePath('/privacy')} className="block transition hover:text-cyan-200">
                 Chính sách bảo mật
               </a>
             </div>
