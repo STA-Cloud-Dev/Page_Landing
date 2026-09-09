@@ -1,7 +1,6 @@
-﻿'use client';
+'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { Reveal } from '@/components/ui/reveal';
 import { homeConfig } from '@/components/home/content';
@@ -81,7 +80,7 @@ function Header() {
   return (
     <header className="px-4 pt-6 sm:px-6 sm:pt-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 rounded-lg border border-cyan-300/15 bg-slate-950/80 px-4 py-4 backdrop-blur sm:px-5 lg:flex-row lg:items-center lg:justify-between">
-        <Link
+        <a
           href="/"
           className="interactive-card group flex items-center gap-3 rounded-lg border border-cyan-300/15 bg-cyan-300/[0.04] px-3 py-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.07] sm:gap-4 sm:px-4"
         >
@@ -94,21 +93,21 @@ function Header() {
               Egg catalog cho panel và service templates
             </p>
           </div>
-        </Link>
+        </a>
 
         <nav className="grid grid-cols-2 gap-2 text-sm text-slate-300 sm:flex sm:flex-wrap sm:gap-3">
-          <Link
+          <a
             href="/"
             className="inline-flex min-h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 transition hover:border-cyan-300/30 hover:text-white"
           >
             Trang chủ
-          </Link>
-          <Link
+          </a>
+          <a
             href="/free-server"
             className="inline-flex min-h-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] px-4 transition hover:border-cyan-300/30 hover:text-white"
           >
             Gói dịch vụ
-          </Link>
+          </a>
           <a
             href={homeConfig.panelUrl}
             target="_blank"

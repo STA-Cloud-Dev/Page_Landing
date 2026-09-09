@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import {
   allServicePlans,
   comprehensiveFaqs,
@@ -61,6 +60,87 @@ function getStatusBadge(status: string) {
   }
 }
 
+const nodeTestVerificationOptions = [
+  'Mời tối thiểu 10 bạn bè tham gia Discord.',
+  'Đăng một bài giới thiệu dịch vụ free hosting lên mạng xã hội hoặc diễn đàn.',
+  'Nạp tối thiểu 10.000 Credit để vào trải nghiệm ngay.',
+] as const;
+
+function NodeTestLaunch() {
+  return (
+    <section id="free-hosting" className="scroll-mt-24 px-4 py-10 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-emerald-300/35 bg-gradient-to-br from-[#073b68]/95 via-[#063056]/95 to-[#04233f]/95 shadow-[0_28px_90px_rgba(0,180,216,0.22)]">
+        <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="relative border-b border-cyan-200/15 p-6 sm:p-8 lg:border-b-0 lg:border-r">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/35 bg-emerald-400/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-200">
+              <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.9)]" />
+              Node Test 100% Free
+            </div>
+            <h2 className="mt-5 text-3xl font-black leading-tight text-white sm:text-4xl">
+              Free Host Bot Discord, Web Nhỏ & Project Sinh Viên
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-sky-100 sm:text-base">
+              Gói Node Test dành cho thành viên trải nghiệm dịch vụ và triển khai các project nhỏ.
+              Mỗi plan cần 9.000 Credit; tài khoản đủ điều kiện được nhận 10.000 Credit để bắt đầu.
+            </p>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl border border-cyan-200/20 bg-black/25 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-cyan-200">CPU</p>
+                <p className="mt-2 text-2xl font-black text-white">75%</p>
+              </div>
+              <div className="rounded-2xl border border-cyan-200/20 bg-black/25 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-cyan-200">RAM</p>
+                <p className="mt-2 text-2xl font-black text-white">2 GB</p>
+              </div>
+              <div className="col-span-2 rounded-2xl border border-emerald-200/25 bg-emerald-400/10 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">Giá tạo plan</p>
+                <p className="mt-2 text-2xl font-black text-white">9.000 Credit</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">Nhận 10.000 Credit</p>
+            <h3 className="mt-2 text-2xl font-bold text-white">Xác minh tài khoản mới qua Discord</h3>
+            <p className="mt-3 text-sm leading-7 text-sky-100">
+              Tạo ticket và chọn <strong className="text-white">Verify Account</strong>. Nếu tài khoản
+              ở trạng thái Approval Account, AI sẽ tự động xét duyệt; thời gian xử lý từ 5 phút đến 24 giờ.
+            </p>
+
+            <ol className="mt-5 grid gap-3">
+              {nodeTestVerificationOptions.map((option, index) => (
+                <li key={option} className="flex gap-3 rounded-2xl border border-cyan-200/15 bg-black/20 p-4 text-sm leading-6 text-sky-50">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-cyan-300 font-black text-[#03203c]">
+                    {index + 1}
+                  </span>
+                  <span>{option}</span>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-5 rounded-2xl border border-amber-300/30 bg-amber-400/10 p-4 text-xs leading-6 text-amber-100 sm:text-sm">
+              Không hỗ trợ backup. Hãy tự tải dữ liệu quan trọng về máy. Nếu server sập do lỗi hệ
+              thống, Credit của plan được hoàn trả 100%. Vi phạm DDoS, mining, scan port, botnet,
+              mã độc hoặc pháp luật sẽ bị khóa vĩnh viễn.
+            </div>
+
+            <a
+              href={homeConfig.discordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-cyber-primary mt-5 min-h-12 w-full rounded-xl px-5 py-3 text-sm font-bold sm:w-auto"
+            >
+              Tạo Ticket & Chọn Verify Account
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomePage() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [activePlanTab, setActivePlanTab] = useState<'all' | 'community' | 'vps' | 'game' | 'beta'>('all');
@@ -85,7 +165,7 @@ export function HomePage() {
       <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-300/30 bg-[#063056]/85 px-4 py-3 shadow-[0_10px_40px_rgba(0,119,182,0.35)] backdrop-blur-xl sm:px-6">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-300/40 bg-black/60 p-1.5 shadow-[0_0_25px_rgba(0,240,255,0.3)] transition group-hover:border-cyan-200 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.55)] sm:h-12 sm:w-12">
               <img
                 src="/picture/logoSTACloud.png"
@@ -101,10 +181,16 @@ export function HomePage() {
                 Ocean Cloud & Community Hosting
               </span>
             </div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden items-center gap-1 rounded-xl border border-cyan-300/20 bg-white/[0.05] p-1 text-xs font-bold text-sky-100 md:flex lg:gap-2 lg:text-sm">
+          <nav className="hidden items-center gap-1 rounded-xl border border-cyan-300/20 bg-white/[0.05] p-1 text-xs font-bold text-sky-100 lg:flex lg:gap-2 lg:text-sm">
+            <a
+              href="#free-hosting"
+              className="rounded-lg bg-emerald-400/15 px-3.5 py-1.5 text-emerald-200 transition hover:bg-emerald-400/25 hover:text-white"
+            >
+              Node Test Free
+            </a>
             <a
               href="#plans"
               className="rounded-lg px-3.5 py-1.5 transition hover:bg-cyan-400/20 hover:text-white"
@@ -117,12 +203,12 @@ export function HomePage() {
             >
               Tùy Biến (Max 64C / 128G)
             </a>
-            <Link
+            <a
               href="/egg"
               className="rounded-lg px-3.5 py-1.5 transition hover:bg-cyan-400/20 hover:text-white"
             >
               Eggs
-            </Link>
+            </a>
             <a
               href="#openclaw"
               className="rounded-lg px-3.5 py-1.5 transition hover:bg-cyan-400/20 hover:text-white"
@@ -171,7 +257,7 @@ export function HomePage() {
               type="button"
               onClick={() => setMobileDrawerOpen(true)}
               aria-label="Mở menu"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-400/15 text-cyan-200 transition hover:bg-cyan-400/25 md:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-400/15 text-cyan-200 transition hover:bg-cyan-400/25 lg:hidden"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -307,6 +393,8 @@ export function HomePage() {
         </div>
       </section>
 
+      <NodeTestLaunch />
+
       {/* --- 3. LIVE STATUS STRIP (3D TILT CARDS) --- */}
       <section className="px-4 py-6 sm:px-6">
         <div className="mx-auto max-w-7xl">
@@ -349,7 +437,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* --- 4. TESTER ALERT MESSAGE --- */}
+      {/* --- 4. NODE TEST ALERT MESSAGE --- */}
       <section className="px-4 py-3 sm:px-6">
         <div className="mx-auto max-w-7xl rounded-2xl border border-amber-300/40 bg-amber-500/15 p-4 text-xs leading-relaxed text-amber-100 shadow-md backdrop-blur">
           {homeConfig.testerAlertMessage}
@@ -601,7 +689,7 @@ export function HomePage() {
               </p>
             </div>
 
-            <Link
+            <a
               href="/egg"
               className="btn-cyber-primary inline-flex shrink-0 rounded-2xl px-6 py-3.5 text-sm font-bold shadow-[0_0_25px_rgba(0,180,216,0.45)]"
             >
@@ -609,7 +697,7 @@ export function HomePage() {
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

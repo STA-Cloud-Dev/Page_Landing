@@ -55,7 +55,7 @@ function matchesFilter(plan: ServicePlan, filter: PlanFilter) {
   }
 
   if (filter === 'free') {
-    return plan.name === 'TESTER' || plan.name === 'OPENCLAW';
+    return plan.name === 'NODE TEST' || plan.name === 'OPENCLAW';
   }
 
   if (filter === 'minecraft') {
@@ -174,7 +174,7 @@ export function PlansSection() {
     () => servicePlans.filter((plan) => matchesFilter(plan, activeFilter)),
     [activeFilter]
   );
-  const testerPlan = filteredPlans.find((plan) => plan.name === 'TESTER');
+  const testerPlan = filteredPlans.find((plan) => plan.name === 'NODE TEST');
 
   return (
     <section id="plans" className="px-4 py-16 sm:px-6 sm:py-24">
@@ -230,12 +230,12 @@ export function PlansSection() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100/80">
-                  Cảnh báo TESTER
+                  Lưu ý NODE TEST
                 </p>
-                <h3 className="mt-2 text-2xl font-semibold text-white">Node miễn phí có rủi ro dữ liệu</h3>
+                <h3 className="mt-2 text-2xl font-semibold text-white">Gói miễn phí không hỗ trợ backup</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
-                  TESTER là node tài trợ nên có thể bị can thiệp hoặc sập bất ngờ. Bạn phải tự
-                  backup dữ liệu; STACloud không chịu trách nhiệm về mất mát dữ liệu trên node này.
+                  NODE TEST là tên hiện tại của gói TESTER. Gói sử dụng 75% CPU, 2 GB RAM và không
+                  hỗ trợ backup; hãy chủ động tải dữ liệu quan trọng về máy.
                 </p>
               </div>
               <span className="w-fit rounded-lg border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">

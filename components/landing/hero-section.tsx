@@ -33,7 +33,7 @@ export function HeroSection() {
             </div>
 
             <div className="max-w-[20rem] space-y-5 sm:max-w-none">
-              <h1 className="max-w-[calc(100vw-2rem)] break-words text-2xl font-semibold leading-tight text-slate-950 sm:max-w-3xl sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-[calc(100vw-2rem)] break-words text-2xl font-semibold leading-tight text-white sm:max-w-3xl sm:text-5xl lg:text-6xl">
                 Xem giá, slot, upsize và cảnh báo của từng gói trong một màn hình.
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-sky-100/80 sm:text-lg sm:leading-8">
@@ -125,7 +125,7 @@ export function HeroSection() {
             <div className="pointer-events-none static mt-3 grid gap-3 sm:absolute sm:inset-x-0 sm:bottom-2 sm:mt-0 sm:grid-cols-2">
               {heroStats.map((item) => (
                 <div key={item.label} className="cloud-stat rounded-lg px-4 py-3">
-                  <p className="text-2xl font-semibold text-slate-950">{item.value}</p>
+                  <p className="text-2xl font-semibold text-white">{item.value}</p>
                   <p className="mt-1 text-xs leading-5 text-slate-300">{item.label}</p>
                 </div>
               ))}

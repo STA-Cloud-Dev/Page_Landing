@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import Link from 'next/link';
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -78,6 +77,15 @@ export function MobileDrawer({
           </p>
 
           <a
+            href="#free-hosting"
+            onClick={onClose}
+            className="flex items-center gap-3 rounded-lg bg-emerald-400/10 px-3 py-2.5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/20 hover:text-white"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-400/20 text-emerald-100">0đ</span>
+            Node Test 100% Free
+          </a>
+
+          <a
             href="#plans"
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
@@ -95,14 +103,14 @@ export function MobileDrawer({
             Tùy Biến (Max 64C / 128G)
           </a>
 
-          <Link
+          <a
             href="/egg"
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-cyan-400/20 text-cyan-200">🥚</span>
             Kho Game Eggs & Softwares
-          </Link>
+          </a>
 
           <a
             href="#openclaw"
@@ -136,18 +144,18 @@ export function MobileDrawer({
               Pháp Lý & Hợp Tác
             </p>
             <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs text-sky-200">
-              <Link href="/partner" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              <a href="/partner" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Partner 20%
-              </Link>
-              <Link href="/sla" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              </a>
+              <a href="/sla" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Cam kết SLA
-              </Link>
-              <Link href="/terms" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              </a>
+              <a href="/terms" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Điều khoản
-              </Link>
-              <Link href="/privacy" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
+              </a>
+              <a href="/privacy" onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Bảo mật
-              </Link>
+              </a>
             </div>
           </div>
         </div>

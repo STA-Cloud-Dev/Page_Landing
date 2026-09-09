@@ -13,13 +13,13 @@ export function MobileDock({ panelUrl, discordUrl, zaloUrl, messengerUrl }: Mobi
   return (
     <aside aria-label="Lối tắt di động" className="fixed bottom-3 inset-x-3 z-40 block lg:hidden">
       <div className="mx-auto flex max-w-md items-center justify-between gap-1.5 rounded-2xl border border-cyan-300/35 bg-[#06335a]/92 px-3 py-2 shadow-[0_10px_35px_rgba(0,119,182,0.5)] backdrop-blur-xl">
-        {/* Quick Plans */}
+        {/* Quick Free Hosting */}
         <a
-          href="#plans"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-sky-100 transition hover:text-cyan-200 active:scale-95"
+          href="#free-hosting"
+          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-emerald-100 transition hover:text-white active:scale-95"
         >
-          <span className="text-base">⚡</span>
-          <span className="text-[10px] font-bold">Bảng Giá</span>
+          <span className="text-base font-black">0đ</span>
+          <span className="text-[10px] font-bold">Node Test</span>
         </a>
 
         {/* Quick Configurator */}

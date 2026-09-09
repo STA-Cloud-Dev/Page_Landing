@@ -1,4 +1,3 @@
-﻿import Link from 'next/link';
 import { siteConfig } from './content';
 
 export function FooterSection() {
@@ -14,21 +13,21 @@ export function FooterSection() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <Link href="/terms" className="transition hover:text-white">
+          <a href="/terms" className="transition hover:text-white">
             Điều khoản
-          </Link>
-          <Link href="/privacy" className="transition hover:text-white">
+          </a>
+          <a href="/privacy" className="transition hover:text-white">
             Quyền riêng tư
-          </Link>
-          <Link href="/sla" className="transition hover:text-white">
+          </a>
+          <a href="/sla" className="transition hover:text-white">
             SLA
-          </Link>
-          <Link href="/partner" className="transition hover:text-white">
+          </a>
+          <a href="/partner" className="transition hover:text-white">
             Partner
-          </Link>
-          <Link href="/egg" className="transition hover:text-white">
+          </a>
+          <a href="/egg" className="transition hover:text-white">
             Eggs
-          </Link>
+          </a>
           <a
             href={siteConfig.siteUrl}
             className="transition hover:text-white"

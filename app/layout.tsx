@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
 
 const SITE_URL = 'https://stacloud.dev';
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'STACloud | Cyber Cloud & VPS Hosting Platform',
     description:
-      'Xem giá, cấu hình, slot, OpenClaw Beta, upsize và lưu ý sử dụng của các gói TESTER, DEV SG, MC SG, PROXY HK, STA-XEON và STA-AMD-EPYC tại STACloud.',
+      'Xem giá, cấu hình, slot, OpenClaw Beta, upsize và lưu ý sử dụng của các gói NODE TEST, DEV SG, MC SG, PROXY HK, STA-XEON và STA-AMD-EPYC tại STACloud.',
     url: SITE_URL,
     siteName: 'STACloud',
     type: 'website',
@@ -52,6 +53,7 @@ export default function RootLayout({
         className="relative min-h-screen overflow-x-hidden bg-[#031c34] text-slate-100 antialiased"
         suppressHydrationWarning
       >
+        <RouteScrollReset />
         <div className="cyber-grid-bg" aria-hidden />
         <div className="cyber-lines-bg" aria-hidden />
         <div className="relative z-10">{children}</div>

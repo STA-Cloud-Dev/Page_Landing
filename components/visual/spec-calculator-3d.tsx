@@ -106,17 +106,34 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     const container = canvasRef.current;
     if (!container) return;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const probeCanvas = document.createElement('canvas');
+    const probeContext = probeCanvas.getContext('webgl2');
+    if (!probeContext) {
+      container.dataset.webglFailed = 'true';
+      return;
+    }
+    probeContext.getExtension('WEBGL_lose_context')?.loseContext();
+
+    const width = Math.max(container.clientWidth, 1);
+    const height = Math.max(container.clientHeight, 1);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     camera.position.set(0, 2.0, 4.2);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch {
+      container.dataset.webglFailed = 'true';
+      return;
+    }
+    renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.background = 'transparent';
     container.appendChild(renderer.domElement);
 
     // Oceanic Lighting
@@ -197,11 +214,13 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     }
 
     let frameId = 0;
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
-    const animate = () => {
+    const animate = (timestamp?: DOMHighResTimeStamp) => {
       frameId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      timer.update(timestamp);
+      const t = timer.getElapsed();
       chipGroup.rotation.y = t * 0.5;
       chipGroup.rotation.x = 0.38 + Math.sin(t * 0.7) * 0.06;
       renderer.render(scene, camera);
@@ -223,6 +242,7 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameId);
+      timer.dispose();
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

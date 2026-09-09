@@ -11,7 +11,7 @@ export function PolicySection() {
             <h2 className="section-title">Chính sách mới bạn cần biết trước khi đăng ký</h2>
             <p className="section-copy">
               Nội dung dưới đây được cập nhật trực tiếp theo thông báo mới nhất, tập trung vào giá,
-              slot, trạng thái gói, tùy chọn nâng cấp và lưu ý riêng cho node TESTER miễn phí.
+              slot, trạng thái gói, tùy chọn nâng cấp và lưu ý riêng cho NODE TEST miễn phí.
             </p>
           </div>
           <Section3DAccent variant="legal" size="compact" />

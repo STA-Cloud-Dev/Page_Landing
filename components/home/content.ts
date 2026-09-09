@@ -1,6 +1,6 @@
 export const homeConfig = {
   name: 'STACloud',
-  tagline: 'Cyber Cloud, VPS & Game Hosting',
+  tagline: 'Free Hosting cho Bot, Web & Project sinh viên',
   panelUrl: 'https://portal.stacloud.dev/',
   discordUrl: 'https://discord.gg/nq8B4JXmnm',
   zaloUrl: 'https://zalo.me/g/ekaldlnq5sqdn37lvikk',
@@ -8,26 +8,26 @@ export const homeConfig = {
   freeServerUrl: '/free-server',
   logoAlt: 'STACloud Logo',
   summary:
-    'Hệ sinh thái hạ tầng đám mây STACloud: Cung cấp Portal quản trị game server, VPS OVH Singapore chống DDoS, OpenClaw Beta miễn phí và các gói dịch vụ cộng đồng minh bạch.',
+    'Free hosting cho bot Discord, web nhỏ và project sinh viên; kèm Portal quản trị game server, OpenClaw Beta và VPS OVH Singapore chống DDoS.',
   testerAlertMessage:
-    '⚠️ Cảnh báo gói TESTER: TESTER là node tài trợ cộng đồng, có thể bị can thiệp hoặc khởi động lại bất ngờ. Vui lòng tự backup dữ liệu; STACloud không chịu trách nhiệm về mất mát dữ liệu trên node thử nghiệm này.',
+    '⚠️ Cảnh báo gói NODE TEST (tên cũ: TESTER): Gói miễn phí không hỗ trợ backup. Vui lòng tự tải dữ liệu quan trọng về máy; tài khoản vi phạm quy định sử dụng sẽ bị khóa vĩnh viễn.',
 };
 
 export const heroStats = [
   { value: '9+', label: 'Gói Dịch Vụ Sẵn Sàng', tone: 'cyan' },
   { value: '34+', label: 'Slots DEV / MC Singapore', tone: 'sky' },
   { value: '10 Gbps', label: 'Anti-DDoS OVH Network', tone: 'emerald' },
-  { value: '0$', label: 'OpenClaw & TESTER Free', tone: 'indigo' },
+  { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
 ] as const;
 
 export const heroSignals = [
-  '⚡ Portal và Control Store chính thức tại portal.stacloud.dev',
+  '🎁 Node Test 100% Free cho bot Discord, web nhỏ và project sinh viên',
+  '⚡ Tài khoản mới Verify Account để nhận 10.000 Credit',
   '🦞 OpenClaw Beta miễn phí - Trải nghiệm AI & Web không cần domain riêng',
-  '🛡️ Hạ tầng OVH Singapore: Intel Xeon & AMD EPYC chống DDoS Layer 3/4/7',
 ] as const;
 
 export const heroStatusStrip = [
-  { label: 'TESTER', detail: 'Node tài trợ test nhanh', value: '0$ / Miễn Phí', tone: 'rose', status: 'warning' },
+  { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: '9.000 Credit', tone: 'emerald', status: 'active' },
   { label: 'DEV SG', detail: 'AMD Milan • 24 Slots', value: '5.000đ / chu kỳ', tone: 'emerald', status: 'active' },
   { label: 'MC SG', detail: 'AMD Milan • 10 Slots', value: '8.000đ / chu kỳ', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
@@ -37,19 +37,19 @@ export const heroStatusStrip = [
 
 export const allServicePlans = [
   {
-    id: 'tester',
+    id: 'node-test',
     category: 'community',
-    name: 'TESTER',
-    badge: 'Miễn Phí 100%',
-    status: 'warning',
-    price: '0 VNĐ',
-    period: 'Dùng Thử Nghiệm',
-    description: 'Gói tài trợ dành cho nhu cầu test bot nhỏ, làm quen giao diện trước khi nâng cấp lên gói chính thức.',
-    specs: ['1 vCore CPU', '1 GB RAM', '5 GB SSD', 'Node tài trợ cộng đồng', 'Hỗ trợ cơ bản'],
+    name: 'NODE TEST',
+    badge: '100% Free',
+    status: 'active',
+    price: '9.000 Credit',
+    period: 'Mỗi lần tạo plan',
+    description: 'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên. Tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
+    specs: ['75% CPU', '2 GB RAM', 'Không hỗ trợ backup', 'Hoàn 100% Credit nếu lỗi hệ thống'],
     upsizeAvailable: false,
-    upsizeNotes: 'Node tài trợ không hỗ trợ upsize tài nguyên riêng.',
-    warning: 'Node có thể reset hoặc ngắt kết nối không báo trước. Hãy tự backup dữ liệu thường xuyên.',
-    ctaText: 'Đăng Ký Test',
+    upsizeNotes: 'Tài khoản mới tạo ticket Discord và chọn Verify Account để nhận Credit.',
+    warning: 'Hãy tự tải bản sao lưu về máy. Nghiêm cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật.',
+    ctaText: 'Verify Account Nhận Credit',
   },
   {
     id: 'openclaw',
@@ -168,8 +168,12 @@ export const allServicePlans = [
 
 export const comprehensiveFaqs = [
   {
+    q: 'Làm sao dùng Node Test miễn phí và nhận 10.000 Credit?',
+    a: 'Gói Node Test có giá tạo plan là 9.000 Credit. Tài khoản cũ đã được cộng 10.000 Credit. Tài khoản mới hãy tạo ticket Discord, chọn Verify Account và hoàn thành một trong các hình thức xác minh được công bố. Nếu tài khoản ở trạng thái Approval Account, hệ thống AI sẽ tự động xét duyệt trong khoảng 5 phút đến 24 giờ.',
+  },
+  {
     q: 'Tôi là người mới, nên chọn gói nào để bắt đầu?',
-    a: 'Nếu bạn cần thử nghiệm nhanh, bạn có thể bắt đầu với gói TESTER (0đ) hoặc OpenClaw Beta. Nếu cần chạy bot ổn định hoặc game server lâu dài, gói DEV SG (5.000đ) hoặc MC SG (8.000đ) là sự lựa chọn hợp lý nhất với chi phí cực kỳ tiết kiệm.',
+    a: 'Nếu bạn cần thử nghiệm nhanh, bạn có thể bắt đầu với NODE TEST (tên cũ: TESTER) hoặc OpenClaw Beta. Nếu cần chạy bot ổn định hoặc game server lâu dài, gói DEV SG (5.000đ) hoặc MC SG (8.000đ) là lựa chọn phù hợp.',
   },
   {
     q: 'OpenClaw Beta hoạt động như thế nào và có mất phí không?',
@@ -180,8 +184,8 @@ export const comprehensiveFaqs = [
     a: 'Với DEV SG: +5.000đ cho mỗi 1 vCore và +10.000đ cho mỗi 1 GB RAM. Với MC SG: +10.000đ cho mỗi 1 vCore và +15.000đ cho mỗi 1 GB RAM. Bạn có thể dùng bộ tính giá 3D trên trang để xem số tiền cụ thể.',
   },
   {
-    q: 'Vì sao gói TESTER lại có cảnh báo về dữ liệu?',
-    a: 'Vì TESTER là node tài trợ cộng đồng miễn phí, máy chủ có thể bị reset hoặc ngắt kết nối bởi nhà tài trợ bất cứ lúc nào. Vì vậy người dùng cần chủ động tự tải và lưu trữ bản backup dữ liệu của mình.',
+    q: 'Vì sao NODE TEST lại có cảnh báo về dữ liệu?',
+    a: 'NODE TEST là gói miễn phí và không hỗ trợ backup. Người dùng cần chủ động tải và lưu trữ bản sao dữ liệu trên thiết bị của mình.',
   },
   {
     q: 'Các gói VPS OVH Singapore (Xeon, EPYC) cần đặt trước bao lâu?',

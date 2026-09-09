@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { homeConfig } from '@/components/home/content';
 
 export function SiteFooter() {
@@ -8,7 +7,7 @@ export function SiteFooter() {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand Info */}
           <div className="space-y-4">
-            <Link href="/" className="group inline-flex items-center gap-3">
+            <a href="/" className="group inline-flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-300/40 bg-black/60 p-2 shadow-[0_0_20px_rgba(0,240,255,0.3)] transition group-hover:border-cyan-200">
                 <img
                   src="/picture/logoSTACloud.png"
@@ -22,7 +21,7 @@ export function SiteFooter() {
                 </span>
                 <p className="text-xs text-cyan-200">Ocean Cloud & Community Hosting</p>
               </div>
-            </Link>
+            </a>
             <p className="max-w-sm text-xs leading-relaxed text-sky-100 sm:text-sm">
               Hệ sinh thái máy chủ game, VPS OVH Singapore, OpenClaw Beta và các gói hosting cộng đồng minh bạch chi phí.
             </p>
@@ -39,18 +38,18 @@ export function SiteFooter() {
               ⚡ Dịch Vụ
             </p>
             <div className="mt-4 space-y-2.5 text-xs sm:text-sm text-sky-100">
-              <Link href="/#plans" className="block transition hover:text-cyan-200">
+              <a href="/#plans" className="block transition hover:text-cyan-200">
                 Bảng giá & Gói dịch vụ
-              </Link>
-              <Link href="/#calculator" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/#calculator" className="block transition hover:text-cyan-200">
                 Tùy biến cấu hình (Max 64C / 128G)
-              </Link>
-              <Link href="/egg" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/egg" className="block transition hover:text-cyan-200">
                 Kho Game & Softwares Eggs
-              </Link>
-              <Link href="/free-server" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/free-server" className="block transition hover:text-cyan-200">
                 Free Server Community
-              </Link>
+              </a>
               <a
                 href={homeConfig.panelUrl}
                 target="_blank"
@@ -92,9 +91,9 @@ export function SiteFooter() {
               >
                 <span>Messenger Group</span>
               </a>
-              <Link href="/#faq" className="block transition hover:text-cyan-200">
+              <a href="/#faq" className="block transition hover:text-cyan-200">
                 Câu hỏi thường gặp (FAQ)
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -104,18 +103,18 @@ export function SiteFooter() {
               🛡️ Chính Sách & SLA
             </p>
             <div className="mt-4 space-y-2.5 text-xs sm:text-sm text-sky-100">
-              <Link href="/partner" className="block transition hover:text-cyan-200">
+              <a href="/partner" className="block transition hover:text-cyan-200">
                 Chương trình Partner (Giảm 20%)
-              </Link>
-              <Link href="/sla" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/sla" className="block transition hover:text-cyan-200">
                 Cam kết chất lượng SLA
-              </Link>
-              <Link href="/terms" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/terms" className="block transition hover:text-cyan-200">
                 Điều khoản sử dụng
-              </Link>
-              <Link href="/privacy" className="block transition hover:text-cyan-200">
+              </a>
+              <a href="/privacy" className="block transition hover:text-cyan-200">
                 Chính sách bảo mật
-              </Link>
+              </a>
             </div>
           </div>
         </div>

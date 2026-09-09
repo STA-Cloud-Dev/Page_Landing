@@ -10,32 +10,37 @@ export const siteConfig = {
   supportChannel: '📥｜support-ticket / Group Chat Messenger-Zalo',
   copyrightText: '© 2018 - 2026 STACloud. All rights reserved.',
   testerAlertMessage:
-    'Cảnh báo: TESTER là node tài trợ, có thể bị can thiệp hoặc sập bất ngờ bất cứ lúc nào. Bạn phải tự backup dữ liệu; STACloud không chịu trách nhiệm về mất mát dữ liệu trên node này.',
+    'Cảnh báo: NODE TEST (tên cũ: TESTER) là gói miễn phí và không hỗ trợ backup. Bạn phải tự tải dữ liệu quan trọng về máy.',
 };
 
 export const heroStats = [
   { value: '9', label: 'Gói / dịch vụ đang công bố' },
   { value: '24 + 10', label: 'Slots DEV / MC Singapore' },
   { value: '3 ngày', label: 'Thời gian đặt trước VPS lớn' },
-  { value: '0$', label: 'OpenClaw / TESTER' },
+  { value: '0đ', label: 'Node Test / OpenClaw' },
 ] as const;
 
 export const servicePlans = [
   {
-    name: 'TESTER',
+    name: 'NODE TEST',
     description:
-      'Gói miễn phí dành cho nhu cầu test nhanh trên node tài trợ. Phù hợp trải nghiệm, thử bot nhỏ hoặc kiểm tra môi trường trước khi dùng gói trả phí.',
-    price: '0$ / 0 VNĐ',
-    highlight: 'Hoàn toàn miễn phí',
-    specs: ['1 vCore', '1 GB RAM', '5 GB Disk', 'Node tài trợ'],
-    addOns: ['Kiểm tra tài nguyên còn lại tại kênh 🗺️｜server-status-and-slot trước khi đăng ký.'],
-    status: 'warning',
-    statusLabel: 'Miễn phí',
-    accent: 'from-sky-500/20 to-cyan-300/10',
+      'Free hosting cho bot Discord, web nhỏ và project sinh viên. Plan dùng 9.000 Credit; tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
+    price: '9.000 Credit / plan',
+    highlight: '100% Free',
+    specs: ['75% CPU', '2 GB RAM', 'Không hỗ trợ backup', 'Hoàn Credit nếu lỗi hệ thống'],
+    addOns: [
+      'Tài khoản cũ đã được cộng sẵn 10.000 Credit.',
+      'Tài khoản mới tạo ticket Discord và chọn Verify Account.',
+      'Approval Account được AI tự động xét duyệt trong 5 phút đến 24 giờ.',
+      'Có thể xác minh bằng mời 10 bạn, đăng bài giới thiệu hoặc nạp tối thiểu 10.000 Credit.',
+    ],
+    status: 'active',
+    statusLabel: '100% Free',
+    accent: 'from-emerald-400/25 to-cyan-300/10',
     warnings: [
-      'Node này được tài trợ nên có thể bị can thiệp hoặc sập bất ngờ bất cứ lúc nào.',
-      'Vui lòng tự chủ động backup dữ liệu.',
-      'STACloud không chịu trách nhiệm về mất mát dữ liệu trên node này.',
+      'Không hỗ trợ backup; người dùng phải tự tải bản sao lưu về máy.',
+      'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật.',
+      'Tài khoản vi phạm bị khóa vĩnh viễn và không hỗ trợ mở lại.',
     ],
   },
   {
@@ -220,7 +225,7 @@ export const benefits = [
   {
     title: 'Có đủ gói free, beta và trả phí',
     description:
-      'TESTER và OpenClaw phục vụ trải nghiệm miễn phí, trong khi DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành ổn định hơn.',
+      'NODE TEST và OpenClaw phục vụ trải nghiệm miễn phí, trong khi DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành ổn định hơn.',
   },
   {
     title: 'Cấu hình và giá rõ ràng',
@@ -235,7 +240,7 @@ export const benefits = [
   {
     title: 'Chính sách rủi ro minh bạch',
     description:
-      'Gói TESTER và OpenClaw Beta có cảnh báo rõ để người dùng chủ động backup, chọn location phù hợp và tạo ticket đúng quy trình.',
+      'NODE TEST và OpenClaw Beta có cảnh báo rõ để người dùng chủ động backup, chọn location phù hợp và tạo ticket đúng quy trình.',
   },
 ] as const;
 
@@ -244,7 +249,7 @@ export const quickSteps = [
     step: '01',
     title: 'Chọn nhóm gói phù hợp',
     description:
-      'Chọn TESTER/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc Xeon/EPYC cho workload ổn định hơn.',
+      'Chọn NODE TEST/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc Xeon/EPYC cho workload ổn định hơn.',
   },
   {
     step: '02',
@@ -261,7 +266,8 @@ export const quickSteps = [
 ] as const;
 
 export const notes = [
-  'TESTER miễn phí nhưng là node tài trợ, có thể bị can thiệp hoặc sập bất ngờ; người dùng phải tự backup dữ liệu.',
+  'NODE TEST (tên cũ: TESTER) dùng 75% CPU, 2 GB RAM và có giá tạo plan 9.000 Credit; tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
+  'Tài khoản mới cần tạo ticket Discord, chọn Verify Account; Approval Account được AI xét duyệt trong 5 phút đến 24 giờ.',
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
   'DEV SG có giá 5.000 VNĐ (0.3$) / chu kỳ với 24 slots; MC SG có giá 8.000 VNĐ (0.5$) / chu kỳ với 10 slots.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
@@ -273,8 +279,11 @@ export const policyGroups = [
   {
     title: 'Gói Miễn Phí Và Beta',
     points: [
-      'TESTER có chi phí 0$ / 0 VNĐ với cấu hình 1 vCore, 1 GB RAM và 5 GB Disk.',
-      'TESTER là node tài trợ nên có thể bị can thiệp hoặc sập bất ngờ; người dùng phải tự backup dữ liệu.',
+      'NODE TEST (tên cũ: TESTER) là gói free cho bot Discord, web nhỏ và project sinh viên, dùng 75% CPU và 2 GB RAM.',
+      'Giá tạo NODE TEST là 9.000 Credit; tài khoản cũ đã được cộng sẵn 10.000 Credit.',
+      'Tài khoản mới tạo ticket Discord, chọn Verify Account và hoàn thành hình thức xác minh được công bố.',
+      'NODE TEST không hỗ trợ backup; nếu server sập do lỗi hệ thống, Credit của plan được hoàn trả 100%.',
+      'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật; tài khoản vi phạm bị khóa vĩnh viễn.',
       'OpenClaw Beta miễn phí và hiện không cần domain riêng.',
       'Nếu cần hỗ trợ OpenClaw, người dùng có thể liên hệ Discord, Zalo hoặc Messenger Group.',
     ],

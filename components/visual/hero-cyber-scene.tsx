@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 interface HeroCyberSceneProps {
@@ -9,18 +9,23 @@ interface HeroCyberSceneProps {
 
 export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isWebGLReady, setIsWebGLReady] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    setIsWebGLReady(false);
 
-    // Check WebGL availability
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return;
+    const probeCanvas = document.createElement('canvas');
+    const probeContext = probeCanvas.getContext('webgl2');
+    if (!probeContext) {
+      container.dataset.webglFailed = 'true';
+      return;
+    }
+    probeContext.getExtension('WEBGL_lose_context')?.loseContext();
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = Math.max(container.clientWidth, 1);
+    const height = Math.max(container.clientHeight, 1);
 
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x03254c, 0.045);
@@ -28,15 +33,32 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
     camera.position.set(0, 1.2, compact ? 6.5 : 5.8);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: 'default',
+      });
+    } catch {
+      try {
+        renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          alpha: true,
+          powerPreference: 'low-power',
+        });
+      } catch {
+        container.dataset.webglFailed = 'true';
+        return;
+      }
+    }
+    renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.background = 'transparent';
     container.appendChild(renderer.domElement);
 
     // Root Group
@@ -248,11 +270,22 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
     window.addEventListener('touchmove', handlePointerMove, { passive: true });
 
     let animationFrameId = 0;
-    let clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
-    const animate = () => {
+    let hasRenderedFrame = false;
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      hasRenderedFrame = false;
+      setIsWebGLReady(false);
+    };
+
+    renderer.domElement.addEventListener('webglcontextlost', handleContextLost);
+
+    const animate = (timestamp?: DOMHighResTimeStamp) => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      timer.update(timestamp);
+      const elapsedTime = timer.getElapsed();
 
       // Smooth camera / root parallax
       currentRotationY += (targetRotationY - currentRotationY) * 0.05;
@@ -288,6 +321,10 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
       particles.rotation.y = elapsedTime * 0.025;
 
       renderer.render(scene, camera);
+      if (!hasRenderedFrame) {
+        hasRenderedFrame = true;
+        setIsWebGLReady(true);
+      }
     };
 
     animate();
@@ -309,6 +346,8 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
       window.removeEventListener('touchmove', handlePointerMove);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
+      timer.dispose();
+      renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
 
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -320,10 +359,30 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
 
   return (
     <div
-      ref={containerRef}
-      className="relative h-full w-full select-none"
+      className="relative h-full w-full select-none overflow-hidden"
       style={{ minHeight: compact ? '360px' : '480px' }}
       aria-label="STACloud 3D Ocean Server Scene"
-    />
+    >
+      <div
+        className={`absolute inset-0 z-0 grid place-items-center transition-opacity duration-500 ${isWebGLReady ? 'opacity-0' : 'opacity-100'}`}
+        aria-hidden="true"
+      >
+        <div className="hero-fallback-scene relative h-64 w-64 sm:h-80 sm:w-80">
+          <div className="hero-fallback-ring hero-fallback-ring-one absolute inset-5 rounded-full border border-cyan-200/25 [transform:rotateX(62deg)_rotateZ(18deg)]" />
+          <div className="hero-fallback-ring hero-fallback-ring-two absolute inset-12 rounded-full border border-sky-300/20 [transform:rotateX(58deg)_rotateZ(-22deg)]" />
+          <div className="hero-fallback-rack absolute left-1/2 top-1/2 h-44 w-28 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-cyan-200/35 bg-gradient-to-br from-[#0b5f91] to-[#021426] p-3 shadow-[0_0_55px_rgba(72,202,228,0.28)]">
+            {[0, 1, 2, 3, 4].map((item) => (
+              <span key={item} className="mb-3 block h-4 rounded bg-cyan-100/80 shadow-[inset_-12px_0_rgba(72,202,228,0.38)]" />
+            ))}
+          </div>
+          <span className="hero-fallback-cube hero-fallback-cube-one absolute left-5 top-20 h-5 w-5 rotate-45 border border-cyan-200/50 bg-sky-400/50" />
+          <span className="hero-fallback-cube hero-fallback-cube-two absolute bottom-16 right-4 h-7 w-7 rotate-45 border border-cyan-200/50 bg-cyan-300/40" />
+        </div>
+      </div>
+      <div
+        ref={containerRef}
+        className={`absolute inset-0 z-10 transition-opacity duration-500 ${isWebGLReady ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </div>
   );
 }
