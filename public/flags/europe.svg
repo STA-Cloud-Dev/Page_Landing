@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-labelledby="title desc">
+  <title id="title">European Union flag</title>
+  <desc id="desc">Blue flag representing the European Union.</desc>
+  <rect width="120" height="80" fill="#003399"/>
+  <g fill="#ffcc00" transform="translate(60 40)">
+    <circle cx="0" cy="-25" r="2.4"/><circle cx="12.5" cy="-21.7" r="2.4"/><circle cx="21.7" cy="-12.5" r="2.4"/>
+    <circle cx="25" cy="0" r="2.4"/><circle cx="21.7" cy="12.5" r="2.4"/><circle cx="12.5" cy="21.7" r="2.4"/>
+    <circle cx="0" cy="25" r="2.4"/><circle cx="-12.5" cy="21.7" r="2.4"/><circle cx="-21.7" cy="12.5" r="2.4"/>
+    <circle cx="-25" cy="0" r="2.4"/><circle cx="-21.7" cy="-12.5" r="2.4"/><circle cx="-12.5" cy="-21.7" r="2.4"/>
+  </g>
+</svg>

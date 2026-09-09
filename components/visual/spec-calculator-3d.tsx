@@ -99,7 +99,7 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     setDiskIndex(diskIdx >= 0 ? diskIdx : 0);
   }, [selectedPresetId]);
 
-  // --- 3D Ocean Cloud Hardware Visual Canvas ---
+  // --- 3D Ocean Hardware Engine: motherboard, CPU core matrix, RAM and NVMe ---
   const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -136,82 +136,125 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     renderer.domElement.style.background = 'transparent';
     container.appendChild(renderer.domElement);
 
-    // Oceanic Lighting
-    const ambientLight = new THREE.AmbientLight(0x0077b6, 1.8);
-    scene.add(ambientLight);
+    scene.add(new THREE.HemisphereLight(0xb9f3ff, 0x03172f, 2.4));
 
-    const oceanPointLight = new THREE.PointLight(0x00f0ff, 4.5, 12);
-    oceanPointLight.position.set(2, 3, 2);
-    scene.add(oceanPointLight);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3.2);
+    keyLight.position.set(3, 5, 4);
+    scene.add(keyLight);
 
-    const azurePointLight = new THREE.PointLight(0x48cae4, 3.5, 10);
-    azurePointLight.position.set(-2, -1, 2);
-    scene.add(azurePointLight);
+    const cyanLight = new THREE.PointLight(0x00d9ff, 5, 12);
+    cyanLight.position.set(-2.5, 2.4, 2.8);
+    scene.add(cyanLight);
 
-    // Hardware Board Group
-    const chipGroup = new THREE.Group();
-    scene.add(chipGroup);
+    const hardwareGroup = new THREE.Group();
+    hardwareGroup.rotation.x = 0.48;
+    scene.add(hardwareGroup);
 
-    // PCB Board (Deep Ocean Blue)
-    const pcbMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(2.6, 0.08, 2.6),
-      new THREE.MeshStandardMaterial({ color: 0x03284c, metalness: 0.85, roughness: 0.25 })
+    const board = new THREE.Mesh(
+      new THREE.BoxGeometry(3.9, 0.14, 2.85),
+      new THREE.MeshStandardMaterial({ color: 0x06345a, metalness: 0.78, roughness: 0.3 })
     );
-    chipGroup.add(pcbMesh);
+    board.receiveShadow = true;
+    hardwareGroup.add(board);
 
-    // Glowing Neon Circuit Ring
-    const circuitRing = new THREE.Mesh(
-      new THREE.TorusGeometry(1.5, 0.025, 16, 64),
-      new THREE.MeshBasicMaterial({ color: 0x00f0ff })
+    const boardEdge = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(3.9, 0.14, 2.85)),
+      new THREE.LineBasicMaterial({ color: 0x48cae4, transparent: true, opacity: 0.65 })
     );
-    circuitRing.rotation.x = Math.PI / 2;
-    circuitRing.position.y = 0.05;
-    chipGroup.add(circuitRing);
+    boardEdge.position.y = 0.08;
+    hardwareGroup.add(boardEdge);
 
-    // Dynamic Multi-Core Processor Matrix (scales with vCore & RAM)
-    const scale = 0.8 + (currentVCore / 64) * 0.5 + (currentRamGB / 128) * 0.4;
-    const cpuMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1.2 * scale, 0.25, 1.2 * scale),
+    const cpuSocket = new THREE.Mesh(
+      new THREE.BoxGeometry(1.55, 0.18, 1.55),
+      new THREE.MeshStandardMaterial({ color: 0x021a30, metalness: 0.85, roughness: 0.24 })
+    );
+    cpuSocket.position.y = 0.16;
+    hardwareGroup.add(cpuSocket);
+
+    const cpuPlate = new THREE.Mesh(
+      new THREE.BoxGeometry(1.22, 0.13, 1.22),
       new THREE.MeshStandardMaterial({
-        color: 0x0096c7,
-        emissive: 0x0077b6,
-        emissiveIntensity: 0.6,
-        metalness: 0.9,
-        roughness: 0.15,
+        color: 0x10a9d4,
+        emissive: 0x006b9e,
+        emissiveIntensity: 0.8,
+        metalness: 0.85,
+        roughness: 0.2,
       })
     );
-    cpuMesh.position.y = 0.16;
-    chipGroup.add(cpuMesh);
+    cpuPlate.position.y = 0.31;
+    hardwareGroup.add(cpuPlate);
 
-    // Glowing Golden Heatspreader Plate
-    const heatspreader = new THREE.Mesh(
-      new THREE.BoxGeometry(1.0 * scale, 0.06, 1.0 * scale),
-      new THREE.MeshStandardMaterial({
-        color: 0x90e0ef,
-        emissive: 0x00f0ff,
-        emissiveIntensity: 0.4,
-        metalness: 0.95,
-        roughness: 0.1,
-      })
-    );
-    heatspreader.position.y = 0.32;
-    chipGroup.add(heatspreader);
-
-    // RAM Modules (4 surrounding sticks)
-    const ramMat = new THREE.MeshStandardMaterial({
-      color: 0x48cae4,
-      emissive: 0x0096c7,
-      emissiveIntensity: 0.3,
-      metalness: 0.7,
+    const coreTiles: THREE.Mesh[] = [];
+    const coreMaterial = new THREE.MeshStandardMaterial({
+      color: 0xcaf0f8,
+      emissive: 0x00c9ef,
+      emissiveIntensity: 0.65,
+      metalness: 0.3,
       roughness: 0.2,
     });
-    for (let i = 0; i < 4; i++) {
-      const ramStick = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.35, 0.8), ramMat);
-      const angle = (i * Math.PI) / 2;
-      ramStick.position.set(Math.cos(angle) * 1.1, 0.22, Math.sin(angle) * 1.1);
-      ramStick.rotation.y = angle + Math.PI / 2;
-      chipGroup.add(ramStick);
+    const coreGeometry = new THREE.BoxGeometry(0.1, 0.045, 0.1);
+    for (let row = 0; row < 8; row++) {
+      for (let column = 0; column < 8; column++) {
+        const core = new THREE.Mesh(coreGeometry, coreMaterial.clone());
+        core.position.set(-0.42 + column * 0.12, 0.39, -0.42 + row * 0.12);
+        hardwareGroup.add(core);
+        coreTiles.push(core);
+      }
     }
+
+    const ramMaterial = new THREE.MeshStandardMaterial({
+      color: 0x087ead,
+      emissive: 0x006b9e,
+      emissiveIntensity: 0.38,
+      metalness: 0.72,
+      roughness: 0.24,
+    });
+    const ramSticks: THREE.Mesh[] = [];
+    for (let side = 0; side < 2; side++) {
+      for (let index = 0; index < 4; index++) {
+        const ramStick = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.32, 0.72), ramMaterial.clone());
+        ramStick.position.set(side === 0 ? -1.43 - index * 0.18 : 1.43 + index * 0.18, 0.28, 0.12);
+        ramStick.rotation.y = Math.PI / 2;
+        hardwareGroup.add(ramStick);
+        ramSticks.push(ramStick);
+      }
+    }
+
+    const driveMaterial = new THREE.MeshStandardMaterial({
+      color: 0x0c5f91,
+      emissive: 0x004b73,
+      emissiveIntensity: 0.45,
+      metalness: 0.7,
+      roughness: 0.24,
+    });
+    const driveModules: THREE.Mesh[] = [];
+    for (let index = 0; index < 2; index++) {
+      const drive = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.08, 0.28), driveMaterial.clone());
+      drive.position.set(0, 0.22, -1.02 + index * 0.42);
+      hardwareGroup.add(drive);
+      driveModules.push(drive);
+    }
+
+    const circuitMaterial = new THREE.LineBasicMaterial({ color: 0x48cae4, transparent: true, opacity: 0.7 });
+    const circuitLines: THREE.Line[] = [];
+    const addCircuit = (from: THREE.Vector3, to: THREE.Vector3) => {
+      const geometry = new THREE.BufferGeometry().setFromPoints([from, to]);
+      const line = new THREE.Line(geometry, circuitMaterial);
+      hardwareGroup.add(line);
+      circuitLines.push(line);
+    };
+    addCircuit(new THREE.Vector3(-0.72, 0.2, 0.2), new THREE.Vector3(-1.45, 0.2, 0.2));
+    addCircuit(new THREE.Vector3(0.72, 0.2, 0.2), new THREE.Vector3(1.45, 0.2, 0.2));
+    addCircuit(new THREE.Vector3(0, 0.2, -0.64), new THREE.Vector3(0, 0.2, -1.0));
+    addCircuit(new THREE.Vector3(-1.25, 0.2, -0.8), new THREE.Vector3(-1.8, 0.2, -1.05));
+
+    const statusRing = new THREE.Mesh(
+      new THREE.TorusGeometry(1.15, 0.018, 12, 64),
+      new THREE.MeshBasicMaterial({ color: 0x90e0ef, transparent: true, opacity: 0.6 })
+    );
+    statusRing.rotation.x = Math.PI / 2;
+    statusRing.position.y = 0.05;
+    hardwareGroup.add(statusRing);
 
     let frameId = 0;
     const timer = new THREE.Timer();
@@ -221,8 +264,23 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
       frameId = requestAnimationFrame(animate);
       timer.update(timestamp);
       const t = timer.getElapsed();
-      chipGroup.rotation.y = t * 0.5;
-      chipGroup.rotation.x = 0.38 + Math.sin(t * 0.7) * 0.06;
+      hardwareGroup.rotation.y = t * 0.32;
+      hardwareGroup.rotation.x = 0.48 + Math.sin(t * 0.7) * 0.035;
+      statusRing.rotation.z = t * 0.6;
+      coreTiles.forEach((core, index) => {
+        const material = core.material as THREE.MeshStandardMaterial;
+        material.emissiveIntensity = 0.34 + (Math.sin(t * 3.2 - index * 0.28) + 1) * 0.25;
+      });
+      ramSticks.forEach((ram, index) => {
+        ram.position.y = 0.28 + Math.sin(t * 1.2 + index * 0.3) * 0.025;
+      });
+      driveModules.forEach((drive, index) => {
+        (drive.material as THREE.MeshStandardMaterial).emissiveIntensity =
+          0.28 + (Math.sin(t * 2 + index) + 1) * 0.18;
+      });
+      circuitLines.forEach((line, index) => {
+        (line.material as THREE.LineBasicMaterial).opacity = 0.42 + (Math.sin(t * 2.2 + index) + 1) * 0.16;
+      });
       renderer.render(scene, camera);
     };
 

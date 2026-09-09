@@ -70,6 +70,32 @@ const NODES: LocationNode[] = [
     statusText: 'Đang Hoạt Động',
     highlight: 'Đường truyền dự phòng và relay mở rộng khu vực Đông Nam Á',
   },
+  {
+    id: 'eu',
+    name: 'European Edge Network',
+    country: 'EU',
+    flag: sitePath('/flags/europe.svg'),
+    badge: 'Global Edge',
+    basePing: 210,
+    bandwidth: '10 Gbps Backbone',
+    uptime: '99.99%',
+    status: 'active',
+    statusText: 'Đang Hoạt Động',
+    highlight: 'Khu vực triển khai tại châu Âu với đường truyền backbone riêng.',
+  },
+  {
+    id: 'ca',
+    name: 'Canada Edge Network',
+    country: 'Canada',
+    flag: sitePath('/flags/canada.svg'),
+    badge: 'North America Edge',
+    basePing: 270,
+    bandwidth: '10 Gbps Backbone',
+    uptime: '99.99%',
+    status: 'active',
+    statusText: 'Đang Hoạt Động',
+    highlight: 'Khu vực triển khai tại Bắc Mỹ với đường truyền backbone riêng.',
+  },
 ];
 
 export function NetworkRadar3D() {
@@ -79,6 +105,8 @@ export function NetworkRadar3D() {
     vn: 8,
     hk: 42,
     th: 34,
+    eu: 210,
+    ca: 270,
   });
 
   // Simulated live ping oscillation
@@ -89,6 +117,8 @@ export function NetworkRadar3D() {
         vn: Math.floor(7 + Math.random() * 3),
         hk: Math.floor(40 + Math.random() * 6),
         th: Math.floor(32 + Math.random() * 5),
+        eu: Math.floor(200 + Math.random() * 25),
+        ca: Math.floor(255 + Math.random() * 30),
       });
     }, 2400);
 
@@ -108,7 +138,7 @@ export function NetworkRadar3D() {
             Mạng Lưới Hạ Tầng & Băng Thông Toàn Cầu
           </h3>
           <p className="mt-1 text-sm text-slate-400">
-            Đường truyền trực tiếp tới các cụm máy chủ Đông Nam Á với công nghệ chống DDoS đa lớp.
+            Kết nối tới các cụm máy chủ Đông Nam Á, EU và Canada với công nghệ chống DDoS đa lớp.
           </p>
         </div>
 
@@ -119,7 +149,7 @@ export function NetworkRadar3D() {
       </div>
 
       {/* Grid of Nodes */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {NODES.map((node) => {
           const isSelected = selectedNode.id === node.id;
           const ping = livePings[node.id] || node.basePing;
@@ -181,6 +211,9 @@ export function NetworkRadar3D() {
               <h4 className="text-base font-bold text-white sm:text-lg">{selectedNode.name}</h4>
             </div>
             <p className="text-xs text-slate-300 sm:text-sm">{selectedNode.highlight}</p>
+            <p className="text-xs font-semibold text-cyan-200 sm:text-sm">
+              {selectedNode.statusText}
+            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">

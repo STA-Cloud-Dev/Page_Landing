@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-labelledby="title desc">
+  <title id="title">Canada flag</title>
+  <desc id="desc">Red and white flag representing Canada.</desc>
+  <rect width="120" height="80" fill="#fff"/>
+  <rect width="28" height="80" fill="#d52b1e"/>
+  <rect x="92" width="28" height="80" fill="#d52b1e"/>
+  <path fill="#d52b1e" d="m60 15 4 13 10-6-4 12 12 2-11 7 7 9-14-4 2 17h-12l2-17-14 4 7-9-11-7 12-2-4-12 10 6z"/>
+</svg>

@@ -373,11 +373,11 @@ export function HomePage() {
                 <HeroCyberScene />
 
                 {/* Floating 3D Stat Counters */}
-                <div className="pointer-events-none absolute inset-x-3 bottom-3 grid grid-cols-2 gap-2 sm:inset-x-6 sm:bottom-6 sm:grid-cols-4">
+                <div className="pointer-events-none absolute inset-x-3 bottom-3 z-30 grid grid-cols-2 gap-2 sm:inset-x-6 sm:bottom-6 sm:grid-cols-4">
                   {heroStats.map((st) => (
                     <div
                       key={st.label}
-                      className="rounded-xl border border-cyan-300/30 bg-[#063056]/90 p-2.5 text-center backdrop-blur-lg shadow-lg"
+                      className="rounded-xl border border-cyan-300/45 bg-[#063056]/[0.97] p-2.5 text-center shadow-[0_12px_28px_rgba(0,12,28,0.46)] backdrop-blur-lg"
                     >
                       <p className="font-mono text-lg font-black text-white sm:text-xl text-gradient-cyan">
                         {st.value}
