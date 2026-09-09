@@ -1,4 +1,5 @@
 const http = require('node:http');
+const childProcess = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const { URL } = require('node:url');
@@ -31,6 +32,57 @@ const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
 };
+
+function getGitCommit() {
+  try {
+    return childProcess.execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: __dirname,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch {
+    return '';
+  }
+}
+
+function ensureProductionBuild() {
+  const markerPath = path.join(publicRoot, '.stacloud-build-commit');
+  const currentCommit = getGitCommit();
+  let builtCommit = '';
+
+  try {
+    builtCommit = fs.readFileSync(markerPath, 'utf8').trim();
+  } catch {
+    // A missing marker is normal for a manually uploaded build.
+  }
+
+  const needsBuild = !fs.existsSync(path.join(publicRoot, 'index.html')) ||
+    (Boolean(currentCommit) && currentCommit !== builtCommit);
+
+  if (!needsBuild) {
+    return;
+  }
+
+  console.log('Production build missing or outdated. Running npm run build...');
+  const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  const result = childProcess.spawnSync(npmCommand, ['run', 'build'], {
+    cwd: __dirname,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+  });
+
+  if (result.error || result.status !== 0 || !fs.existsSync(path.join(publicRoot, 'index.html'))) {
+    if (result.error) {
+      console.error(`Build command error: ${result.error.message}`);
+    }
+    console.error('Production build failed. Run npm run build and restart the server.');
+    process.exit(1);
+  }
+
+  if (currentCommit) {
+    fs.writeFileSync(markerPath, `${currentCommit}\n`, 'utf8');
+  }
+}
 
 function getSafePath(pathname) {
   let decodedPath;
@@ -103,6 +155,8 @@ function sendFile(request, response, filePath, statusCode = 200) {
   }
 }
 
+ensureProductionBuild();
+
 const server = http.createServer((request, response) => {
   if (!['GET', 'HEAD'].includes(request.method || '')) {
     response.writeHead(405, { ...securityHeaders, Allow: 'GET, HEAD' });
@@ -116,12 +170,6 @@ const server = http.createServer((request, response) => {
   } catch {
     response.writeHead(400, securityHeaders);
     response.end('Bad Request');
-    return;
-  }
-
-  if (!fs.existsSync(publicRoot)) {
-    response.writeHead(503, { ...securityHeaders, 'Content-Type': 'text/plain; charset=utf-8' });
-    response.end('Production build is missing. Run: npm run build');
     return;
   }
 
