@@ -22,12 +22,12 @@ export const heroStats = [
 
 export const heroSignals = [
   '🎁 Node Test 100% Free cho bot Discord, web nhỏ và project sinh viên',
-  '⚡ Tài khoản mới Verify Account để nhận 10.000 Credit',
+  '⚡ Free Forever • 75% CPU • 2 GB RAM',
   '🦞 OpenClaw Beta miễn phí - Trải nghiệm AI & Web không cần domain riêng',
 ] as const;
 
 export const heroStatusStrip = [
-  { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: '9.000 Credit', tone: 'emerald', status: 'active' },
+  { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: 'Free Forever', tone: 'emerald', status: 'active' },
   { label: 'DEV SG', detail: 'AMD Milan • 24 Slots', value: '5.000đ / chu kỳ', tone: 'emerald', status: 'active' },
   { label: 'MC SG', detail: 'AMD Milan • 10 Slots', value: '8.000đ / chu kỳ', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
@@ -42,14 +42,14 @@ export const allServicePlans = [
     name: 'NODE TEST',
     badge: '100% Free',
     status: 'active',
-    price: '9.000 Credit',
+    price: '0 Credit',
     period: 'Mỗi lần tạo plan',
-    description: 'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên. Tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
-    specs: ['75% CPU', '2 GB RAM', 'Không hỗ trợ backup', 'Hoàn 100% Credit nếu lỗi hệ thống'],
+    description: 'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên.',
+    specs: [],
     upsizeAvailable: false,
-    upsizeNotes: 'Tài khoản mới tạo ticket Discord và chọn Verify Account để nhận Credit.',
-    warning: 'Hãy tự tải bản sao lưu về máy. Nghiêm cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật.',
-    ctaText: 'Verify Account Nhận Credit',
+    upsizeNotes: '',
+    warning: '',
+    ctaText: 'Đăng Ký NODE TEST',
   },
   {
     id: 'openclaw',
@@ -75,7 +75,7 @@ export const allServicePlans = [
     price: '5.000 VNĐ',
     period: 'Chu kỳ',
     description: 'Máy chủ CPU AMD Milan tại Singapore, cực kỳ tối ưu cho bot Discord/Telegram, Node.js app, Python backend và web test.',
-    specs: ['1 vCore AMD Milan', '1 GB RAM DDR4', '2 GB SSD NVMe', 'Singapore / OVH Shield', 'Uptime 99.9%'],
+    specs: ['1 vCore AMD Milan', '1 GB RAM DDR4', '2 GB SSD NVMe', 'Singapore / OVH Shield', 'Uptime 99%+'],
     upsizeAvailable: true,
     upsizeNotes: 'Upsize tối đa 2 Core (+5k/core) và 2 GB RAM (+10k/GB).',
     ctaText: 'Chọn Gói DEV SG',
@@ -168,8 +168,8 @@ export const allServicePlans = [
 
 export const comprehensiveFaqs = [
   {
-    q: 'Làm sao dùng Node Test miễn phí và nhận 10.000 Credit?',
-    a: 'Gói Node Test có giá tạo plan là 9.000 Credit. Tài khoản cũ đã được cộng 10.000 Credit. Tài khoản mới hãy tạo ticket Discord, chọn Verify Account và hoàn thành một trong các hình thức xác minh được công bố. Nếu tài khoản ở trạng thái Approval Account, hệ thống AI sẽ tự động xét duyệt trong khoảng 5 phút đến 24 giờ.',
+    q: 'NODE TEST có thực sự miễn phí lâu dài không?',
+    a: 'Có. NODE TEST được công bố là Free Forever với 75% CPU và 2 GB RAM. Mỗi lần tạo plan hiển thị 0 Credit; người dùng chỉ cần tuân thủ chính sách sử dụng và chủ động lưu bản sao dữ liệu.',
   },
   {
     q: 'Tôi là người mới, nên chọn gói nào để bắt đầu?',

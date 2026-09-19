@@ -9,6 +9,7 @@ export type EggGroup = {
   accent: 'cyan' | 'blue' | 'teal' | 'slate';
   items: EggItem[];
   wide?: boolean;
+  status?: string;
 };
 
 const linuxFamilies: EggItem[] = [
@@ -30,7 +31,7 @@ const linuxFamilies: EggItem[] = [
   },
   {
     name: 'Ubuntu',
-    variants: ['Ubuntu 22.04 LTS', 'Ubuntu 24.04 LTS', 'Ubuntu 25.10', 'Ubuntu 26.04 LTS'],
+    variants: ['Ubuntu 22.04 LTS', 'Ubuntu 24.04 LTS', 'Ubuntu 26.04 LTS'],
   },
   {
     name: 'Debian',
@@ -81,6 +82,25 @@ export const eggGroups: EggGroup[] = [
     accent: 'teal',
     items: linuxFamilies,
     wide: true,
+  },
+  {
+    title: 'Windows',
+    subtitle: 'Windows desktop và Windows Server cho panel',
+    accent: 'blue',
+    status: 'Coming Soon',
+    items: [
+      { name: 'Windows Desktop', variants: ['Windows 10', 'Windows 11'] },
+      {
+        name: 'Windows Server',
+        variants: [
+          'Windows Server 2012',
+          'Windows Server 2016',
+          'Windows Server 2019',
+          'Windows Server 2022',
+          'Windows Server 2025',
+        ],
+      },
+    ],
   },
   {
     title: 'Minecraft',

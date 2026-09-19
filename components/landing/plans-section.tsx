@@ -174,8 +174,6 @@ export function PlansSection() {
     () => servicePlans.filter((plan) => matchesFilter(plan, activeFilter)),
     [activeFilter]
   );
-  const testerPlan = filteredPlans.find((plan) => plan.name === 'NODE TEST');
-
   return (
     <section id="plans" className="px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
@@ -225,26 +223,6 @@ export function PlansSection() {
           </div>
         )}
 
-        {testerPlan ? (
-          <div className="mt-8 rounded-lg border border-cyan-300/20 bg-slate-950/75 p-5 sm:p-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100/80">
-                  Lưu ý NODE TEST
-                </p>
-                <h3 className="mt-2 text-2xl font-semibold text-white">Gói miễn phí không hỗ trợ backup</h3>
-                <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
-                  NODE TEST là tên hiện tại của gói TESTER. Gói sử dụng 75% CPU, 2 GB RAM và không
-                  hỗ trợ backup; hãy chủ động tải dữ liệu quan trọng về máy.
-                </p>
-              </div>
-              <span className="w-fit rounded-lg border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
-                {testerPlan.price}
-              </span>
-            </div>
-          </div>
-        ) : null}
-
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-12">
           {filteredPlans.map((plan) => (
             <article
@@ -282,16 +260,18 @@ export function PlansSection() {
                   </div>
                 </div>
 
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {plan.specs.map((spec) => (
-                    <div
-                      key={spec}
-                      className="status-tile rounded-lg border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200"
-                    >
-                      {spec}
-                    </div>
-                  ))}
-                </div>
+                {plan.specs.length > 0 ? (
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {plan.specs.map((spec) => (
+                      <div
+                        key={spec}
+                        className="status-tile rounded-lg border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200"
+                      >
+                        {spec}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
 
                 {plan.addOns.length > 0 ? (
                   <div className="rounded-lg border border-cyan-300/15 bg-cyan-300/[0.05] p-4">

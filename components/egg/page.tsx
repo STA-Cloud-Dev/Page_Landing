@@ -174,11 +174,11 @@ function Summary({
           </div>
           <div>
             <h1 className="max-w-4xl text-3xl font-semibold leading-tight text-white sm:text-5xl">
-              Danh sách egg đang hỗ trợ cho AI, Code Languages, Linux, Minecraft, Proxy và Voice Servers.
+              Danh sách egg cho AI, Code Languages, Linux, Windows, Minecraft, Proxy và Voice Servers.
             </h1>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
-              Trang này gom egg theo đúng nhóm chính trong STACloudMultiEgg/Egg. Riêng Linux hiển thị
-              toàn bộ hệ điều hành trong egg Linux VPS, không tách thành nhiều card rời rạc.
+              Linux hiển thị các hệ điều hành đang hỗ trợ. Egg Windows 10, Windows 11 và Windows Server
+              hiện đã được công bố ở trạng thái Coming Soon.
             </p>
           </div>
         </Reveal>
@@ -236,7 +236,7 @@ function Summary({
   );
 }
 
-function EggItemRow({ item, accent }: { item: EggItem; accent: (typeof accentClasses)[EggGroup['accent']] }) {
+function EggItemRow({ item, accent, comingSoon }: { item: EggItem; accent: (typeof accentClasses)[EggGroup['accent']]; comingSoon?: boolean }) {
   if (item.variants?.length) {
     return (
       <div className="rounded-lg border border-cyan-300/10 bg-slate-950/60 px-4 py-4">
@@ -250,7 +250,7 @@ function EggItemRow({ item, accent }: { item: EggItem; accent: (typeof accentCla
           {item.variants.map((variant) => (
             <span
               key={variant}
-              className="rounded-lg border border-white/10 bg-white/[0.035] px-3 py-1.5 text-xs font-medium text-slate-200"
+              className={`rounded-lg border px-3 py-1.5 text-xs font-medium ${comingSoon ? 'border-amber-300/20 bg-amber-300/10 text-amber-100' : 'border-white/10 bg-white/[0.035] text-slate-200'}`}
             >
               {variant}
             </span>
@@ -265,7 +265,7 @@ function EggItemRow({ item, accent }: { item: EggItem; accent: (typeof accentCla
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 break-words text-sm font-semibold text-white">{item.name}</p>
         <span className={`w-fit shrink-0 rounded-lg border px-2.5 py-1 text-[11px] font-semibold ${accent.pill}`}>
-          Egg
+          {comingSoon ? 'Coming Soon' : 'Egg'}
         </span>
       </div>
     </div>
@@ -296,13 +296,13 @@ function EggCard({ group, index }: { group: EggGroup; index: number }) {
               <p className="mt-2 text-sm leading-6 text-slate-400">{group.subtitle}</p>
             </div>
             <span className={`shrink-0 rounded-lg border px-3 py-1 text-xs font-semibold ${accent.pill}`}>
-              {totalItems}
+              {group.status ?? totalItems}
             </span>
           </div>
 
           <div className={group.wide ? 'mt-5 grid gap-2.5 lg:grid-cols-2' : 'mt-5 grid gap-2.5'}>
             {group.items.map((item) => (
-              <EggItemRow key={`${group.title}-${item.name}`} item={item} accent={accent} />
+              <EggItemRow key={`${group.title}-${item.name}`} item={item} accent={accent} comingSoon={Boolean(group.status)} />
             ))}
           </div>
         </div>

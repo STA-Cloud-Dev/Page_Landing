@@ -11,9 +11,9 @@ export type LegalSection = {
   subsections?: LegalSubsection[];
 };
 
-export const legalLastUpdated = '09/09/2026';
-export const slaLastUpdated = '09/09/2026';
-export const partnerLastUpdated = '09/09/2026';
+export const legalLastUpdated = '19/09/2026';
+export const slaLastUpdated = '19/09/2026';
+export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
   {
@@ -111,11 +111,9 @@ export const termsSections: LegalSection[] = [
         title: '7.6 Điều khoản riêng cho Node Test',
         bullets: [
           'NODE TEST (tên cũ: TESTER) là gói miễn phí cho bot Discord, web nhỏ và project học tập; cấu hình công bố gồm 75% CPU và 2 GB RAM.',
-          'Mỗi lần tạo plan dùng 9.000 Credit. Tài khoản cũ đã được cộng 10.000 Credit; tài khoản mới cần tạo ticket Discord và chọn Verify Account.',
-          'Tài khoản mới có thể xác minh bằng cách mời tối thiểu 10 thành viên vào Discord, đăng bài giới thiệu dịch vụ hoặc nạp tối thiểu 10.000 Credit theo thông báo hiện hành.',
-          'Approval Account được AI tự động xét duyệt trong khoảng 5 phút đến 24 giờ.',
+          'NODE TEST được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
+          'Người dùng tạo ticket Discord để đăng ký và chờ đội ngũ kiểm tra khả năng cấp phát tài nguyên.',
           'NODE TEST không hỗ trợ backup. Người dùng phải tự tải bản sao lưu về máy trước khi có sự cố.',
-          'Nếu server sập do lỗi hệ thống được STACloud xác nhận, Credit của plan được hoàn trả 100%.',
           'Nghiêm cấm DDoS, mining, scan port, botnet, mã độc, nội dung độc hại hoặc vi phạm pháp luật. Tài khoản vi phạm bị khóa vĩnh viễn và không hỗ trợ mở lại.',
         ],
       },
@@ -128,8 +126,31 @@ export const termsSections: LegalSection[] = [
     ],
   },
   {
-    title: '9. Liên hệ',
-    paragraphs: ['Nếu cần hỗ trợ, vui lòng liên hệ qua email: stacloud.dev@gmail.com.'],
+    title: '9. Dịch vụ miễn phí và Free Forever',
+    bullets: [
+      'Free Forever mô tả chính sách giá 0 Credit của NODE TEST tại thời điểm công bố, không phải cam kết tài nguyên vô hạn hoặc không bao giờ thay đổi cấu hình.',
+      'STACloud có thể giới hạn số lượng plan, thời gian cấp phát hoặc tạm dừng đăng ký mới khi hạ tầng không còn đủ tài nguyên.',
+      'Dịch vụ miễn phí không thuộc phạm vi bồi hoàn SLA, không hỗ trợ backup và được cung cấp theo khả năng hiện có.',
+    ],
+  },
+  {
+    title: '10. Hạ tầng trong nước và ngoài nước',
+    bullets: [
+      'Dịch vụ có thể được triển khai tại Việt Nam, Singapore, Hong Kong, Thái Lan, EU, Canada hoặc khu vực khác tùy gói và khả năng hạ tầng.',
+      'Các dịch vụ trả phí đủ điều kiện tại cả location trong nước và ngoài nước có mục tiêu uptime tối thiểu 99% theo tháng, theo phạm vi và loại trừ của SLA.',
+      'Độ trễ phụ thuộc khoảng cách địa lý, tuyến mạng, nhà mạng người dùng và trạng thái Internet quốc tế; ping hiển thị trên website chỉ mang tính tham khảo.',
+    ],
+  },
+  {
+    title: '11. Dịch vụ và liên kết bên thứ ba',
+    bullets: [
+      'Portal, Discord, Zalo, Messenger, DNS, domain, API AI hoặc dịch vụ nhà cung cấp hạ tầng có thể chịu điều khoản và sự cố riêng của bên thứ ba.',
+      'STACloud không kiểm soát và không chịu trách nhiệm cho nội dung, thời gian hoạt động hoặc thay đổi chính sách của nền tảng bên thứ ba.',
+    ],
+  },
+  {
+    title: '12. Liên hệ',
+    paragraphs: ['Nếu cần hỗ trợ, vui lòng liên hệ qua email: stacloud.dev@gmail.com hoặc ticket Discord chính thức.'],
   },
 ];
 
@@ -201,13 +222,35 @@ export const privacySections: LegalSection[] = [
     ],
   },
   {
-    title: '10. Thay đổi chính sách này',
+    title: '10. Hạ tầng và truyền dữ liệu theo khu vực',
+    bullets: [
+      'Tùy dịch vụ, dữ liệu kỹ thuật có thể được xử lý hoặc lưu trữ tại Việt Nam, Singapore, Hong Kong, Thái Lan, EU, Canada hoặc khu vực của nhà cung cấp hạ tầng.',
+      'Việc truyền dữ liệu giữa các khu vực chỉ được thực hiện khi cần cho vận hành, hỗ trợ, bảo mật hoặc cung cấp dịch vụ người dùng đã chọn.',
+      'Người dùng chịu trách nhiệm bảo đảm dữ liệu tải lên được phép lưu trữ và xử lý tại location đã đăng ký.',
+    ],
+  },
+  {
+    title: '11. Phát hiện lạm dụng và xử lý tự động',
+    bullets: [
+      'STACloud có thể dùng hệ thống tự động để phân tích log kỹ thuật, mức sử dụng tài nguyên và dấu hiệu DDoS, mining, botnet, scan port, malware hoặc hành vi bất thường.',
+      'Kết quả tự động có thể dẫn đến giới hạn tạm thời để bảo vệ hệ thống; người dùng có thể tạo ticket để yêu cầu kiểm tra lại.',
+    ],
+  },
+  {
+    title: '12. Dịch vụ bên thứ ba',
+    bullets: [
+      'Discord, Zalo, Messenger, nhà cung cấp thanh toán, DNS, domain và hạ tầng upstream có chính sách quyền riêng tư riêng.',
+      'Khi truy cập liên kết bên thứ ba, dữ liệu của bạn được xử lý theo chính sách của nền tảng đó và nằm ngoài quyền kiểm soát trực tiếp của STACloud.',
+    ],
+  },
+  {
+    title: '13. Thay đổi chính sách này',
     paragraphs: [
       'Chúng tôi có thể cập nhật Chính sách quyền riêng tư này bất kỳ lúc nào. Việc bạn tiếp tục sử dụng dịch vụ sau khi có thay đổi đồng nghĩa với việc bạn chấp nhận phiên bản đã cập nhật.',
     ],
   },
   {
-    title: '11. Liên hệ',
+    title: '14. Liên hệ',
     paragraphs: ['Nếu bạn có câu hỏi về Chính sách quyền riêng tư này, vui lòng liên hệ: stacloud.dev@gmail.com.'],
   },
 ];
@@ -227,7 +270,7 @@ export const slaSections: LegalSection[] = [
   {
     title: '2. Cam kết uptime',
     bullets: [
-      'STACloud đặt mục tiêu uptime hàng tháng ở mức 99.9% cho các dịch vụ thuộc phạm vi SLA.',
+      'STACloud cam kết mục tiêu uptime hàng tháng tối thiểu 99% cho các dịch vụ trả phí đủ điều kiện tại location trong nước và ngoài nước.',
       'Uptime hàng tháng được tính theo công thức: (tổng thời gian trong tháng - downtime hợp lệ) / tổng thời gian trong tháng.',
       'Downtime hợp lệ là khoảng thời gian dịch vụ không thể truy cập do lỗi phía STACloud kéo dài liên tục từ 5 phút trở lên.',
     ],
@@ -263,8 +306,8 @@ export const slaSections: LegalSection[] = [
       'Nếu vi phạm SLA được xác nhận, STACloud có thể cấp service credit dưới dạng gia hạn chu kỳ hoặc cộng credit nội bộ, không quy đổi thành tiền mặt.',
     ],
     bullets: [
-      'Uptime từ 99.0% đến dưới 99.9%: service credit 10% giá trị chu kỳ hiện tại.',
-      'Uptime từ 95.0% đến dưới 99.0%: service credit 25% giá trị chu kỳ hiện tại.',
+      'Uptime từ 98.0% đến dưới 99.0%: service credit 10% giá trị chu kỳ hiện tại.',
+      'Uptime từ 95.0% đến dưới 98.0%: service credit 25% giá trị chu kỳ hiện tại.',
       'Uptime dưới 95.0%: service credit 50% giá trị chu kỳ hiện tại.',
       'Tổng service credit tối đa cho một chu kỳ không vượt quá phí của chính chu kỳ đó.',
     ],
@@ -411,7 +454,7 @@ export const partnerSections: LegalSection[] = [
   {
     title: '11. SLA dịch vụ',
     bullets: [
-      'STACloud đặt mục tiêu uptime 99.9% theo tháng cho các dịch vụ trả phí đủ điều kiện.',
+      'STACloud cam kết mục tiêu uptime tối thiểu 99% theo tháng cho các dịch vụ trả phí đủ điều kiện tại location trong nước và ngoài nước.',
       'Uptime được tính dựa trên hệ thống giám sát của STACloud hoặc dữ liệu từ nhà cung cấp hạ tầng nếu có.',
       'Các trường hợp không tính là vi phạm SLA gồm bảo trì đã thông báo, lỗi từ nhà cung cấp hạ tầng, lỗi mạng quốc tế, DDoS, cấu hình sai từ phía người dùng, phần mềm người dùng gây treo máy, hành vi vi phạm điều khoản, sự cố bất khả kháng hoặc lỗi nằm ngoài phạm vi kiểm soát hợp lý của STACloud.',
       'Nếu dịch vụ trả phí đủ điều kiện không đạt SLA và lỗi được xác nhận thuộc trách nhiệm của STACloud, STACloud có thể bồi hoàn bằng service credit cho chu kỳ tiếp theo. Service credit không quy đổi thành tiền mặt.',
@@ -500,7 +543,7 @@ export const partnerSections: LegalSection[] = [
     bullets: [
       'STACloud không chịu trách nhiệm cho thiệt hại gián tiếp, mất doanh thu, mất dữ liệu, mất người dùng, gián đoạn cộng đồng hoặc thiệt hại phát sinh từ việc Partner không backup, cấu hình sai, dùng phần mềm lỗi hoặc vi phạm điều khoản.',
       'Trong mọi trường hợp, mức bồi hoàn tối đa nếu có sẽ không vượt quá phí dịch vụ mà Partner đã thanh toán cho dịch vụ bị ảnh hưởng trong chu kỳ xảy ra sự cố.',
-      'Các dịch vụ miễn phí như NODE TEST và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime hoặc khôi phục dữ liệu ngoài chính sách Credit đã công bố.',
+      'Các dịch vụ miễn phí như NODE TEST và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime, bồi hoàn hoặc khôi phục dữ liệu.',
       'Service credit, nếu được áp dụng, là biện pháp khắc phục duy nhất cho sự cố downtime thuộc phạm vi SLA.',
     ],
   },

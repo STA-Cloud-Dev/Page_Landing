@@ -16,6 +16,20 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
     if (!container) return;
     setIsWebGLReady(false);
 
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ?? false;
+    if (
+      window.innerWidth < 768 ||
+      deviceMemory <= 4 ||
+      navigator.hardwareConcurrency <= 4 ||
+      saveData ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      container.dataset.webglFailed = 'lite-mode';
+      return;
+    }
+
     const probeCanvas = document.createElement('canvas');
     const probeContext = probeCanvas.getContext('webgl2');
     if (!probeContext) {
@@ -54,7 +68,7 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
     }
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.domElement.style.display = 'block';
@@ -270,6 +284,8 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
     window.addEventListener('touchmove', handlePointerMove, { passive: true });
 
     let animationFrameId = 0;
+    let lastFrameTime = 0;
+    let isVisible = true;
     const timer = new THREE.Timer();
     timer.connect(document);
 
@@ -284,6 +300,10 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
 
     const animate = (timestamp?: DOMHighResTimeStamp) => {
       animationFrameId = requestAnimationFrame(animate);
+      if (!isVisible || document.hidden || (timestamp && timestamp - lastFrameTime < 33)) {
+        return;
+      }
+      lastFrameTime = timestamp ?? 0;
       timer.update(timestamp);
       const elapsedTime = timer.getElapsed();
 
@@ -329,22 +349,28 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
 
     animate();
 
-    // Resize Handler
-    const handleResize = () => {
-      if (!container) return;
+    const resizeObserver = new ResizeObserver(() => {
       const newWidth = container.clientWidth;
       const newHeight = container.clientHeight;
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
-    };
+    });
+    resizeObserver.observe(container);
 
-    window.addEventListener('resize', handleResize);
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { rootMargin: '120px' }
+    );
+    visibilityObserver.observe(container);
 
     return () => {
       window.removeEventListener('mousemove', handlePointerMove);
       window.removeEventListener('touchmove', handlePointerMove);
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
       timer.dispose();
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
@@ -352,6 +378,16 @@ export function HeroCyberScene({ compact = false }: HeroCyberSceneProps) {
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      scene.traverse((object) => {
+        const renderable = object as THREE.Mesh | THREE.Line;
+        if ('geometry' in renderable && renderable.geometry) {
+          renderable.geometry.dispose();
+        }
+        if ('material' in renderable && renderable.material) {
+          const materials = Array.isArray(renderable.material) ? renderable.material : [renderable.material];
+          materials.forEach((material) => material.dispose());
+        }
+      });
       renderer.dispose();
       scene.clear();
     };

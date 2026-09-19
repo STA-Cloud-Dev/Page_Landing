@@ -182,12 +182,32 @@ export function ServerCloudScene({ compact = false }: ServerCloudSceneProps) {
       return;
     }
 
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ?? false;
+    if (
+      window.innerWidth < 768 ||
+      deviceMemory <= 4 ||
+      navigator.hardwareConcurrency <= 4 ||
+      saveData ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      container.dataset.lite = 'true';
+      return;
+    }
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     camera.position.set(4.55, 2.45, 6.15);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    } catch {
+      container.dataset.lite = 'true';
+      return;
+    }
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -329,7 +349,7 @@ export function ServerCloudScene({ compact = false }: ServerCloudSceneProps) {
       dataCubes.forEach((cube) => {
         cube.visible = !isMobile;
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
@@ -340,11 +360,20 @@ export function ServerCloudScene({ compact = false }: ServerCloudSceneProps) {
     setSize();
 
     let frameId = 0;
+    let lastFrameTime = 0;
+    let isVisible = true;
     const timer = new THREE.Timer();
     timer.connect(document);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const animate = (timestamp?: DOMHighResTimeStamp) => {
+      if (!prefersReducedMotion) {
+        frameId = window.requestAnimationFrame(animate);
+      }
+      if (!isVisible || document.hidden || (timestamp && timestamp - lastFrameTime < 33)) {
+        return;
+      }
+      lastFrameTime = timestamp ?? 0;
       timer.update(timestamp);
       const elapsed = timer.getElapsed();
 
@@ -385,15 +414,21 @@ export function ServerCloudScene({ compact = false }: ServerCloudSceneProps) {
       });
 
       renderer.render(scene, camera);
-      if (!prefersReducedMotion) {
-        frameId = window.requestAnimationFrame(animate);
-      }
     };
 
     animate();
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { rootMargin: '120px' }
+    );
+    visibilityObserver.observe(container);
+
     return () => {
       window.cancelAnimationFrame(frameId);
+      visibilityObserver.disconnect();
       observer.disconnect();
       timer.dispose();
       renderer.dispose();

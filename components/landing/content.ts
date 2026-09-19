@@ -26,24 +26,15 @@ export const servicePlans = [
   {
     name: 'NODE TEST',
     description:
-      'Free hosting cho bot Discord, web nhỏ và project sinh viên. Plan dùng 9.000 Credit; tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
-    price: '9.000 Credit / plan',
-    highlight: '100% Free',
-    specs: ['75% CPU', '2 GB RAM', 'Không hỗ trợ backup', 'Hoàn Credit nếu lỗi hệ thống'],
-    addOns: [
-      'Tài khoản cũ đã được cộng sẵn 10.000 Credit.',
-      'Tài khoản mới tạo ticket Discord và chọn Verify Account.',
-      'Approval Account được AI tự động xét duyệt trong 5 phút đến 24 giờ.',
-      'Có thể xác minh bằng mời 10 bạn, đăng bài giới thiệu hoặc nạp tối thiểu 10.000 Credit.',
-    ],
+      'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên.',
+    price: '0 Credit / Mỗi lần tạo plan',
+    highlight: 'Free Forever',
+    specs: [],
+    addOns: [],
     status: 'active',
-    statusLabel: '100% Free',
+    statusLabel: 'Đang Mở Slot',
     accent: 'from-emerald-400/25 to-cyan-300/10',
-    warnings: [
-      'Không hỗ trợ backup; người dùng phải tự tải bản sao lưu về máy.',
-      'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật.',
-      'Tài khoản vi phạm bị khóa vĩnh viễn và không hỗ trợ mở lại.',
-    ],
+    warnings: [],
   },
   {
     name: 'OPENCLAW',
@@ -268,8 +259,7 @@ export const quickSteps = [
 ] as const;
 
 export const notes = [
-  'NODE TEST (tên cũ: TESTER) dùng 75% CPU, 2 GB RAM và có giá tạo plan 9.000 Credit; tài khoản đủ điều kiện nhận 10.000 Credit để bắt đầu.',
-  'Tài khoản mới cần tạo ticket Discord, chọn Verify Account; Approval Account được AI xét duyệt trong 5 phút đến 24 giờ.',
+  'NODE TEST (tên cũ: TESTER) là gói Free Forever, dùng 75% CPU và 2 GB RAM; mỗi lần tạo plan có giá 0 Credit.',
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
   'DEV SG có giá 5.000 VNĐ (0.3$) / chu kỳ với 24 slots; MC SG có giá 8.000 VNĐ (0.5$) / chu kỳ với 10 slots.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
@@ -282,9 +272,8 @@ export const policyGroups = [
     title: 'Gói Miễn Phí Và Beta',
     points: [
       'NODE TEST (tên cũ: TESTER) là gói free cho bot Discord, web nhỏ và project sinh viên, dùng 75% CPU và 2 GB RAM.',
-      'Giá tạo NODE TEST là 9.000 Credit; tài khoản cũ đã được cộng sẵn 10.000 Credit.',
-      'Tài khoản mới tạo ticket Discord, chọn Verify Account và hoàn thành hình thức xác minh được công bố.',
-      'NODE TEST không hỗ trợ backup; nếu server sập do lỗi hệ thống, Credit của plan được hoàn trả 100%.',
+      'NODE TEST được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
+      'NODE TEST không hỗ trợ backup; người dùng phải chủ động tải bản sao dữ liệu về máy.',
       'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật; tài khoản vi phạm bị khóa vĩnh viễn.',
       'OpenClaw Beta miễn phí và hiện không cần domain riêng.',
       'Nếu cần hỗ trợ OpenClaw, người dùng có thể liên hệ Discord, Zalo hoặc Messenger Group.',

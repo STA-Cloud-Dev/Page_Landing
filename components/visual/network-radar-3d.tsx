@@ -26,7 +26,7 @@ const NODES: LocationNode[] = [
     badge: 'Tối Ưu Cho Việt Nam',
     basePing: 26,
     bandwidth: '10 Gbps Anti-DDoS',
-    uptime: '99.99%',
+    uptime: '99%+',
     status: 'fast',
     statusText: 'Cực Nhanh & Mở Rộng',
     highlight: 'Hạ tầng chính cho VPS OVH Xeon/EPYC, DEV SG, MC SG & OpenClaw',
@@ -39,7 +39,7 @@ const NODES: LocationNode[] = [
     badge: 'Direct VN Routing',
     basePing: 8,
     bandwidth: '1 Gbps Dedicated',
-    uptime: '99.95%',
+    uptime: '99%+',
     status: 'active',
     statusText: 'Độ Trễ Thấp Nhất',
     highlight: 'Tối ưu cho bot nội địa và game server kết nối trong nước',
@@ -65,7 +65,7 @@ const NODES: LocationNode[] = [
     badge: 'Edge Relay',
     basePing: 34,
     bandwidth: '30 Gbps Backbone',
-    uptime: '99.99%',
+    uptime: '99%+',
     status: 'active',
     statusText: 'Đang Hoạt Động',
     highlight: 'Đường truyền dự phòng và relay mở rộng khu vực Đông Nam Á',
@@ -78,7 +78,7 @@ const NODES: LocationNode[] = [
     badge: 'Global Edge',
     basePing: 210,
     bandwidth: '10 Gbps Backbone',
-    uptime: '99.99%',
+    uptime: '99%+',
     status: 'active',
     statusText: 'Đang Hoạt Động',
     highlight: 'Khu vực triển khai tại châu Âu với đường truyền backbone riêng.',
@@ -91,7 +91,7 @@ const NODES: LocationNode[] = [
     badge: 'North America Edge',
     basePing: 270,
     bandwidth: '10 Gbps Backbone',
-    uptime: '99.99%',
+    uptime: '99%+',
     status: 'active',
     statusText: 'Đang Hoạt Động',
     highlight: 'Khu vực triển khai tại Bắc Mỹ với đường truyền backbone riêng.',
@@ -144,7 +144,7 @@ export function NetworkRadar3D() {
 
         <div className="flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-xs font-semibold text-emerald-300">
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
-          <span>Hệ thống mạng: 100% Online</span>
+          <span>Hệ thống mạng đang hoạt động</span>
         </div>
       </div>
 

@@ -77,6 +77,86 @@ interface SpecCalculator3DProps {
   messengerUrl: string;
 }
 
+type HardwareSceneParts = {
+  coreTiles: THREE.Mesh[];
+  ramSticks: THREE.Mesh[];
+  driveModules: THREE.Mesh[];
+  cpuPlate: THREE.Mesh;
+};
+
+function LiteHardwareVisual({ vCore, ramGB, diskGB }: { vCore: number; ramGB: number; diskGB: number }) {
+  const activeRam = Math.min(8, Math.max(1, Math.ceil(ramGB / 16)));
+  const activeDrives = diskGB >= 2000 ? 4 : diskGB >= 1000 ? 3 : diskGB >= 250 ? 2 : 1;
+
+  return (
+    <div className="relative mx-auto h-64 w-full max-w-sm overflow-hidden rounded-2xl border border-cyan-300/25 bg-[#031a30] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+      <div className="absolute inset-4 rounded-xl border border-cyan-300/20 bg-[#06345a] shadow-[0_20px_35px_rgba(0,0,0,0.28)] [transform:perspective(700px)_rotateX(54deg)]" />
+      <div className="absolute left-1/2 top-[47%] grid h-28 w-28 -translate-x-1/2 -translate-y-1/2 grid-cols-8 gap-1 rounded-lg border border-cyan-100/35 bg-[#021426] p-2 shadow-[0_0_35px_rgba(72,202,228,0.3)]">
+        {Array.from({ length: 64 }, (_, index) => (
+          <span
+            key={index}
+            className={`rounded-[2px] transition-colors duration-300 ${index < vCore ? 'bg-cyan-100 shadow-[0_0_6px_rgba(144,224,239,0.8)]' : 'bg-slate-800'}`}
+          />
+        ))}
+      </div>
+      <div className="absolute left-6 top-14 flex gap-1.5">
+        {Array.from({ length: 4 }, (_, index) => (
+          <span key={index} className={`h-16 w-2 rounded-sm ${index * 2 < activeRam ? 'bg-sky-300' : 'bg-slate-700'}`} />
+        ))}
+      </div>
+      <div className="absolute right-6 top-14 flex gap-1.5">
+        {Array.from({ length: 4 }, (_, index) => (
+          <span key={index} className={`h-16 w-2 rounded-sm ${index * 2 + 1 < activeRam ? 'bg-sky-300' : 'bg-slate-700'}`} />
+        ))}
+      </div>
+      <div className="absolute inset-x-12 bottom-7 grid grid-cols-4 gap-2">
+        {Array.from({ length: 4 }, (_, index) => (
+          <span key={index} className={`h-2 rounded-full ${index < activeDrives ? 'bg-cyan-200 shadow-[0_0_8px_rgba(144,224,239,0.6)]' : 'bg-slate-700'}`} />
+        ))}
+      </div>
+      <span className="absolute left-4 top-4 text-[10px] font-bold uppercase tracking-wider text-sky-200">RAM DIMM</span>
+      <span className="absolute right-4 top-4 text-[10px] font-bold uppercase tracking-wider text-sky-200">{vCore}/64 Cores</span>
+      <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-wider text-cyan-200">NVMe {diskGB >= 1000 ? `${diskGB / 1000} TB` : `${diskGB} GB`}</span>
+    </div>
+  );
+}
+
+function updateHardwareParts(parts: HardwareSceneParts, config: { vCore: number; ramGB: number; diskGB: number }) {
+  const activeRam = Math.min(parts.ramSticks.length, Math.max(1, Math.ceil(config.ramGB / 16)));
+  const activeDrives = config.diskGB >= 2000 ? 4 : config.diskGB >= 1000 ? 3 : config.diskGB >= 250 ? 2 : 1;
+
+  parts.coreTiles.forEach((core, index) => {
+    const material = core.material as THREE.MeshStandardMaterial;
+    const active = index < config.vCore;
+    material.color.setHex(active ? 0xcaf0f8 : 0x09243c);
+    material.emissive.setHex(active ? 0x00c9ef : 0x000000);
+    material.emissiveIntensity = active ? 0.7 : 0;
+    core.scale.y = active ? 1.25 : 0.62;
+    core.userData.active = active;
+  });
+
+  parts.ramSticks.forEach((ram, index) => {
+    const material = ram.material as THREE.MeshStandardMaterial;
+    const active = (index % 4) * 2 + (index >= 4 ? 1 : 0) < activeRam;
+    material.color.setHex(active ? 0x38bdf8 : 0x0b253d);
+    material.emissive.setHex(active ? 0x006b9e : 0x000000);
+    material.emissiveIntensity = active ? 0.45 : 0;
+    ram.userData.active = active;
+  });
+
+  parts.driveModules.forEach((drive, index) => {
+    const material = drive.material as THREE.MeshStandardMaterial;
+    const active = index < activeDrives;
+    material.color.setHex(active ? 0x67e8f9 : 0x0b253d);
+    material.emissive.setHex(active ? 0x0891b2 : 0x000000);
+    material.emissiveIntensity = active ? 0.48 : 0;
+    drive.userData.active = active;
+  });
+
+  const cpuScale = 0.9 + (config.vCore / 64) * 0.16;
+  parts.cpuPlate.scale.set(cpuScale, 1, cpuScale);
+}
+
 export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalculator3DProps) {
   const [selectedPresetId, setSelectedPresetId] = useState<string>('custom-enterprise');
   const preset = CLOUD_PRESETS.find((p) => p.id === selectedPresetId) || CLOUD_PRESETS[0];
@@ -88,6 +168,9 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
   const currentVCore = VCORE_STEPS[vCoreIndex] || 16;
   const currentRamGB = RAM_STEPS[ramIndex] || 32;
   const currentDiskGB = DISK_STEPS[diskIndex] || 250;
+  const hardwarePartsRef = useRef<HardwareSceneParts | null>(null);
+  const hardwareConfigRef = useRef({ vCore: currentVCore, ramGB: currentRamGB, diskGB: currentDiskGB });
+  const [hardwareMode, setHardwareMode] = useState<'loading' | 'webgl' | 'lite'>('loading');
 
   // When preset changes, adjust defaults
   useEffect(() => {
@@ -99,6 +182,13 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     setDiskIndex(diskIdx >= 0 ? diskIdx : 0);
   }, [selectedPresetId]);
 
+  useEffect(() => {
+    hardwareConfigRef.current = { vCore: currentVCore, ramGB: currentRamGB, diskGB: currentDiskGB };
+    if (hardwarePartsRef.current) {
+      updateHardwareParts(hardwarePartsRef.current, hardwareConfigRef.current);
+    }
+  }, [currentVCore, currentRamGB, currentDiskGB]);
+
   // --- 3D Ocean Hardware Engine: motherboard, CPU core matrix, RAM and NVMe ---
   const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -106,10 +196,26 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     const container = canvasRef.current;
     if (!container) return;
 
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ?? false;
+    const useLiteMode =
+      window.innerWidth < 768 ||
+      deviceMemory <= 4 ||
+      navigator.hardwareConcurrency <= 4 ||
+      saveData ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (useLiteMode) {
+      setHardwareMode('lite');
+      return;
+    }
+
     const probeCanvas = document.createElement('canvas');
     const probeContext = probeCanvas.getContext('webgl2');
     if (!probeContext) {
       container.dataset.webglFailed = 'true';
+      setHardwareMode('lite');
       return;
     }
     probeContext.getExtension('WEBGL_lose_context')?.loseContext();
@@ -118,23 +224,25 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     const height = Math.max(container.clientHeight, 1);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-    camera.position.set(0, 2.0, 4.2);
+    const camera = new THREE.PerspectiveCamera(43, width / height, 0.1, 100);
+    camera.position.set(0, 3.1, 6.2);
     camera.lookAt(0, 0, 0);
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: deviceMemory > 6, alpha: true, powerPreference: 'default' });
     } catch {
       container.dataset.webglFailed = 'true';
+      setHardwareMode('lite');
       return;
     }
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     renderer.domElement.style.display = 'block';
     renderer.domElement.style.background = 'transparent';
     container.appendChild(renderer.domElement);
+    setHardwareMode('webgl');
 
     scene.add(new THREE.HemisphereLight(0xb9f3ff, 0x03172f, 2.4));
 
@@ -147,7 +255,7 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     scene.add(cyanLight);
 
     const hardwareGroup = new THREE.Group();
-    hardwareGroup.rotation.x = 0.48;
+    hardwareGroup.rotation.x = 0.14;
     scene.add(hardwareGroup);
 
     const board = new THREE.Mesh(
@@ -228,9 +336,9 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
       roughness: 0.24,
     });
     const driveModules: THREE.Mesh[] = [];
-    for (let index = 0; index < 2; index++) {
-      const drive = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.08, 0.28), driveMaterial.clone());
-      drive.position.set(0, 0.22, -1.02 + index * 0.42);
+    for (let index = 0; index < 4; index++) {
+      const drive = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.08, 0.22), driveMaterial.clone());
+      drive.position.set(-1.15 + index * 0.76, 0.22, -1.02);
       hardwareGroup.add(drive);
       driveModules.push(drive);
     }
@@ -256,27 +364,40 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
     statusRing.position.y = 0.05;
     hardwareGroup.add(statusRing);
 
+    hardwarePartsRef.current = { coreTiles, ramSticks, driveModules, cpuPlate };
+    updateHardwareParts(hardwarePartsRef.current, hardwareConfigRef.current);
+
     let frameId = 0;
+    let lastFrameTime = 0;
+    let isVisible = true;
     const timer = new THREE.Timer();
     timer.connect(document);
 
     const animate = (timestamp?: DOMHighResTimeStamp) => {
       frameId = requestAnimationFrame(animate);
+      if (!isVisible || document.hidden || (timestamp && timestamp - lastFrameTime < 33)) {
+        return;
+      }
+      lastFrameTime = timestamp ?? 0;
       timer.update(timestamp);
       const t = timer.getElapsed();
-      hardwareGroup.rotation.y = t * 0.32;
-      hardwareGroup.rotation.x = 0.48 + Math.sin(t * 0.7) * 0.035;
+      hardwareGroup.rotation.y = -0.18 + Math.sin(t * 0.35) * 0.12;
+      hardwareGroup.rotation.x = 0.14 + Math.sin(t * 0.7) * 0.035;
       statusRing.rotation.z = t * 0.6;
       coreTiles.forEach((core, index) => {
         const material = core.material as THREE.MeshStandardMaterial;
-        material.emissiveIntensity = 0.34 + (Math.sin(t * 3.2 - index * 0.28) + 1) * 0.25;
+        if (core.userData.active) {
+          material.emissiveIntensity = 0.42 + (Math.sin(t * 3.2 - index * 0.28) + 1) * 0.2;
+        }
       });
       ramSticks.forEach((ram, index) => {
-        ram.position.y = 0.28 + Math.sin(t * 1.2 + index * 0.3) * 0.025;
+        ram.position.y = ram.userData.active ? 0.28 + Math.sin(t * 1.2 + index * 0.3) * 0.025 : 0.28;
       });
       driveModules.forEach((drive, index) => {
-        (drive.material as THREE.MeshStandardMaterial).emissiveIntensity =
-          0.28 + (Math.sin(t * 2 + index) + 1) * 0.18;
+        if (drive.userData.active) {
+          (drive.material as THREE.MeshStandardMaterial).emissiveIntensity =
+            0.3 + (Math.sin(t * 2 + index) + 1) * 0.14;
+        }
       });
       circuitLines.forEach((line, index) => {
         (line.material as THREE.LineBasicMaterial).opacity = 0.42 + (Math.sin(t * 2.2 + index) + 1) * 0.16;
@@ -286,28 +407,46 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
 
     animate();
 
-    const handleResize = () => {
-      if (!container) return;
-      const nw = container.clientWidth;
-      const nh = container.clientHeight;
+    const resizeObserver = new ResizeObserver(() => {
+      const nw = Math.max(container.clientWidth, 1);
+      const nh = Math.max(container.clientHeight, 1);
       camera.aspect = nw / nh;
       camera.updateProjectionMatrix();
       renderer.setSize(nw, nh);
-    };
+    });
+    resizeObserver.observe(container);
 
-    window.addEventListener('resize', handleResize);
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { rootMargin: '120px' }
+    );
+    visibilityObserver.observe(container);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       cancelAnimationFrame(frameId);
       timer.dispose();
+      hardwarePartsRef.current = null;
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      scene.traverse((object) => {
+        const renderable = object as THREE.Mesh | THREE.Line;
+        if ('geometry' in renderable && renderable.geometry) {
+          renderable.geometry.dispose();
+        }
+        if ('material' in renderable && renderable.material) {
+          const materials = Array.isArray(renderable.material) ? renderable.material : [renderable.material];
+          materials.forEach((material) => material.dispose());
+        }
+      });
       renderer.dispose();
       scene.clear();
     };
-  }, [selectedPresetId, currentVCore, currentRamGB]);
+  }, []);
 
   const quoteMessage = encodeURIComponent(
     `Xin chào STACloud! Tôi cần nhận báo giá cấu hình Cloud theo yêu cầu:\n- Gói/Nhu cầu: ${preset.name}\n- CPU: ${currentVCore} vCore (${preset.cpuFamily})\n- RAM: ${currentRamGB} GB DDR4\n- Lưu trữ: ${currentDiskGB} GB SSD NVMe\n- Vị trí: ${preset.location}\nNhờ Admin tư vấn và báo giá chi tiết giúp tôi nhé!`
@@ -446,10 +585,21 @@ export function SpecCalculator3D({ discordUrl, zaloUrl, messengerUrl }: SpecCalc
         </div>
 
         {/* 3D Visual Centerpiece */}
-        <div className="relative flex flex-col items-center justify-center">
-          <div ref={canvasRef} className="h-64 w-full cursor-grab active:cursor-grabbing sm:h-72" />
-          <p className="mt-2 text-[11px] font-mono uppercase tracking-widest text-cyan-300">
-            3D Ocean Hardware Engine (64-Core Ready)
+        <div className="relative flex min-w-0 flex-col items-center justify-center">
+          <div className="w-full rounded-2xl border border-cyan-300/20 bg-[#021a30]/75 p-3">
+            {hardwareMode === 'lite' ? (
+              <LiteHardwareVisual vCore={currentVCore} ramGB={currentRamGB} diskGB={currentDiskGB} />
+            ) : (
+              <div ref={canvasRef} className="h-64 w-full sm:h-72" aria-label="Mô hình bo mạch CPU, RAM và NVMe theo cấu hình đang chọn" />
+            )}
+            <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
+              <span className="rounded-lg border border-cyan-300/15 bg-cyan-400/10 px-2 py-2 text-cyan-100">CPU {currentVCore}/64 Core</span>
+              <span className="rounded-lg border border-sky-300/15 bg-sky-400/10 px-2 py-2 text-sky-100">RAM {currentRamGB} GB</span>
+              <span className="rounded-lg border border-cyan-300/15 bg-cyan-400/10 px-2 py-2 text-cyan-100">NVMe {currentDiskGB >= 1000 ? `${currentDiskGB / 1000} TB` : `${currentDiskGB} GB`}</span>
+            </div>
+          </div>
+          <p className="mt-3 text-center text-[11px] font-mono uppercase tracking-widest text-cyan-300">
+            Ocean Hardware Engine • Core / DIMM / NVMe Live Preview
           </p>
         </div>
 

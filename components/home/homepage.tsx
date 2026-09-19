@@ -61,17 +61,11 @@ function getStatusBadge(status: string) {
   }
 }
 
-const nodeTestVerificationOptions = [
-  'Mời tối thiểu 10 bạn bè tham gia Discord.',
-  'Đăng một bài giới thiệu dịch vụ free hosting lên mạng xã hội hoặc diễn đàn.',
-  'Nạp tối thiểu 10.000 Credit để vào trải nghiệm ngay.',
-] as const;
-
 function NodeTestLaunch() {
   return (
     <section id="free-hosting" className="scroll-mt-24 px-4 py-10 sm:px-6 sm:py-14">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-emerald-300/35 bg-gradient-to-br from-[#073b68]/95 via-[#063056]/95 to-[#04233f]/95 shadow-[0_28px_90px_rgba(0,180,216,0.22)]">
-        <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
           <div className="relative border-b border-cyan-200/15 p-6 sm:p-8 lg:border-b-0 lg:border-r">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent" />
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/35 bg-emerald-400/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-200">
@@ -82,11 +76,10 @@ function NodeTestLaunch() {
               Free Host Bot Discord, Web Nhỏ & Project Sinh Viên
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-sky-100 sm:text-base">
-              Gói Node Test dành cho thành viên trải nghiệm dịch vụ và triển khai các project nhỏ.
-              Mỗi plan cần 9.000 Credit; tài khoản đủ điều kiện được nhận 10.000 Credit để bắt đầu.
+              Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên.
             </p>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-cyan-200/20 bg-black/25 p-4">
                 <p className="text-xs font-semibold uppercase tracking-wider text-cyan-200">CPU</p>
                 <p className="mt-2 text-2xl font-black text-white">75%</p>
@@ -95,37 +88,19 @@ function NodeTestLaunch() {
                 <p className="text-xs font-semibold uppercase tracking-wider text-cyan-200">RAM</p>
                 <p className="mt-2 text-2xl font-black text-white">2 GB</p>
               </div>
-              <div className="col-span-2 rounded-2xl border border-emerald-200/25 bg-emerald-400/10 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">Giá tạo plan</p>
-                <p className="mt-2 text-2xl font-black text-white">9.000 Credit</p>
+              <div className="col-span-2 rounded-2xl border border-emerald-200/25 bg-emerald-400/10 p-4 sm:col-span-1">
+                <p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">Thời hạn</p>
+                <p className="mt-2 text-lg font-black text-white sm:text-2xl">Free Forever</p>
               </div>
             </div>
           </div>
 
-          <div className="p-6 sm:p-8">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">Nhận 10.000 Credit</p>
-            <h3 className="mt-2 text-2xl font-bold text-white">Xác minh tài khoản mới qua Discord</h3>
+          <div className="flex flex-col justify-center p-6 sm:p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">0 Credit / Mỗi lần tạo plan</p>
+            <h3 className="mt-2 text-2xl font-bold text-white">NODE TEST đang mở slot</h3>
             <p className="mt-3 text-sm leading-7 text-sky-100">
-              Tạo ticket và chọn <strong className="text-white">Verify Account</strong>. Nếu tài khoản
-              ở trạng thái Approval Account, AI sẽ tự động xét duyệt; thời gian xử lý từ 5 phút đến 24 giờ.
+              Tạo ticket Discord để đăng ký. NODE TEST không hỗ trợ backup; hãy chủ động tải dữ liệu quan trọng về máy.
             </p>
-
-            <ol className="mt-5 grid gap-3">
-              {nodeTestVerificationOptions.map((option, index) => (
-                <li key={option} className="flex gap-3 rounded-2xl border border-cyan-200/15 bg-black/20 p-4 text-sm leading-6 text-sky-50">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-cyan-300 font-black text-[#03203c]">
-                    {index + 1}
-                  </span>
-                  <span>{option}</span>
-                </li>
-              ))}
-            </ol>
-
-            <div className="mt-5 rounded-2xl border border-amber-300/30 bg-amber-400/10 p-4 text-xs leading-6 text-amber-100 sm:text-sm">
-              Không hỗ trợ backup. Hãy tự tải dữ liệu quan trọng về máy. Nếu server sập do lỗi hệ
-              thống, Credit của plan được hoàn trả 100%. Vi phạm DDoS, mining, scan port, botnet,
-              mã độc hoặc pháp luật sẽ bị khóa vĩnh viễn.
-            </div>
 
             <a
               href={homeConfig.discordUrl}
@@ -133,7 +108,7 @@ function NodeTestLaunch() {
               rel="noopener noreferrer"
               className="btn-cyber-primary mt-5 min-h-12 w-full rounded-xl px-5 py-3 text-sm font-bold sm:w-auto"
             >
-              Tạo Ticket & Chọn Verify Account
+              Tạo Ticket Đăng Ký NODE TEST
             </a>
           </div>
         </div>
@@ -561,18 +536,19 @@ export function HomePage() {
                       <p className="mt-2 text-xs leading-relaxed text-sky-100">{plan.description}</p>
                     </div>
 
-                    {/* Hardware Specs Checklist */}
-                    <div className="mt-4 space-y-2">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-cyan-200">
-                        Cấu Hình Chi Tiết:
-                      </p>
-                      {plan.specs.map((spec, sIdx) => (
-                        <div key={sIdx} className="flex items-center gap-2 text-xs text-sky-100">
-                          <span className="text-cyan-300">✔</span>
-                          <span>{spec}</span>
-                        </div>
-                      ))}
-                    </div>
+                    {plan.specs.length > 0 ? (
+                      <div className="mt-4 space-y-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-cyan-200">
+                          Cấu Hình Chi Tiết:
+                        </p>
+                        {plan.specs.map((spec, sIdx) => (
+                          <div key={sIdx} className="flex items-center gap-2 text-xs text-sky-100">
+                            <span className="text-cyan-300">✔</span>
+                            <span>{spec}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
 
                     {/* Warning / Upsize Info */}
                     {plan.warning ? (

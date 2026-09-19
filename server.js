@@ -64,11 +64,12 @@ function ensureProductionBuild() {
   }
 
   console.log('Production build missing or outdated. Running npm run build...');
-  const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-  const result = childProcess.spawnSync(npmCommand, ['run', 'build'], {
+  const isWindows = process.platform === 'win32';
+  const buildCommand = isWindows ? process.env.ComSpec || 'cmd.exe' : 'npm';
+  const buildArgs = isWindows ? ['/d', '/s', '/c', 'npm.cmd run build'] : ['run', 'build'];
+  const result = childProcess.spawnSync(buildCommand, buildArgs, {
     cwd: __dirname,
     stdio: 'inherit',
-    shell: process.platform === 'win32',
   });
 
   if (result.error || result.status !== 0 || !fs.existsSync(path.join(publicRoot, 'index.html'))) {
