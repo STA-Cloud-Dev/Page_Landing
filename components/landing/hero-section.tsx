@@ -1,6 +1,6 @@
-﻿import { heroStats, servicePlans, siteConfig } from './content';
+import { heroStats, servicePlans, siteConfig } from './content';
 import { Reveal } from '@/components/ui/reveal';
-import { ServerCloudScene } from '@/components/visual/server-cloud-scene';
+import { CloudConsoleDisplay } from '@/components/visual/cloud-console-display';
 
 function getPlanBadgeClasses(status: string) {
   if (status === 'paused') {
@@ -120,16 +120,8 @@ export function HeroSection() {
             </div>
           </Reveal>
 
-          <Reveal className="relative min-h-[380px] sm:min-h-[430px] lg:min-h-[540px]" delayMs={120}>
-            <ServerCloudScene compact />
-            <div className="pointer-events-none static mt-3 grid gap-3 sm:absolute sm:inset-x-0 sm:bottom-2 sm:mt-0 sm:grid-cols-2">
-              {heroStats.map((item) => (
-                <div key={item.label} className="cloud-stat rounded-lg px-4 py-3">
-                  <p className="text-2xl font-semibold text-white">{item.value}</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-300">{item.label}</p>
-                </div>
-              ))}
-            </div>
+          <Reveal className="relative flex flex-col items-center justify-center" delayMs={120}>
+            <CloudConsoleDisplay stats={heroStats} />
           </Reveal>
         </div>
       </div>

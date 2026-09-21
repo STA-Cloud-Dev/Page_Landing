@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -14,55 +14,66 @@ export function TiltCard({
   children,
   className = '',
   glareColor = 'rgba(0, 240, 255, 0.15)',
-  tiltMaxAngleX = 8,
-  tiltMaxAngleY = 8,
+  tiltMaxAngleX = 6,
+  tiltMaxAngleY = 6,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [transformStyle, setTransformStyle] = useState('');
-  const [glareStyle, setGlareStyle] = useState({ opacity: 0, x: 50, y: 50 });
+  const glareRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = ((y - centerY) / centerY) * -tiltMaxAngleX;
-    const rotateY = ((x - centerX) / centerX) * tiltMaxAngleY;
-    
-    setTransformStyle(`perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`);
-    
-    const glareX = (x / rect.width) * 100;
-    const glareY = (y / rect.height) * 100;
-    setGlareStyle({ opacity: 1, x: glareX, y: glareY });
+
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+
+    rafId.current = requestAnimationFrame(() => {
+      if (!cardRef.current) return;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -tiltMaxAngleX;
+      const rotateY = ((x - centerX) / centerX) * tiltMaxAngleY;
+
+      cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
+
+      if (glareRef.current) {
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+        glareRef.current.style.opacity = '1';
+        glareRef.current.style.background = `radial-gradient(circle 280px at ${glareX}% ${glareY}%, ${glareColor}, transparent 80%)`;
+      }
+    });
   };
 
   const handleMouseLeave = () => {
-    setTransformStyle('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
-    setGlareStyle((prev) => ({ ...prev, opacity: 0 }));
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    }
+    if (glareRef.current) {
+      glareRef.current.style.opacity = '0';
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
 
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden transition-transform duration-200 ease-out ${className}`}
-      style={{
-        transform: transformStyle,
-        transformStyle: 'preserve-3d',
-      }}
+      className={`relative overflow-hidden transition-transform duration-200 ease-out will-change-transform ${className}`}
     >
       {/* Dynamic Glare Reflection */}
       <div
-        className="pointer-events-none absolute inset-0 z-20 transition-opacity duration-300 ease-out"
-        style={{
-          opacity: glareStyle.opacity,
-          background: `radial-gradient(circle 280px at ${glareStyle.x}% ${glareStyle.y}%, ${glareColor}, transparent 80%)`,
-        }}
+        ref={glareRef}
+        className="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-300 ease-out"
       />
       {children}
     </div>

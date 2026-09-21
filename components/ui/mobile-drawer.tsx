@@ -46,17 +46,11 @@ export function MobileDrawer({
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-cyan-300/20 pb-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-300/40 bg-black/60 p-1.5 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
-              <img
-                src={sitePath('/picture/logoSTACloud.png')}
-                alt="STACloud"
-                className="h-full w-full object-contain"
-              />
-            </div>
-            <div>
-              <span className="text-base font-bold text-white tracking-wide">STACloud</span>
-              <span className="block text-[11px] text-cyan-200">Ocean Cloud & Hosting</span>
-            </div>
+            <img
+              src={sitePath('/picture/logoSTACloud.png')}
+              alt="STACloud"
+              className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.4)]"
+            />
           </div>
 
           <button
@@ -96,12 +90,12 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#calculator"
+            href="#benefits"
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-cyan-400/20 text-cyan-200">🧮</span>
-            Tùy Biến (Max 64C / 128G)
+            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-cyan-400/20 text-cyan-200">🛡️</span>
+            Ưu Điểm Hạ Tầng
           </a>
 
           <a

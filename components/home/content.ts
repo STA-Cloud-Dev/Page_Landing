@@ -89,7 +89,7 @@ export const allServicePlans = [
     price: '8.000 VNĐ',
     period: 'Chu kỳ',
     description: 'Gói tiêu chuẩn chạy Minecraft community nhỏ, test plugin Paper/Purpur với CPU AMD xung nhịp cao và RAM DDR4.',
-    specs: ['1 vCore AMD Milan', '2 GB RAM DDR4', '3 GB SSD NVMe', 'Singapore / OVH AntiDDoS', 'Pterodactyl Egg ready'],
+    specs: ['1 vCore AMD Milan', '2 GB RAM DDR4', '3 GB SSD NVMe', 'Singapore / OVH AntiDDoS', 'STACloud Game Engine Ready'],
     upsizeAvailable: true,
     upsizeNotes: 'Upsize tối đa 2 Core (+10k/core) và 4 GB RAM (+15k/GB).',
     ctaText: 'Chọn Gói MC SG',
@@ -181,7 +181,7 @@ export const comprehensiveFaqs = [
   },
   {
     q: 'Phụ phí nâng cấp (upsize) vCore và RAM được tính như thế nào?',
-    a: 'Với DEV SG: +5.000đ cho mỗi 1 vCore và +10.000đ cho mỗi 1 GB RAM. Với MC SG: +10.000đ cho mỗi 1 vCore và +15.000đ cho mỗi 1 GB RAM. Bạn có thể dùng bộ tính giá 3D trên trang để xem số tiền cụ thể.',
+    a: 'Với DEV SG: +5.000đ cho mỗi 1 vCore và +10.000đ cho mỗi 1 GB RAM. Với MC SG: +10.000đ cho mỗi 1 vCore và +15.000đ cho mỗi 1 GB RAM. Bạn có thể xem trực tiếp bảng quy chuẩn nâng cấp bên dưới danh mục bảng giá hoặc tạo ticket để nhận tư vấn cụ thể.',
   },
   {
     q: 'Vì sao NODE TEST lại có cảnh báo về dữ liệu?',
@@ -196,3 +196,51 @@ export const comprehensiveFaqs = [
     a: 'Để hỏi nhanh trước khi mua: Vào nhóm Zalo Group hoặc Messenger Group. Khi cần hỗ trợ kỹ thuật, cấp quyền server hoặc giao dịch: Tạo ticket tại kênh 📥｜support-ticket trong Discord chính thức.',
   },
 ];
+
+export const homeBenefits = [
+  {
+    icon: '💎',
+    title: 'Đầy Đủ Gói Free, Beta & Trả Phí',
+    description:
+      'Từ NODE TEST và OpenClaw phục vụ trải nghiệm miễn phí 100%, đến DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
+  },
+  {
+    icon: '📊',
+    title: 'Cấu Hình & Giá Cả Minh Bạch',
+    description:
+      'Mỗi gói dịch vụ đều hiển thị giá thực tế, số lượng vCore, RAM, NVMe, location, trạng thái slot và chi phí upsize minh bạch.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Hạ Tầng OVH Singapore Chống DDoS',
+    description:
+      'Cụm máy chủ chuyên dụng đặt tại OVH Singapore với lớp lọc Anti-DDoS Layer 3/4/7 bảo vệ toàn diện các cuộc tấn công flood.',
+  },
+  {
+    icon: '⚡',
+    title: 'Chính Sách An Toàn & Hỗ Trợ 24/7',
+    description:
+      'Đội ngũ kỹ thuật viên trực tiếp hỗ trợ qua Discord Ticket, Zalo và Messenger; chính sách dữ liệu công khai rõ ràng.',
+  },
+] as const;
+
+export const homeQuickSteps = [
+  {
+    step: '01',
+    title: 'Chọn Gói Dịch Vụ',
+    description:
+      'Chọn NODE TEST / OpenClaw nếu muốn thử nghiệm miễn phí, DEV SG / MC SG cho bot/game nhỏ, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
+  },
+  {
+    step: '02',
+    title: 'Gửi Nhu Cầu & Nhận Tư Vấn',
+    description:
+      'Tạo ticket tại Discord hoặc nhắn tin nhanh qua nhóm Zalo / Messenger để được kỹ thuật viên tư vấn cấu hình tối ưu.',
+  },
+  {
+    step: '03',
+    title: 'Bàn Giao & Quản Trị Trực Quan',
+    description:
+      'Hệ thống cấp phát server tự động vào tài khoản Control Portal; quản lý restart, console, file manager và đổi bản phân phối 1-click.',
+  },
+] as const;

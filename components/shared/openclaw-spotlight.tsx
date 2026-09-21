@@ -1,88 +1,95 @@
-﻿type OpenClawSpotlightProps = {
+'use client';
+
+import React from 'react';
+
+type OpenClawSpotlightProps = {
   discordUrl: string;
   zaloUrl: string;
   messengerUrl: string;
 };
 
-import { Section3DAccent } from '@/components/visual/section-3d-accent';
-
-const openClawHighlights = ['Free Beta', 'Không cần domain riêng', 'Khuyến nghị Singapore / Việt Nam'] as const;
+const openClawHighlights = [
+  '100% Free Beta',
+  'Không cần domain riêng',
+  'Proxy SSL Tự Động',
+  'Khuyến nghị Singapore / Việt Nam',
+] as const;
 
 export function OpenClawSpotlight({ discordUrl, zaloUrl, messengerUrl }: OpenClawSpotlightProps) {
   return (
-    <section className="px-4 py-14 sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-6xl overflow-hidden rounded-lg border border-cyan-300/20 bg-slate-950/80 p-5 shadow-[0_30px_100px_rgba(8,145,178,0.12)] backdrop-blur sm:p-8">
-        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-          <div className="relative border-l border-cyan-300/20 pl-5">
-            <div className="relative">
-              <span className="inline-flex rounded-full border border-cyan-200/30 bg-cyan-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">
-                Dịch vụ mới
-              </span>
-              <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-5xl">
-                OpenClaw Beta đã mở miễn phí
-              </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-lg sm:leading-8">
-                OpenClaw hiện được mở miễn phí cho cộng đồng sử dụng thử và không cần domain riêng.
-                Nếu cần hỗ trợ, bạn có thể liên hệ STACloud qua Discord, Zalo hoặc Messenger Group.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {openClawHighlights.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 bg-slate-950/60 px-4 py-2 text-sm font-semibold text-cyan-50"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+    <section className="px-4 py-10 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-cyan-300/35 bg-gradient-to-b from-[#051c36]/95 via-[#031528]/95 to-[#020b17]/98 p-6 shadow-[0_25px_80px_rgba(0,180,216,0.25)] backdrop-blur-2xl sm:p-10 cyber-cut-lg cyber-corner-accent">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/35 bg-sky-400/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-sky-200">
+              <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
+              🦞 OpenClaw AI Beta Ecosystem
+            </div>
+            <h2 className="text-2xl font-black leading-tight text-white sm:text-4xl">
+              Trải Nghiệm OpenClaw AI & Web Miễn Phí
+            </h2>
+            <p className="max-w-2xl text-xs leading-relaxed text-sky-100 sm:text-base">
+              OpenClaw được mở miễn phí cho cộng đồng trải nghiệm AI & Web. Chạy mượt mà với độ trễ thấp qua hạ tầng Singapore / Việt Nam mà không cần sở hữu tên miền riêng.
+            </p>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {openClawHighlights.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-cyan-300/25 bg-black/40 px-3.5 py-1.5 text-xs font-semibold text-cyan-100"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
 
-          <div className="status-panel relative rounded-lg border border-cyan-300/15 bg-slate-950/70 p-5 sm:p-6">
-            <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/60 to-transparent" />
-            <Section3DAccent variant="community" size="compact" className="mb-5" />
-            <div className="space-y-4">
-              <div className="rounded-lg border border-cyan-300/15 bg-cyan-300/[0.06] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100/80">
-                  Truy cập
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  OpenClaw hiện không cần domain riêng. Anh em có thể trải nghiệm miễn phí và nhắn hỗ trợ nếu cần cấu hình thêm.
-                </p>
-              </div>
+          <div className="rounded-2xl border border-cyan-300/25 bg-[#062444]/80 p-5 shadow-lg backdrop-blur space-y-4">
+            <div className="flex items-center justify-between border-b border-cyan-300/15 pb-3">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-200">
+                Thông Tin Trải Nghiệm
+              </span>
+              <span className="rounded-full border border-emerald-400/30 bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-300">
+                SLOT SẴN SÀNG
+              </span>
+            </div>
 
-              <div className="rounded-lg border border-blue-300/20 bg-blue-300/[0.06] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/80">
-                  Lưu ý location
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  Nên chọn Singapore hoặc Việt Nam. Không khuyến nghị Hong Kong cho workload AI vì
-                  một số dịch vụ AI có thể bị hạn chế.
-                </p>
-              </div>
+            <div className="rounded-xl border border-cyan-300/20 bg-black/30 p-3.5 text-xs leading-relaxed text-sky-100">
+              <p className="font-bold text-white mb-1">🔗 Không Cần Tên Miền Riêng:</p>
+              Hệ thống tự động cấp phát domain proxy tunneling kèm chứng chỉ SSL Cloudflare miễn phí.
+            </div>
 
-              <div className="flex flex-col gap-3">
+            <div className="rounded-xl border border-cyan-300/20 bg-black/30 p-3.5 text-xs leading-relaxed text-sky-100">
+              <p className="font-bold text-white mb-1">⚡ Tối Ưu Tác Vụ AI:</p>
+              Khuyến nghị chọn node Singapore hoặc Việt Nam để kết nối các API AI ổn định và nhanh nhất.
+            </div>
+
+            <div className="pt-2 space-y-2">
+              <a
+                href={discordUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cyber-primary w-full rounded-xl py-2.5 text-center text-xs font-bold block"
+              >
+                Nhận Key & Slot OpenClaw Tại Discord
+              </a>
+              <div className="grid grid-cols-2 gap-2">
                 <a
-                  href={discordUrl}
+                  href={zaloUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-400 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-300 hover:text-slate-950"
+                  className="btn-cyber-outline rounded-xl py-2 text-center text-xs font-bold"
                 >
-                  Mở ticket Discord
+                  Zalo Group
                 </a>
-                <div className="rounded-lg border border-cyan-300/15 bg-slate-950/55 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/80">
-                    Group Chat
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
-                    <a href={messengerUrl} target="_blank" rel="noopener noreferrer" className="text-cyan-100 transition hover:text-white">
-                      Messenger
-                    </a>
-                    <a href={zaloUrl} target="_blank" rel="noopener noreferrer" className="text-cyan-100 transition hover:text-white">
-                      Zalo
-                    </a>
-                  </div>
-                </div>
+                <a
+                  href={messengerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cyber-outline rounded-xl py-2 text-center text-xs font-bold"
+                >
+                  Messenger Group
+                </a>
               </div>
             </div>
           </div>

@@ -13,25 +13,25 @@ export function FooterSection() {
           <p className="mt-1">{siteConfig.copyrightText}</p>
         </div>
 
-        <div className="flex flex-wrap gap-4">
-          <a href={sitePath('/terms')} className="transition hover:text-white">
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          <a href={sitePath('/terms')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Điều khoản
           </a>
-          <a href={sitePath('/privacy')} className="transition hover:text-white">
+          <a href={sitePath('/privacy')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Quyền riêng tư
           </a>
-          <a href={sitePath('/sla')} className="transition hover:text-white">
+          <a href={sitePath('/sla')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             SLA
           </a>
-          <a href={sitePath('/partner')} className="transition hover:text-white">
+          <a href={sitePath('/partner')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Partner
           </a>
-          <a href={sitePath('/egg')} className="transition hover:text-white">
+          <a href={sitePath('/egg')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Eggs
           </a>
           <a
             href={siteConfig.siteUrl}
-            className="transition hover:text-white"
+            className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -39,7 +39,7 @@ export function FooterSection() {
           </a>
           <a
             href={siteConfig.panelUrl}
-            className="transition hover:text-white"
+            className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -47,16 +47,16 @@ export function FooterSection() {
           </a>
           <a
             href={siteConfig.discordUrl}
-            className="transition hover:text-white"
+            className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0"
             target="_blank"
             rel="noopener noreferrer"
           >
             Discord Ticket
           </a>
-          <span className="text-cyan-100/70">Group Chat:</span>
+          <span className="inline-flex min-h-11 items-center text-cyan-100/70 sm:min-h-0">Group Chat:</span>
           <a
             href={siteConfig.zaloUrl}
-            className="transition hover:text-white"
+            className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -64,7 +64,7 @@ export function FooterSection() {
           </a>
           <a
             href={siteConfig.messengerUrl}
-            className="transition hover:text-white"
+            className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0"
             target="_blank"
             rel="noopener noreferrer"
           >
