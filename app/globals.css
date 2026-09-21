@@ -1208,18 +1208,53 @@ body {
   }
 }
 
-@media (max-width: 640px) {
+/* Mobile browsers can drop composited layers when fixed blur and masks stack up.
+   Keep the visual language, but use an intentionally static rendering path. */
+@media (max-width: 767px) {
   body { background-attachment: scroll; }
+  .cyber-background-decor .ambient-orb,
+  .cyber-background-decor .cyber-bg-grid,
+  .cyber-background-decor .cyber-bg-beam,
+  .cyber-background-decor .cyber-bg-circuit,
+  .cyber-background-decor .cyber-bg-ring,
+  .cyber-background-decor .cyber-bg-scanline {
+    display: none;
+  }
+  .cyber-background-decor .cyber-bg-mesh {
+    position: absolute;
+    z-index: 0;
+    opacity: 1;
+    background:
+      linear-gradient(150deg, rgba(34, 211, 238, 0.12), transparent 45%),
+      linear-gradient(330deg, rgba(37, 99, 235, 0.14), transparent 50%);
+    animation: none;
+  }
+  .glass-panel,
+  .glass-panel-interactive,
+  .glass-card-bright,
+  .glass-panel-luminous,
+  .cloud-console-box,
   .backdrop-blur-xl,
   .backdrop-blur-2xl,
-  .backdrop-blur-lg { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .backdrop-blur-lg {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
   .section-copy { font-size: .9rem; }
   .visual-3d,
   .visual-3d--compact,
   .visual-3d--wide { min-height: 10.5rem; }
   .visual-3d { transform: translateZ(0); }
   .legal-article:hover,
-  .interactive-card:hover { transform: none; }
+  .interactive-card:hover,
+  .glass-card-bright:hover { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

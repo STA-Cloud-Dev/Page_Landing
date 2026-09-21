@@ -240,6 +240,14 @@ export function NetworkMapVector() {
   });
 
   useEffect(() => {
+    const isLowMotionMobile =
+      window.innerWidth < 768 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isLowMotionMobile) {
+      return;
+    }
+
     const timer = setInterval(() => {
       if (document.hidden) return;
       setLivePings({

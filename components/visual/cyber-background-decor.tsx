@@ -1,10 +1,6 @@
-'use client';
-
-import React from 'react';
-
 export function CyberBackgroundDecor() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div className="cyber-background-decor pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
       {/* Ambient Luminous Light Orbs for Bright Depth */}
       <span className="ambient-orb ambient-orb-cyan -top-24 -left-20 h-[500px] w-[500px] sm:h-[700px] sm:w-[700px]" />
       <span className="ambient-orb ambient-orb-blue top-[18%] -right-32 h-[550px] w-[550px] sm:h-[750px] sm:w-[750px]" />
