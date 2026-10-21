@@ -5,11 +5,13 @@ import { servicePlans } from './content';
 import { Section3DAccent } from '@/components/visual/section-3d-accent';
 
 type ServicePlan = (typeof servicePlans)[number];
-type PlanFilter = 'all' | 'free' | 'minecraft' | 'vps' | 'proxy' | 'openclaw' | 'available' | 'paused';
+type PlanFilter = 'all' | 'free' | 'linux' | 'dev' | 'minecraft' | 'vps' | 'proxy' | 'openclaw' | 'available' | 'paused';
 
 const planFilters: Array<{ id: PlanFilter; label: string }> = [
   { id: 'all', label: 'Tất cả' },
   { id: 'free', label: 'Free' },
+  { id: 'linux', label: 'Linux Egg' },
+  { id: 'dev', label: 'Dev' },
   { id: 'minecraft', label: 'Minecraft' },
   { id: 'vps', label: 'VPS' },
   { id: 'proxy', label: 'Proxy' },
@@ -50,6 +52,8 @@ function getPlanCardClasses(status: string) {
 }
 
 function matchesFilter(plan: ServicePlan, filter: PlanFilter) {
+  if (filter === 'linux') return plan.name.startsWith('Egg Linux');
+  if (filter === 'dev') return plan.name.startsWith('Dev ');
   if (filter === 'all') {
     return true;
   }
@@ -59,11 +63,11 @@ function matchesFilter(plan: ServicePlan, filter: PlanFilter) {
   }
 
   if (filter === 'minecraft') {
-    return plan.name === 'MC SG' || plan.description.toLowerCase().includes('minecraft');
+    return plan.name.startsWith('Game Servers ') || plan.description.toLowerCase().includes('minecraft');
   }
 
   if (filter === 'vps') {
-    return plan.name.includes('XEON') || plan.name.includes('EPYC') || plan.name === 'DEV SG';
+    return plan.name.includes('XEON') || plan.name.includes('EPYC');
   }
 
   if (filter === 'proxy') {

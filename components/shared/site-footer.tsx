@@ -10,7 +10,13 @@ export function SiteFooter() {
           <div className="space-y-4">
             <a href={sitePath('/')} className="group inline-flex flex-col gap-2">
               <img
-                src={sitePath('/picture/logoSTACloud.png')}
+                src={sitePath('/picture/logoSTACloud-204.webp')}
+                srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
+                sizes="(min-width: 640px) 140px, 116px"
+                width={204}
+                height={70}
+                decoding="async"
+                loading="lazy"
                 alt={homeConfig.logoAlt}
                 className="h-11 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.35)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.6)]"
               />

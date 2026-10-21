@@ -3,7 +3,7 @@ import './globals.css';
 import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
 import { sitePath } from '@/lib/site-path';
 
-const SITE_URL = 'https://stacloud.dev';
+const SITE_URL = 'https://stacloud.eu.cc';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'STACloud | Cyber Cloud & VPS Hosting Platform',
     description:
-      'Xem giá, cấu hình, slot, OpenClaw Beta, upsize và lưu ý sử dụng của các gói NODE TEST, DEV SG, MC SG, PROXY HK, STA-XEON và STA-AMD-EPYC tại STACloud.',
+      'Xem giá, cấu hình, slot, OpenClaw Beta, upsize và lưu ý sử dụng của các gói NODE TEST, Dev 1–3, Game Servers 1–2, PROXY HK, STA-XEON và STA-AMD-EPYC tại STACloud.',
     url: SITE_URL,
     siteName: 'STACloud',
     type: 'website',
@@ -36,9 +36,10 @@ export const metadata: Metadata = {
       'Khám phá OpenClaw Beta, VPS OVH Singapore, game server và các gói dịch vụ cộng đồng giá tốt nhất.',
   },
   icons: {
+    apple: [{ url: sitePath('/picture/iconSTACloud.png') }],
     icon: [
-      { url: sitePath('/picture/iconSTACloud.ico'), type: 'image/x-icon', sizes: 'any' },
-      { url: sitePath('/picture/iconSTACloud.png'), type: 'image/png' },
+      { url: sitePath('/picture/iconSTACloud.png'), type: 'image/png', sizes: '500x500' },
+      { url: sitePath('/favicon.ico'), type: 'image/x-icon', sizes: 'any' },
     ],
   },
   robots: 'index, follow',
@@ -58,7 +59,7 @@ export default function RootLayout({
         <RouteScrollReset />
         <div className="cyber-grid-bg" aria-hidden />
         <div className="cyber-lines-bg" aria-hidden />
-        <div className="relative z-10">{children}</div>
+        <main id="main-content" className="relative z-10">{children}</main>
       </body>
     </html>
   );

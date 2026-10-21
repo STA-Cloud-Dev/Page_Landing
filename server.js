@@ -24,7 +24,7 @@ const mimeTypes = {
 };
 
 const securityHeaders = {
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://portal.stacloud.dev https://discord.gg https://zalo.me https://m.me; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://portal.stacloud.eu.cc https://discord.gg https://zalo.me https://m.me; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:",
   'Cross-Origin-Opener-Policy': 'same-origin',
   'Cross-Origin-Resource-Policy': 'same-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
@@ -142,8 +142,12 @@ function findFile(safePath) {
 
 function sendFile(request, response, filePath, statusCode = 200) {
   const extension = path.extname(filePath).toLowerCase();
+  const isHttps = request.socket.encrypted ||
+    request.headers['x-forwarded-proto']?.split(',')[0].trim() === 'https';
   const headers = {
     ...securityHeaders,
+    'Content-Security-Policy': securityHeaders['Content-Security-Policy'] +
+      (isHttps ? '; upgrade-insecure-requests' : ''),
     'Cache-Control': extension === '.html' ? 'no-cache' : 'public, max-age=31536000, immutable',
     'Content-Type': mimeTypes[extension] || 'application/octet-stream',
   };

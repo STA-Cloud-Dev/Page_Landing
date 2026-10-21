@@ -13,7 +13,7 @@ import {
 } from './content';
 import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
 import { CloudConsoleDisplay } from '@/components/visual/cloud-console-display';
-import { NetworkMapVector } from '@/components/visual/network-map-vector';
+import { LazyNetworkMap } from '@/components/visual/lazy-network-map';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { CyberTerminal } from '@/components/ui/cyber-terminal';
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
@@ -123,12 +123,14 @@ function NodeTestLaunch() {
 
 export function HomePage() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [activePlanTab, setActivePlanTab] = useState<'all' | 'community' | 'vps' | 'game' | 'beta'>('all');
+  const [activePlanTab, setActivePlanTab] = useState<'all' | 'community' | 'linux' | 'dev' | 'vps' | 'game' | 'beta'>('all');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const filteredPlans = allServicePlans.filter((plan) => {
     if (activePlanTab === 'all') return true;
-    if (activePlanTab === 'community') return plan.category === 'community' || plan.category === 'proxy';
+    if (activePlanTab === 'linux') return plan.category === 'linux';
+    if (activePlanTab === 'dev') return plan.name.startsWith('Dev ');
+    if (activePlanTab === 'community') return plan.category === 'community' || plan.category === 'proxy' || plan.category === 'linux';
     if (activePlanTab === 'vps') return plan.category === 'vps';
     if (activePlanTab === 'game') return plan.category === 'game';
     if (activePlanTab === 'beta') return plan.category === 'beta';
@@ -146,7 +148,12 @@ export function HomePage() {
           {/* Brand Logo */}
           <a href={sitePath('/')} className="flex items-center gap-3 group">
             <img
-              src={sitePath('/picture/logoSTACloud.png')}
+              src={sitePath('/picture/logoSTACloud-204.webp')}
+              srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
+              sizes="(min-width: 640px) 140px, 116px"
+              width={204}
+              height={70}
+              decoding="async"
               alt={homeConfig.logoAlt}
               className="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.65)]"
             />
@@ -474,6 +481,19 @@ export function HomePage() {
               >
                 Gói Cộng Đồng
               </button>
+              {(['linux', 'dev'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  aria-pressed={activePlanTab === tab}
+                  onClick={() => setActivePlanTab(tab)}
+                  className={`rounded-xl px-4 py-2 text-xs font-bold transition-all sm:text-sm ${activePlanTab === tab
+                    ? 'bg-cyan-300 text-black'
+                    : 'border border-cyan-300/30 bg-[#072a4e]/70 text-slate-200 hover:text-white'}`}
+                >
+                  {tab === 'linux' ? 'Linux Egg • Trả phí' : 'Dev • 28 ngày'}
+                </button>
+              ))}
               <button
                 type="button"
                 onClick={() => setActivePlanTab('vps')}
@@ -603,11 +623,11 @@ export function HomePage() {
                 <div className="grid gap-2 pt-2 sm:grid-cols-2 text-xs text-sky-100">
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
-                    <span><strong>Upsize DEV SG:</strong> Tối đa 2 Core (+5k/core) & 2 GB RAM (+10k/GB)</span>
+                    <span><strong>Dev 1–3:</strong> Cấu hình riêng, chu kỳ 28 ngày; nhu cầu nâng cấp liên hệ ticket.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
-                    <span><strong>Upsize MC SG:</strong> Tối đa 2 Core (+10k/core) & 4 GB RAM (+15k/GB)</span>
+                    <span><strong>Game Servers:</strong> Gói trả phí theo chu kỳ 28 ngày.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
@@ -717,7 +737,7 @@ export function HomePage() {
       {/* --- 10. GLOBAL DATACENTER & 6-LOCATION NETWORK MAP (CANADA, EU, SG, VN, TH, HK) --- */}
       <section id="network" className="scroll-mt-24 px-4 py-10 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-7xl">
-          <NetworkMapVector />
+          <LazyNetworkMap />
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { LegalPage } from '@/components/legal/legal-page';
 import { slaLastUpdated, slaSections } from '@/components/legal/legal-content';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://stacloud.eu.cc/sla' },
   title: 'SLA | STACloud',
   description: 'Đọc cam kết mức độ dịch vụ (SLA) của STACloud.',
 };

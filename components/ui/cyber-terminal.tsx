@@ -6,7 +6,7 @@ const terminalLines = [
   { text: '$ stacloud init --env=production --region=sg-ovh-01', color: 'text-cyan-400' },
   { text: '[OK] Connected to OVH Singapore Datacenter (10 Gbps AntiDDoS)', color: 'text-emerald-400' },
   { text: '[INFO] Allocating AMD EPYC Milan Core & High-Speed DDR4 RAM...', color: 'text-slate-300' },
-  { text: '$ curl -sSL https://portal.stacloud.dev/openclaw/deploy.sh | bash', color: 'text-cyan-400' },
+  { text: '$ curl -sSL https://portal.stacloud.eu.cc/openclaw/deploy.sh | bash', color: 'text-cyan-400' },
   { text: '[CLAW] OpenClaw Beta Engine v2.4 initialized successfully!', color: 'text-sky-300' },
   { text: '[CLAW] Zero Domain Requirement: Active on fast SSL tunneling proxy', color: 'text-indigo-300' },
   { text: '[STATUS] Node Health: 100% | Latency to VN: 28ms | Ready for Traffic', color: 'text-emerald-400' },
@@ -26,7 +26,7 @@ export function CyberTerminal() {
   }, [displayedIndex]);
 
   const handleCopyCommand = () => {
-    navigator.clipboard.writeText('curl -sSL https://portal.stacloud.dev/openclaw/deploy.sh | bash');
+    navigator.clipboard.writeText('curl -sSL https://portal.stacloud.eu.cc/openclaw/deploy.sh | bash');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

@@ -34,7 +34,12 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-300/30 bg-[#05182e]/90 px-4 py-2.5 shadow-[0_12px_45px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:px-6 cyber-cut-sm">
           <a href={sitePath('/')} className="group flex items-center gap-3">
             <img
-              src={sitePath('/picture/logoSTACloud.png')}
+              src={sitePath('/picture/logoSTACloud-204.webp')}
+              srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
+              sizes="(min-width: 640px) 140px, 116px"
+              width={204}
+              height={70}
+              decoding="async"
               alt="STACloud"
               className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.6)]"
             />

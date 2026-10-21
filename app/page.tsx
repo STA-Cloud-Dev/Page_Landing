@@ -27,7 +27,7 @@ const freeHostingSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'STACloud Node Test Free Hosting',
-  provider: { '@type': 'Organization', name: 'STACloud', url: 'https://stacloud.dev/' },
+  provider: { '@type': 'Organization', name: 'STACloud', url: 'https://stacloud.eu.cc/' },
   serviceType: 'Free hosting cho bot Discord, web nhỏ và project sinh viên',
   description: 'Node Test Free Forever với 75% CPU, 2 GB RAM và 0 Credit mỗi lần tạo plan.',
   offers: {
@@ -35,7 +35,7 @@ const freeHostingSchema = {
     price: '0',
     priceCurrency: 'VND',
     availability: 'https://schema.org/InStock',
-    url: 'https://stacloud.dev/#free-hosting',
+    url: 'https://stacloud.eu.cc/#free-hosting',
   },
 };
 

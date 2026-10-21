@@ -58,6 +58,12 @@ const linuxFamilies: EggItem[] = [
 
 export const eggGroups: EggGroup[] = [
   {
+    title: 'Website Egg',
+    subtitle: 'Môi trường triển khai website PHP và ứng dụng web',
+    accent: 'blue',
+    items: [{ name: 'WordPress' }, { name: 'PHPweb' }, { name: 'Laravel' }],
+  },
+  {
     title: 'AI',
     subtitle: 'Workload AI và ứng dụng beta',
     accent: 'blue',
@@ -78,7 +84,7 @@ export const eggGroups: EggGroup[] = [
   },
   {
     title: 'Linux',
-    subtitle: 'Các hệ điều hành Linux trong egg STACloud Linux VPS',
+    subtitle: 'Dành cho người trả phí • Các hệ điều hành Linux',
     accent: 'teal',
     items: linuxFamilies,
     wide: true,

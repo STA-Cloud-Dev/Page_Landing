@@ -87,7 +87,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     availability: 'Free & Paid (Trọng Tâm)',
     status: 'optimal',
     description:
-      'Cụm máy chủ trung tâm chính của STACloud: Dành cho toàn bộ gói Game Server (MC SG), DEV SG, Cloud VPS Xeon E5 và AMD EPYC Milan. Tối ưu độ trễ thấp về Việt Nam.',
+      'Cụm máy chủ trung tâm chính của STACloud: Dành cho toàn bộ gói Game Servers 1–2, Dev 1–3, Cloud VPS Xeon E5 và AMD EPYC Milan. Tối ưu độ trễ thấp về Việt Nam.',
     lat: 1.35,
     lng: 103.82,
     svgX: 788.4,

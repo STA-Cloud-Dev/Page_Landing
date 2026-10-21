@@ -1,9 +1,11 @@
+import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
+
 import { sitePath } from '@/lib/site-path';
 
 export const siteConfig = {
   name: 'STACloud',
   siteUrl: sitePath('/'),
-  panelUrl: 'https://portal.stacloud.dev/',
+  panelUrl: 'https://portal.stacloud.eu.cc/',
   discordUrl: 'https://discord.gg/nq8B4JXmnm',
   zaloUrl: 'https://zalo.me/g/ekaldlnq5sqdn37lvikk',
   messengerUrl: 'https://m.me/j/AbaXFRAcUrDjgFCN/?send_source=gc%3Acopy_invite_link_c',
@@ -16,8 +18,8 @@ export const siteConfig = {
 };
 
 export const heroStats = [
-  { value: '9', label: 'Gói / dịch vụ đang công bố' },
-  { value: '24 + 10', label: 'Slots DEV / MC Singapore' },
+  { value: '17', label: 'Gói / dịch vụ đang công bố' },
+  { value: '8', label: 'Gói Linux Egg & Dev' },
   { value: '3 ngày', label: 'Thời gian đặt trước VPS lớn' },
   { value: '0đ', label: 'Node Test / OpenClaw' },
 ] as const;
@@ -57,40 +59,32 @@ export const servicePlans = [
       'Không khuyến nghị chọn Hong Kong cho workload AI vì một số dịch vụ AI có thể bị hạn chế.',
     ],
   },
-  {
-    name: 'DEV SG',
-    description:
-      'Gói tiêu chuẩn dùng CPU AMD Milan tại Singapore, phù hợp app nhỏ, bot, web dev và môi trường test cần chi phí thấp theo chu kỳ.',
-    price: '5.000 VNĐ (0.3$) / chu kỳ',
-    highlight: '24 Slots',
-    specs: ['1 vCore AMD Milan', '1 GB RAM', '2 GB SSD', 'Singapore / OVH Shield'],
-    addOns: [
-      'Upsize tối đa 2 vCore và 2 GB RAM.',
-      '+5.000 VNĐ cho mỗi 1 vCore.',
-      '+10.000 VNĐ cho mỗi 1 GB RAM.',
-    ],
+  ...paidPlans.map((plan) => ({
+    name: plan.name,
+    description: plan.name.startsWith('Egg Linux')
+      ? `${plan.cpu / 100} Core | ${plan.ram / 1024} GB RAM | ${plan.disk / 1024} GB SSD. Dành cho người trả phí.`
+      : 'Dành cho bot Discord, ứng dụng web nhỏ và môi trường phát triển.',
+    price: `${formatCredit(plan.credit)} Credit / ${plan.days} ngày`,
+    highlight: plan.name.startsWith('Egg Linux') ? `${formatCredit(plan.credit)}đ / 12 ngày` : 'Dev • 28 ngày',
+    specs: paidPlanSpecs(plan),
+    addOns: plan.backup ? [backupSchedule] : [],
     status: 'active',
     statusLabel: 'Đang mở',
     accent: 'from-sky-400/30 to-cyan-300/10',
     warnings: [],
-  },
-  {
-    name: 'MC SG',
-    description:
-      'Gói tiêu chuẩn dùng CPU AMD Milan tại Singapore cho Minecraft community nhỏ và nhu cầu test plugin với tài nguyên cao hơn DEV.',
-    price: '8.000 VNĐ (0.5$) / chu kỳ',
-    highlight: '10 Slots',
-    specs: ['1 vCore AMD Milan', '2 GB RAM', '3 GB SSD', 'Singapore / OVH Shield'],
-    addOns: [
-      'Upsize tối đa 2 vCore và 4 GB RAM.',
-      '+10.000 VNĐ cho mỗi 1 vCore.',
-      '+15.000 VNĐ cho mỗi 1 GB RAM.',
-    ],
+  })),
+  ...gamePlans.map((plan) => ({
+    name: plan.name,
+    description: 'Gói máy chủ game trả phí, chu kỳ 28 ngày.',
+    price: `${formatCredit(plan.credit)} Credit / ${plan.days} ngày`,
+    highlight: 'Game Server • Trả phí',
+    specs: [],
+    addOns: [],
     status: 'active',
     statusLabel: 'Đang mở',
     accent: 'from-cyan-400/20 to-sky-300/10',
     warnings: [],
-  },
+  })),
   {
     name: 'PROXY HK',
     description:
@@ -261,7 +255,7 @@ export const quickSteps = [
 export const notes = [
   'NODE TEST (tên cũ: TESTER) là gói Free Forever, dùng 75% CPU và 2 GB RAM; mỗi lần tạo plan có giá 0 Credit.',
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
-  'DEV SG có giá 5.000 VNĐ (0.3$) / chu kỳ với 24 slots; MC SG có giá 8.000 VNĐ (0.5$) / chu kỳ với 10 slots.',
+  'Dev 1–3: 7.000 / 12.000 / 20.000 Credit cho 28 ngày. Game Servers 1–2: 50.000 / 65.000 Credit cho 28 ngày. Egg Linux 1–5 dành cho người trả phí, chu kỳ 12 ngày.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
   'STA-XEON-01 giá 146.000 VNĐ / tháng; STA-XEON-02 giá 209.000 VNĐ / tháng; STA-AMD-EPYC-01 giá 249.000 VNĐ / tháng; STA-AMD-EPYC-02 giá 333.000 VNĐ / tháng và đều cần đặt trước 3 ngày.',
   'Theo dõi tài nguyên còn lại tại kênh 🗺️｜server-status-and-slot trên Discord.',
@@ -280,19 +274,20 @@ export const policyGroups = [
     ],
   },
   {
-    title: 'DEV / MC Singapore',
+    title: 'Dev, Linux Egg & Game Servers',
     points: [
-      'DEV SG dùng AMD Milan tại Singapore, giá 5.000 VNĐ (0.3$) / chu kỳ với 1 vCore, 1 GB RAM và 2 GB SSD.',
-      'MC SG dùng AMD Milan tại Singapore, giá 8.000 VNĐ (0.5$) / chu kỳ với 1 vCore, 2 GB RAM và 3 GB SSD.',
-      'DEV có 24 slots, MC có 10 slots và đều dùng AntiDDoS OVH Shield.',
-      'DEV upsize tối đa 2 vCore / 2 GB RAM; MC upsize tối đa 2 vCore / 4 GB RAM.',
+      'Dev 1: 75% CPU, 512 MB RAM, 1024 MB ổ đĩa; 7.000 Credit / 28 ngày.',
+      'Dev 2: 75% CPU, 1024 MB RAM, 2048 MB ổ đĩa; 12.000 Credit / 28 ngày.',
+      'Dev 3: 100% CPU, 2048 MB RAM, 3072 MB ổ đĩa; 20.000 Credit / 28 ngày.',
+      'Game Servers 1–2 có giá 50.000 / 65.000 Credit cho chu kỳ 28 ngày.',
+      'Linux Egg dành cho người trả phí và có chu kỳ 12 ngày.',
+      'Egg Linux 1, 2, 3 và 5 có backup dự phòng vào Thứ 3, Thứ 6 và Chủ nhật.',
     ],
   },
   {
-    title: 'Upsize DEV / MC',
+    title: 'Nâng cấp tài nguyên',
     points: [
-      'Phụ phí DEV: +5.000 VNĐ cho mỗi 1 vCore và +10.000 VNĐ cho mỗi 1 GB RAM.',
-      'Phụ phí MC: +10.000 VNĐ cho mỗi 1 vCore và +15.000 VNĐ cho mỗi 1 GB RAM.',
+      'Các gói Dev có cấu hình cố định; nhu cầu nâng cấp riêng cần xác nhận qua ticket.',
       'Nên nêu rõ nhu cầu CPU/RAM khi tạo ticket để được tư vấn cấu hình phù hợp.',
     ],
   },

@@ -32,7 +32,7 @@
   --amber-neon: #fbbf24;
   --rose-neon: #f87171;
   
-  /* Cyber-Cloud System Tokens (inspired by maintain.stacloud.dev) */
+  /* Cyber-Cloud System Tokens (inspired by maintain.stacloud.eu.cc) */
   --surface: #04070d;
   --surface-soft: rgba(8, 15, 28, 0.78);
   --panel: rgba(5, 12, 24, 0.76);
@@ -1093,78 +1093,6 @@ body {
 
 .visual-service-tower{top:20%;left:15%;z-index:3;width:5rem;height:8rem;padding:.8rem;border-radius:.7rem;transform:rotateY(-20deg)}.visual-service-tower span{display:block;height:.58rem;margin-bottom:.7rem;border-radius:.3rem;background:#caf0f8}.visual-service-panel{top:29%;right:15%;width:6rem;height:4.5rem;border-radius:.7rem;background:rgba(2,20,38,.52)}.visual-service-panel span{display:block;width:70%;height:.42rem;margin:1rem;border-radius:1rem;background:#90e0ef}.visual-service-meter{right:21%;z-index:3;height:.45rem;border-radius:1rem;background:linear-gradient(90deg,#caf0f8,transparent)}.visual-service-meter-one{bottom:27%;width:6rem}.visual-service-meter-two{right:29%;bottom:19%;width:4rem}.visual-service-glass{top:20%;left:45%;z-index:2;width:2.5rem;height:2.5rem;border:1px solid rgba(202,240,248,.4);background:rgba(202,240,248,.1);rotate:38deg}
 
-.server-cloud-scene {
-  position: relative;
-  width: 100%;
-  min-height: 26rem;
-  overflow: hidden;
-}
-
-.server-cloud-scene-compact { min-height: 21rem; }
-.server-cloud-scene canvas { display: block; }
-.mobile-cloud-preview { display: none; }
-
-.server-cloud-scene[data-lite='true'] .mobile-cloud-preview {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  perspective: 700px;
-}
-
-.server-cloud-scene[data-lite='true'] .mobile-rack {
-  position: relative;
-  display: block;
-  width: 5.5rem;
-  height: 11rem;
-  padding: 1rem 0.8rem;
-  border: 1px solid rgba(202, 240, 248, 0.46);
-  border-radius: 0.7rem;
-  background: linear-gradient(145deg, #0e98c6, #05466f 62%, #032038);
-  box-shadow: 18px 22px 35px rgba(0, 12, 28, 0.34), inset -12px 0 rgba(2, 20, 38, 0.24);
-  transform: rotateY(-22deg) rotateZ(-3deg);
-}
-
-.server-cloud-scene[data-lite='true'] .mobile-rack > span {
-  display: block;
-  height: 0.65rem;
-  margin-bottom: 1rem;
-  border-radius: 0.2rem;
-  background: #caf0f8;
-  box-shadow: inset -8px 0 #48cae4;
-}
-
-.server-cloud-scene[data-lite='true'] .mobile-cloud {
-  position: absolute;
-  width: 5.2rem;
-  height: 1.8rem;
-  border-radius: 999px;
-  background: #f4fbff;
-  box-shadow: 0 10px 20px rgba(0, 12, 28, 0.2);
-}
-
-.server-cloud-scene[data-lite='true'] .mobile-cloud::before,
-.server-cloud-scene[data-lite='true'] .mobile-cloud::after {
-  content: '';
-  position: absolute;
-  bottom: 0.35rem;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: inherit;
-}
-
-.server-cloud-scene[data-lite='true'] .mobile-cloud::before { left: 0.8rem; }
-.server-cloud-scene[data-lite='true'] .mobile-cloud::after { right: 0.7rem; width: 2.4rem; height: 2.4rem; }
-.server-cloud-scene[data-lite='true'] .mobile-cloud-one { top: 20%; right: 10%; scale: 0.75; }
-.server-cloud-scene[data-lite='true'] .mobile-cloud-two { bottom: 18%; left: 10%; scale: 0.68; }
-.server-cloud-scene[data-lite='true'] .mobile-cloud-three { right: 13%; bottom: 26%; scale: 0.54; }
-
-@media (max-width: 767px) {
-  .server-cloud-scene,
-  .server-cloud-scene-compact { min-height: 18rem; }
-}
 
 @keyframes visualFloat {
   0%, 100% { translate: 0 0; }

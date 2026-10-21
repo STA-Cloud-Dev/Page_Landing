@@ -1,7 +1,9 @@
+import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
+
 export const homeConfig = {
   name: 'STACloud',
   tagline: 'Free Hosting cho Bot, Web & Project sinh viên',
-  panelUrl: 'https://portal.stacloud.dev/',
+  panelUrl: 'https://portal.stacloud.eu.cc/',
   discordUrl: 'https://discord.gg/nq8B4JXmnm',
   zaloUrl: 'https://zalo.me/g/ekaldlnq5sqdn37lvikk',
   messengerUrl: 'https://m.me/j/AbaXFRAcUrDjgFCN/?send_source=gc%3Acopy_invite_link_c',
@@ -14,8 +16,8 @@ export const homeConfig = {
 };
 
 export const heroStats = [
-  { value: '9+', label: 'Gói Dịch Vụ Sẵn Sàng', tone: 'cyan' },
-  { value: '34+', label: 'Slots DEV / MC Singapore', tone: 'sky' },
+  { value: '17', label: 'Gói dịch vụ đang công bố', tone: 'cyan' },
+  { value: '8', label: 'Gói Linux Egg & Dev', tone: 'sky' },
   { value: '10 Gbps', label: 'Anti-DDoS OVH Network', tone: 'emerald' },
   { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
 ] as const;
@@ -28,8 +30,8 @@ export const heroSignals = [
 
 export const heroStatusStrip = [
   { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: 'Free Forever', tone: 'emerald', status: 'active' },
-  { label: 'DEV SG', detail: 'AMD Milan • 24 Slots', value: '5.000đ / chu kỳ', tone: 'emerald', status: 'active' },
-  { label: 'MC SG', detail: 'AMD Milan • 10 Slots', value: '8.000đ / chu kỳ', tone: 'cyan', status: 'active' },
+  { label: 'Dev 1', detail: '75% CPU • 512 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
+  { label: 'Game Servers 1', detail: 'Gói máy chủ game trả phí', value: '50.000 Credit / 28 ngày', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
   { label: 'STA-XEON-01', detail: 'OVH Singapore 6GB RAM', value: '146.000đ / tháng', tone: 'cyan', status: 'preorder' },
   { label: 'STA-AMD-EPYC-01', detail: 'AMD EPYC 7GB RAM', value: '249.000đ / tháng', tone: 'blue', status: 'preorder' },
@@ -66,34 +68,38 @@ export const allServicePlans = [
     warning: 'Không khuyến nghị chọn node Hong Kong cho tác vụ AI do một số API bên thứ 3 giới hạn khu vực.',
     ctaText: 'Trải Nghiệm OpenClaw',
   },
-  {
-    id: 'dev-sg',
-    category: 'community',
-    name: 'DEV SG',
-    badge: '24 Slots • AMD Milan',
+  ...paidPlans.map((plan) => ({
+    id: plan.name.toLowerCase().replaceAll(' ', '-'),
+    category: plan.name.startsWith('Egg Linux') ? 'linux' : 'community',
+    name: plan.name,
+    badge: plan.name.startsWith('Egg Linux') ? 'Linux Egg • Trả phí' : 'Bot & Web',
     status: 'active',
-    price: '5.000 VNĐ',
-    period: 'Chu kỳ',
-    description: 'Máy chủ CPU AMD Milan tại Singapore, cực kỳ tối ưu cho bot Discord/Telegram, Node.js app, Python backend và web test.',
-    specs: ['1 vCore AMD Milan', '1 GB RAM DDR4', '2 GB SSD NVMe', 'Singapore / OVH Shield', 'Uptime 99%+'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Upsize tối đa 2 Core (+5k/core) và 2 GB RAM (+10k/GB).',
-    ctaText: 'Chọn Gói DEV SG',
-  },
-  {
-    id: 'mc-sg',
+    price: `${formatCredit(plan.credit)} Credit`,
+    period: `${plan.days} ngày`,
+    description: plan.name.startsWith('Egg Linux')
+      ? `${plan.cpu / 100} Core | ${plan.ram / 1024} GB RAM | ${plan.disk / 1024} GB SSD. ${formatCredit(plan.credit)}đ / 12 ngày. Dành cho người trả phí.`
+      : 'Dành cho bot Discord, ứng dụng web nhỏ và môi trường phát triển.',
+    specs: paidPlanSpecs(plan),
+    upsizeAvailable: false,
+    upsizeNotes: plan.backup ? backupSchedule : '',
+    warning: '',
+    ctaText: `Chọn ${plan.name}`,
+  })),
+  ...gamePlans.map((plan) => ({
+    id: plan.name.toLowerCase().replaceAll(' ', '-'),
     category: 'game',
-    name: 'MC SG (Minecraft)',
-    badge: '10 Slots • High Perf',
+    name: plan.name,
+    badge: 'Game Server • Trả phí',
     status: 'active',
-    price: '8.000 VNĐ',
-    period: 'Chu kỳ',
-    description: 'Gói tiêu chuẩn chạy Minecraft community nhỏ, test plugin Paper/Purpur với CPU AMD xung nhịp cao và RAM DDR4.',
-    specs: ['1 vCore AMD Milan', '2 GB RAM DDR4', '3 GB SSD NVMe', 'Singapore / OVH AntiDDoS', 'STACloud Game Engine Ready'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Upsize tối đa 2 Core (+10k/core) và 4 GB RAM (+15k/GB).',
-    ctaText: 'Chọn Gói MC SG',
-  },
+    price: `${formatCredit(plan.credit)} Credit`,
+    period: `${plan.days} ngày`,
+    description: 'Gói máy chủ game trả phí, chu kỳ 28 ngày.',
+    specs: [],
+    upsizeAvailable: false,
+    upsizeNotes: '',
+    warning: '',
+    ctaText: `Chọn ${plan.name}`,
+  })),
   {
     id: 'proxy-hk',
     category: 'proxy',
@@ -173,7 +179,7 @@ export const comprehensiveFaqs = [
   },
   {
     q: 'Tôi là người mới, nên chọn gói nào để bắt đầu?',
-    a: 'Nếu bạn cần thử nghiệm nhanh, bạn có thể bắt đầu với NODE TEST (tên cũ: TESTER) hoặc OpenClaw Beta. Nếu cần chạy bot ổn định hoặc game server lâu dài, gói DEV SG (5.000đ) hoặc MC SG (8.000đ) là lựa chọn phù hợp.',
+    a: 'Bạn có thể bắt đầu miễn phí với NODE TEST hoặc OpenClaw Beta. Dev 1–3 có giá 7.000, 12.000 và 20.000 Credit cho 28 ngày; Linux Egg là các gói trả phí theo chu kỳ 12 ngày.',
   },
   {
     q: 'OpenClaw Beta hoạt động như thế nào và có mất phí không?',
@@ -181,7 +187,7 @@ export const comprehensiveFaqs = [
   },
   {
     q: 'Phụ phí nâng cấp (upsize) vCore và RAM được tính như thế nào?',
-    a: 'Với DEV SG: +5.000đ cho mỗi 1 vCore và +10.000đ cho mỗi 1 GB RAM. Với MC SG: +10.000đ cho mỗi 1 vCore và +15.000đ cho mỗi 1 GB RAM. Bạn có thể xem trực tiếp bảng quy chuẩn nâng cấp bên dưới danh mục bảng giá hoặc tạo ticket để nhận tư vấn cụ thể.',
+    a: 'Dev 1–3 và Egg Linux 1–5 có cấu hình và chu kỳ riêng ghi trong bảng giá. Nhu cầu nâng cấp riêng cần xác nhận qua ticket.',
   },
   {
     q: 'Vì sao NODE TEST lại có cảnh báo về dữ liệu?',
@@ -229,7 +235,7 @@ export const homeQuickSteps = [
     step: '01',
     title: 'Chọn Gói Dịch Vụ',
     description:
-      'Chọn NODE TEST / OpenClaw nếu muốn thử nghiệm miễn phí, DEV SG / MC SG cho bot/game nhỏ, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
+      'Chọn NODE TEST / OpenClaw nếu muốn thử nghiệm miễn phí, Dev 1–3 / Game Servers cho bot/game, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
   },
   {
     step: '02',

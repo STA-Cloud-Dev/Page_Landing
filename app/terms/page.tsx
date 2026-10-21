@@ -3,6 +3,7 @@ import { LegalPage } from '@/components/legal/legal-page';
 import { legalLastUpdated, termsSections } from '@/components/legal/legal-content';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://stacloud.eu.cc/terms' },
   title: 'Điều Khoản Dịch Vụ | STACloud',
   description: 'Đọc Điều khoản dịch vụ của STACloud.',
 };

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
 
-const siteUrl = 'https://stacloud.dev';
+const siteUrl = 'https://stacloud.eu.cc';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

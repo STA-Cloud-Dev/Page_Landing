@@ -47,7 +47,12 @@ export function MobileDrawer({
         <div className="flex items-center justify-between border-b border-cyan-300/20 pb-5">
           <div className="flex items-center gap-3">
             <img
-              src={sitePath('/picture/logoSTACloud.png')}
+              src={sitePath('/picture/logoSTACloud-204.webp')}
+              srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
+              sizes="(min-width: 640px) 140px, 116px"
+              width={204}
+              height={70}
+              decoding="async"
               alt="STACloud"
               className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.4)]"
             />

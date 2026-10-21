@@ -3,6 +3,7 @@ import { LegalPage } from '@/components/legal/legal-page';
 import { legalLastUpdated, privacySections } from '@/components/legal/legal-content';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://stacloud.eu.cc/privacy' },
   title: 'Chính Sách Quyền Riêng Tư | STACloud',
   description: 'Đọc Chính sách quyền riêng tư của STACloud.',
 };

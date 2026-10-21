@@ -1,5 +1,7 @@
 'use client';
 
+import { EggIcon } from './egg-icon';
+
 import React, { useMemo, useState } from 'react';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { Reveal } from '@/components/ui/reveal';
@@ -75,7 +77,12 @@ function Header({ onOpenDrawer }: { onOpenDrawer: () => void }) {
       <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-300/30 bg-[#05182e]/90 px-4 py-2.5 shadow-[0_12px_45px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:px-6 cyber-cut-sm">
         <a href={sitePath('/')} className="group flex items-center gap-3">
           <img
-            src={sitePath('/picture/logoSTACloud.png')}
+            src={sitePath('/picture/logoSTACloud-204.webp')}
+            srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
+            sizes="(min-width: 640px) 140px, 116px"
+            width={204}
+            height={70}
+            decoding="async"
             alt="STACloud"
             className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.6)]"
           />
@@ -165,7 +172,7 @@ function Summary({
                 Kho Môi Trường Chạy Ứng Dụng & Game Engine
               </h1>
               <p className="max-w-2xl text-xs leading-relaxed text-sky-100 sm:text-base">
-                Hệ thống Template tối ưu độc quyền sẵn sàng triển khai 1-click cho AI (OpenClaw), Ngôn ngữ lập trình (Node.js, Python, Golang, Bun, C, Java), Hệ điều hành Linux, Windows Server, Minecraft & Proxy.
+                Hệ thống Template sẵn sàng triển khai cho Website Egg (WordPress, PHPweb, Laravel), AI (OpenClaw), ngôn ngữ lập trình, hệ điều hành Linux, Windows Server, Minecraft & Proxy.
               </p>
 
               <div className="flex flex-wrap gap-2 pt-2">
@@ -259,10 +266,12 @@ function Summary({
 
 function EggItemRow({
   item,
+  group,
   accent,
   comingSoon,
 }: {
   item: EggItem;
+  group: string;
   accent: (typeof accentClasses)[EggGroup['accent']];
   comingSoon?: boolean;
 }) {
@@ -270,7 +279,10 @@ function EggItemRow({
     return (
       <div className="rounded-xl border border-cyan-300/15 bg-black/35 p-3.5 sm:p-4">
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm font-bold text-white">{item.name}</p>
+          <div className="flex min-w-0 items-center gap-3">
+            <EggIcon name={item.name} group={group} />
+            <p className="text-sm font-bold text-white">{item.name}</p>
+          </div>
           <span className={`w-fit rounded-lg border px-2.5 py-0.5 text-[10px] font-bold ${accent.pill}`}>
             {item.variants.length} Bản Phân Phối
           </span>
@@ -279,12 +291,13 @@ function EggItemRow({
           {item.variants.map((variant) => (
             <span
               key={variant}
-              className={`rounded-lg border px-2.5 py-1 text-xs font-medium ${
+              className={`inline-flex items-center gap-2 rounded-lg border px-2.5 py-1 text-xs font-medium ${
                 comingSoon
                   ? 'border-amber-300/25 bg-amber-300/10 text-amber-100'
                   : 'border-cyan-300/15 bg-white/[0.04] text-sky-100'
               }`}
             >
+              <EggIcon name={variant} group={group} small />
               {variant}
             </span>
           ))}
@@ -295,7 +308,10 @@ function EggItemRow({
 
   return (
     <div className="rounded-xl border border-cyan-300/15 bg-black/35 px-4 py-3 flex items-center justify-between gap-3">
-      <p className="text-sm font-bold text-white">{item.name}</p>
+      <div className="flex min-w-0 items-center gap-3">
+        <EggIcon name={item.name} group={group} />
+        <p className="text-sm font-bold text-white">{item.name}</p>
+      </div>
       <span className={`w-fit shrink-0 rounded-lg border px-2.5 py-0.5 text-[10px] font-bold ${accent.pill}`}>
         {comingSoon ? 'Coming Soon' : 'Sẵn Sàng'}
       </span>
@@ -332,6 +348,7 @@ function EggCard({ group, index }: { group: EggGroup; index: number }) {
               <EggItemRow
                 key={`${group.title}-${item.name}`}
                 item={item}
+                group={group.title}
                 accent={accent}
                 comingSoon={Boolean(group.status)}
               />
