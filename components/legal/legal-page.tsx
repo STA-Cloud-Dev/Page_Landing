@@ -9,6 +9,7 @@ import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
 import type { LegalSection } from './legal-content';
+import { PolicyLinks } from './policy-links';
 
 type LegalPageProps = {
   eyebrow: string;
@@ -145,11 +146,11 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
                     <strong className="text-emerald-300">Áp dụng toàn hệ thống</strong>
                   </div>
                   <div className="flex items-center justify-between border-b border-cyan-300/10 py-1">
-                    <span className="text-sky-200/70">Bảo mật:</span>
-                    <strong className="text-white">Bảo toàn dữ liệu</strong>
+                    <span className="text-sky-200/70">Dữ liệu:</span>
+                    <strong className="text-white">Theo chính sách bảo mật</strong>
                   </div>
                   <div className="flex items-center justify-between py-1">
-                    <span className="text-sky-200/70">Hỗ trợ 24/7:</span>
+                    <span className="text-sky-200/70">Kênh hỗ trợ:</span>
                     <strong className="text-cyan-300">Discord Ticket</strong>
                   </div>
                 </div>
@@ -168,6 +169,7 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
       </section>
 
       {/* Main Content Layout with Sidebar */}
+      <div className="mx-auto mt-6 max-w-7xl px-4 sm:px-6"><PolicyLinks /></div>
       <div className="mx-auto mt-8 grid max-w-7xl gap-8 px-4 pb-16 sm:px-6 sm:mt-12 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
         {/* Table of Contents Sticky Sidebar */}
         <aside className="lg:sticky lg:top-24">

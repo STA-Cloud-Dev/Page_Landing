@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" role="img" aria-labelledby="title">
   <title>Singapore flag</title>
-  <rect width="64" height="24" fill="#ef3340"/>
-  <rect y="24" width="64" height="24" fill="#ffffff"/>
+  <rect width="72" height="24" fill="#ef3340"/>
+  <rect y="24" width="72" height="24" fill="#ffffff"/>
   <circle cx="18" cy="14" r="9" fill="#ffffff"/>
   <circle cx="21" cy="14" r="7" fill="#ef3340"/>
   <g fill="#ffffff">

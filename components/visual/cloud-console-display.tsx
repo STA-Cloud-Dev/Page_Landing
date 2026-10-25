@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { sitePath } from '@/lib/site-path';
 
 interface StatItem {
   value: string;
@@ -18,7 +17,7 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
     : [
         { value: '17', label: 'Gói dịch vụ đang công bố' },
         { value: '8', label: 'Gói Linux Egg & Dev' },
-        { value: '10 Gbps', label: 'Anti-DDoS OVH Shield' },
+        { value: 'L3/L4', label: 'Bảo vệ mạng OVH' },
         { value: '0đ', label: 'Node Test Free Forever' },
       ];
 
@@ -33,13 +32,12 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
           </div>
           <span className="font-mono text-xs font-semibold text-cyan-200/90 tracking-wider xl:text-sm">
-            STACloud Console // Node Cluster SG-VN
+            STACloud Console // Danh mục hạ tầng
           </span>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/15 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300 xl:text-xs">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>ALL SYSTEMS OPERATIONAL</span>
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-2.5 py-0.5 text-[11px] font-bold text-cyan-200 xl:text-xs">
+          <span>THÔNG TIN MINH HỌA</span>
         </div>
       </div>
 
@@ -50,16 +48,16 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
           <p className="mt-0.5 font-bold text-white">VN-SGN &bull; SG-SIN</p>
         </div>
         <div className="rounded-lg border border-cyan-300/15 bg-white/[0.03] p-2 text-center">
-          <p className="text-[10px] text-sky-300/70 uppercase">DDoS SHIELD</p>
-          <p className="mt-0.5 font-bold text-emerald-300">10 Gbps+ LAYER 4/7</p>
+          <p className="text-[10px] text-sky-300/70 uppercase">BẢO VỆ MẠNG</p>
+          <p className="mt-0.5 font-bold text-emerald-300">OVH LAYER 3/4</p>
         </div>
         <div className="rounded-lg border border-cyan-300/15 bg-white/[0.03] p-2 text-center">
           <p className="text-[10px] text-sky-300/70 uppercase">STORAGE</p>
-          <p className="mt-0.5 font-bold text-cyan-300">NVMe GEN4 RAID</p>
+          <p className="mt-0.5 font-bold text-cyan-300">NVMe / SSD tùy gói</p>
         </div>
         <div className="rounded-lg border border-cyan-300/15 bg-white/[0.03] p-2 text-center">
           <p className="text-[10px] text-sky-300/70 uppercase">UPTIME SLA</p>
-          <p className="mt-0.5 font-bold text-white">99%+ SLA TARGET</p>
+          <p className="mt-0.5 font-bold text-white">MỤC TIÊU 99%</p>
         </div>
       </div>
 
@@ -80,10 +78,10 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
           </div>
           <div className="flex items-center gap-2">
             <span className="hidden sm:inline-block font-mono text-[11px] font-semibold text-emerald-300">
-              0.8ms Jitter
+              Cấu hình game
             </span>
             <span className="rounded border border-cyan-300/30 bg-cyan-400/15 px-2 py-0.5 text-[10px] font-bold text-cyan-200">
-              ACTIVE
+              XEM GÓI
             </span>
           </div>
         </div>
@@ -103,10 +101,10 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
           </div>
           <div className="flex items-center gap-2">
             <span className="hidden sm:inline-block font-mono text-[11px] font-semibold text-cyan-300">
-              100% Dedicated
+              Cấp phát theo gói
             </span>
             <span className="rounded border border-cyan-300/30 bg-cyan-400/15 px-2 py-0.5 text-[10px] font-bold text-cyan-200">
-              SLOTS OPEN
+              HỎI SLOT
             </span>
           </div>
         </div>
@@ -129,7 +127,7 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
               0 Credit / Free
             </span>
             <span className="rounded border border-emerald-400/30 bg-emerald-400/15 px-2 py-0.5 text-[10px] font-bold text-emerald-200">
-              ONLINE
+              GÓI FREE
             </span>
           </div>
         </div>

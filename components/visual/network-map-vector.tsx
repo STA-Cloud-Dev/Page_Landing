@@ -34,7 +34,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'CA-BHS-01 (Canada Edge Hub)',
     city: 'Beauharnois / Montreal',
     country: 'Canada',
-    flagSrc: sitePath('/flags/canada.svg'),
+    flagSrc: sitePath('/flags/canada.svg?v=20261024-2'),
     basePing: 255,
     speed: '10 Gbps Backbone',
     shield: 'OVH VAC Anti-DDoS North America',
@@ -57,7 +57,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'EU-FRA-01 (European Hub)',
     city: 'Frankfurt & Paris',
     country: 'Châu Âu (EU)',
-    flagSrc: sitePath('/flags/europe.svg'),
+    flagSrc: sitePath('/flags/europe.svg?v=20261024-2'),
     basePing: 205,
     speed: '10 Gbps Backbone',
     shield: 'European Multi-Tier Shield 10Gbps',
@@ -80,7 +80,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'SG-SIN-01 (OVH Singapore)',
     city: 'Singapore',
     country: 'Singapore',
-    flagSrc: sitePath('/flags/singapore.svg'),
+    flagSrc: sitePath('/flags/singapore.svg?v=20261024-2'),
     basePing: 27,
     speed: '10 Gbps Anti-DDoS',
     shield: 'OVH Anti-DDoS Multi-Layer 10Gbps+',
@@ -103,7 +103,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'VN-SGN-01 (Việt Nam Local Hub)',
     city: 'Hồ Chí Minh & Hà Nội',
     country: 'Việt Nam',
-    flagSrc: sitePath('/flags/vietnam.svg'),
+    flagSrc: sitePath('/flags/vietnam.svg?v=20261024-2'),
     basePing: 4,
     speed: '1 Gbps Dedicated Uplink',
     shield: 'Domestic Firewall & VNIX Filter',
@@ -126,7 +126,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'TH-BKK-01 (Thailand Gateway)',
     city: 'Bangkok',
     country: 'Thailand',
-    flagSrc: sitePath('/flags/thailand.svg'),
+    flagSrc: sitePath('/flags/thailand.svg?v=20261024-2'),
     basePing: 23,
     speed: '30 Gbps Bandwidth',
     shield: 'Southeast Asia AntiDDoS Gateway',
@@ -149,7 +149,7 @@ export const allDatacenterLocations: DatacenterLocation[] = [
     name: 'HKG-01 (Hong Kong Route)',
     city: 'Hong Kong',
     country: 'Hong Kong',
-    flagSrc: sitePath('/flags/hong-kong.svg'),
+    flagSrc: sitePath('/flags/hong-kong.svg?v=20261024-2'),
     basePing: 36,
     speed: '30 Gbps Shield',
     shield: 'Dedicated Shield AntiDDoS',
@@ -177,13 +177,16 @@ function LocationFlag({
   className?: string;
 }) {
   return (
-    <Image
-      src={location.flagSrc}
-      alt={`${location.country} flag`}
-      width={36}
-      height={24}
-      className={`shrink-0 rounded-[0.2rem] object-contain shadow-sm ${className}`}
-    />
+    <span className={`relative block aspect-[3/2] shrink-0 overflow-hidden ${className}`}>
+      <Image
+        src={location.flagSrc}
+        alt={`${location.country} flag`}
+        fill
+        sizes="72px"
+        loading="eager"
+        className="block object-fill"
+      />
+    </span>
   );
 }
 
@@ -213,6 +216,28 @@ const LASER_CONDUITS = [
 export function NetworkMapVector() {
   const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(allDatacenterLocations[0]);
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
+  const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(() =>
+    Object.fromEntries(allDatacenterLocations.map((location) => [location.id, location.basePing]))
+  );
+
+  // Animated reference values only: these are not measurements from a live server.
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (document.hidden) return;
+
+      setSimulatedPings((previous) => {
+        const updated = { ...previous };
+        for (const location of allDatacenterLocations) {
+          const jitter = Math.max(2, Math.round(location.basePing * 0.04));
+          const variation = Math.floor(Math.random() * (jitter * 2 + 1)) - jitter;
+          updated[location.id] = Math.max(1, location.basePing + variation);
+        }
+        return updated;
+      });
+    }, 4000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   // Native SVG ViewBox Zoom and Pan coordinates (1000 x 500 world extent)
   const [zoom, setZoom] = useState<number>(1.0);
@@ -228,40 +253,6 @@ export function NetworkMapVector() {
     startCenterY: 250,
   });
   const hasMovedRef = useRef<boolean>(false);
-
-  // Simulated live ping oscillation
-  const [livePings, setLivePings] = useState<Record<string, number>>({
-    'ca-bhs': 255,
-    'eu-fra': 205,
-    'sg-sin': 27,
-    'vn-sgn': 4,
-    'th-bkk': 23,
-    'hk-01': 36,
-  });
-
-  useEffect(() => {
-    const isLowMotionMobile =
-      window.innerWidth < 768 ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (isLowMotionMobile) {
-      return;
-    }
-
-    const timer = setInterval(() => {
-      if (document.hidden) return;
-      setLivePings({
-        'ca-bhs': Math.floor(248 + Math.random() * 14),
-        'eu-fra': Math.floor(198 + Math.random() * 15),
-        'sg-sin': Math.floor(25 + Math.random() * 4),
-        'vn-sgn': Math.floor(3 + Math.random() * 3),
-        'th-bkk': Math.floor(21 + Math.random() * 4),
-        'hk-01': Math.floor(34 + Math.random() * 5),
-      });
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // Smooth mathematical camera transition to target coordinates
   const smoothFlyTo = useCallback(
@@ -488,23 +479,22 @@ export function NetworkMapVector() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-400/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-cyan-200">
             <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
-            🗺️ Mạng Lưới Hạ Tầng 6 Khu Vực Toàn Cầu
+            🗺️ Sơ đồ khu vực hạ tầng & định tuyến
           </div>
           <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
-            Bản Đồ Hạ Tầng & Radar Ping Toàn Cầu
+            Bản đồ hạ tầng và kết nối khu vực
           </h3>
           <p className="mt-1 text-xs text-sky-100/90 sm:text-sm">
-            Bản đồ địa lý thực tế kết nối: Canada (Bắc Mỹ), Châu Âu (EU), OVH Singapore, Việt Nam, Thái Lan & Hong Kong.
+            Sơ đồ minh họa 6 khu vực: Canada, châu Âu, Singapore, Việt Nam, Thái Lan và Hong Kong. Độ trễ hiển thị mang tính tham khảo; kết quả thực tế phụ thuộc đường truyền và vị trí kết nối.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <span className="status-pill-cyber">
-            <span className="pulse-dot-green" />
-            <span className="font-bold text-xs">6 VỊ TRÍ TOÀN CẦU</span>
+            <span className="font-bold text-xs">6 KHU VỰC THAM KHẢO</span>
           </span>
           <span className="hidden sm:inline-flex rounded-xl border border-cyan-300/30 bg-black/40 px-3 py-1 font-mono text-xs text-cyan-300">
-            GIS Live Topology
+            Sơ đồ tương tác
           </span>
         </div>
       </div>
@@ -541,13 +531,13 @@ export function NetworkMapVector() {
             >
               <LocationFlag location={loc} className="h-4 w-6" />
               <span className="min-w-0 flex-1 truncate text-left">{loc.country}</span>
-              <span className="shrink-0 font-mono text-[10px] opacity-80">~{livePings[loc.id] || loc.basePing}ms</span>
+              <span className="shrink-0 font-mono text-[10px] opacity-80">~{simulatedPings[loc.id]}ms*</span>
             </button>
           );
         })}
       </div>
 
-      {/* Main Grid: Interactive GIS Native SVG World Map + Live Telemetry Detail */}
+      {/* Main Grid: Interactive GIS Native SVG World Map + Simulated Ping Detail */}
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.55fr)] xl:items-start">
         {/* Left: Authentic GIS SVG Map Viewport */}
         <div
@@ -756,9 +746,9 @@ export function NetworkMapVector() {
                         href={loc.flagSrc}
                         x={4}
                         y={4}
-                        width={14}
+                        width={15}
                         height={10}
-                        preserveAspectRatio="xMidYMid meet"
+                        preserveAspectRatio="none"
                       />
                       <text
                         x={22}
@@ -882,24 +872,25 @@ export function NetworkMapVector() {
         {/* Right: Selected Node Deep-Dive Telemetry Card (Frosted Glass) */}
         <div className="space-y-3">
           <div className="glass-card-bright rounded-2xl p-4 shadow-xl sm:p-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex flex-col gap-3">
               <div className="flex min-w-0 items-center gap-3">
-                <div className="flex h-11 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyan-300/30 bg-white/95 p-1.5 shadow">
+                <div className="flex h-11 w-[66px] shrink-0 items-center justify-center overflow-hidden shadow">
                   <LocationFlag location={activeLocation} className="h-full w-full" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-base font-black leading-snug text-white sm:text-lg">
-                    {activeLocation.name}
+                  <h4 className="text-base font-black leading-snug text-white">
+                    {activeLocation.country}
                   </h4>
-                  <p className="text-xs text-cyan-200 font-semibold">{activeLocation.city}</p>
+                  <p className="mt-1 break-words text-xs leading-4 text-sky-100">{activeLocation.name}</p>
+                  <p className="mt-1 text-xs text-cyan-200 font-semibold">{activeLocation.city}</p>
                 </div>
               </div>
 
-              <div className="shrink-0 text-left sm:text-right">
-                <p className="font-mono text-xl font-black text-emerald-300 sm:text-2xl">
-                  ~{livePings[activeLocation.id] || activeLocation.basePing}ms
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-cyan-300/20 pt-2">
+                <p className="shrink-0 font-mono text-xl font-black text-emerald-300">
+                  ~{simulatedPings[activeLocation.id]}ms*
                 </p>
-                <span className="text-[10px] text-sky-200/80 font-mono">Độ trễ trung bình</span>
+                <span className="text-[10px] text-sky-200/80 font-mono">*Ước tính, không đo trực tiếp</span>
               </div>
             </div>
 
@@ -940,7 +931,7 @@ export function NetworkMapVector() {
                 <LocationFlag location={loc} className="mx-auto h-4 w-6" />
                 <p className="mt-1.5 truncate text-xs font-bold">{loc.country}</p>
                 <p className="text-[10px] font-mono text-emerald-300">
-                  ~{livePings[loc.id] || loc.basePing}ms
+                  ~{simulatedPings[loc.id]}ms*
                 </p>
               </button>
             ))}
@@ -952,17 +943,17 @@ export function NetworkMapVector() {
       <div className="mt-8 border-t border-cyan-300/20 pt-6">
         <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-            Chi Tiết 6 Điểm Đặt Máy Chủ & Trạm Chuyển Tiếp Toàn Cầu
+            Danh mục 6 khu vực trên sơ đồ minh họa
           </span>
           <span className="text-xs font-mono text-emerald-300">
-            6/6 Nodes Online
+            Tình trạng thực tế: xác nhận qua ticket
           </span>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {allDatacenterLocations.map((loc) => {
             const isSelected = activeLocation.id === loc.id;
-            const pingVal = livePings[loc.id] || loc.basePing;
+            const pingVal = simulatedPings[loc.id];
 
             return (
               <div
@@ -976,7 +967,7 @@ export function NetworkMapVector() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-8 w-12 items-center justify-center overflow-hidden rounded-md border border-cyan-300/30 bg-white/95 p-1 shadow">
+                    <div className="flex h-8 w-12 items-center justify-center overflow-hidden shadow">
                       <LocationFlag location={loc} className="h-full w-full" />
                     </div>
                     <span
@@ -986,7 +977,7 @@ export function NetworkMapVector() {
                           : 'border border-emerald-300/30 bg-emerald-400/15 text-emerald-200'
                       }`}
                     >
-                      {loc.status === 'paused' ? 'Kín Slot' : 'Online'}
+                      {loc.status === 'paused' ? 'Kín Slot' : 'Tham khảo'}
                     </span>
                   </div>
 
@@ -995,8 +986,8 @@ export function NetworkMapVector() {
                 </div>
 
                 <div className="mt-3 border-t border-cyan-300/15 pt-2.5 flex items-baseline justify-between font-mono text-xs">
-                  <span className="text-[10px] text-sky-200/70">Ping:</span>
-                  <span className="font-bold text-emerald-300">~{pingVal}ms</span>
+                  <span className="text-[10px] text-sky-200/70">Ping tham khảo:</span>
+                  <span className="font-bold text-emerald-300">~{pingVal}ms*</span>
                 </div>
               </div>
             );

@@ -28,13 +28,14 @@ export function LocationsSection() {
               </span>
               <div className="flex flex-col gap-4">
                 <div className="flex min-w-0 items-start gap-4">
-                  <div className="flex h-16 w-20 shrink-0 items-center justify-center rounded-lg border border-cyan-300/20 bg-white/95 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
+                  <div className="relative aspect-[3/2] w-20 shrink-0 overflow-hidden shadow-sm">
                     <Image
                       src={location.flagSrc}
                       alt={`${location.name} flag`}
-                      width={64}
-                      height={42}
-                      className="h-full w-full rounded-sm object-contain"
+                      fill
+                      sizes="80px"
+                      loading="eager"
+                      className="block object-fill"
                     />
                   </div>
                   <div className="min-w-0">

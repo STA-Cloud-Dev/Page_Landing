@@ -65,6 +65,11 @@ html {
   color-scheme: dark;
 }
 
+.mobile-dock { bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+@media (max-width: 1023px) {
+  body { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+}
+
 body {
   min-height: 100vh;
   color: var(--ink-primary);

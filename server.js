@@ -45,6 +45,30 @@ function getGitCommit() {
   }
 }
 
+// Changes to source files and newly introduced policy pages must invalidate
+// an existing static export even when the Git HEAD commit has not changed.
+function hasNewerSourceThan(buildTime) {
+  const inputs = ['app', 'components', 'lib', 'public', 'package.json', 'package-lock.json', 'next.config.js', 'server.js'];
+
+  function scan(entryPath) {
+    let stats;
+    try {
+      stats = fs.statSync(entryPath);
+    } catch {
+      return false;
+    }
+
+    if (stats.isFile()) return stats.mtimeMs > buildTime;
+    if (!stats.isDirectory()) return false;
+
+    return fs.readdirSync(entryPath, { withFileTypes: true }).some((entry) =>
+      scan(path.join(entryPath, entry.name))
+    );
+  }
+
+  return inputs.some((entry) => scan(path.join(__dirname, entry)));
+}
+
 function ensureProductionBuild() {
   const markerPath = path.join(publicRoot, '.stacloud-build-commit');
   const currentCommit = getGitCommit();
@@ -56,7 +80,12 @@ function ensureProductionBuild() {
     // A missing marker is normal for a manually uploaded build.
   }
 
-  const needsBuild = !fs.existsSync(path.join(publicRoot, 'index.html')) ||
+  const indexPath = path.join(publicRoot, 'index.html');
+  const policyPages = ['terms', 'privacy', 'sla', 'refund', 'security', 'cookies'];
+  const buildTime = fs.existsSync(indexPath) ? fs.statSync(indexPath).mtimeMs : 0;
+  const needsBuild = !buildTime ||
+    policyPages.some((page) => !fs.existsSync(path.join(publicRoot, `${page}.html`))) ||
+    hasNewerSourceThan(buildTime) ||
     (Boolean(currentCommit) && currentCommit !== builtCommit);
 
   if (!needsBuild) {
@@ -72,7 +101,7 @@ function ensureProductionBuild() {
     stdio: 'inherit',
   });
 
-  if (result.error || result.status !== 0 || !fs.existsSync(path.join(publicRoot, 'index.html'))) {
+  if (result.error || result.status !== 0 || !fs.existsSync(indexPath)) {
     if (result.error) {
       console.error(`Build command error: ${result.error.message}`);
     }
@@ -144,11 +173,16 @@ function sendFile(request, response, filePath, statusCode = 200) {
   const extension = path.extname(filePath).toLowerCase();
   const isHttps = request.socket.encrypted ||
     request.headers['x-forwarded-proto']?.split(',')[0].trim() === 'https';
+  const isVersionedAsset = filePath.includes(`${path.sep}_next${path.sep}static${path.sep}`);
+  const isDocument = ['.html', '.xml', '.txt'].includes(extension);
   const headers = {
     ...securityHeaders,
     'Content-Security-Policy': securityHeaders['Content-Security-Policy'] +
       (isHttps ? '; upgrade-insecure-requests' : ''),
-    'Cache-Control': extension === '.html' ? 'no-cache' : 'public, max-age=31536000, immutable',
+    ...(isHttps ? { 'Strict-Transport-Security': 'max-age=31536000' } : {}),
+    'Cache-Control': isDocument ? 'no-cache' : isVersionedAsset
+      ? 'public, max-age=31536000, immutable'
+      : 'public, max-age=604800',
     'Content-Type': mimeTypes[extension] || 'application/octet-stream',
   };
 

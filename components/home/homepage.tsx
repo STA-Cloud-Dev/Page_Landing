@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import {
   allServicePlans,
   comprehensiveFaqs,
-  heroSignals,
   heroStats,
   heroStatusStrip,
   homeConfig,
@@ -19,8 +18,17 @@ import { CyberTerminal } from '@/components/ui/cyber-terminal';
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
 import { SiteFooter } from '@/components/shared/site-footer';
+import { PolicyCenterSection } from '@/components/home/policy-center-section';
 import { Reveal } from '@/components/ui/reveal';
 import { sitePath } from '@/lib/site-path';
+
+const featuredTiers = [
+  { id: 'node-test', eyebrow: '01 / Học tập & trải nghiệm', title: 'Khởi đầu miễn phí', action: 'Nhận gói miễn phí', emphasis: false },
+  { id: 'dev-1', eyebrow: '02 / Bot & ứng dụng web', title: 'Phát triển mỗi ngày', action: 'Chọn gói Dev 1', emphasis: true },
+  { id: 'sta-epyc-01', eyebrow: '03 / VPS hiệu năng cao', title: 'Sẵn sàng mở rộng', action: 'Tư vấn VPS EPYC', emphasis: false },
+] as const;
+
+const infrastructureTechnologies = ['OVHcloud', 'AMD EPYC', 'Intel Xeon', 'Cloudflare', 'Docker', 'Ubuntu'] as const;
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -195,10 +203,10 @@ export function HomePage() {
               Bản Đồ Hạ Tầng
             </a>
             <a
-              href="#faq"
+              href="#policies"
               className="rounded-lg px-3 py-1.5 transition hover:bg-cyan-400/25 hover:text-white"
             >
-              Hỏi Đáp
+              Chính Sách
             </a>
           </nav>
 
@@ -206,8 +214,7 @@ export function HomePage() {
           <div className="flex items-center gap-2">
             <div className="hidden 2xl:flex items-center mr-2">
               <span className="status-pill-cyber">
-                <span className="pulse-dot-green" />
-                <span className="text-[11px] font-bold">Hạ tầng Online</span>
+                <span className="text-[11px] font-bold">Tư vấn hạ tầng qua ticket</span>
               </span>
             </div>
 
@@ -253,27 +260,19 @@ export function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center xl:gap-12">
             {/* Left Copy & Actions */}
             <Reveal className="space-y-6">
-              {/* Badges */}
-              <div className="flex flex-wrap items-center gap-2.5">
-                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/45 bg-cyan-400/20 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-cyan-200 shadow-[0_0_20px_rgba(0,180,216,0.3)] sm:text-xs xl:text-sm">
-                  <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
-                  {homeConfig.tagline}
-                </div>
-
-                <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/45 bg-sky-400/20 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-100 sm:text-xs xl:text-sm">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                  OpenClaw Beta Free 100%
-                </div>
+              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] text-cyan-100 sm:text-xs">
+                <span className="h-2 w-2 rounded-full bg-emerald-300" />
+                Hạ tầng Cloud & Game Hosting • STACloud
               </div>
 
               {/* Title & Slogan */}
               <div className="space-y-3 sm:space-y-4">
-                <h1 className="text-3xl font-black leading-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight">
-                  Nền Tảng <span className="text-gradient-cyan">Hạ Tầng Cloud VPS</span> & Game Server Đỉnh Cao.
+                <h1 className="max-w-3xl text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
+                  Cloud VPS & <span className="text-gradient-cyan">Game Server</span> hiệu năng cao.
                 </h1>
-                <p className="max-w-2xl text-xs sm:text-base leading-relaxed text-sky-100 sm:leading-7 xl:max-w-3xl xl:text-lg xl:leading-8">
-                  Hạ tầng điện toán đám mây thế hệ mới tại OVH Singapore với khả năng chống DDoS đa tầng.
-                  Tùy chỉnh cấu hình linh hoạt lên tới 64 vCore & 128 GB RAM, bảng giá minh bạch và hỗ trợ 24/7.
+                <p className="max-w-2xl text-sm leading-7 text-sky-100 sm:text-base xl:text-lg xl:leading-8">
+                  Triển khai bot, website, game server và VPS trên hạ tầng Việt Nam & Singapore.
+                  Cấu hình rõ ràng, linh hoạt theo nhu cầu và hỗ trợ qua đội ngũ kỹ thuật.
                 </p>
               </div>
 
@@ -285,7 +284,7 @@ export function HomePage() {
                   rel="noopener noreferrer"
                   className="btn-cyber-primary rounded-xl px-6 py-3.5 text-sm font-bold shadow-[0_0_30px_rgba(0,180,216,0.4)] text-center"
                 >
-                  <span>Truy Cập Game & Cloud Portal</span>
+                  <span>Khám phá Control Portal</span>
                   <svg className="h-4 w-4 ml-2 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -297,50 +296,19 @@ export function HomePage() {
                   rel="noopener noreferrer"
                   className="btn-cyber-outline rounded-xl px-6 py-3.5 text-sm font-bold text-center"
                 >
-                  <span>🎫 Tạo Ticket Discord</span>
+                  <span>Tư vấn cấu hình</span>
                 </a>
               </div>
 
-              {/* Quick Group Chat Banner */}
-              <div className="glass-card-bright rounded-2xl p-4 sm:p-5 shadow-xl">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-cyan-200">
-                      Cộng Đồng Hỗ Trợ 24/7
-                    </p>
-                    <p className="mt-0.5 text-xs text-sky-100 sm:text-sm xl:text-base">
-                      Hỏi nhanh, tư vấn cấu hình trước khi tạo ticket trên Discord.
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    <a
-                      href={homeConfig.zaloUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-xl border border-cyan-300/40 bg-cyan-400/25 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-cyan-400/40 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)]"
-                    >
-                      Nhóm Zalo
-                    </a>
-                    <a
-                      href={homeConfig.messengerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-xl border border-sky-300/40 bg-sky-400/25 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-sky-400/40 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]"
-                    >
-                      Nhóm Messenger
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Key Signal Highlights */}
-              <div className="grid gap-2 sm:grid-cols-3">
-                {heroSignals.map((signal, idx) => (
-                  <div
-                    key={idx}
-                    className="glass-card-bright rounded-xl p-3 text-xs text-sky-100 shadow xl:p-4 xl:text-sm"
-                  >
-                    {signal}
+              <div className="grid grid-cols-3 gap-2.5 border-t border-cyan-100/15 pt-5 sm:gap-4">
+                {[
+                  { value: '99%', label: 'Mục tiêu SLA gói trả phí' },
+                  { value: '0đ', label: 'Node Test miễn phí' },
+                  { value: 'L3/L4', label: 'Bảo vệ mạng tại OVH' },
+                ].map((stat) => (
+                  <div key={stat.value} className="min-w-0 border-l-2 border-cyan-300/50 pl-3 sm:pl-4">
+                    <p className="text-xl font-black text-white sm:text-3xl">{stat.value}</p>
+                    <p className="mt-1 text-[10px] leading-snug text-sky-200 sm:text-xs">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -354,23 +322,35 @@ export function HomePage() {
         </div>
       </section>
 
+      <section aria-label="Công nghệ và hạ tầng" className="px-4 pb-8 sm:px-6">
+        <div className="mx-auto max-w-7xl rounded-2xl border border-white/10 bg-[#020d1e]/80 px-5 py-5 sm:px-7">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="shrink-0">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Nền tảng công nghệ</p>
+              <p className="mt-1 text-xs text-sky-200/80">Hệ sinh thái hạ tầng & công cụ được giới thiệu</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-8">
+              {infrastructureTechnologies.map((name) => (
+                <span key={name} className="text-sm font-extrabold tracking-tight text-slate-200/90 sm:text-base">{name}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- 3. NODE TEST FREE LAUNCHPAD --- */}
       <NodeTestLaunch />
 
-      {/* --- 4. LIVE STATUS STRIP (6 CLUSTER NODES) --- */}
+      {/* --- 4. PUBLIC PLAN INFORMATION (NOT LIVE AVAILABILITY) --- */}
       <section className="px-4 py-6 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="status-indicator-ping">
-                <span className="bg-emerald-400" />
-                <span className="bg-emerald-500" />
-              </span>
               <h2 className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-                Trạng Thái Tài Nguyên & Node Real-Time
+                Thông tin gói & tình trạng đăng ký
               </h2>
             </div>
-            <span className="text-xs text-sky-200">Tự động đồng bộ</span>
+            <span className="text-xs text-sky-200">Thông tin tham khảo • Xác nhận slot qua ticket</span>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
@@ -400,7 +380,7 @@ export function HomePage() {
       </section>
 
       {/* --- 5. 4 CORE BENEFITS (ƯU ĐIỂM VƯỢT TRỘI) --- */}
-      <section id="benefits" className="scroll-mt-24 px-4 py-8 sm:px-6 sm:py-12">
+      <section id="benefits" className="scroll-mt-24 bg-[#020f22]/70 px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="text-center space-y-2 mb-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-400/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-cyan-200">
@@ -456,9 +436,48 @@ export function HomePage() {
             <p className="mx-auto max-w-2xl text-xs text-sky-100 sm:text-base">
               Từ các gói test cộng đồng giá siêu rẻ đến cụm máy chủ VPS OVH Singapore chuyên dụng cho tải nặng.
             </p>
+          </div>
+
+          <div className="mt-9 grid gap-5 lg:grid-cols-3 lg:items-stretch">
+            {featuredTiers.map((tier) => {
+              const plan = allServicePlans.find((item) => item.id === tier.id);
+              if (!plan) return null;
+              return (
+                <article key={tier.id} className={`relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 shadow-2xl sm:p-7 ${tier.emphasis
+                  ? 'border-cyan-300 bg-gradient-to-b from-[#114a74] to-[#042343] shadow-[0_0_45px_rgba(34,211,238,0.24)] lg:-translate-y-2'
+                  : 'border-sky-200/20 bg-[#06182b] shadow-black/25'}`}>
+                  {tier.emphasis && <span className="absolute right-0 top-0 rounded-bl-xl bg-cyan-300 px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#031b32]">Đề xuất bắt đầu</span>}
+                  <p className="text-[11px] font-bold uppercase tracking-[0.17em] text-cyan-300">{tier.eyebrow}</p>
+                  <h3 className="mt-3 text-2xl font-black text-white">{tier.title}</h3>
+                  <p className="mt-1 text-sm font-semibold text-slate-200">{plan.name}</p>
+                  <div className="mt-6 flex flex-wrap items-end gap-x-2 gap-y-1 border-b border-white/10 pb-6">
+                    <strong className="text-3xl font-black text-white sm:text-4xl">{plan.price}</strong>
+                    <span className="pb-1 text-xs text-sky-200">/ {plan.period}</span>
+                  </div>
+                  <p className="mt-5 flex-1 text-sm leading-7 text-sky-100/90">{plan.description}</p>
+                  <ul className="mt-5 space-y-2 text-sm text-slate-200">
+                    {(plan.specs.length ? plan.specs.slice(0, 3) : ['Dành cho sinh viên & thử nghiệm', 'Bot Discord và web nhỏ', 'Không thu phí dịch vụ']).map((spec) => (
+                      <li key={spec} className="flex items-start gap-2"><span className="font-bold text-emerald-300" aria-hidden="true">✓</span>{spec}</li>
+                    ))}
+                  </ul>
+                  <a href={homeConfig.discordUrl} target="_blank" rel="noopener noreferrer"
+                    className={`mt-7 flex min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition ${tier.emphasis ? 'bg-cyan-300 text-[#031b32] hover:bg-cyan-100' : 'border border-cyan-300/50 bg-cyan-400/15 text-white hover:bg-cyan-400/25'}`}>
+                    {tier.action}
+                  </a>
+                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.status === 'preorder' ? 'Đặt trước • Tư vấn slot qua Discord' : 'Xác nhận tình trạng slot qua Discord'}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <details className="group mt-9 rounded-3xl border border-sky-200/20 bg-[#04172b]/90 p-4 sm:p-6">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-xl bg-white/5 px-5 py-3 text-left text-sm font-bold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-cyan-300 [&::-webkit-details-marker]:hidden">
+              <span>Xem đầy đủ {allServicePlans.length} gói dịch vụ, cấu hình và bộ lọc</span>
+              <span aria-hidden="true" className="text-xl text-cyan-300 transition-transform group-open:rotate-180">⌄</span>
+            </summary>
 
             {/* Filter Tabs */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2" aria-label="Lọc các gói dịch vụ">
               <button
                 type="button"
                 onClick={() => setActivePlanTab('all')}
@@ -528,7 +547,6 @@ export function HomePage() {
                 OpenClaw Beta AI
               </button>
             </div>
-          </div>
 
           {/* Cards Grid with Frosted Glass Styling */}
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -606,6 +624,7 @@ export function HomePage() {
               );
             })}
           </div>
+          </details>
 
           {/* Custom Dedicated & Upsize Support Banner */}
           <div className="mt-10 rounded-3xl border border-cyan-300/35 bg-gradient-to-r from-[#072d54]/85 via-[#052342]/90 to-[#041a33]/95 p-6 shadow-2xl backdrop-blur-xl sm:p-8 cyber-cut glass-shine">
@@ -857,6 +876,7 @@ export function HomePage() {
       </section>
 
       {/* --- 14. FOOTER --- */}
+      <PolicyCenterSection />
       <SiteFooter />
 
       {/* --- 15. MOBILE DRAWER & MOBILE BOTTOM DOCK --- */}

@@ -1,9 +1,10 @@
 import { policyGroups } from './content';
+import { sitePath } from '@/lib/site-path';
 import { Section3DAccent } from '@/components/visual/section-3d-accent';
 
 export function PolicySection() {
   return (
-    <section className="px-4 py-16 sm:px-6 sm:py-24">
+    <section id="service-rules" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
       <div className="status-panel mx-auto max-w-6xl rounded-lg border border-cyan-300/15 bg-slate-950/70 p-6 backdrop-blur sm:p-8">
         <div className="relative z-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end">
           <div className="max-w-3xl">
@@ -13,6 +14,9 @@ export function PolicySection() {
               Nội dung dưới đây được cập nhật trực tiếp theo thông báo mới nhất, tập trung vào giá,
               slot, trạng thái gói, tùy chọn nâng cấp và lưu ý riêng cho NODE TEST miễn phí.
             </p>
+            <a href={sitePath('/#policies')} className="mt-4 inline-flex text-sm font-semibold text-cyan-200 underline-offset-4 hover:underline">
+              Xem đầy đủ điều khoản, SLA và chính sách bảo mật →
+            </a>
           </div>
           <Section3DAccent variant="legal" size="compact" />
         </div>

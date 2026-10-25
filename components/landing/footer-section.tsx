@@ -1,5 +1,6 @@
 import { siteConfig } from './content';
 import { sitePath } from '@/lib/site-path';
+import { PolicyLinks } from '@/components/legal/policy-links';
 
 export function FooterSection() {
   return (
@@ -14,15 +15,7 @@ export function FooterSection() {
         </div>
 
         <div className="flex flex-wrap gap-x-4 gap-y-1">
-          <a href={sitePath('/terms')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
-            Điều khoản
-          </a>
-          <a href={sitePath('/privacy')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
-            Quyền riêng tư
-          </a>
-          <a href={sitePath('/sla')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
-            SLA
-          </a>
+          <PolicyLinks />
           <a href={sitePath('/partner')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Partner
           </a>

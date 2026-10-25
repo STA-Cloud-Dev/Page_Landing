@@ -3,9 +3,9 @@ import { HomePage } from '@/components/home/homepage';
 import { sitePath } from '@/lib/site-path';
 
 export const metadata: Metadata = {
-  title: 'Free Hosting Bot Discord, Web & Project Sinh Viên | STACloud',
+  title: 'Cloud VPS, Game Server & Free Hosting tại Việt Nam | STACloud',
   description:
-    'Node Test STACloud Free Forever cho bot Discord, web nhỏ và project sinh viên: 75% CPU, 2 GB RAM và 0 Credit mỗi lần tạo plan.',
+    'STACloud cung cấp Cloud VPS, Game Server và gói Node Test miễn phí cho bot Discord, website, project sinh viên. Khám phá cấu hình và nhận tư vấn triển khai.',
   alternates: { canonical: sitePath('/') },
   keywords: [
     'free hosting bot discord',
@@ -13,11 +13,14 @@ export const metadata: Metadata = {
     'free hosting project nhỏ',
     'Node Test miễn phí',
     'hosting miễn phí Việt Nam',
+    'VPS Singapore',
+    'game server hosting',
+    'Cloud VPS STACloud',
     'STACloud',
   ],
   openGraph: {
-    title: 'Node Test 100% Free | STACloud',
-    description: 'Free host bot Discord, web nhỏ và project sinh viên với 75% CPU, 2 GB RAM.',
+    title: 'Cloud VPS, Game Server & Node Test Free | STACloud',
+    description: 'Triển khai VPS, game server, bot Discord và website trên STACloud. Có gói Node Test miễn phí cho nhu cầu trải nghiệm.',
     url: sitePath('/'),
     type: 'website',
   },
@@ -34,7 +37,6 @@ const freeHostingSchema = {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'VND',
-    availability: 'https://schema.org/InStock',
     url: 'https://stacloud.eu.cc/#free-hosting',
   },
 };

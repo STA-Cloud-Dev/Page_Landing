@@ -176,7 +176,7 @@ export const servicePlans = [
 export const locations = [
   {
     name: 'Singapore',
-    flagSrc: sitePath('/flags/singapore.svg'),
+    flagSrc: sitePath('/flags/singapore.svg?v=20261024-2'),
     speed: '10 Gbps',
     description:
       'OVH Singapore dành cho gói miễn phí và trả phí, phù hợp game server, web app, bot và VPS Xeon/EPYC.',
@@ -184,7 +184,7 @@ export const locations = [
   },
   {
     name: 'Hong Kong',
-    flagSrc: sitePath('/flags/hong-kong.svg'),
+    flagSrc: sitePath('/flags/hong-kong.svg?v=20261024-2'),
     speed: '30 Gbps',
     description:
       'Proxy Hong Kong chỉ dành cho gói trả phí và hiện tạm ngưng do hết slot. Theo dõi Discord để nhận thông báo khi có slot mới.',
@@ -192,7 +192,7 @@ export const locations = [
   },
   {
     name: 'Thailand',
-    flagSrc: sitePath('/flags/thailand.svg'),
+    flagSrc: sitePath('/flags/thailand.svg?v=20261024-2'),
     speed: '30 Gbps',
     description:
       'Proxy Thailand hỗ trợ gói miễn phí và trả phí, phù hợp nhu cầu proxy hoặc kết nối trong khu vực Đông Nam Á.',
@@ -200,7 +200,7 @@ export const locations = [
   },
   {
     name: 'Việt Nam',
-    flagSrc: sitePath('/flags/vietnam.svg'),
+    flagSrc: sitePath('/flags/vietnam.svg?v=20261024-2'),
     speed: '1 Gbps',
     description:
       'Location Việt Nam dành cho dịch vụ trả phí, có độ trễ thấp cho người dùng trong nước.',

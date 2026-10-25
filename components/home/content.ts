@@ -18,7 +18,7 @@ export const homeConfig = {
 export const heroStats = [
   { value: '17', label: 'Gói dịch vụ đang công bố', tone: 'cyan' },
   { value: '8', label: 'Gói Linux Egg & Dev', tone: 'sky' },
-  { value: '10 Gbps', label: 'Anti-DDoS OVH Network', tone: 'emerald' },
+  { value: 'L3/L4', label: 'Bảo vệ mạng OVH', tone: 'emerald' },
   { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
 ] as const;
 

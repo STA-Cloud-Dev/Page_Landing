@@ -1,6 +1,8 @@
 'use client';
 
-import React from 'react';
+import { Home, Tags, LayoutDashboard, Blocks, MessageCircle } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { sitePath } from '@/lib/site-path';
 
 interface MobileDockProps {
   panelUrl: string;
@@ -9,61 +11,25 @@ interface MobileDockProps {
   messengerUrl: string;
 }
 
-export function MobileDock({ panelUrl, discordUrl, zaloUrl, messengerUrl }: MobileDockProps) {
-  return (
-    <aside aria-label="Lối tắt di động" className="fixed bottom-3 inset-x-3 z-40 block lg:hidden">
-      <div className="mx-auto flex max-w-md items-center justify-between gap-1.5 rounded-2xl border border-cyan-300/35 bg-[#06335a]/92 px-3 py-2 shadow-[0_10px_35px_rgba(0,119,182,0.5)] backdrop-blur-xl">
-        {/* Quick Free Hosting */}
-        <a
-          href="#free-hosting"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-emerald-100 transition hover:text-white active:scale-95"
-        >
-          <span className="text-base font-black">0đ</span>
-          <span className="text-[10px] font-bold">Node Test</span>
-        </a>
+export function MobileDock({ panelUrl, discordUrl }: MobileDockProps) {
+  const pathname = usePathname();
+  const items = [
+    { label: 'Trang chủ', href: sitePath('/'), icon: Home, active: pathname === '/' },
+    { label: 'Bảng giá', href: sitePath('/#plans'), icon: Tags },
+    { label: 'Portal', href: panelUrl, icon: LayoutDashboard, external: true, primary: true },
+    { label: 'Templates', href: sitePath('/egg'), icon: Blocks, active: pathname === '/egg' },
+    { label: 'Hỗ trợ', href: discordUrl, icon: MessageCircle, external: true },
+  ];
 
-        {/* Quick Plans */}
-        <a
-          href="#plans"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-sky-100 transition hover:text-cyan-200 active:scale-95"
-        >
-          <span className="text-base">⚡</span>
-          <span className="text-[10px] font-bold">Bảng Giá</span>
+  return <nav aria-label="Lối tắt di động" className="mobile-dock fixed inset-x-3 z-40 lg:hidden">
+    <div className="mx-auto grid max-w-lg grid-cols-5 gap-1 rounded-xl border border-cyan-300/30 bg-[#06243d] p-2 shadow-lg">
+      {items.map(({ label, href, icon: Icon, active, primary, external }) => (
+        <a key={label} href={href} aria-current={active ? 'page' : undefined}
+          target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}
+          className={`flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[11px] font-semibold md:min-h-11 ${primary ? 'bg-cyan-300 text-[#031c34]' : active ? 'bg-white/10 text-cyan-200' : 'text-sky-100 hover:bg-white/10'}`}>
+          <Icon size={20} aria-hidden="true" />{label}
         </a>
-
-        {/* Center Main CTA: Open Portal */}
-        <a
-          href={panelUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 py-1.5 px-2 text-slate-950 shadow-[0_0_18px_rgba(0,240,255,0.6)] transition active:scale-95"
-        >
-          <span className="text-base font-extrabold">🚀</span>
-          <span className="text-[10px] font-black tracking-tight">Portal</span>
-        </a>
-
-        {/* Quick Chat Zalo */}
-        <a
-          href={zaloUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-sky-100 transition hover:text-cyan-200 active:scale-95"
-        >
-          <span className="text-base">💬</span>
-          <span className="text-[10px] font-bold">Zalo</span>
-        </a>
-
-        {/* Quick Ticket Discord */}
-        <a
-          href={discordUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1 text-sky-100 transition hover:text-cyan-200 active:scale-95"
-        >
-          <span className="text-base">🎫</span>
-          <span className="text-[10px] font-bold">Ticket</span>
-        </a>
-      </div>
-    </aside>
-  );
+      ))}
+    </div>
+  </nav>;
 }

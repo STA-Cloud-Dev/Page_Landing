@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { PolicyLinks } from '@/components/legal/policy-links';
 import { sitePath } from '@/lib/site-path';
 
 interface MobileDrawerProps {
@@ -20,14 +21,28 @@ export function MobileDrawer({
   zaloUrl,
   messengerUrl,
 }: MobileDrawerProps) {
+  const dialog = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+    const focusables = () => Array.from(dialog.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []);
+    focusables()[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+      if (event.key !== 'Tab') return;
+      const controls = focusables();
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+      previousFocus?.focus();
     };
   }, [isOpen]);
 
@@ -42,7 +57,7 @@ export function MobileDrawer({
       />
 
       {/* Drawer Container (Ocean Blue Theme) */}
-      <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xs flex-col border-l border-cyan-300/30 bg-[#06335a]/95 p-6 shadow-2xl backdrop-blur-2xl transition-all duration-300">
+      <div ref={dialog} role="dialog" aria-modal="true" aria-label="Menu điều hướng" className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto border-l border-cyan-300/30 bg-[#06335a] p-5 shadow-2xl">
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-cyan-300/20 pb-5">
           <div className="flex items-center gap-3">
@@ -77,7 +92,7 @@ export function MobileDrawer({
           </p>
 
           <a
-            href="#free-hosting"
+            href={sitePath('/#free-hosting')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg bg-emerald-400/10 px-3 py-2.5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/20 hover:text-white"
           >
@@ -86,7 +101,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#plans"
+            href={sitePath('/#plans')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -95,7 +110,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#benefits"
+            href={sitePath('/#benefits')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -113,7 +128,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#openclaw"
+            href={sitePath('/#openclaw')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -122,7 +137,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#network"
+            href={sitePath('/#network')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -131,7 +146,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href="#faq"
+            href={sitePath('/#faq')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -140,21 +155,16 @@ export function MobileDrawer({
           </a>
 
           <div className="pt-4 border-t border-cyan-300/20">
+            <a href={sitePath('/#policies')} onClick={onClose} className="mb-3 flex min-h-11 items-center rounded-lg bg-cyan-400/10 px-3 text-sm font-semibold text-cyan-100 hover:bg-cyan-400/20">
+              Chính sách &amp; điều khoản dịch vụ
+            </a>
             <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-cyan-300">
               Pháp Lý & Hợp Tác
             </p>
             <div className="mt-2 grid grid-cols-2 gap-1.5 text-xs text-sky-200">
+              <div className="col-span-2" onClick={onClose}><PolicyLinks /></div>
               <a href={sitePath('/partner')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
                 Partner 20%
-              </a>
-              <a href={sitePath('/sla')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
-                Cam kết SLA
-              </a>
-              <a href={sitePath('/terms')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
-                Điều khoản
-              </a>
-              <a href={sitePath('/privacy')} onClick={onClose} className="rounded px-3 py-1.5 hover:text-white">
-                Bảo mật
               </a>
             </div>
           </div>

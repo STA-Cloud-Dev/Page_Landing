@@ -11,8 +11,8 @@ export type LegalSection = {
   subsections?: LegalSubsection[];
 };
 
-export const legalLastUpdated = '19/09/2026';
-export const slaLastUpdated = '19/09/2026';
+export const legalLastUpdated = '24/10/2026';
+export const slaLastUpdated = '24/10/2026';
 export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
@@ -20,7 +20,7 @@ export const termsSections: LegalSection[] = [
     title: '1. Thanh toán',
     bullets: [
       'Dịch vụ sẽ được kích hoạt sau khi chúng tôi nhận đủ thanh toán của bạn.',
-      'Chúng tôi không hỗ trợ hoàn tiền, vì vậy vui lòng cân nhắc kỹ trước khi mua.',
+      'Chính sách thanh toán và hoàn trả được quy định tại /refund. STACloud không hỗ trợ hoàn tiền mặt về ngân hàng hoặc ví điện tử; khoản hoàn trả hợp lệ được cộng vào số dư Credit Portal, trừ trường hợp pháp luật bắt buộc khác.',
       'Chúng tôi có thể giới hạn hoặc tạm ngưng dịch vụ miễn phí hoặc trả phí nếu phát hiện hành vi lạm dụng.',
     ],
   },
@@ -196,8 +196,8 @@ export const privacySections: LegalSection[] = [
   {
     title: '6. Cookie và công nghệ tương tự',
     bullets: [
-      'Chúng tôi có thể sử dụng cookie, local storage hoặc công nghệ tương tự để duy trì phiên đăng nhập, ghi nhớ tùy chọn và cải thiện trải nghiệm website hoặc portal.',
-      'Chúng tôi cũng có thể thu thập thông tin sử dụng để chẩn đoán lỗi, tối ưu hiệu năng và phát hiện hành vi lạm dụng.',
+      'Chi tiết cookie thiết yếu, an ninh, phân tích và cách kiểm soát được công bố tại /cookies. Bộ lọc trên website công khai hiện dùng bộ nhớ trang, không dùng cookie để ghi nhớ lựa chọn.',
+      'Quyền truy cập nội dung máy chủ để hỗ trợ, ứng phó sự cố hoặc đáp ứng yêu cầu hợp lệ được giới hạn theo /security. STACloud không chủ động thu thập nội dung mã nguồn và cơ sở dữ liệu bên trong máy chủ cho hoạt động tiếp thị.',
     ],
   },
   {
@@ -303,7 +303,7 @@ export const slaSections: LegalSection[] = [
   {
     title: '6. Service credit',
     paragraphs: [
-      'Nếu vi phạm SLA được xác nhận, STACloud có thể cấp service credit dưới dạng gia hạn chu kỳ hoặc cộng credit nội bộ, không quy đổi thành tiền mặt.',
+      'Nếu vi phạm SLA được xác nhận, khoản service credit được cộng vào số dư Credit của tài khoản Portal đã thanh toán, theo quy trình xác minh tại /refund; không quy đổi thành tiền mặt, trừ trường hợp pháp luật bắt buộc khác.',
     ],
     bullets: [
       'Uptime từ 98.0% đến dưới 99.0%: service credit 10% giá trị chu kỳ hiện tại.',
