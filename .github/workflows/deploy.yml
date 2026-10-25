@@ -38,6 +38,16 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
+      - name: Prepare static Pages artifact
+        shell: bash
+        run: |
+          # GitHub Pages/Jekyll must not discard the Next.js _next directory.
+          touch out/.nojekyll
+          test -s out/index.html
+          test -n "$(find out/_next/static -type f -name '*.css' -print -quit)"
+          test -n "$(find out/_next/static -type f -name '*.js' -print -quit)"
+          test -f out/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
