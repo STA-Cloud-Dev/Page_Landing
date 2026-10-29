@@ -277,7 +277,7 @@ function EggItemRow({
 }) {
   if (item.variants?.length) {
     return (
-      <div className="rounded-xl border border-cyan-300/15 bg-black/35 p-3.5 sm:p-4">
+      <div className="egg-item rounded-xl border border-cyan-300/15 bg-black/35 p-3.5 sm:p-4">
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex min-w-0 items-center gap-3">
             <EggIcon name={item.name} group={group} />
@@ -307,7 +307,7 @@ function EggItemRow({
   }
 
   return (
-    <div className="rounded-xl border border-cyan-300/15 bg-black/35 px-4 py-3 flex items-center justify-between gap-3">
+    <div className="egg-item rounded-xl border border-cyan-300/15 bg-black/35 px-4 py-3 flex items-center justify-between gap-3">
       <div className="flex min-w-0 items-center gap-3">
         <EggIcon name={item.name} group={group} />
         <p className="text-sm font-bold text-white">{item.name}</p>

@@ -1,13 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 /** A projected point sculpture: no WebGL runtime or downloaded 3D assets. */
 export function ParticleCloud({ lost = false }: { lost?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pausedRef = useRef(false);
-  const redrawRef = useRef<(() => void) | null>(null);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,16 +14,16 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const small = window.matchMedia('(max-width: 640px)').matches;
     const count = small ? 1050 : 2300;
-    // A torus knot gives the cloud a continuous, sculptural silhouette.
+    // Two Fibonacci shells form a luminous compute core with visible depth.
     let points = Array.from({ length: count }, (_, i) => {
-      const u = (i / count) * Math.PI * 2;
-      const v = i * 2.3999632297;
-      const tube = 0.2 + 0.05 * Math.sin(u * 9);
-      const radius = 0.84 + 0.3 * Math.cos(3 * u);
+      const y = 1 - 2 * i / (count - 1);
+      const angle = i * 2.3999632297;
+      const radius = i % 4 === 0 ? 0.76 : 1;
+      const ring = Math.sqrt(1 - y * y) * radius;
       return {
-        x: (radius + tube * Math.cos(v)) * Math.cos(2 * u),
-        y: (radius + tube * Math.cos(v)) * Math.sin(2 * u),
-        z: 0.38 * Math.sin(3 * u) + tube * Math.sin(v),
+        x: ring * Math.cos(angle),
+        y: y * radius,
+        z: ring * Math.sin(angle),
         size: 0.6 + (i % 7) / 8,
       };
     });
@@ -57,6 +54,7 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     let visible = true, disposed = false;
     let pointerX = 0, pointerY = 0, tiltX = 0, tiltY = 0;
     let pointerActive = false;
+    let pointerSpeed = 0;
     // Screen-space spring offsets stay attached to each particle as the cloud turns.
     const offsets = new Float32Array(count * 4);
     const resize = () => {
@@ -70,11 +68,12 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     const draw = (time: number) => {
       frame = 0;
       if (disposed) return;
-      const moving = !motion.matches && !pausedRef.current;
+      const moving = lost || !motion.matches;
       const delta = lastTime ? Math.min(time - lastTime, 50) : 16.667;
       if (moving && lastTime) elapsed += delta;
       lastTime = time;
-      if (motion.matches) { tiltX = 0; tiltY = 0; offsets.fill(0); }
+      if (motion.matches && !lost) { tiltX = 0; tiltY = 0; offsets.fill(0); }
+      pointerSpeed *= Math.pow(.9, delta / 16.667);
       if (moving) {
         const ease = 1 - Math.pow(0.955, delta / 16.667);
         tiltX += (pointerX - tiltX) * ease;
@@ -101,16 +100,17 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
         if (moving) {
           const dx = screenX - cursorX, dy = screenY - cursorY;
           const distance = Math.hypot(dx, dy);
-          const force = pointerActive ? Math.pow(Math.max(0, 1 - distance / radius), 2) * radius * 0.95 : 0;
+          const force = pointerActive ? Math.pow(Math.max(0, 1 - distance / radius), 2) * radius * (.95 + pointerSpeed) : 0;
           const targetX = (distance > 0.01 ? dx / distance : Math.cos(i)) * force;
           const targetY = (distance > 0.01 ? dy / distance : Math.sin(i)) * force;
           // Small substeps keep the spring stable on slower devices and high refresh displays.
           const steps = Math.ceil(delta / 16.667);
           const step = delta / (16.667 * steps);
-          const damping = Math.pow(0.74, step);
+          const damping = Math.pow(lost ? 0.85 : 0.74, step);
+          const stiffness = lost ? 0.04 : 0.09;
           for (let n = 0; n < steps; n++) {
-            offsets[offset + 2] = (offsets[offset + 2] + (targetX - offsets[offset]) * 0.09 * step) * damping;
-            offsets[offset + 3] = (offsets[offset + 3] + (targetY - offsets[offset + 1]) * 0.09 * step) * damping;
+            offsets[offset + 2] = (offsets[offset + 2] + (targetX - offsets[offset]) * stiffness * step) * damping;
+            offsets[offset + 3] = (offsets[offset + 3] + (targetY - offsets[offset + 1]) * stiffness * step) * damping;
             offsets[offset] += offsets[offset + 2] * step;
             offsets[offset + 1] += offsets[offset + 3] * step;
           }
@@ -128,10 +128,12 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
       if (moving && visible && !document.hidden) frame = requestAnimationFrame(draw);
     };
     const requestDraw = () => { lastTime = 0; if (!frame && visible && !document.hidden) frame = requestAnimationFrame(draw); };
-    redrawRef.current = requestDraw;
     const move = (event: PointerEvent) => {
-      if (motion.matches || pausedRef.current || event.pointerType !== 'mouse') return;
+      if ((!lost && motion.matches) || event.pointerType !== 'mouse') return;
       const rect = canvas.getBoundingClientRect();
+      const nextX = (event.clientX - rect.left) / rect.width - 0.5;
+      const nextY = (event.clientY - rect.top) / rect.height - 0.5;
+      pointerSpeed = Math.min(.75, Math.hypot(nextX - pointerX, nextY - pointerY) * 8);
       pointerX = (event.clientX - rect.left) / rect.width - 0.5;
       pointerY = (event.clientY - rect.top) / rect.height - 0.5;
       pointerActive = true;
@@ -152,7 +154,6 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     resize(); requestDraw();
     return () => {
       disposed = true; cancelAnimationFrame(frame);
-      redrawRef.current = null;
       observer.disconnect(); intersection.disconnect();
       canvas.removeEventListener('pointermove', move);
       canvas.removeEventListener('pointerleave', leave);
@@ -161,22 +162,13 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     };
   }, [lost]);
 
-  useEffect(() => {
-    pausedRef.current = paused;
-    // Resume the same sculpture and rotation instead of rebuilding it from scratch.
-    if (!paused) redrawRef.current?.();
-  }, [paused]);
-
   return (
     <div className={`particle-sculpture${lost ? ' particle-sculpture-lost' : ''}`}>
       <div className="sculpture-halo" aria-hidden="true" />
       <div className="sculpture-orbit" aria-hidden="true" />
       <canvas ref={canvasRef} aria-hidden="true" />
-      <span className="sculpture-coordinate sculpture-coordinate-top" aria-hidden="true">STA / COMPUTE FIELD</span>
-      <span className="sculpture-coordinate sculpture-coordinate-bottom" aria-hidden="true">{lost ? 'SIGNAL LOST · 404' : '10.8231° N / 106.6297° E'}</span>
-      <button className="sculpture-pause" type="button" aria-pressed={paused} onClick={() => setPaused(!paused)} aria-label={paused ? 'Tiếp tục hiệu ứng 3D' : 'Tạm dừng hiệu ứng 3D'}>
-        {paused ? '▶' : 'Ⅱ'}<span>{paused ? 'Tiếp tục' : 'Dừng chuyển động'}</span>
-      </button>
+      {!lost && <><span className="sculpture-coordinate sculpture-coordinate-top" aria-hidden="true">STA / COMPUTE FIELD</span>
+      <span className="sculpture-coordinate sculpture-coordinate-bottom" aria-hidden="true">10.8231° N / 106.6297° E</span></>}
     </div>
   );
 }

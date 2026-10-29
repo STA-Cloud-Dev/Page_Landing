@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { ParticleCloud } from '@/components/visual/particle-cloud';
 import { homeConfig } from './content';
+import { ContactLinks } from '@/components/shared/contact-links';
 
 export function ImmersiveHero() {
   return (
@@ -16,15 +17,19 @@ export function ImmersiveHero() {
             <a className="cosmic-text-link" href={homeConfig.panelUrl} target="_blank" rel="noopener noreferrer">Mở Control Portal <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
           <a className="hero-community-link" href="#free-hosting"><span>CHO CỘNG ĐỒNG</span> Khởi đầu miễn phí với Node Test <ArrowUpRight size={14} aria-hidden="true" /></a>
+          <ContactLinks />
         </div>
-        <div className="hero-sculpture-wrap"><ParticleCloud /></div>
+        <div className="hero-sculpture-wrap">
+          <div className="hero-core-ring hero-core-ring-one" aria-hidden="true" />
+          <div className="hero-core-ring hero-core-ring-two" aria-hidden="true" />
+          <ParticleCloud />
+          <span className="core-label core-label-top" aria-hidden="true">01 / COMPUTE</span>
+          <span className="core-label core-label-bottom" aria-hidden="true">02 / CONNECT</span>
+        </div>
         <div className="hero-bottom-rail">
           <a href="#free-hosting" className="hero-scroll-cue"><ArrowDown size={17} aria-hidden="true" /> Cuộn để khám phá</a>
           <div className="hero-rail-detail"><span>01 — INFRASTRUCTURE, REIMAGINED</span><span>VIỆT NAM ↗ SINGAPORE</span></div>
         </div>
-      </div>
-      <div className="hero-service-rail" aria-label="Dịch vụ STACloud">
-        <span>CLOUD VPS</span><span aria-hidden="true">✳</span><span>GAME SERVERS</span><span aria-hidden="true">✳</span><span>COMMUNITY HOSTING</span><span aria-hidden="true">✳</span><span>BUILD. DEPLOY. GROW.</span>
       </div>
     </section>
   );

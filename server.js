@@ -86,7 +86,7 @@ function ensureProductionBuild() {
   const policyPages = ['terms', 'privacy', 'sla', 'refund', 'security', 'cookies'];
   const buildTime = fs.existsSync(indexPath) ? fs.statSync(indexPath).mtimeMs : 0;
   const needsBuild = !buildTime ||
-    policyPages.some((page) => !fs.existsSync(path.join(publicRoot, `${page}.html`))) ||
+    policyPages.some((page) => !fs.existsSync(path.join(publicRoot, `${page}.html`)) && !fs.existsSync(path.join(publicRoot, page, 'index.html'))) ||
     hasNewerSourceThan(buildTime) ||
     (Boolean(currentCommit) && currentCommit !== builtCommit);
 

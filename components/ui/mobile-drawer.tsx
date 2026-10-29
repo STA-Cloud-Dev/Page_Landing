@@ -87,6 +87,7 @@ export function MobileDrawer({
 
         {/* Navigation Links */}
         <div className="mt-6 flex-1 overflow-y-auto space-y-1.5">
+          <a href={messengerUrl} target="_blank" rel="noopener noreferrer" onClick={onClose} className="mb-5 flex min-h-12 items-center justify-center rounded-xl border border-indigo-300/50 bg-indigo-400/20 px-4 text-sm font-bold text-white">Chat nhanh qua Messenger ↗</a>
           <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-cyan-300">
             Điều Hướng
           </p>

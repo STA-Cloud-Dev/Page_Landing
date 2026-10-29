@@ -14,16 +14,18 @@ const terminalLines = [
 
 export function CyberTerminal() {
   const [displayedIndex, setDisplayedIndex] = useState(0);
+  const [characters, setCharacters] = useState(0);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (displayedIndex < terminalLines.length) {
       const timer = setTimeout(() => {
-        setDisplayedIndex((prev) => prev + 1);
-      }, 700);
+        if (characters < terminalLines[displayedIndex].text.length) setCharacters(value => value + 3);
+        else { setDisplayedIndex(value => value + 1); setCharacters(0); }
+      }, characters < terminalLines[displayedIndex].text.length ? 28 : 350);
       return () => clearTimeout(timer);
     }
-  }, [displayedIndex]);
+  }, [displayedIndex, characters]);
 
   const handleCopyCommand = () => {
     navigator.clipboard.writeText('curl -sSL https://portal.stacloud.eu.cc/openclaw/deploy.sh | bash');
@@ -39,7 +41,7 @@ export function CyberTerminal() {
           <div className="h-3 w-3 rounded-full bg-rose-500/80" />
           <div className="h-3 w-3 rounded-full bg-amber-500/80" />
           <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
-          <span className="ml-2 font-mono text-xs text-slate-400">stacloud-terminal@openclaw-node</span>
+          <span className="ml-2 font-mono text-[10px] text-slate-400 sm:text-xs">OpenClaw · Console mô phỏng</span>
         </div>
         <button
           onClick={handleCopyCommand}
@@ -72,6 +74,7 @@ export function CyberTerminal() {
         ))}
         {displayedIndex < terminalLines.length ? (
           <div className="flex items-center gap-1 text-cyan-400">
+            <span className="break-all">{terminalLines[displayedIndex].text.slice(0, characters)}</span>
             <span className="inline-block h-4 w-2 animate-pulse bg-cyan-400" />
           </div>
         ) : (

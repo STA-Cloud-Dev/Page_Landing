@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Tags, LayoutDashboard, Blocks, MessageCircle } from 'lucide-react';
+import { Home, Tags, LayoutDashboard, Ticket, MessageCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { sitePath } from '@/lib/site-path';
 
@@ -11,14 +11,14 @@ interface MobileDockProps {
   messengerUrl: string;
 }
 
-export function MobileDock({ panelUrl, discordUrl }: MobileDockProps) {
+export function MobileDock({ panelUrl, discordUrl, zaloUrl }: MobileDockProps) {
   const pathname = usePathname();
   const items = [
     { label: 'Trang chủ', href: sitePath('/'), icon: Home, active: pathname === '/' },
     { label: 'Bảng giá', href: sitePath('/#plans'), icon: Tags },
     { label: 'Portal', href: panelUrl, icon: LayoutDashboard, external: true, primary: true },
-    { label: 'Templates', href: sitePath('/egg'), icon: Blocks, active: pathname === '/egg' },
-    { label: 'Hỗ trợ', href: discordUrl, icon: MessageCircle, external: true },
+    { label: 'Zalo', href: zaloUrl, icon: MessageCircle, external: true },
+    { label: 'Ticket', href: discordUrl, icon: Ticket, external: true },
   ];
 
   return <nav aria-label="Lối tắt di động" className="mobile-dock fixed inset-x-3 z-40 lg:hidden">

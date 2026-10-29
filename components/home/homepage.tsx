@@ -10,7 +10,10 @@ import {
   homeQuickSteps,
 } from './content';
 import { ImmersiveHero } from './immersive-hero';
-
+import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
+import { LandingDepthEffects } from '@/components/visual/landing-depth-effects';
+import { AmbientParticles } from '@/components/visual/ambient-particles';
+import { ContactLinks } from '@/components/shared/contact-links';
 import { LazyNetworkMap } from '@/components/visual/lazy-network-map';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { CyberTerminal } from '@/components/ui/cyber-terminal';
@@ -26,8 +29,6 @@ const featuredTiers = [
   { id: 'dev-1', eyebrow: '02 / Bot & ứng dụng web', title: 'Phát triển mỗi ngày', action: 'Chọn gói Dev 1', emphasis: true },
   { id: 'sta-epyc-01', eyebrow: '03 / VPS hiệu năng cao', title: 'Sẵn sàng mở rộng', action: 'Tư vấn VPS EPYC', emphasis: false },
 ] as const;
-
-const infrastructureTechnologies = ['OVHcloud', 'AMD EPYC', 'Intel Xeon', 'Cloudflare', 'Docker', 'Ubuntu'] as const;
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -121,6 +122,7 @@ function NodeTestLaunch() {
             >
               <span>🎫 Tạo Ticket Đăng Ký NODE TEST Ngay</span>
             </a>
+            <a href={homeConfig.zaloUrl} target="_blank" rel="noopener noreferrer" className="btn-cyber-outline mt-3 min-h-11 rounded-xl px-5 py-3 text-center text-xs">Hỏi cài đặt qua Zalo</a>
           </div>
         </div>
       </div>
@@ -233,7 +235,7 @@ export function HomePage() {
               rel="noopener noreferrer"
               className="hidden items-center justify-center rounded-xl border border-sky-300/40 bg-sky-500/20 px-3.5 py-2 text-xs font-bold text-sky-100 transition hover:bg-sky-500/35 lg:inline-flex"
             >
-              Discord
+              Ticket Discord
             </a>
 
             {/* Mobile Hamburger Button */}
@@ -252,22 +254,11 @@ export function HomePage() {
       </header>
 
       <ImmersiveHero />
+      <AmbientParticles />
 
-      <section aria-label="Công nghệ và hạ tầng" className="px-4 pb-8 sm:px-6">
-        <div className="mx-auto max-w-7xl rounded-2xl border border-white/10 bg-[#020d1e]/80 px-5 py-5 sm:px-7">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="shrink-0">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Nền tảng công nghệ</p>
-              <p className="mt-1 text-xs text-sky-200/80">Hệ sinh thái hạ tầng & công cụ được giới thiệu</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-x-8">
-              {infrastructureTechnologies.map((name) => (
-                <span key={name} className="text-sm font-extrabold tracking-tight text-slate-200/90 sm:text-base">{name}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="landing-depth-content">
+        <CyberBackgroundDecor />
+        <LandingDepthEffects />
 
       {/* --- 3. NODE TEST FREE LAUNCHPAD --- */}
       <NodeTestLaunch />
@@ -327,7 +318,7 @@ export function HomePage() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {homeBenefits.map((b, idx) => (
-              <div
+              <TiltCard
                 key={idx}
                 className="glass-card-bright rounded-2xl p-5 shadow-xl flex flex-col justify-between"
               >
@@ -339,7 +330,7 @@ export function HomePage() {
                 <div className="mt-4 pt-3 border-t border-cyan-300/15 text-[11px] font-mono text-cyan-300">
                   STACloud Verified
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -374,7 +365,7 @@ export function HomePage() {
               const plan = allServicePlans.find((item) => item.id === tier.id);
               if (!plan) return null;
               return (
-                <article key={tier.id} className={`relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 shadow-2xl sm:p-7 ${tier.emphasis
+                <TiltCard key={tier.id} className={`depth-plan-card ${tier.emphasis || tier.id === 'sta-epyc-01' ? 'border-beam' : ''} relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 shadow-2xl sm:p-7 ${tier.emphasis
                   ? 'border-cyan-300 bg-gradient-to-b from-[#114a74] to-[#042343] shadow-[0_0_45px_rgba(34,211,238,0.24)] lg:-translate-y-2'
                   : 'border-sky-200/20 bg-[#06182b] shadow-black/25'}`}>
                   {tier.emphasis && <span className="absolute right-0 top-0 rounded-bl-xl bg-cyan-300 px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#031b32]">Đề xuất bắt đầu</span>}
@@ -396,7 +387,7 @@ export function HomePage() {
                     {tier.action}
                   </a>
                   <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.status === 'preorder' ? 'Đặt trước • Tư vấn slot qua Discord' : 'Xác nhận tình trạng slot qua Discord'}</p>
-                </article>
+                </TiltCard>
               );
             })}
           </div>
@@ -487,7 +478,7 @@ export function HomePage() {
               return (
                 <TiltCard
                   key={plan.id}
-                  className="glass-card-bright flex flex-col justify-between rounded-3xl p-6 shadow-xl"
+                  className={`glass-card-bright flex flex-col justify-between rounded-3xl p-6 shadow-xl ${plan.category === 'vps' || plan.category === 'game' ? 'border-beam' : ''}`}
                 >
                   <div>
                     {/* Header: Title & Status */}
@@ -708,7 +699,7 @@ export function HomePage() {
 
           <div className="grid gap-4 md:grid-cols-3">
             {homeQuickSteps.map((stepItem) => (
-              <div
+              <TiltCard
                 key={stepItem.step}
                 className="glass-card-bright rounded-2xl p-6 shadow-xl relative"
               >
@@ -720,7 +711,7 @@ export function HomePage() {
                 </span>
                 <h3 className="text-lg font-bold text-white">{stepItem.title}</h3>
                 <p className="mt-2 text-xs leading-relaxed text-sky-100/80">{stepItem.description}</p>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -779,10 +770,13 @@ export function HomePage() {
               return (
                 <div
                   key={idx}
-                  className="glass-card-bright overflow-hidden rounded-2xl transition-all"
+                  className={`faq-item glass-card-bright overflow-hidden rounded-2xl ${isOpen ? 'faq-open' : ''}`}
                 >
                   <button
                     type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
+                    id={`faq-question-${idx}`}
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                     className="flex w-full items-center justify-between p-4 text-left font-semibold text-white sm:p-5 hover:text-cyan-200 transition"
                   >
@@ -794,11 +788,11 @@ export function HomePage() {
                     </span>
                   </button>
 
-                  {isOpen && (
-                    <div className="border-t border-cyan-300/20 px-4 pb-5 pt-3 text-xs leading-relaxed text-sky-100 sm:px-5 sm:text-sm">
+                  <div id={`faq-answer-${idx}`} role="region" aria-labelledby={`faq-question-${idx}`} aria-hidden={!isOpen} className="faq-answer">
+                    <div><div className="border-t border-cyan-300/20 px-4 pb-5 pt-3 text-xs leading-relaxed text-sky-100 sm:px-5 sm:text-sm">
                       {item.a}
-                    </div>
-                  )}
+                    </div></div>
+                  </div>
                 </div>
               );
             })}
@@ -809,6 +803,8 @@ export function HomePage() {
       {/* --- 14. FOOTER --- */}
       <PolicyCenterSection />
       <SiteFooter />
+      </div>
+      <ContactLinks floating />
 
       {/* --- 15. MOBILE DRAWER & MOBILE BOTTOM DOCK --- */}
       <MobileDrawer

@@ -706,6 +706,7 @@ export function NetworkMapVector() {
                     />
 
                     {/* Halo ring */}
+                    <circle cx={loc.svgX} cy={loc.svgY} r={isSelected ? 16 : 11} fill="none" stroke={loc.color} strokeWidth={0.7} opacity={0.3} className="animate-ping" style={{ transformOrigin: `${loc.svgX}px ${loc.svgY}px`, animationDuration: '3s', animationDelay: '-1.5s' }} />
                     <circle
                       cx={loc.svgX}
                       cy={loc.svgY}

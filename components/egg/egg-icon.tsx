@@ -17,7 +17,7 @@ export function EggIcon({ name, group, small = false }: { name: string; group: s
 
   return (
     <span
-      className={small ? 'inline-flex h-5 w-5 shrink-0 items-center justify-center' : 'inline-flex h-8 w-8 shrink-0 items-center justify-center'}
+      className={small ? 'egg-icon egg-icon-small inline-flex h-5 w-5 shrink-0 items-center justify-center' : 'egg-icon inline-flex h-10 w-10 shrink-0 items-center justify-center'}
       aria-hidden="true"
     >
       <img
