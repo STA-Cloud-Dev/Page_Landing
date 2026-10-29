@@ -19,6 +19,8 @@ const mimeTypes = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.txt': 'text/plain; charset=utf-8',
+  '.ttf': 'font/ttf',
+  '.woff2': 'font/woff2',
   '.webp': 'image/webp',
   '.xml': 'application/xml; charset=utf-8',
 };
@@ -219,14 +221,19 @@ const server = http.createServer((request, response) => {
     return;
   }
 
-  const filePath = findFile(safePath) || path.join(publicRoot, '_not-found.html');
-  if (filePath.endsWith('_not-found.html') && !fs.existsSync(filePath)) {
+  const matchedFile = findFile(safePath);
+  const notFoundFiles = ['404.html', path.join('_not-found', 'index.html'), '_not-found.html'];
+  const fallbackFile = notFoundFiles.map((file) => path.join(publicRoot, file)).find((file) => fs.existsSync(file));
+  const filePath = matchedFile || fallbackFile;
+  if (!filePath) {
     response.writeHead(404, { ...securityHeaders, 'Content-Type': 'text/plain; charset=utf-8' });
     response.end('Not Found');
     return;
   }
 
-  sendFile(request, response, filePath, filePath.endsWith('_not-found.html') ? 404 : 200);
+  const isNotFound = !matchedFile || notFoundFiles.some((file) => filePath === path.join(publicRoot, file)) ||
+    filePath === path.join(publicRoot, '404', 'index.html');
+  sendFile(request, response, filePath, isNotFound ? 404 : 200);
 });
 
 server.listen(Number.isNaN(port) ? 3000 : port, '0.0.0.0', () => {

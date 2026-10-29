@@ -1,9 +1,20 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './cosmic.css';
+import localFont from 'next/font/local';
 import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
 import { sitePath } from '@/lib/site-path';
 
 const SITE_URL = 'https://stacloud.eu.cc';
+
+const cosmicFont = localFont({
+  src: [
+    { path: '../public/fonts/be-vietnam-pro-regular.ttf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/be-vietnam-pro-bold.ttf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-cosmic',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -51,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className="dark scroll-smooth">
+    <html lang="vi" className={`dark scroll-smooth ${cosmicFont.variable}`}>
       <body
         className="relative min-h-screen overflow-x-hidden bg-[#031c34] text-slate-100 antialiased"
         suppressHydrationWarning

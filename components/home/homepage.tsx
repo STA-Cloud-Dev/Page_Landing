@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import {
   allServicePlans,
   comprehensiveFaqs,
-  heroStats,
   heroStatusStrip,
   homeConfig,
   homeBenefits,
   homeQuickSteps,
 } from './content';
-import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
-import { CloudConsoleDisplay } from '@/components/visual/cloud-console-display';
+import { ImmersiveHero } from './immersive-hero';
+
 import { LazyNetworkMap } from '@/components/visual/lazy-network-map';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { CyberTerminal } from '@/components/ui/cyber-terminal';
@@ -146,12 +145,10 @@ export function HomePage() {
   });
 
   return (
-    <div className="desktop-readable relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
-      {/* Luminous Cyber Background Layers & Ambient Glow Orbs */}
-      <CyberBackgroundDecor />
+    <div className="cosmic-home desktop-readable relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
 
       {/* --- 1. TOP STICKY FROSTED CYBER NAVBAR --- */}
-      <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
+      <header className="landing-header sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-300/40 bg-[#06294d]/85 px-4 py-2.5 shadow-[0_12px_45px_rgba(0,119,182,0.25)] backdrop-blur-xl sm:px-6 cyber-cut-sm">
           {/* Brand Logo */}
           <a href={sitePath('/')} className="flex items-center gap-3 group">
@@ -254,73 +251,7 @@ export function HomePage() {
         </div>
       </header>
 
-      {/* --- 2. HERO SECTION: GAME SERVER & CLOUD PLATFORM --- */}
-      <section className="relative px-4 pb-10 pt-8 sm:px-6 sm:pb-20 sm:pt-12 lg:pt-14">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center xl:gap-12">
-            {/* Left Copy & Actions */}
-            <Reveal className="space-y-6">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] text-cyan-100 sm:text-xs">
-                <span className="h-2 w-2 rounded-full bg-emerald-300" />
-                Hạ tầng Cloud & Game Hosting • STACloud
-              </div>
-
-              {/* Title & Slogan */}
-              <div className="space-y-3 sm:space-y-4">
-                <h1 className="max-w-3xl text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-                  Cloud VPS & <span className="text-gradient-cyan">Game Server</span> hiệu năng cao.
-                </h1>
-                <p className="max-w-2xl text-sm leading-7 text-sky-100 sm:text-base xl:text-lg xl:leading-8">
-                  Triển khai bot, website, game server và VPS trên hạ tầng Việt Nam & Singapore.
-                  Cấu hình rõ ràng, linh hoạt theo nhu cầu và hỗ trợ qua đội ngũ kỹ thuật.
-                </p>
-              </div>
-
-              {/* CTA Action Buttons */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href={homeConfig.panelUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-cyber-primary rounded-xl px-6 py-3.5 text-sm font-bold shadow-[0_0_30px_rgba(0,180,216,0.4)] text-center"
-                >
-                  <span>Khám phá Control Portal</span>
-                  <svg className="h-4 w-4 ml-2 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-
-                <a
-                  href={homeConfig.discordUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-cyber-outline rounded-xl px-6 py-3.5 text-sm font-bold text-center"
-                >
-                  <span>Tư vấn cấu hình</span>
-                </a>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2.5 border-t border-cyan-100/15 pt-5 sm:gap-4">
-                {[
-                  { value: '99%', label: 'Mục tiêu SLA gói trả phí' },
-                  { value: '0đ', label: 'Node Test miễn phí' },
-                  { value: 'L3/L4', label: 'Bảo vệ mạng tại OVH' },
-                ].map((stat) => (
-                  <div key={stat.value} className="min-w-0 border-l-2 border-cyan-300/50 pl-3 sm:pl-4">
-                    <p className="text-xl font-black text-white sm:text-3xl">{stat.value}</p>
-                    <p className="mt-1 text-[10px] leading-snug text-sky-200 sm:text-xs">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-
-            {/* Right: Cloud Console Display */}
-            <Reveal className="relative flex flex-col items-center justify-center">
-              <CloudConsoleDisplay stats={heroStats} />
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <ImmersiveHero />
 
       <section aria-label="Công nghệ và hạ tầng" className="px-4 pb-8 sm:px-6">
         <div className="mx-auto max-w-7xl rounded-2xl border border-white/10 bg-[#020d1e]/80 px-5 py-5 sm:px-7">

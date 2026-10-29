@@ -1,0 +1,133 @@
+/* STACloud — a quiet, spatial identity around a single point sculpture. */
+:root {
+  --cosmic-night: #030d19;
+  --cosmic-paper: #f0f5f7;
+  --cosmic-dim: #9aafc2;
+  --cosmic-accent: #a6edff;
+  --cosmic-rule: rgba(173, 217, 245, .16);
+}
+
+.cosmic-home, .cosmic-not-found {
+  background: var(--cosmic-night);
+  color: var(--cosmic-paper);
+  font-family: var(--font-cosmic), sans-serif;
+}
+.cosmic-home .landing-header { background: var(--cosmic-night); }
+.cosmic-home .landing-header > div {
+  max-width: 1440px;
+  border: 0;
+  border-bottom: 1px solid var(--cosmic-rule);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  clip-path: none;
+  padding-top: 16px;
+  padding-bottom: 20px;
+}
+.cosmic-home .landing-header nav { background: transparent; border: 0; }
+.cosmic-home .landing-header img { filter: none; }
+.cosmic-home .glass-card-bright, .cosmic-home .glass-card {
+  border-color: var(--cosmic-rule);
+  box-shadow: none;
+  background-color: var(--cosmic-night);
+}
+.immersive-hero { position: relative; isolation: isolate; overflow: hidden; }
+.immersive-hero-inner { max-width: 1440px; margin: auto; padding: 0 48px; position: relative; }
+.hero-fine-grid {
+  position: absolute; inset: 0; z-index: -1; opacity: .45;
+  background-image: linear-gradient(to right, var(--cosmic-rule) 1px, transparent 1px);
+  background-size: 25% 100%;
+  mask-image: linear-gradient(transparent, black 40%, transparent);
+}
+.hero-editorial-copy { position: relative; z-index: 2; padding: 116px 0 108px; max-width: 750px; pointer-events: none; }
+.hero-editorial-copy a { pointer-events: auto; }
+.cosmic-eyebrow { display: flex; align-items: center; gap: 12px; color: var(--cosmic-accent); font-size: 10px; font-weight: 700; letter-spacing: .19em; line-height: 1.8; }
+.cosmic-eyebrow > span { width: 6px; height: 6px; background: var(--cosmic-accent); border-radius: 50%; box-shadow: 0 0 12px var(--cosmic-accent); flex-shrink: 0; }
+.hero-editorial-copy h1 { font-size: clamp(48px, 5.8vw, 84px); letter-spacing: -.075em; font-weight: 400; line-height: 1.22; margin: 28px 0 26px; }
+.hero-editorial-copy h1 em, .lost-copy h1 em { font-style: normal; color: var(--cosmic-accent); }
+.hero-description { color: var(--cosmic-dim); max-width: 415px; font-size: 14px; line-height: 1.95; }
+.cosmic-actions { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 32px; }
+.cosmic-button { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 52px; padding: 14px 24px; font-size: 12px; font-weight: 700; border-radius: 4px; transition: background .2s, transform .2s; }
+.cosmic-button-primary { background: var(--cosmic-accent); color: var(--cosmic-night); }
+.cosmic-button-primary:hover { background: var(--cosmic-paper); transform: translateY(-2px); }
+.cosmic-text-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 12px; color: var(--cosmic-paper); }
+.cosmic-text-link:hover { color: var(--cosmic-accent); }
+.cosmic-home a:focus-visible, .cosmic-not-found a:focus-visible, .sculpture-pause:focus-visible { outline: 2px solid var(--cosmic-accent); outline-offset: 6px; }
+.hero-community-link { display: flex; align-items: center; flex-wrap: wrap; column-gap: 10px; row-gap: 8px; margin-top: 48px; font-size: 10px; color: var(--cosmic-dim); min-height: 44px; }
+.hero-community-link > span { color: var(--cosmic-accent); border: 1px solid var(--cosmic-rule); padding: 5px 7px; font-size: 8px; letter-spacing: .1em; }
+.hero-community-link:hover { color: var(--cosmic-paper); }
+.hero-sculpture-wrap { position: absolute; width: 64%; height: 650px; right: -10%; top: 10px; z-index: 1; }
+.particle-sculpture { width: 100%; height: 100%; position: relative; isolation: isolate; }
+.particle-sculpture canvas { width: 100%; height: 100%; position: relative; z-index: 1; display: block; }
+.sculpture-halo { position: absolute; inset: 13%; border-radius: 50%; background: radial-gradient(ellipse, rgba(28, 101, 163, .2), transparent 66%); }
+.sculpture-orbit { position: absolute; inset: 19% 2%; border: 1px solid var(--cosmic-rule); border-radius: 50%; transform: rotate(-32deg) scaleY(.46); }
+.sculpture-orbit::before { content: ''; position: absolute; left: 9%; top: 18%; width: 5px; height: 5px; border-radius: 50%; background: var(--cosmic-accent); box-shadow: 0 0 18px var(--cosmic-accent); }
+.sculpture-coordinate { position: absolute; z-index: 2; color: var(--cosmic-dim); font: 8px ui-monospace, monospace; letter-spacing: .16em; }
+.sculpture-coordinate-top { top: 9%; right: 20%; }
+.sculpture-coordinate-bottom { bottom: 12%; left: 20%; }
+.sculpture-pause { position: absolute; z-index: 3; bottom: 11%; right: 20%; min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: var(--cosmic-dim); background: transparent; border: 0; font-size: 11px; }
+.sculpture-pause span { font-size: 9px; }
+.sculpture-pause:hover { color: var(--cosmic-accent); }
+.hero-bottom-rail { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 26px 0; border-top: 1px solid var(--cosmic-rule); }
+.hero-scroll-cue { display: inline-flex; align-items: center; gap: 12px; font-size: 10px; color: var(--cosmic-dim); min-height: 44px; }
+.hero-rail-detail { display: flex; gap: 64px; font: 9px ui-monospace, monospace; letter-spacing: .1em; color: var(--cosmic-dim); }
+.hero-service-rail { display: flex; justify-content: space-around; align-items: center; gap: 20px; padding: 25px 32px; border-block: 1px solid var(--cosmic-rule); color: var(--cosmic-dim); font-size: 10px; letter-spacing: .15em; }
+.hero-service-rail span:nth-child(even) { color: var(--cosmic-accent); font-size: 17px; }
+.cosmic-home > section[aria-label="Công nghệ và hạ tầng"] { padding-top: 36px; }
+
+.cosmic-not-found { min-height: 100svh; padding: 0 48px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.lost-header, .lost-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1344px; margin: 0 auto; width: 100%; z-index: 2; }
+.lost-header { padding: 28px 0; border-bottom: 1px solid var(--cosmic-rule); }
+.lost-header img { width: 126px; height: auto; }
+.lost-header > span { font: 9px ui-monospace, monospace; letter-spacing: .16em; color: var(--cosmic-dim); }
+.lost-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: 1344px; margin: auto; width: 100%; gap: 60px; padding: 40px 0; flex: 1; }
+.lost-artwork { position: relative; height: min(600px, 65vh); min-height: 360px; }
+.lost-numeral { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(140px, 18vw, 260px); letter-spacing: -.08em; font-weight: 700; color: transparent; -webkit-text-stroke: 1px rgba(166,237,255,.1); }
+.lost-copy { position: relative; z-index: 2; }
+.lost-copy h1 { font-size: clamp(34px, 3.6vw, 53px); font-weight: 400; line-height: 1.3; letter-spacing: -.06em; margin: 24px 0; }
+.lost-copy > p:not(.cosmic-eyebrow) { color: var(--cosmic-dim); font-size: 13px; line-height: 1.95; max-width: 390px; }
+.lost-footer { border-top: 1px solid var(--cosmic-rule); padding: 24px 0; color: var(--cosmic-dim); font-size: 9px; line-height: 1.8; }
+.lost-footer a { min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; }
+
+@media (min-width: 1600px) { .hero-sculpture-wrap { right: -5%; } }
+@media (max-width: 1100px) {
+  .hero-editorial-copy { padding-top: 80px; max-width: 620px; }
+  .hero-sculpture-wrap { right: -20%; width: 75%; opacity: .8; }
+  .hero-rail-detail { gap: 24px; }
+  .hero-rail-detail span:first-child { display: none; }
+  .lost-content { gap: 20px; }
+}
+@media (max-width: 700px) {
+  .cosmic-home .landing-header > div > div > a:first-of-type { display: none; }
+  .immersive-hero-inner { padding: 0 24px; }
+  .hero-editorial-copy { padding: 50px 0 0; }
+  .cosmic-eyebrow { font-size: 8px; letter-spacing: .12em; }
+  .hero-editorial-copy h1 { font-size: clamp(36px, 8.5vw, 57px); margin: 22px 0; letter-spacing: -.065em; }
+  .hero-description { font-size: 12px; max-width: 360px; }
+  .cosmic-actions { gap: 12px 24px; margin-top: 24px; }
+  .cosmic-button { padding: 12px 18px; gap: 14px; min-height: 48px; font-size: 11px; }
+  .cosmic-text-link { font-size: 11px; }
+  .hero-community-link { margin-top: 22px; font-size: 9px; }
+  .hero-sculpture-wrap { position: relative; width: calc(100% + 48px); right: auto; margin: -12px -24px -10px; top: auto; height: 370px; opacity: 1; }
+  .hero-bottom-rail { padding: 12px 0; }
+  .hero-rail-detail { font-size: 7px; }
+  .hero-scroll-cue { font-size: 9px; gap: 7px; }
+  .hero-service-rail { padding: 20px 24px; flex-wrap: wrap; gap: 14px 20px; justify-content: center; font-size: 8px; }
+  .hero-service-rail span:last-child, .hero-service-rail span:nth-last-child(2) { display: none; }
+  .sculpture-coordinate-top { top: 6%; }
+  .sculpture-coordinate-bottom { bottom: 6%; left: 12%; font-size: 7px; }
+  .sculpture-pause { bottom: 2%; right: 10%; }
+  .cosmic-not-found { padding: 0 24px; }
+  .lost-header { padding: 20px 0; }
+  .lost-header img { width: 110px; }
+  .lost-header > span { font-size: 7px; letter-spacing: .08em; }
+  .lost-content { grid-template-columns: 1fr; gap: 10px; padding: 0 0 40px; }
+  .lost-artwork { height: 330px; min-height: 0; margin-inline: -24px; }
+  .lost-numeral { font-size: 180px; }
+  .lost-copy h1 { margin: 18px 0; }
+  .lost-footer { flex-wrap: wrap; gap: 0; padding: 16px 0; font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-button { transition: none; }
+  .sculpture-pause { display: none; }
+}
