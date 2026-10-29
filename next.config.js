@@ -4,9 +4,6 @@ const basePath = configuredBasePath === '/' ? '' : configuredBasePath.replace(/\
 
 const nextConfig = {
   output: 'export',
-  // Ship styles with the static HTML so slow mobile connections do not wait
-  // for a separate render-blocking stylesheet before showing the Hero text.
-  experimental: { inlineCss: true },
   // GitHub Pages serves static routes as directories (for example /egg/).
   // This keeps links and refreshes working without server-side rewrites.
   trailingSlash: true,

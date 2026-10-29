@@ -80,17 +80,15 @@ Further changes:
   heading. Cached or promptly available brand fonts still render normally.
 - Move 10,557 characters of Free Server illustration CSS out of the root CSS
   into the Free Server route, retaining mobile and reduced-motion overrides.
-- Enable Next.js `experimental.inlineCss` for the static export. This removes
-  the render-blocking stylesheet request. It is an experimental Next.js option:
-  recheck the static export after framework upgrades. Styles now travel with each
-  HTML document instead of benefiting from a separately cached stylesheet. Next
-  also duplicates styles in the RSC payload; the homepage HTML is about 76 KB
-  gzipped. This is a deliberate first-render versus repeat-navigation tradeoff.
+- An experiment with Next.js `experimental.inlineCss` was reverted. It removed
+  the CSS request in a local run but increased mobile Total Blocking Time and
+  reduced the desktop score. The production build keeps the normal cached CSS
+  link instead.
 
 In the same local mobile setup described above, optional fonts and CSS splitting
-gave LCP 3,204 ms; additionally inlining CSS gave FCP 736 ms and LCP 756 ms, with
-CLS 0.000045 (rounds to 0 at report precision). These are individual local
-samples, not a verified new PageSpeed score. Verified mobile menu, 375px and
+gave LCP 3,204 ms. An inline-CSS experiment gave FCP 736 ms and LCP 756 ms but
+was reverted after the deployed report showed higher blocking time. These are
+individual local samples, not a verified new PageSpeed score. Verified mobile menu, 375px and
 1280px layouts without horizontal overflow, Free Server illustration styles,
 404 heading, all exported routes' inline styles, H1 and canonical markup, and
 no captured browser errors. Build and TypeScript pass.
