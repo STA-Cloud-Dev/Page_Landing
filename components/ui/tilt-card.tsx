@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
+import { getVisualQuality } from '@/lib/visual-quality';
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export function TiltCard({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
+    if (getVisualQuality() !== 'full') return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -32,6 +33,7 @@ export function TiltCard({
 
     rafId.current = requestAnimationFrame(() => {
       if (!cardRef.current) return;
+      cardRef.current.style.willChange = 'transform';
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       const rotateX = ((y - centerY) / centerY) * -tiltMaxAngleX;
@@ -51,7 +53,8 @@ export function TiltCard({
   const handleMouseLeave = () => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
     if (cardRef.current) {
-      cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      cardRef.current.style.transform = '';
+      cardRef.current.style.willChange = '';
     }
     if (glareRef.current) {
       glareRef.current.style.opacity = '0';
@@ -69,7 +72,7 @@ export function TiltCard({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden transition-transform duration-200 ease-out will-change-transform ${className}`}
+      className={`relative overflow-hidden transition-transform duration-200 ease-out ${className}`}
     >
       {/* Dynamic Glare Reflection */}
       <div

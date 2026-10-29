@@ -3,6 +3,7 @@ import './globals.css';
 import './cosmic.css';
 import localFont from 'next/font/local';
 import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
+import { VisualPerformance } from '@/components/visual/visual-performance';
 import { sitePath } from '@/lib/site-path';
 
 const SITE_URL = 'https://stacloud.eu.cc';
@@ -68,6 +69,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <RouteScrollReset />
+        <VisualPerformance />
         <div className="cyber-grid-bg" aria-hidden />
         <div className="cyber-lines-bg" aria-hidden />
         <main id="main-content" className="relative z-10">{children}</main>

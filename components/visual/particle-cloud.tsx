@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { getVisualQuality, useLiteVisuals } from '@/lib/visual-quality';
 
 /** A projected point sculpture: no WebGL runtime or downloaded 3D assets. */
 export function ParticleCloud({ lost = false }: { lost?: boolean }) {
@@ -13,7 +14,11 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     if (!ctx) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const small = window.matchMedia('(max-width: 640px)').matches;
-    const count = small ? 1050 : 2300;
+    const quality = getVisualQuality();
+    const count = quality === 'lite' ? 240 : quality === 'balanced' ? 480 : 1400;
+    const frameInterval = 1000 / (quality === 'full' ? 60 : 30);
+    let staticOnly = quality === 'lite';
+    let slowFrames = 0;
     // Two Fibonacci shells form a luminous compute core with visible depth.
     let points = Array.from({ length: count }, (_, i) => {
       const y = 1 - 2 * i / (count - 1);
@@ -60,7 +65,7 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     const resize = () => {
       const box = canvas.getBoundingClientRect();
       width = box.width; height = box.height;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, quality === 'full' ? 1.5 : 1);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -68,11 +73,13 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
     const draw = (time: number) => {
       frame = 0;
       if (disposed) return;
-      const moving = lost || !motion.matches;
+      if (lastTime && time - lastTime < frameInterval - 1) { frame = requestAnimationFrame(draw); return; }
+      const drawStarted = performance.now();
+      const moving = !staticOnly && !motion.matches && document.documentElement.dataset.visualQuality !== 'lite';
       const delta = lastTime ? Math.min(time - lastTime, 50) : 16.667;
       if (moving && lastTime) elapsed += delta;
       lastTime = time;
-      if (motion.matches && !lost) { tiltX = 0; tiltY = 0; offsets.fill(0); }
+      if (!moving) { tiltX = 0; tiltY = 0; offsets.fill(0); }
       pointerSpeed *= Math.pow(.9, delta / 16.667);
       if (moving) {
         const ease = 1 - Math.pow(0.955, delta / 16.667);
@@ -87,12 +94,14 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
       const radius = Math.min(145, Math.max(85, Math.min(width, height) * 0.23));
       const cursorX = (pointerX + 0.5) * width;
       const cursorY = (pointerY + 0.5) * height;
-      const projected = points.map((p, i) => {
+      // Transparent dots do not need depth sorting or an object allocation per dot/frame.
+      const cosY = Math.cos(ay), sinY = Math.sin(ay), cosX = Math.cos(ax), sinX = Math.sin(ax);
+      points.forEach((p, i) => {
         const drift = lost ? 1 + 0.007 * Math.sin(t * 2 + i * 0.2) : 1;
-        const x = (p.x * Math.cos(ay) + p.z * Math.sin(ay)) * drift;
-        const z = -p.x * Math.sin(ay) + p.z * Math.cos(ay);
-        const y = p.y * Math.cos(ax) - z * Math.sin(ax);
-        const depth = p.y * Math.sin(ax) + z * Math.cos(ax);
+        const x = (p.x * cosY + p.z * sinY) * drift;
+        const z = -p.x * sinY + p.z * cosY;
+        const y = p.y * cosX - z * sinX;
+        const depth = p.y * sinX + z * cosX;
         const perspective = 3.8 / (3.8 - depth);
         const screenX = width / 2 + x * scale * perspective;
         const screenY = height / 2 + y * scale * perspective;
@@ -115,21 +124,20 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
             offsets[offset + 1] += offsets[offset + 3] * step;
           }
         }
-        return { x: screenX + offsets[offset], y: screenY + offsets[offset + 1], z: depth, size: p.size * perspective };
-      }).sort((a, b) => a.z - b.z);
-      for (const p of projected) {
-        const brightness = Math.max(0.13, Math.min(1, (p.z + 1.5) / 2.6));
+        const brightness = Math.max(0.13, Math.min(1, (depth + 1.5) / 2.6));
         ctx.fillStyle = `rgba(${Math.round(65 + brightness * 155)},${Math.round(150 + brightness * 95)},255,${brightness})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * (small ? 0.95 : 1.1), 0, Math.PI * 2);
+        ctx.arc(screenX + offsets[offset], screenY + offsets[offset + 1], p.size * perspective * (small ? 0.95 : 1.1), 0, Math.PI * 2);
         ctx.fill();
-      }
+      });
+      slowFrames = performance.now() - drawStarted > 20 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+      if (slowFrames >= 12) { staticOnly = true; useLiteVisuals(); }
       // Only animate while on screen. A static sculpture remains for reduced motion.
-      if (moving && visible && !document.hidden) frame = requestAnimationFrame(draw);
+      if (moving && !staticOnly && visible && !document.hidden) frame = requestAnimationFrame(draw);
     };
     const requestDraw = () => { lastTime = 0; if (!frame && visible && !document.hidden) frame = requestAnimationFrame(draw); };
     const move = (event: PointerEvent) => {
-      if ((!lost && motion.matches) || event.pointerType !== 'mouse') return;
+      if (staticOnly || getVisualQuality() !== 'full' || event.pointerType !== 'mouse') return;
       const rect = canvas.getBoundingClientRect();
       const nextX = (event.clientX - rect.left) / rect.width - 0.5;
       const nextY = (event.clientY - rect.top) / rect.height - 0.5;
@@ -139,26 +147,31 @@ export function ParticleCloud({ lost = false }: { lost?: boolean }) {
       pointerActive = true;
     };
     const leave = () => { pointerX = 0; pointerY = 0; pointerActive = false; };
-    const observer = new ResizeObserver(() => { resize(); requestDraw(); });
-    observer.observe(canvas);
-    const intersection = new IntersectionObserver(([entry]) => {
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { resize(); requestDraw(); }) : null;
+    observer?.observe(canvas);
+    const intersection = typeof IntersectionObserver !== 'undefined' ? new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       if (visible) requestDraw();
       else { cancelAnimationFrame(frame); frame = 0; }
-    });
-    intersection.observe(canvas);
+    }) : null;
+    intersection?.observe(canvas);
+    const onResize = () => { resize(); requestDraw(); };
+    window.addEventListener('resize', onResize);
     canvas.addEventListener('pointermove', move);
     canvas.addEventListener('pointerleave', leave);
     document.addEventListener('visibilitychange', requestDraw);
-    motion.addEventListener('change', requestDraw);
+    if (motion.addEventListener) motion.addEventListener('change', requestDraw);
+    else motion.addListener(requestDraw);
     resize(); requestDraw();
     return () => {
       disposed = true; cancelAnimationFrame(frame);
-      observer.disconnect(); intersection.disconnect();
+      observer?.disconnect(); intersection?.disconnect();
+      window.removeEventListener('resize', onResize);
       canvas.removeEventListener('pointermove', move);
       canvas.removeEventListener('pointerleave', leave);
       document.removeEventListener('visibilitychange', requestDraw);
-      motion.removeEventListener('change', requestDraw);
+      if (motion.removeEventListener) motion.removeEventListener('change', requestDraw);
+      else motion.removeListener(requestDraw);
     };
   }, [lost]);
 

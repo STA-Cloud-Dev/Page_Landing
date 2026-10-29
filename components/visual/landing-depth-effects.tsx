@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
+import { getVisualQuality } from '@/lib/visual-quality';
 
 export function LandingDepthEffects() {
   useEffect(() => {
     const root = document.querySelector('.landing-depth-content');
-    if (!root) return;
+    if (!root || getVisualQuality() === 'lite' || !('IntersectionObserver' in window)) return;
     const cards = root.querySelectorAll('.glass-card-bright, .depth-plan-card, #policies .grid > a, section > div > .text-center, #openclaw .grid > div, section > .mx-auto.rounded-3xl');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

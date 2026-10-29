@@ -216,28 +216,9 @@ const LASER_CONDUITS = [
 export function NetworkMapVector() {
   const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(allDatacenterLocations[0]);
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
-  const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(() =>
+  const [simulatedPings] = useState<Record<string, number>>(() =>
     Object.fromEntries(allDatacenterLocations.map((location) => [location.id, location.basePing]))
   );
-
-  // Animated reference values only: these are not measurements from a live server.
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      if (document.hidden) return;
-
-      setSimulatedPings((previous) => {
-        const updated = { ...previous };
-        for (const location of allDatacenterLocations) {
-          const jitter = Math.max(2, Math.round(location.basePing * 0.04));
-          const variation = Math.floor(Math.random() * (jitter * 2 + 1)) - jitter;
-          updated[location.id] = Math.max(1, location.basePing + variation);
-        }
-        return updated;
-      });
-    }, 4000);
-
-    return () => window.clearInterval(timer);
-  }, []);
 
   // Native SVG ViewBox Zoom and Pan coordinates (1000 x 500 world extent)
   const [zoom, setZoom] = useState<number>(1.0);

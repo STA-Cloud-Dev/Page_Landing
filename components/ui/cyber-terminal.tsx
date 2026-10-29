@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { getVisualQuality } from '@/lib/visual-quality';
 
 const terminalLines = [
   { text: '$ stacloud init --env=production --region=sg-ovh-01', color: 'text-cyan-400' },
@@ -13,11 +14,26 @@ const terminalLines = [
 ];
 
 export function CyberTerminal() {
+  const container = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
   const [displayedIndex, setDisplayedIndex] = useState(0);
   const [characters, setCharacters] = useState(0);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    if (getVisualQuality() === 'lite') { setDisplayedIndex(terminalLines.length); return; }
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    if (container.current) observer.observe(container.current);
+    const visibility = () => setPageVisible(!document.hidden);
+    visibility();
+    document.addEventListener('visibilitychange', visibility);
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', visibility); };
+  }, []);
+
+  useEffect(() => {
+    if (getVisualQuality() === 'lite') { setDisplayedIndex(terminalLines.length); return; }
+    if (!inView || !pageVisible) return;
     if (displayedIndex < terminalLines.length) {
       const timer = setTimeout(() => {
         if (characters < terminalLines[displayedIndex].text.length) setCharacters(value => value + 3);
@@ -25,7 +41,7 @@ export function CyberTerminal() {
       }, characters < terminalLines[displayedIndex].text.length ? 28 : 350);
       return () => clearTimeout(timer);
     }
-  }, [displayedIndex, characters]);
+  }, [displayedIndex, characters, inView, pageVisible]);
 
   const handleCopyCommand = () => {
     navigator.clipboard.writeText('curl -sSL https://portal.stacloud.eu.cc/openclaw/deploy.sh | bash');
@@ -34,7 +50,7 @@ export function CyberTerminal() {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#020b14]/90 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+    <div ref={container} className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#020b14]/90 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl">
       {/* Terminal Titlebar */}
       <div className="flex items-center justify-between border-b border-cyan-400/10 bg-[#031526] px-4 py-2.5">
         <div className="flex items-center gap-2">
