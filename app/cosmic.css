@@ -279,3 +279,4 @@ html[data-visual-quality='lite'] .cosmic-subpage :is(article,.status-panel,.inte
 @media (prefers-reduced-motion:reduce) { .subpage-atmosphere span { animation: none; } }
 .cosmic-subpage :is(.cyber-corner-accent,.cyber-cut,.cyber-cut-sm,.cyber-cut-lg)::before,.cosmic-subpage :is(.cyber-corner-accent,.cyber-cut,.cyber-cut-sm,.cyber-cut-lg)::after { display: none; }
 .cosmic-subpage section > .mx-auto:is(.rounded-2xl,.rounded-3xl) { background: linear-gradient(145deg,rgba(31,81,119,.92),rgba(12,43,72,.96)); border-radius: 30px; }
+.particle-mount { width: 100%; height: 100%; }

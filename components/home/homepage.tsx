@@ -134,6 +134,7 @@ export function HomePage() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [activePlanTab, setActivePlanTab] = useState<'all' | 'community' | 'linux' | 'dev' | 'vps' | 'game' | 'beta'>('all');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [catalogOpened, setCatalogOpened] = useState(false);
 
   const filteredPlans = allServicePlans.filter((plan) => {
     if (activePlanTab === 'all') return true;
@@ -392,12 +393,14 @@ export function HomePage() {
             })}
           </div>
 
-          <details className="group mt-9 rounded-3xl border border-sky-200/20 bg-[#04172b]/90 p-4 sm:p-6">
+          <details onToggle={event => { if (event.currentTarget.open) setCatalogOpened(true); }} className="group mt-9 rounded-3xl border border-sky-200/20 bg-[#04172b]/90 p-4 sm:p-6">
             <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-xl bg-white/5 px-5 py-3 text-left text-sm font-bold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-cyan-300 [&::-webkit-details-marker]:hidden">
               <span>Xem đầy đủ {allServicePlans.length} gói dịch vụ, cấu hình và bộ lọc</span>
               <span aria-hidden="true" className="text-xl text-cyan-300 transition-transform group-open:rotate-180">⌄</span>
             </summary>
+            <a href={sitePath('/free-server/#plans')} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-cyan-200 underline underline-offset-4">Mở trang bảng giá đầy đủ →</a>
 
+            {catalogOpened && <>
             {/* Filter Tabs */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2" aria-label="Lọc các gói dịch vụ">
               <button
@@ -546,6 +549,7 @@ export function HomePage() {
               );
             })}
           </div>
+            </>}
           </details>
 
           {/* Custom Dedicated & Upsize Support Banner */}

@@ -10,8 +10,8 @@ const SITE_URL = 'https://stacloud.eu.cc';
 
 const cosmicFont = localFont({
   src: [
-    { path: '../public/fonts/be-vietnam-pro-regular.ttf', weight: '400', style: 'normal' },
-    { path: '../public/fonts/be-vietnam-pro-bold.ttf', weight: '700', style: 'normal' },
+    { path: '../public/fonts/be-vietnam-pro-regular.woff2', weight: '400', style: 'normal' },
+    { path: '../public/fonts/be-vietnam-pro-bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-cosmic',
   display: 'swap',

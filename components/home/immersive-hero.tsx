@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { ParticleCloud } from '@/components/visual/particle-cloud';
+import { LazyParticleCloud } from '@/components/visual/lazy-particle-cloud';
 import { homeConfig } from './content';
 import { ContactLinks } from '@/components/shared/contact-links';
 
@@ -22,7 +22,7 @@ export function ImmersiveHero() {
         <div className="hero-sculpture-wrap">
           <div className="hero-core-ring hero-core-ring-one" aria-hidden="true" />
           <div className="hero-core-ring hero-core-ring-two" aria-hidden="true" />
-          <ParticleCloud />
+          <LazyParticleCloud />
           <span className="core-label core-label-top" aria-hidden="true">01 / COMPUTE</span>
           <span className="core-label core-label-bottom" aria-hidden="true">02 / CONNECT</span>
         </div>

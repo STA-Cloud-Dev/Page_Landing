@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import { ParticleCloud } from '@/components/visual/particle-cloud';
+import { LazyParticleCloud } from '@/components/visual/lazy-particle-cloud';
 import { sitePath } from '@/lib/site-path';
 import { homeConfig } from '@/components/home/content';
 import type { Metadata } from 'next';
@@ -13,7 +13,7 @@ export default function NotFound() {
   return (
     <div className="cosmic-not-found">
       <section className="lost-content" aria-labelledby="lost-title">
-        <div className="lost-artwork"><span className="lost-numeral" aria-hidden="true">404</span><ParticleCloud lost /></div>
+        <div className="lost-artwork"><span className="lost-numeral" aria-hidden="true">404</span><LazyParticleCloud lost /></div>
         <div className="lost-copy">
           <h1 id="lost-title" className="sr-only">404 — Không tìm thấy trang</h1>
           <p>Cụm máy chủ hoặc trang bạn tìm kiếm đã bị ngắt kết nối khỏi mạng lưới STACloud.</p>
