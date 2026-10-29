@@ -7,6 +7,7 @@ import { SiteFooter } from '@/components/shared/site-footer';
 import { Reveal } from '@/components/ui/reveal';
 import { sitePath } from '@/lib/site-path';
 import { homeConfig } from '@/components/home/content';
+import { SubpageEffects } from '@/components/visual/subpage-effects';
 import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
@@ -429,8 +430,9 @@ export function EggPage() {
   );
 
   return (
-    <div className="relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
+    <div className="cosmic-subpage relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
       <CyberBackgroundDecor />
+      <SubpageEffects />
 
       <Header onOpenDrawer={() => setMobileDrawerOpen(true)} />
 

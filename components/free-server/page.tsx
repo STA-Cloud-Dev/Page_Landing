@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { OpenClawSpotlight } from '@/components/shared/openclaw-spotlight';
 import { Reveal } from '@/components/ui/reveal';
 import { sitePath } from '@/lib/site-path';
+import { SubpageEffects } from '@/components/visual/subpage-effects';
 import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
@@ -21,8 +22,9 @@ export function FreeServerPage() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
+    <div className="cosmic-subpage relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
       <CyberBackgroundDecor />
+      <SubpageEffects />
 
       {/* Top Cyber Navbar */}
       <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">

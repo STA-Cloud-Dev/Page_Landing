@@ -5,6 +5,7 @@ import { Reveal } from '@/components/ui/reveal';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { homeConfig } from '@/components/home/content';
 import { sitePath } from '@/lib/site-path';
+import { SubpageEffects } from '@/components/visual/subpage-effects';
 import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
 import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { MobileDock } from '@/components/ui/mobile-dock';
@@ -27,8 +28,9 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
+    <div className="cosmic-subpage relative min-h-screen text-slate-100 selection:bg-cyan-400 selection:text-black">
       <CyberBackgroundDecor />
+      <SubpageEffects />
 
       {/* Top Sticky Cyber Navbar */}
       <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
