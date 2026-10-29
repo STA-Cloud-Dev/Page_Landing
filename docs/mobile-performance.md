@@ -65,3 +65,32 @@ end in `.woff2`, and rerun PageSpeed on the deployed commit. A localhost test is
 useful for before/after comparisons but is not a replacement for a new PageSpeed
 report on the public URL. Lighthouse SEO 100 verifies basic technical audits;
 it does not guarantee search ranking or successful indexing.
+
+## Follow-up to the 95-point report
+
+Report: https://pagespeed.web.dev/analysis/https-stacloud-eu-cc/z6xthuefsq?form_factor=mobile
+
+This run reports FCP 1.7 s, LCP 2.7 s, TBT 30 ms, CLS 0 and Speed Index 2.9 s.
+The LCP remains the Hero heading, with 1,330 ms element render delay.
+
+Further changes:
+
+- Use `font-display: optional` without font preloads. Slow connections keep the
+  adjusted fallback font for that visit rather than delaying or repainting the
+  heading. Cached or promptly available brand fonts still render normally.
+- Move 10,557 characters of Free Server illustration CSS out of the root CSS
+  into the Free Server route, retaining mobile and reduced-motion overrides.
+- Enable Next.js `experimental.inlineCss` for the static export. This removes
+  the render-blocking stylesheet request. It is an experimental Next.js option:
+  recheck the static export after framework upgrades. Styles now travel with each
+  HTML document instead of benefiting from a separately cached stylesheet. Next
+  also duplicates styles in the RSC payload; the homepage HTML is about 76 KB
+  gzipped. This is a deliberate first-render versus repeat-navigation tradeoff.
+
+In the same local mobile setup described above, optional fonts and CSS splitting
+gave LCP 3,204 ms; additionally inlining CSS gave FCP 736 ms and LCP 756 ms, with
+CLS 0.000045 (rounds to 0 at report precision). These are individual local
+samples, not a verified new PageSpeed score. Verified mobile menu, 375px and
+1280px layouts without horizontal overflow, Free Server illustration styles,
+404 heading, all exported routes' inline styles, H1 and canonical markup, and
+no captured browser errors. Build and TypeScript pass.

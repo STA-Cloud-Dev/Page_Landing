@@ -14,7 +14,10 @@ const cosmicFont = localFont({
     { path: '../public/fonts/be-vietnam-pro-bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-cosmic',
-  display: 'swap',
+  // On slow connections keep the metrics-adjusted fallback for this visit,
+  // rather than repainting the LCP heading when the brand font arrives late.
+  display: 'optional',
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import './illustrations.css';
 import { FreeServerPage } from '@/components/free-server/page';
 import { sitePath } from '@/lib/site-path';
 
