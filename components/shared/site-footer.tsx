@@ -21,10 +21,10 @@ export function SiteFooter() {
                 alt={homeConfig.logoAlt}
                 className="h-11 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.35)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.6)]"
               />
-              <p className="text-xs text-cyan-200 font-semibold">Ocean Cloud & Community Hosting</p>
+              <p className="text-xs text-cyan-200 font-semibold">STA Cloud Hosting • Việt Nam & Singapore</p>
             </a>
             <p className="max-w-sm text-xs leading-relaxed text-sky-100 sm:text-sm">
-              Hệ sinh thái máy chủ game, VPS OVH Singapore, OpenClaw Beta và các gói hosting cộng đồng minh bạch chi phí.
+              VPS, hosting Việt Nam và Singapore cho website, bot Discord và game server; cấu hình và chi phí công khai theo từng gói.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-cyan-200">
@@ -39,6 +39,9 @@ export function SiteFooter() {
               ⚡ Dịch Vụ
             </p>
             <div className="mt-3 text-sm text-sky-100 sm:mt-4 sm:space-y-2.5">
+              <a href={sitePath('/vps-hosting/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
+                VPS & Hosting Việt Nam / Singapore
+              </a>
               <a href={sitePath('/#plans')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Bảng giá & Gói dịch vụ
               </a>

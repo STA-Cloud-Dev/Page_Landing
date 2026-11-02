@@ -23,6 +23,7 @@ import { SiteFooter } from '@/components/shared/site-footer';
 import { PolicyCenterSection } from '@/components/home/policy-center-section';
 import { Reveal } from '@/components/ui/reveal';
 import { sitePath } from '@/lib/site-path';
+import { siteServices } from '@/lib/site-seo';
 
 const featuredTiers = [
   { id: 'node-test', eyebrow: '01 / Học tập & trải nghiệm', title: 'Khởi đầu miễn phí', action: 'Nhận gói miễn phí', emphasis: false },
@@ -263,6 +264,28 @@ export function HomePage() {
 
       {/* --- 3. NODE TEST FREE LAUNCHPAD --- */}
       <NodeTestLaunch />
+
+      <section aria-labelledby="hosting-services-title" className="px-4 py-8 sm:px-6 sm:py-12">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="hosting-services-title" className="text-2xl font-bold text-white sm:text-3xl">
+            VPS, hosting Việt Nam & Singapore tại STA Cloud
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-sky-100">
+            STA Cloud Hosting cung cấp hosting website, server hosting và game hosting. Chọn VPS hoặc hosting theo tài nguyên, khu vực Việt Nam / Singapore và tình trạng slot; xác nhận cấu hình qua ticket trước khi đăng ký.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {siteServices.map((service) => (
+              <article key={service.name} className="flex flex-col rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">
+                <h3 className="text-lg font-semibold text-white">{service.name}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-sky-100">{service.description}</p>
+                <a href={sitePath(service.path)} className="mt-4 inline-flex min-h-11 items-center font-semibold text-cyan-200 hover:text-white">
+                  {service.action} →
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* --- 4. PUBLIC PLAN INFORMATION (NOT LIVE AVAILABILITY) --- */}
       <section className="px-4 py-6 sm:px-6">

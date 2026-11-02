@@ -3,7 +3,7 @@
 Landing page chính thức của STACloud, giới thiệu portal, VPS, các gói dịch vụ cộng đồng, hướng dẫn đăng ký và chính sách sử dụng.
 
 Website công khai: `https://stacloud.eu.cc`. Portal riêng tư:
-`https://portal.stacloud.eu.cc`. Sitemap chỉ gồm 7 trang công khai; không thêm
+`https://portal.stacloud.eu.cc`. Sitemap gồm 11 trang công khai; không thêm
 Admin, account hoặc server khách vào sitemap. Robots, metadata và canonical
 phải dùng domain mới khi build. Favicon PNG hiện có kích thước 500×500, ICO có
 đường dẫn dự phòng `/favicon.ico`.
@@ -11,6 +11,11 @@ phải dùng domain mới khi build. Favicon PNG hiện có kích thước 500×
 Ngày 14/10/2026 đã chuyển vhost Caddy và các URL từ domain cũ sang domain mới,
 khôi phục container website trên port 4002, và gửi sitemap vào Search Console.
 Việc gửi sitemap không đảm bảo Google đã lập chỉ mục hoặc đã cập nhật favicon.
+
+Kiểm tra chuyển domain, hướng xử lý Search Console và kế hoạch nội dung:
+[SEO và chuyển domain](docs/seo-domain-migration.md).
+Sau khi build, chạy `npm run seo:check` để kiểm tra HTML xuất bản, canonical,
+sitemap, khả năng lập chỉ mục và schema nhận diện thương hiệu.
 
 ## Run local
 

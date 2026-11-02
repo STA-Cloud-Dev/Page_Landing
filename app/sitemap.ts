@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next';
+import { siteUrl } from '@/lib/site-seo';
 
 export const dynamic = 'force-static';
-
-const siteUrl = 'https://stacloud.eu.cc';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${siteUrl}/`, changeFrequency: 'weekly', priority: 1 },
+    { url: `${siteUrl}/vps-hosting/`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${siteUrl}/free-server/`, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${siteUrl}/egg/`, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${siteUrl}/partner/`, changeFrequency: 'monthly', priority: 0.55 },

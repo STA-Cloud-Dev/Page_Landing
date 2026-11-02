@@ -5,8 +5,7 @@ import localFont from 'next/font/local';
 import { RouteScrollReset } from '@/components/ui/route-scroll-reset';
 import { VisualPerformance } from '@/components/visual/visual-performance';
 import { sitePath } from '@/lib/site-path';
-
-const SITE_URL = 'https://stacloud.eu.cc';
+import { siteUrl, siteName, siteTitle, siteDescription, siteImage } from '@/lib/site-seo';
 
 const cosmicFont = localFont({
   src: [
@@ -21,10 +20,10 @@ const cosmicFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: 'STACloud | Cyber Cloud, VPS & Game Hosting Platform',
-  description:
-    'Hệ sinh thái hạ tầng đám mây STACloud: Cung cấp Portal quản trị game server, VPS OVH Singapore chống DDoS, OpenClaw Beta miễn phí và các gói dịch vụ cộng đồng minh bạch.',
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: siteName,
   keywords: [
     'STACloud',
     'community hosting',
@@ -37,18 +36,19 @@ export const metadata: Metadata = {
     'ovh singapore vps',
   ],
   openGraph: {
-    title: 'STACloud | Cyber Cloud & VPS Hosting Platform',
-    description:
-      'Xem giá, cấu hình, slot, OpenClaw Beta, upsize và lưu ý sử dụng của các gói NODE TEST, Dev 1–3, Game Servers 1–2, PROXY HK, STA-XEON và STA-AMD-EPYC tại STACloud.',
-    url: SITE_URL,
-    siteName: 'STACloud',
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
+    locale: 'vi_VN',
+    images: [siteImage],
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'STACloud | Cyber Cloud & VPS Hosting Platform',
-    description:
-      'Khám phá OpenClaw Beta, VPS OVH Singapore, game server và các gói dịch vụ cộng đồng giá tốt nhất.',
+    card: 'summary',
+    title: siteTitle,
+    description: siteDescription,
+    images: [siteImage.url],
   },
   icons: {
     apple: [{ url: sitePath('/picture/iconSTACloud.png') }],
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
       { url: sitePath('/favicon.ico'), type: 'image/x-icon', sizes: 'any' },
     ],
   },
-  robots: 'index, follow',
+  robots: { index: true, follow: true, 'max-image-preview': 'large' },
 };
 
 export default function RootLayout({

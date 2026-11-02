@@ -48,6 +48,9 @@ jobs:
           test -n "$(find out/_next/static -type f -name '*.js' -print -quit)"
           test -f out/CNAME
 
+      - name: Verify exported SEO metadata
+        run: npm run seo:check
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
