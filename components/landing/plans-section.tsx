@@ -1,4 +1,6 @@
-﻿'use client';
+'use client';
+
+import { freePlans } from '@/components/shared/free-plans';
 
 import { useMemo, useState } from 'react';
 import { servicePlans } from './content';
@@ -59,7 +61,7 @@ function matchesFilter(plan: ServicePlan, filter: PlanFilter) {
   }
 
   if (filter === 'free') {
-    return plan.name === 'NODE TEST' || plan.name === 'OPENCLAW';
+    return plan.name === 'NODE TEST' || plan.name === 'OPENCLAW' || freePlans.some((free) => free.name === plan.name);
   }
 
   if (filter === 'minecraft') {
@@ -155,12 +157,12 @@ function ComparisonTable({ plans }: { plans: ServicePlan[] }) {
                 </td>
                 <td className="px-4 py-4">
                   <a
-                    href="https://discord.gg/nq8B4JXmnm"
+                    href={plan.name.startsWith('STA-XEON') || plan.name.startsWith('STA-AMD') || plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' || plan.name === 'NODE TEST' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex min-h-9 items-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 px-3 text-xs font-semibold text-cyan-100 transition hover:border-cyan-300/35 hover:text-white"
                   >
-                    Tạo ticket
+                    Xem đăng ký
                   </a>
                 </td>
               </tr>
@@ -194,6 +196,11 @@ export function PlansSection() {
           </div>
           <Section3DAccent variant="pricing" size="compact" />
         </div>
+
+        <p className="mt-5 text-sm leading-7 text-sky-100">
+          Nhóm FREE dành cho tài khoản đã xác minh: mua hoàn 100%, không hỗ trợ backup hoặc khôi phục dữ liệu;
+          sập hoặc xóa máy chủ sẽ hoàn 100% khoản đã thanh toán. Giá và slot được xác nhận trên Portal lúc đăng ký.
+        </p>
 
         <PlanFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
 
@@ -310,12 +317,12 @@ export function PlansSection() {
                 ) : null}
 
                 <a
-                  href="https://discord.gg/nq8B4JXmnm"
+                  href={plan.name.startsWith('STA-XEON') || plan.name.startsWith('STA-AMD') || plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' || plan.name === 'NODE TEST' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex w-full items-center justify-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:border-cyan-300/35 hover:text-white"
                 >
-                  Tạo ticket Discord
+                  Xem đăng ký
                 </a>
               </div>
             </article>

@@ -33,6 +33,8 @@ const featuredTiers = [
 
 function getStatusBadge(status: string) {
   switch (status) {
+    case 'check':
+      return { dot: 'bg-sky-300', pill: 'border-sky-300/40 bg-sky-400/20 text-sky-100', label: 'Xem slot trên Portal' };
     case 'active':
       return {
         dot: 'bg-emerald-400',
@@ -406,11 +408,11 @@ export function HomePage() {
                       <li key={spec} className="flex items-start gap-2"><span className="font-bold text-emerald-300" aria-hidden="true">✓</span>{spec}</li>
                     ))}
                   </ul>
-                  <a href={homeConfig.discordUrl} target="_blank" rel="noopener noreferrer"
+                  <a href={plan.id.startsWith('sta-') || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'} target="_blank" rel="noopener noreferrer"
                     className={`mt-7 flex min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition ${tier.emphasis ? 'bg-cyan-300 text-[#031b32] hover:bg-cyan-100' : 'border border-cyan-300/50 bg-cyan-400/15 text-white hover:bg-cyan-400/25'}`}>
                     {tier.action}
                   </a>
-                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.status === 'preorder' ? 'Đặt trước • Tư vấn slot qua Discord' : 'Xác nhận tình trạng slot qua Discord'}</p>
+                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.status === 'preorder' ? 'Đặt trước • Tư vấn slot qua Discord' : plan.id === 'node-test' ? 'Xác nhận tình trạng slot qua Discord' : 'Kiểm tra slot hiện tại trên Portal'}</p>
                 </TiltCard>
               );
             })}
@@ -560,7 +562,7 @@ export function HomePage() {
                   {/* Card CTA */}
                   <div className="mt-6 border-t border-cyan-300/20 pt-4">
                     <a
-                      href={homeConfig.discordUrl}
+                      href={plan.id.startsWith('sta-') || plan.id === 'proxy-hk' || plan.id === 'openclaw' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-cyber-primary w-full rounded-xl py-2.5 text-xs font-bold text-center block"
@@ -591,7 +593,7 @@ export function HomePage() {
                 <div className="grid gap-2 pt-2 sm:grid-cols-2 text-xs text-sky-100">
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
-                    <span><strong>Dev 1–3:</strong> Cấu hình riêng, chu kỳ 28 ngày; nhu cầu nâng cấp liên hệ ticket.</span>
+                    <span><strong>Dev 1–5:</strong> Cấu hình riêng, chu kỳ 28 ngày; nhu cầu nâng cấp liên hệ ticket.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>

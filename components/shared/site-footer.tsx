@@ -98,6 +98,9 @@ export function SiteFooter() {
               <a href={sitePath('/#faq')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Câu hỏi thường gặp (FAQ)
               </a>
+              <a href={sitePath('/history/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
+                Lịch sử STACloud
+              </a>
             </div>
           </div>
 
@@ -117,7 +120,7 @@ export function SiteFooter() {
 
         {/* Bottom Copyright Bar */}
         <div className="mt-8 flex flex-col items-center justify-between border-t border-cyan-300/20 pt-6 text-center text-xs text-sky-200/80 sm:flex-row sm:text-left">
-          <p>© 2026 STACloud. All rights reserved.</p>
+          <p>© 2018 - 2026 STACloud. All rights reserved.</p>
           <p className="mt-2 sm:mt-0 text-[11px] font-mono text-cyan-300">
             STACloud Infrastructure &bull; High Performance Cloud & Game Hosting
           </p>

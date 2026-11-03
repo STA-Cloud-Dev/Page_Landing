@@ -4,9 +4,9 @@ import { FreeServerPage } from '@/components/free-server/page';
 import { sitePath } from '@/lib/site-path';
 
 export const metadata: Metadata = {
-  title: 'Node Test Free Hosting & Bảng Giá | STACloud',
+  title: 'Node Test FREE Hosting & Bảng Giá | STACloud',
   description:
-    'Đăng ký Node Test Free Forever cho bot Discord, web nhỏ và project sinh viên; xem cấu hình, điều khoản và toàn bộ bảng giá STACloud.',
+    'NODE TEST 0 Credit / Free Forever và gói FREE dành cho tài khoản đã xác minh, mua hoàn 100%; cấu hình và giá Linux Egg, Dev, Game Servers và VPS STACloud.',
   alternates: { canonical: sitePath('/free-server') },
 };
 

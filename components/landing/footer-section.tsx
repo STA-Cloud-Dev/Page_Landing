@@ -16,6 +16,9 @@ export function FooterSection() {
 
         <div className="flex flex-wrap gap-x-4 gap-y-1">
           <PolicyLinks />
+          <a href={sitePath('/history/')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
+            Lịch sử STACloud
+          </a>
           <a href={sitePath('/partner')} className="inline-flex min-h-11 items-center transition hover:text-white sm:min-h-0">
             Partner
           </a>

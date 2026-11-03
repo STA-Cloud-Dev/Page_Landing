@@ -91,6 +91,10 @@ export function MobileDrawer({
           <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-cyan-300">
             Điều Hướng
           </p>
+          <a href={sitePath('/history/')} onClick={onClose} className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200">
+            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-cyan-400/20 text-cyan-200" aria-hidden="true">↗</span>
+            Lịch sử STACloud
+          </a>
 
           <a
             href={sitePath('/#free-hosting')}

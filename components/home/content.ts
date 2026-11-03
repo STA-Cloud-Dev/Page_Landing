@@ -1,3 +1,4 @@
+import { freePlans, donaterPlan, freePolicy, communitySpecs } from '@/components/shared/free-plans';
 import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
 
 export const homeConfig = {
@@ -16,8 +17,8 @@ export const homeConfig = {
 };
 
 export const heroStats = [
-  { value: '17', label: 'Gói dịch vụ đang công bố', tone: 'cyan' },
-  { value: '8', label: 'Gói Linux Egg & Dev', tone: 'sky' },
+  { value: '24', label: 'Gói dịch vụ đang công bố', tone: 'cyan' },
+  { value: '10', label: 'Gói Linux Egg & Dev', tone: 'sky' },
   { value: 'L3/L4', label: 'Bảo vệ mạng OVH', tone: 'emerald' },
   { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
 ] as const;
@@ -30,7 +31,7 @@ export const heroSignals = [
 
 export const heroStatusStrip = [
   { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: 'Free Forever', tone: 'emerald', status: 'active' },
-  { label: 'Dev 1', detail: '75% CPU • 512 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
+  { label: 'Dev 1', detail: '50% CPU • 256 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
   { label: 'Game Servers 1', detail: 'Gói máy chủ game trả phí', value: '50.000 Credit / 28 ngày', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
   { label: 'STA-XEON-01', detail: 'OVH Singapore 6GB RAM', value: '146.000đ / tháng', tone: 'cyan', status: 'preorder' },
@@ -53,6 +54,21 @@ export const allServicePlans = [
     warning: '',
     ctaText: 'Đăng Ký NODE TEST',
   },
+  ...[...freePlans, donaterPlan].map((plan) => ({
+    id: plan.id,
+    category: 'community',
+    name: plan.name,
+    badge: plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Hoàn 100%',
+    status: 'check',
+    price: `${formatCredit(plan.credit)} Credit`,
+    period: `${plan.days} ngày`,
+    description: plan.requirement,
+    specs: communitySpecs(plan),
+    upsizeAvailable: false,
+    upsizeNotes: `Sao lưu thủ công: ${plan.backups} vị trí. Người dùng tự quản lý bản sao; không bao gồm backup tự động.`,
+    warning: plan.id === 'donater' ? 'Chủ động sao lưu dữ liệu. Kiểm tra điều kiện Donater và tài nguyên trên Portal.' : freePolicy,
+    ctaText: 'Kiểm tra trên Portal',
+  })),
   {
     id: 'openclaw',
     category: 'beta',
@@ -94,7 +110,7 @@ export const allServicePlans = [
     price: `${formatCredit(plan.credit)} Credit`,
     period: `${plan.days} ngày`,
     description: 'Gói máy chủ game trả phí, chu kỳ 28 ngày.',
-    specs: [],
+    specs: paidPlanSpecs(plan),
     upsizeAvailable: false,
     upsizeNotes: '',
     warning: '',
@@ -173,13 +189,14 @@ export const allServicePlans = [
 ];
 
 export const comprehensiveFaqs = [
+  { q: 'Nhóm FREE trên Portal khác NODE TEST thế nào?', a: `${freePolicy} Free Gamming + AI và Free DEV: 9.990 Credit / 5 ngày; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày. NODE TEST vẫn giữ 0 Credit / Free Forever.` },
   {
     q: 'NODE TEST có thực sự miễn phí lâu dài không?',
     a: 'Có. NODE TEST được công bố là Free Forever với 75% CPU và 2 GB RAM. Mỗi lần tạo plan hiển thị 0 Credit; người dùng chỉ cần tuân thủ chính sách sử dụng và chủ động lưu bản sao dữ liệu.',
   },
   {
     q: 'Tôi là người mới, nên chọn gói nào để bắt đầu?',
-    a: 'Bạn có thể bắt đầu miễn phí với NODE TEST hoặc OpenClaw Beta. Dev 1–3 có giá 7.000, 12.000 và 20.000 Credit cho 28 ngày; Linux Egg là các gói trả phí theo chu kỳ 12 ngày.',
+    a: 'Bạn có thể bắt đầu miễn phí với NODE TEST hoặc OpenClaw Beta. Dev 1–5 có giá 7.000, 12.000, 20.000, 35.000 và 50.000 Credit cho 28 ngày; Linux Egg là các gói trả phí theo chu kỳ 12 ngày.',
   },
   {
     q: 'OpenClaw Beta hoạt động như thế nào và có mất phí không?',
@@ -187,7 +204,7 @@ export const comprehensiveFaqs = [
   },
   {
     q: 'Phụ phí nâng cấp (upsize) vCore và RAM được tính như thế nào?',
-    a: 'Dev 1–3 và Egg Linux 1–5 có cấu hình và chu kỳ riêng ghi trong bảng giá. Nhu cầu nâng cấp riêng cần xác nhận qua ticket.',
+    a: 'Dev 1–5 và Egg Linux 1–5 có cấu hình và chu kỳ riêng ghi trong bảng giá. Nhu cầu nâng cấp riêng cần xác nhận qua ticket.',
   },
   {
     q: 'Vì sao NODE TEST lại có cảnh báo về dữ liệu?',
@@ -208,7 +225,7 @@ export const homeBenefits = [
     icon: '💎',
     title: 'Đầy Đủ Gói Free, Beta & Trả Phí',
     description:
-      'Từ NODE TEST và OpenClaw phục vụ trải nghiệm miễn phí 100%, đến DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
+      'Từ nhóm FREE mua hoàn 100% và OpenClaw Beta, đến DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
   },
   {
     icon: '📊',
@@ -235,7 +252,7 @@ export const homeQuickSteps = [
     step: '01',
     title: 'Chọn Gói Dịch Vụ',
     description:
-      'Chọn NODE TEST / OpenClaw nếu muốn thử nghiệm miễn phí, Dev 1–3 / Game Servers cho bot/game, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
+      'Chọn gói FREE / OpenClaw nếu muốn thử nghiệm miễn phí, Dev 1–5 / Game Servers cho bot/game, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
   },
   {
     step: '02',

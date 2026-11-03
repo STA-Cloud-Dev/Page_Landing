@@ -1,8 +1,10 @@
+import { freePolicy } from '@/components/shared/free-plans';
 import type { LegalSection } from './legal-content';
 
-export const policyUpdated = '24/10/2026';
+export const policyUpdated = '03/11/2026';
 
 export const refundSections: LegalSection[] = [
+  { title: 'Chính sách riêng cho nhóm FREE', paragraphs: [freePolicy, 'Chính sách FREE được ưu tiên áp dụng cho các gói trong nhóm FREE; không khấu trừ theo số ngày đã sử dụng hoặc áp dụng loại trừ sự cố, xóa máy chủ của gói trả phí bên dưới. Hoàn khoản thanh toán không bao gồm khôi phục dữ liệu.'] },
   { title: '1. Nguyên tắc hoàn vào số dư Credit', bullets: [
     'Theo chính sách dịch vụ của STACloud, giao dịch đã hoàn tất không được hoàn bằng tiền mặt, chuyển khoản ngân hàng, ví điện tử hoặc cổng thanh toán bên ngoài. Ngoại lệ bắt buộc theo pháp luật áp dụng vẫn được thực hiện.',
     'Khoản hoàn trả hoặc bồi hoàn được chấp thuận được cộng vào số dư Credit của chính tài khoản Portal đã thanh toán tại portal.stacloud.eu.cc.',
@@ -22,7 +24,7 @@ export const refundSections: LegalSection[] = [
   ] },
   { title: '4. Các trường hợp không thuộc diện hoàn', bullets: [
     'Vi phạm quy định sử dụng: DDoS, mining, botnet, scan trái phép, mã độc, phishing, nội dung vi phạm pháp luật hoặc quyền hợp pháp của bên thứ ba.',
-    'NODE TEST Free Forever, OpenClaw Beta và các dịch vụ hoàn toàn miễn phí không có khoản phí thực trả để hoàn.',
+    'OpenClaw Beta và dịch vụ có giá thực trả 0 không có khoản thanh toán để hoàn. Nhóm FREE có thanh toán Credit áp dụng chính sách hoàn 100% riêng ở trên.',
     'Sự cố do cấu hình, phần mềm, plugin, script, thao tác xóa dữ liệu hoặc lộ thông tin đăng nhập thuộc phía khách hàng.',
     'Tên miền đã đăng ký, IP riêng đã kích hoạt, lưu lượng Shield đã tiêu thụ và các khoản thiết lập đặc biệt không thu hồi được.',
     'Gói Partner đã hưởng ưu đãi trên 20% không thuộc chính sách hủy hoàn Credit theo nhu cầu; sự cố đủ điều kiện vẫn được xét theo SLA và thỏa thuận riêng.',
@@ -50,7 +52,7 @@ export const securitySections: LegalSection[] = [
     'Khách hàng chịu trách nhiệm với người được mình chia sẻ quyền. Báo ngay khi phát hiện truy cập lạ để phối hợp khóa phiên, cô lập và khôi phục.',
   ] },
   { title: '4. Backup và khôi phục', paragraphs: [
-    'NODE TEST và OpenClaw Beta không được cam kết backup tự động. Người dùng phải chủ động giữ bản sao bên ngoài hệ thống.',
+    'NODE TEST, nhóm FREE và OpenClaw Beta không được cam kết backup tự động. Người dùng phải chủ động giữ bản sao bên ngoài hệ thống.',
     'Gói trả phí có công bố Backup được sao lưu dự phòng vào Thứ 3, Thứ 6 và Chủ nhật. Chỉ áp dụng cho gói có ghi rõ quyền lợi này; không mặc nhiên áp dụng cho mọi gói Linux, Dev hoặc Game Servers.',
     'Backup hạ tầng không thay thế bản sao độc lập của khách hàng; khả năng khôi phục phụ thuộc bản sao còn hợp lệ. Nêu rõ mốc dữ liệu cần khôi phục khi tạo ticket.',
   ] },

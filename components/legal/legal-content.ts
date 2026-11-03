@@ -1,3 +1,5 @@
+import { freePolicy } from '@/components/shared/free-plans';
+
 export type LegalSubsection = {
   title: string;
   paragraphs?: string[];
@@ -11,11 +13,12 @@ export type LegalSection = {
   subsections?: LegalSubsection[];
 };
 
-export const legalLastUpdated = '24/10/2026';
+export const legalLastUpdated = '03/11/2026';
 export const slaLastUpdated = '24/10/2026';
 export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
+  { title: 'Chính sách nhóm FREE trên Portal', paragraphs: [freePolicy, 'Nhóm FREE trên Portal có thanh toán Credit và áp dụng hoàn 100% riêng, khác gói NODE TEST 0 Credit / Free Forever. Chính sách này được ưu tiên khi có sự khác biệt với quy định chung về dịch vụ miễn phí; không bao gồm khôi phục dữ liệu.'] },
   {
     title: '1. Thanh toán',
     bullets: [
@@ -543,7 +546,7 @@ export const partnerSections: LegalSection[] = [
     bullets: [
       'STACloud không chịu trách nhiệm cho thiệt hại gián tiếp, mất doanh thu, mất dữ liệu, mất người dùng, gián đoạn cộng đồng hoặc thiệt hại phát sinh từ việc Partner không backup, cấu hình sai, dùng phần mềm lỗi hoặc vi phạm điều khoản.',
       'Trong mọi trường hợp, mức bồi hoàn tối đa nếu có sẽ không vượt quá phí dịch vụ mà Partner đã thanh toán cho dịch vụ bị ảnh hưởng trong chu kỳ xảy ra sự cố.',
-      'Các dịch vụ miễn phí như NODE TEST và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime, bồi hoàn hoặc khôi phục dữ liệu.',
+      'NODE TEST 0 Credit và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime hoặc khôi phục dữ liệu. Nhóm FREE có thanh toán trên Portal áp dụng riêng chính sách mua hoàn 100%, kể cả khi máy chủ sập hoặc bị xóa.',
       'Service credit, nếu được áp dụng, là biện pháp khắc phục duy nhất cho sự cố downtime thuộc phạm vi SLA.',
     ],
   },

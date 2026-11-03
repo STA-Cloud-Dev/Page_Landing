@@ -15,8 +15,8 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
   const displayStats: StatItem[] = stats
     ? [...stats]
     : [
-        { value: '17', label: 'Gói dịch vụ đang công bố' },
-        { value: '8', label: 'Gói Linux Egg & Dev' },
+        { value: '24', label: 'Gói dịch vụ đang công bố' },
+        { value: '10', label: 'Gói Linux Egg & Dev' },
         { value: 'L3/L4', label: 'Bảo vệ mạng OVH' },
         { value: '0đ', label: 'Node Test Free Forever' },
       ];

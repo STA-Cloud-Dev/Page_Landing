@@ -1,3 +1,4 @@
+import { freePlans, donaterPlan, freePolicy, communitySpecs } from '@/components/shared/free-plans';
 import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
 
 import { sitePath } from '@/lib/site-path';
@@ -14,14 +15,14 @@ export const siteConfig = {
   supportChannel: '📥｜support-ticket / Group Chat Messenger-Zalo',
   copyrightText: '© 2018 - 2026 STACloud. All rights reserved.',
   testerAlertMessage:
-    'Cảnh báo: NODE TEST (tên cũ: TESTER) là gói miễn phí và không hỗ trợ backup. Bạn phải tự tải dữ liệu quan trọng về máy.',
+    freePolicy,
 };
 
 export const heroStats = [
-  { value: '17', label: 'Gói / dịch vụ đang công bố' },
-  { value: '8', label: 'Gói Linux Egg & Dev' },
+  { value: '24', label: 'Gói / dịch vụ đang công bố' },
+  { value: '10', label: 'Gói Linux Egg & Dev' },
   { value: '3 ngày', label: 'Thời gian đặt trước VPS lớn' },
-  { value: '0đ', label: 'Node Test / OpenClaw' },
+  { value: '100%', label: 'Hoàn khoản mua gói FREE' },
 ] as const;
 
 export const servicePlans = [
@@ -38,6 +39,18 @@ export const servicePlans = [
     accent: 'from-emerald-400/25 to-cyan-300/10',
     warnings: [],
   },
+  ...[...freePlans, donaterPlan].map((plan) => ({
+    name: plan.name,
+    description: plan.requirement,
+    price: `${formatCredit(plan.credit)} Credit / ${plan.days} ngày`,
+    highlight: plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Mua hoàn 100%',
+    specs: communitySpecs(plan),
+    addOns: [`Sao lưu thủ công: ${plan.backups} vị trí. Người dùng tự quản lý bản sao; không bao gồm backup tự động.`],
+    status: 'check',
+    statusLabel: 'Xem slot trên Portal',
+    accent: 'from-emerald-400/25 to-cyan-300/10',
+    warnings: [plan.id === 'donater' ? 'Chủ động sao lưu dữ liệu. Kiểm tra điều kiện Donater trên Portal.' : freePolicy],
+  })),
   {
     name: 'OPENCLAW',
     description:
@@ -78,7 +91,7 @@ export const servicePlans = [
     description: 'Gói máy chủ game trả phí, chu kỳ 28 ngày.',
     price: `${formatCredit(plan.credit)} Credit / ${plan.days} ngày`,
     highlight: 'Game Server • Trả phí',
-    specs: [],
+    specs: paidPlanSpecs(plan),
     addOns: [],
     status: 'active',
     statusLabel: 'Đang mở',
@@ -212,7 +225,7 @@ export const benefits = [
   {
     title: 'Có đủ gói free, beta và trả phí',
     description:
-      'NODE TEST và OpenClaw phục vụ trải nghiệm miễn phí, trong khi DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành ổn định hơn.',
+      'Nhóm FREE mua hoàn 100% và OpenClaw phục vụ trải nghiệm cộng đồng, trong khi DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành ổn định hơn.',
   },
   {
     title: 'Cấu hình và giá rõ ràng',
@@ -227,7 +240,7 @@ export const benefits = [
   {
     title: 'Chính sách rủi ro minh bạch',
     description:
-      'NODE TEST và OpenClaw Beta có cảnh báo rõ để người dùng chủ động backup, chọn location phù hợp và tạo ticket đúng quy trình.',
+      'Nhóm FREE và OpenClaw Beta có cảnh báo rõ để người dùng chủ động backup, chọn location phù hợp và tạo ticket đúng quy trình.',
   },
 ] as const;
 
@@ -236,7 +249,7 @@ export const quickSteps = [
     step: '01',
     title: 'Chọn nhóm gói phù hợp',
     description:
-      'Chọn NODE TEST/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc Xeon/EPYC cho workload ổn định hơn.',
+      'Chọn nhóm FREE/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc Xeon/EPYC cho workload ổn định hơn.',
   },
   {
     step: '02',
@@ -253,9 +266,10 @@ export const quickSteps = [
 ] as const;
 
 export const notes = [
-  'NODE TEST (tên cũ: TESTER) là gói Free Forever, dùng 75% CPU và 2 GB RAM; mỗi lần tạo plan có giá 0 Credit.',
+  freePolicy,
+  'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM.',
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
-  'Dev 1–3: 7.000 / 12.000 / 20.000 Credit cho 28 ngày. Game Servers 1–2: 50.000 / 65.000 Credit cho 28 ngày. Egg Linux 1–5 dành cho người trả phí, chu kỳ 12 ngày.',
+  'Dev 1–5: 7.000 / 12.000 / 20.000 / 35.000 / 50.000 Credit cho 28 ngày. Game Servers 1–2: 50.000 / 65.000 Credit cho 28 ngày. Egg Linux 1–5 dành cho người trả phí, chu kỳ 12 ngày.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
   'STA-XEON-01 giá 146.000 VNĐ / tháng; STA-XEON-02 giá 209.000 VNĐ / tháng; STA-AMD-EPYC-01 giá 249.000 VNĐ / tháng; STA-AMD-EPYC-02 giá 333.000 VNĐ / tháng và đều cần đặt trước 3 ngày.',
   'Theo dõi tài nguyên còn lại tại kênh 🗺️｜server-status-and-slot trên Discord.',
@@ -265,9 +279,10 @@ export const policyGroups = [
   {
     title: 'Gói Miễn Phí Và Beta',
     points: [
-      'NODE TEST (tên cũ: TESTER) là gói free cho bot Discord, web nhỏ và project sinh viên, dùng 75% CPU và 2 GB RAM.',
-      'NODE TEST được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
-      'NODE TEST không hỗ trợ backup; người dùng phải chủ động tải bản sao dữ liệu về máy.',
+      'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM. Nhóm FREE trên Portal áp dụng mức thanh toán và hoàn 100% riêng.',
+      freePolicy,
+      'Free Gamming + AI và Free DEV: 9.990 Credit / 5 ngày; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày.',
+      'Nhóm FREE không hỗ trợ backup; người dùng phải chủ động tải bản sao dữ liệu về máy.',
       'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật; tài khoản vi phạm bị khóa vĩnh viễn.',
       'OpenClaw Beta miễn phí và hiện không cần domain riêng.',
       'Nếu cần hỗ trợ OpenClaw, người dùng có thể liên hệ Discord, Zalo hoặc Messenger Group.',
@@ -276,9 +291,11 @@ export const policyGroups = [
   {
     title: 'Dev, Linux Egg & Game Servers',
     points: [
-      'Dev 1: 75% CPU, 512 MB RAM, 1024 MB ổ đĩa; 7.000 Credit / 28 ngày.',
-      'Dev 2: 75% CPU, 1024 MB RAM, 2048 MB ổ đĩa; 12.000 Credit / 28 ngày.',
-      'Dev 3: 100% CPU, 2048 MB RAM, 3072 MB ổ đĩa; 20.000 Credit / 28 ngày.',
+      'Dev 1: 50% CPU, 256 MB RAM, 1024 MB ổ đĩa; 7.000 Credit / 28 ngày.',
+      'Dev 2: 75% CPU, 512 MB RAM, 2048 MB ổ đĩa; 12.000 Credit / 28 ngày.',
+      'Dev 3: 75% CPU, 1024 MB RAM, 3072 MB ổ đĩa; 20.000 Credit / 28 ngày.',
+      'Dev 4: 100% CPU, 1536 MB RAM, 4096 MB ổ đĩa; 35.000 Credit / 28 ngày.',
+      'Dev 5: 100% CPU, 2048 MB RAM, 5120 MB ổ đĩa; 50.000 Credit / 28 ngày.',
       'Game Servers 1–2 có giá 50.000 / 65.000 Credit cho chu kỳ 28 ngày.',
       'Linux Egg dành cho người trả phí và có chu kỳ 12 ngày.',
       'Egg Linux 1, 2, 3 và 5 có backup dự phòng vào Thứ 3, Thứ 6 và Chủ nhật.',
