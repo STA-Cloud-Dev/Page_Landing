@@ -11,7 +11,7 @@ export function ImmersiveHero() {
         <div className="hero-editorial-copy">
           <p className="cosmic-eyebrow"><span /> VPS & HOSTING • VIỆT NAM / SINGAPORE</p>
           <h1 id="hero-title">STA Cloud.<br /><em>Hosting & VPS.</em></h1>
-          <p className="hero-description">STA Cloud (STACloud) chuyên VPS và hosting tại Việt Nam, Singapore cho website, bot Discord và game server. Khám phá Cloud VPS OVH, game hosting và các gói cộng đồng theo nhu cầu của bạn.</p>
+          <p className="hero-description">STA Cloud (STACloud) chuyên VPS và hosting tại Việt Nam, Singapore cho website, bot Discord và game server. Khám phá Cloud VPS Oracle, game hosting và các gói cộng đồng theo nhu cầu của bạn.</p>
           <div className="cosmic-actions">
             <a className="cosmic-button cosmic-button-primary" href="#plans">Khám phá hạ tầng <ArrowUpRight size={18} aria-hidden="true" /></a>
             <a className="cosmic-text-link" href={homeConfig.panelUrl} target="_blank" rel="noopener noreferrer">Mở Control Portal <ArrowUpRight size={16} aria-hidden="true" /></a>

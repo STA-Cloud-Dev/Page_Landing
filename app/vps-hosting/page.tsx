@@ -1,3 +1,4 @@
+import { oraclePricingSource, oraclePricingDate } from '@/components/shared/oracle-vps';
 import type { Metadata } from 'next';
 import { allServicePlans, homeConfig } from '@/components/home/content';
 import { SiteFooter } from '@/components/shared/site-footer';
@@ -5,7 +6,7 @@ import { sitePath } from '@/lib/site-path';
 import { siteImage, siteName, siteUrl } from '@/lib/site-seo';
 
 const title = 'VPS & Hosting Việt Nam, Singapore | STA Cloud';
-const description = 'Chọn VPS, hosting website, bot Discord và game server tại STA Cloud. So sánh khu vực Việt Nam, Singapore; xem gói VPS Xeon, AMD EPYC và cách đăng ký.';
+const description = 'Chọn VPS, hosting website, bot Discord và game server tại STA Cloud. So sánh khu vực Việt Nam, Singapore; xem bảng giá VPS Oracle Cloud và cách đăng ký.';
 const canonical = `${siteUrl}/vps-hosting/`;
 
 export const metadata: Metadata = {
@@ -53,7 +54,7 @@ export default function VpsHostingPage() {
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {[
               { name: 'Hosting website & bot', text: 'Phù hợp website, bot Discord, ứng dụng Node.js hoặc Python có nhu cầu tài nguyên rõ ràng. Xem gói Dev và Linux Egg, runtime được hỗ trợ và giới hạn của từng gói.', href: '/free-server/', action: 'Xem bảng giá hosting' },
-              { name: 'Cloud VPS', text: 'Phù hợp nhu cầu triển khai ứng dụng và dịch vụ trên máy chủ ảo. Gửi yêu cầu hệ điều hành, CPU, RAM, dung lượng và port để chọn VPS Xeon hoặc AMD EPYC.', href: '/#plans', action: 'Xem toàn bộ gói dịch vụ' },
+              { name: 'Cloud VPS', text: 'Phù hợp nhu cầu triển khai ứng dụng và dịch vụ trên máy chủ ảo. Gửi yêu cầu hệ điều hành, CPU, RAM, dung lượng và port để chọn VPS Oracle Cloud.', href: '/#plans', action: 'Xem toàn bộ gói dịch vụ' },
               { name: 'Game hosting / server hosting', text: 'Dành cho máy chủ game như Minecraft. Chọn môi trường trong kho Egg, sau đó xác nhận tài nguyên theo phiên bản game, plugin, mod và số người chơi dự kiến.', href: '/egg/', action: 'Xem game & runtime hỗ trợ' },
             ].map((service) => (
               <article key={service.name} className="flex flex-col rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">
@@ -74,15 +75,16 @@ export default function VpsHostingPage() {
             </article>
             <article className="rounded-2xl border border-cyan-300/25 p-5">
               <h3 className="text-xl font-semibold text-white">Singapore</h3>
-              <p className="mt-3 text-sm leading-7 text-sky-100">Các gói VPS đang công bố dùng Intel Xeon và AMD EPYC tại OVH Singapore, kèm bảo vệ Anti-DDoS theo gói. Phù hợp để cân nhắc khi phục vụ người dùng ở Việt Nam và khu vực; độ trễ thực tế phụ thuộc tuyến mạng của người dùng.</p>
+              <p className="mt-3 text-sm leading-7 text-sky-100">Hosting và game server Singapore được xác nhận theo từng gói. VPS Oracle Cloud cần xác nhận khu vực triển khai qua ticket; không mặc định mọi cấu hình đều có tại Singapore.</p>
             </article>
           </div>
           <p className="mt-4 text-sm leading-7 text-sky-200">Không phải mọi gói đều có ở cả hai khu vực. Khi mở ticket, hãy nêu khu vực mong muốn, loại ứng dụng, số người dùng và nhu cầu backup để được đối chiếu hạ tầng hiện có.</p>
         </section>
 
         <section id="vps-plans" aria-labelledby="vps-title" className="scroll-mt-8 py-8">
-          <h2 id="vps-title" className="text-2xl font-bold text-white">Các gói Cloud VPS OVH Singapore đang công bố</h2>
-          <p className="mt-3 text-sm leading-7 text-sky-100">So sánh CPU, RAM, lưu trữ và giá theo tháng để chọn cấu hình phù hợp. Các gói VPS bên dưới yêu cầu đặt trước 3 ngày; xác nhận slot và cấu hình bàn giao qua ticket.</p>
+          <h2 id="vps-title" className="text-2xl font-bold text-white">Bảng giá VPS Oracle Cloud</h2>
+          <p className="mt-3 text-sm leading-7 text-sky-100">So sánh vCPU, RAM và SSD để chọn cấu hình phù hợp. CPU Burstable 50%; khu vực, slot và lịch bàn giao được xác nhận qua ticket. Giá theo tháng chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung.</p>
+          <p className="mt-3 text-sm text-sky-200">Giá cập nhật {oraclePricingDate}, tham khảo <a href={oraclePricingSource} target="_blank" rel="noopener noreferrer" className="underline">bảng giá Oracle Cloud ICS</a>. STA Cloud tiếp nhận tư vấn và đăng ký qua ticket.</p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {vpsPlans.map((plan) => (
               <article key={plan.id} className="rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">

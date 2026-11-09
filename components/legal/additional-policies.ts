@@ -38,7 +38,7 @@ export const refundSections: LegalSection[] = [
 export const securitySections: LegalSection[] = [
   { title: '1. Cách ly tài nguyên và bảo vệ mạng', paragraphs: [
     'Máy chủ được phân tách theo cơ chế ảo hóa hoặc container tùy gói và hạ tầng được cấp. Không cố truy cập hoặc can thiệp môi trường của khách hàng khác. Việc cách ly là biện pháp bảo vệ, không phải bảo đảm tuyệt đối rằng không thể có lỗ hổng.',
-    'Khả năng Anti-DDoS phụ thuộc location và nhà cung cấp. Các gói OVH phù hợp thừa hưởng lớp bảo vệ mạng của OVH; không cam kết miễn nhiễm mọi cuộc tấn công hoặc lọc lớp ứng dụng nếu gói không công bố tính năng đó.',
+    'Khả năng Anti-DDoS phụ thuộc location và nhà cung cấp. VPS Oracle Cloud cần xác nhận tính năng bảo vệ theo cấu hình và khu vực; không cam kết miễn nhiễm mọi cuộc tấn công hoặc lọc lớp ứng dụng nếu gói không công bố tính năng đó.',
   ] },
   { title: '2. Quyền quản trị và truy cập hỗ trợ', bullets: [
     'Quyền root/SSH hoặc console được cung cấp theo loại dịch vụ; máy chủ container không mặc nhiên có quyền quản trị host hoặc máy vật lý.',

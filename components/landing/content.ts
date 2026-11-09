@@ -1,3 +1,4 @@
+import { oracleServicePlans, oraclePricingNote } from '@/components/shared/oracle-vps';
 import { freePlans, donaterPlan, freePolicy, communitySpecs } from '@/components/shared/free-plans';
 import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
 
@@ -19,9 +20,9 @@ export const siteConfig = {
 };
 
 export const heroStats = [
-  { value: '24', label: 'Gói / dịch vụ đang công bố' },
+  { value: '19', label: 'Cấu hình VPS Oracle' },
   { value: '10', label: 'Gói Linux Egg & Dev' },
-  { value: '3 ngày', label: 'Thời gian đặt trước VPS lớn' },
+  { value: 'OCI', label: 'VPS Oracle Cloud' },
   { value: '100%', label: 'Hoàn khoản mua gói FREE' },
 ] as const;
 
@@ -111,79 +112,11 @@ export const servicePlans = [
     accent: 'from-blue-400/20 to-cyan-300/10',
     warnings: [],
   },
-  {
-    name: 'STA-XEON-01',
-    description:
-      'Economy Edition dùng Intel Xeon E5-26xx v3 Haswell-EP tại OVH Singapore. Tối ưu chi phí cho sinh viên, treo tool, bot Discord, web nhỏ hoặc test lab.',
-    price: '146.000 VNĐ / tháng',
-    highlight: 'Economy OVH SG',
-    specs: ['2 vCore Intel Xeon E5-26xx v3', '~3.1 GHz', '6 GB RAM', '40 GB Disk', 'Full port theo yêu cầu'],
-    addOns: [
-      'Hạ tầng OVH Singapore với AntiDDoS layer 3 & 4.',
-      'Phù hợp treo tool, bot Discord, web nhỏ hoặc test lab.',
-      'Uptime 24/7 với độ trễ thấp từ Singapore về Việt Nam.',
-      'Yêu cầu đặt trước 3 ngày để khởi tạo và tối ưu tài nguyên.',
-      'Tạo ticket tại kênh 📥｜support-ticket để giữ slot.',
-    ],
-    status: 'preorder',
-    statusLabel: 'Đặt trước',
-    accent: 'from-sky-400/20 to-cyan-300/10',
-    warnings: [],
-  },
-  {
-    name: 'STA-XEON-02',
-    description:
-      'Economy Edition nâng cao dùng Intel Xeon E5-26xx v3 Haswell-EP tại OVH Singapore. Phù hợp workload cần nhiều CPU, RAM và dung lượng lưu trữ hơn.',
-    price: '209.000 VNĐ / tháng',
-    highlight: 'Economy Plus OVH SG',
-    specs: ['4 vCore Intel Xeon E5-26xx v3', '~3.1 GHz', '14 GB RAM', '90 GB Disk', 'Full port theo yêu cầu'],
-    addOns: [
-      'Hạ tầng OVH Singapore với AntiDDoS layer 3 & 4.',
-      'Phù hợp bot, web app, tool, test lab hoặc workload cần nhiều RAM.',
-      'Uptime 24/7 với độ trễ thấp từ Singapore về Việt Nam.',
-      'Yêu cầu đặt trước 3 ngày để khởi tạo và tối ưu tài nguyên.',
-      'Tạo ticket tại kênh 📥｜support-ticket để giữ slot.',
-    ],
-    status: 'preorder',
-    statusLabel: 'Đặt trước',
-    accent: 'from-blue-400/20 to-cyan-300/10',
-    warnings: [],
-  },
-  {
-    name: 'STA-AMD-EPYC-01',
-    description:
-      'Standard Edition hiệu năng cao dùng AMD EPYC Milan Gen 3 tại OVH Singapore. Phù hợp Minecraft, game server, web app và workload cần CPU mạnh.',
-    price: '249.000 VNĐ / tháng',
-    highlight: 'Standard EPYC',
-    specs: ['2 vCore AMD Milan', '7 GB RAM', '40 GB Disk', 'Full port theo yêu cầu', 'OVH Singapore'],
-    addOns: [
-      'Có thể đổi sang AMD Gen 4 hoặc Gen 5 theo khả năng hạ tầng.',
-      'Hỗ trợ chia nhỏ thành nhiều server hoặc port khác nhau.',
-      'Bảo vệ AntiDDoS mạnh từ hạ tầng OVH.',
-      'Yêu cầu đặt trước 3 ngày để phân bổ máy chủ.',
-    ],
-    status: 'preorder',
-    statusLabel: 'Đặt trước',
-    accent: 'from-cyan-400/20 to-sky-300/10',
-    warnings: [],
-  },
-  {
-    name: 'STA-AMD-EPYC-02',
-    description:
-      'Premium Edition hiệu năng cao dùng AMD EPYC Milan Gen 3 tại OVH Singapore. Dành cho workload cần nhiều vCore, nhiều RAM hoặc chia nhiều server.',
-    price: '333.000 VNĐ / tháng',
-    highlight: 'Premium EPYC',
-    specs: ['4 vCore AMD Milan', '15 GB RAM', '90 GB Disk', 'Full port theo yêu cầu', 'OVH Singapore'],
-    addOns: [
-      'Có thể đổi sang AMD Gen 4 hoặc Gen 5 theo khả năng hạ tầng.',
-      'Hỗ trợ chia nhỏ thành nhiều server hoặc port khác nhau.',
-      'Yêu cầu đặt trước 3 ngày để phân bổ máy chủ.',
-    ],
-    status: 'preorder',
-    statusLabel: 'Đặt trước',
-    accent: 'from-blue-400/20 to-cyan-300/10',
-    warnings: [],
-  },
+  ...oracleServicePlans.map((plan) => ({
+    name: plan.name, description: plan.description, price: `${plan.price} / ${plan.period}`,
+    highlight: plan.badge, specs: plan.specs, addOns: [plan.upsizeNotes],
+    status: 'check', statusLabel: 'Liên hệ tư vấn', accent: 'from-sky-400/20 to-cyan-300/10', warnings: [plan.warning],
+  })),
 ] as const;
 
 export const locations = [
@@ -192,7 +125,7 @@ export const locations = [
     flagSrc: sitePath('/flags/singapore.svg?v=20261024-2'),
     speed: '10 Gbps',
     description:
-      'OVH Singapore dành cho gói miễn phí và trả phí, phù hợp game server, web app, bot và VPS Xeon/EPYC.',
+      'Hosting, game server và VPS Oracle Cloud được xác nhận khu vực theo từng dịch vụ.',
     availability: 'Free / Paid',
   },
   {
@@ -225,7 +158,7 @@ export const benefits = [
   {
     title: 'Có đủ gói free, beta và trả phí',
     description:
-      'Nhóm FREE mua hoàn 100% và OpenClaw phục vụ trải nghiệm cộng đồng, trong khi DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành ổn định hơn.',
+      'Nhóm FREE mua hoàn 100% và OpenClaw phục vụ trải nghiệm cộng đồng, trong khi DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành ổn định hơn.',
   },
   {
     title: 'Cấu hình và giá rõ ràng',
@@ -235,7 +168,7 @@ export const benefits = [
   {
     title: 'Hạ tầng Singapore mạnh',
     description:
-      'Các gói trả phí chính chạy trên OVH Singapore, có AntiDDoS và phù hợp độ trễ từ Singapore về Việt Nam.',
+      'Các gói trả phí gồm hosting, game server và VPS Oracle Cloud; khu vực và bảo vệ mạng tùy dịch vụ.',
   },
   {
     title: 'Chính sách rủi ro minh bạch',
@@ -249,7 +182,7 @@ export const quickSteps = [
     step: '01',
     title: 'Chọn nhóm gói phù hợp',
     description:
-      'Chọn nhóm FREE/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc Xeon/EPYC cho workload ổn định hơn.',
+      'Chọn nhóm FREE/OpenClaw nếu chỉ cần trải nghiệm miễn phí, DEV/MC cho nhu cầu nhỏ, hoặc VPS Oracle Cloud cho workload ổn định hơn.',
   },
   {
     step: '02',
@@ -261,7 +194,7 @@ export const quickSteps = [
     step: '03',
     title: 'Chờ xác minh và cấp phát',
     description:
-      'Các gói lớn như STA-XEON-01, STA-XEON-02, STA-AMD-EPYC-01 và STA-AMD-EPYC-02 cần đặt trước 3 ngày để khởi tạo và tối ưu tài nguyên.',
+      'VPS Oracle Cloud được tư vấn cấu hình, khu vực và lịch bàn giao qua ticket.',
   },
 ] as const;
 
@@ -271,7 +204,7 @@ export const notes = [
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
   'Dev 1–5: 7.000 / 12.000 / 20.000 / 35.000 / 50.000 Credit cho 28 ngày. Game Servers 1–2: 50.000 / 65.000 Credit cho 28 ngày. Egg Linux 1–5 dành cho người trả phí, chu kỳ 12 ngày.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
-  'STA-XEON-01 giá 146.000 VNĐ / tháng; STA-XEON-02 giá 209.000 VNĐ / tháng; STA-AMD-EPYC-01 giá 249.000 VNĐ / tháng; STA-AMD-EPYC-02 giá 333.000 VNĐ / tháng và đều cần đặt trước 3 ngày.',
+  oraclePricingNote,
   'Theo dõi tài nguyên còn lại tại kênh 🗺️｜server-status-and-slot trên Discord.',
 ] as const;
 
@@ -317,25 +250,7 @@ export const policyGroups = [
       'Proxy Thailand hỗ trợ gói Free / Paid với băng thông 30 Gbps.',
     ],
   },
-  {
-    title: 'Intel Xeon OVH Singapore',
-    points: [
-      'STA-XEON-01 dùng 2 vCore Intel Xeon E5-26xx v3 khoảng 3.1 GHz, 6 GB RAM và 40 GB Disk.',
-      'Giá STA-XEON-01 là 146.000 VNĐ / tháng, full port theo yêu cầu.',
-      'STA-XEON-02 dùng 4 vCore Intel Xeon E5-26xx v3 khoảng 3.1 GHz, 14 GB RAM và 90 GB Disk.',
-      'Giá STA-XEON-02 là 209.000 VNĐ / tháng, full port theo yêu cầu.',
-      'Yêu cầu đặt trước 3 ngày để khởi tạo và tối ưu tài nguyên.',
-    ],
-  },
-  {
-    title: 'AMD EPYC OVH Singapore',
-    points: [
-      'STA-AMD-EPYC-01 có 2 vCore AMD Milan, 7 GB RAM, 40 GB Disk, full port theo yêu cầu và giá 249.000 VNĐ / tháng.',
-      'STA-AMD-EPYC-02 có 4 vCore AMD Milan, 15 GB RAM, 90 GB Disk, full port theo yêu cầu và giá 333.000 VNĐ / tháng.',
-      'Có thể hỗ trợ chia nhỏ thành nhiều server hoặc port khác nhau.',
-      'Yêu cầu đặt trước 3 ngày để phân bổ máy chủ.',
-    ],
-  },
+  { title: 'VPS Oracle Cloud', points: [oraclePricingNote] },
   {
     title: 'Lưu Ý Location OpenClaw',
     points: [

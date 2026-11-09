@@ -3,7 +3,7 @@ export const siteName = 'STACloud';
 export const alternateNames = ['STA Cloud', 'STA Cloud Hosting'];
 export const siteTitle = 'STA Cloud | VPS, Hosting Việt Nam & Singapore';
 export const siteDescription =
-  'STA Cloud (STACloud) cung cấp VPS, hosting Việt Nam và Singapore cho website, bot Discord và game server. Xem Cloud VPS OVH, game hosting, cấu hình và bảng giá.';
+  'STA Cloud (STACloud) cung cấp VPS, hosting Việt Nam và Singapore cho website, bot Discord và game server. Xem Cloud VPS Oracle, game hosting, cấu hình và bảng giá.';
 
 export const siteServices = [
   {
@@ -14,7 +14,7 @@ export const siteServices = [
   },
   {
     name: 'VPS & máy chủ theo nhu cầu',
-    description: 'Cloud VPS Intel Xeon và AMD EPYC tại OVH Singapore; tư vấn nhu cầu VPS, hosting Việt Nam và Singapore theo khu vực sử dụng, cấu hình và tình trạng hạ tầng.',
+    description: 'Cloud VPS Oracle với cấu hình vCPU, RAM và SSD theo gói; tư vấn nhu cầu VPS, hosting Việt Nam và Singapore theo khu vực sử dụng, cấu hình và tình trạng hạ tầng.',
     path: '/vps-hosting/',
     action: 'Chọn VPS & khu vực hosting',
   },

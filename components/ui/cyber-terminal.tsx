@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getVisualQuality } from '@/lib/visual-quality';
 
 const terminalLines = [
-  { text: '$ stacloud init --env=production --region=sg-ovh-01', color: 'text-cyan-400' },
-  { text: '[OK] Connected to OVH Singapore Datacenter (10 Gbps AntiDDoS)', color: 'text-emerald-400' },
-  { text: '[INFO] Allocating AMD EPYC Milan Core & High-Speed DDR4 RAM...', color: 'text-slate-300' },
+  { text: '$ stacloud init --env=production --provider=oracle-cloud', color: 'text-cyan-400' },
+  { text: '[OK] Oracle Cloud VPS configuration selected', color: 'text-emerald-400' },
+  { text: '[INFO] Preparing vCPU, RAM and SSD configuration...', color: 'text-slate-300' },
   { text: '$ curl -sSL https://portal.stacloud.eu.cc/openclaw/deploy.sh | bash', color: 'text-cyan-400' },
   { text: '[CLAW] OpenClaw Beta Engine v2.4 initialized successfully!', color: 'text-sky-300' },
   { text: '[CLAW] Zero Domain Requirement: Active on fast SSL tunneling proxy', color: 'text-indigo-300' },

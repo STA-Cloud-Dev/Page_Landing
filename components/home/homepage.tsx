@@ -1,5 +1,6 @@
 'use client';
 
+import { oraclePricingNote, oraclePricingSource, oraclePricingDate } from '@/components/shared/oracle-vps';
 import React, { useState } from 'react';
 import {
   allServicePlans,
@@ -28,11 +29,13 @@ import { siteServices } from '@/lib/site-seo';
 const featuredTiers = [
   { id: 'node-test', eyebrow: '01 / Học tập & trải nghiệm', title: 'Khởi đầu miễn phí', action: 'Nhận gói miễn phí', emphasis: false },
   { id: 'dev-1', eyebrow: '02 / Bot & ứng dụng web', title: 'Phát triển mỗi ngày', action: 'Chọn gói Dev 1', emphasis: true },
-  { id: 'sta-epyc-01', eyebrow: '03 / VPS hiệu năng cao', title: 'Sẵn sàng mở rộng', action: 'Tư vấn VPS EPYC', emphasis: false },
+  { id: 'oracle-starter-1', eyebrow: '03 / VPS Oracle Cloud', title: 'Sẵn sàng mở rộng', action: 'Tư vấn VPS Oracle', emphasis: false },
 ] as const;
 
 function getStatusBadge(status: string) {
   switch (status) {
+    case 'consult':
+      return { dot: 'bg-sky-300', pill: 'border-sky-300/40 bg-sky-400/20 text-sky-100', label: 'Liên hệ tư vấn' };
     case 'check':
       return { dot: 'bg-sky-300', pill: 'border-sky-300/40 bg-sky-400/20 text-sky-100', label: 'Xem slot trên Portal' };
     case 'active':
@@ -382,7 +385,7 @@ export function HomePage() {
               Chọn Gói Dịch Vụ Phù Hợp Nhu Cầu
             </h2>
             <p className="mx-auto max-w-2xl text-xs text-sky-100 sm:text-base">
-              Từ các gói test cộng đồng giá siêu rẻ đến cụm máy chủ VPS OVH Singapore chuyên dụng cho tải nặng.
+              Từ các gói test cộng đồng giá siêu rẻ đến các cấu hình VPS Oracle Cloud cho ứng dụng và dịch vụ.
             </p>
           </div>
 
@@ -391,7 +394,7 @@ export function HomePage() {
               const plan = allServicePlans.find((item) => item.id === tier.id);
               if (!plan) return null;
               return (
-                <TiltCard key={tier.id} className={`depth-plan-card ${tier.emphasis || tier.id === 'sta-epyc-01' ? 'border-beam' : ''} relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 shadow-2xl sm:p-7 ${tier.emphasis
+                <TiltCard key={tier.id} className={`depth-plan-card ${tier.emphasis || tier.id === 'oracle-starter-1' ? 'border-beam' : ''} relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 shadow-2xl sm:p-7 ${tier.emphasis
                   ? 'border-cyan-300 bg-gradient-to-b from-[#114a74] to-[#042343] shadow-[0_0_45px_rgba(34,211,238,0.24)] lg:-translate-y-2'
                   : 'border-sky-200/20 bg-[#06182b] shadow-black/25'}`}>
                   {tier.emphasis && <span className="absolute right-0 top-0 rounded-bl-xl bg-cyan-300 px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-[#031b32]">Đề xuất bắt đầu</span>}
@@ -408,11 +411,11 @@ export function HomePage() {
                       <li key={spec} className="flex items-start gap-2"><span className="font-bold text-emerald-300" aria-hidden="true">✓</span>{spec}</li>
                     ))}
                   </ul>
-                  <a href={plan.id.startsWith('sta-') || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'} target="_blank" rel="noopener noreferrer"
+                  <a href={plan.category === 'vps' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'} target="_blank" rel="noopener noreferrer"
                     className={`mt-7 flex min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition ${tier.emphasis ? 'bg-cyan-300 text-[#031b32] hover:bg-cyan-100' : 'border border-cyan-300/50 bg-cyan-400/15 text-white hover:bg-cyan-400/25'}`}>
                     {tier.action}
                   </a>
-                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.status === 'preorder' ? 'Đặt trước • Tư vấn slot qua Discord' : plan.id === 'node-test' ? 'Xác nhận tình trạng slot qua Discord' : 'Kiểm tra slot hiện tại trên Portal'}</p>
+                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.category === 'vps' ? 'Xác nhận cấu hình, slot và giá qua ticket' : plan.id === 'node-test' ? 'Xác nhận tình trạng slot qua Discord' : 'Kiểm tra slot hiện tại trên Portal'}</p>
                 </TiltCard>
               );
             })}
@@ -472,7 +475,7 @@ export function HomePage() {
                     : 'border border-cyan-300/30 bg-[#072a4e]/70 text-slate-200 hover:border-cyan-300/50 hover:text-white'
                 }`}
               >
-                VPS OVH Singapore
+                VPS Oracle Cloud
               </button>
               <button
                 type="button"
@@ -498,6 +501,12 @@ export function HomePage() {
               </button>
             </div>
 
+          {(activePlanTab === 'all' || activePlanTab === 'vps') && (
+            <p className="mt-5 rounded-xl border border-cyan-300/25 bg-[#072a4e]/70 p-4 text-sm leading-7 text-sky-100">
+              VPS Oracle Cloud: {oraclePricingNote} Giá cập nhật {oraclePricingDate}, tham khảo{' '}
+              <a href={oraclePricingSource} target="_blank" rel="noopener noreferrer" className="text-cyan-200 underline">bảng giá Oracle Cloud ICS</a>.
+            </p>
+          )}
           {/* Cards Grid with Frosted Glass Styling */}
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filteredPlans.map((plan) => {
@@ -562,7 +571,7 @@ export function HomePage() {
                   {/* Card CTA */}
                   <div className="mt-6 border-t border-cyan-300/20 pt-4">
                     <a
-                      href={plan.id.startsWith('sta-') || plan.id === 'proxy-hk' || plan.id === 'openclaw' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'}
+                      href={plan.category === 'vps' || plan.id === 'proxy-hk' || plan.id === 'openclaw' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-cyber-primary w-full rounded-xl py-2.5 text-xs font-bold text-center block"
@@ -601,7 +610,7 @@ export function HomePage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
-                    <span><strong>Dedicated Xeon / EPYC:</strong> Đặt trước 3 ngày để phân bổ slot tối ưu</span>
+                    <span><strong>VPS Oracle Cloud:</strong> Xác nhận khu vực, slot và lịch bàn giao qua ticket</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>

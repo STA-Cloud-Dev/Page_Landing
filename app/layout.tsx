@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     'stacloud game panel',
     'stacloud cloud hosting',
     'openclaw beta',
-    'ovh singapore vps',
+    'oracle cloud vps',
   ],
   openGraph: {
     title: siteTitle,

@@ -15,9 +15,9 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
   const displayStats: StatItem[] = stats
     ? [...stats]
     : [
-        { value: '24', label: 'Gói dịch vụ đang công bố' },
+        { value: '19', label: 'Cấu hình VPS Oracle' },
         { value: '10', label: 'Gói Linux Egg & Dev' },
-        { value: 'L3/L4', label: 'Bảo vệ mạng OVH' },
+        { value: 'OCI', label: 'VPS Oracle Cloud' },
         { value: '0đ', label: 'Node Test Free Forever' },
       ];
 
@@ -49,7 +49,7 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
         </div>
         <div className="rounded-lg border border-cyan-300/15 bg-white/[0.03] p-2 text-center">
           <p className="text-[10px] text-sky-300/70 uppercase">BẢO VỆ MẠNG</p>
-          <p className="mt-0.5 font-bold text-emerald-300">OVH LAYER 3/4</p>
+          <p className="mt-0.5 font-bold text-emerald-300">THEO TỪNG GÓI</p>
         </div>
         <div className="rounded-lg border border-cyan-300/15 bg-white/[0.03] p-2 text-center">
           <p className="text-[10px] text-sky-300/70 uppercase">STORAGE</p>
@@ -86,16 +86,16 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
           </div>
         </div>
 
-        {/* Blade 2: Cloud VPS Xeon & AMD EPYC */}
+        {/* Blade 2: VPS Oracle Cloud */}
         <div className="server-rack-row group">
           <div className="flex items-center gap-3">
             <span className="server-rack-led-cyan" />
             <div>
               <p className="text-xs font-bold text-white group-hover:text-cyan-200 transition xl:text-sm">
-                BLADE-02 // CLOUD VPS & DEDICATED
+                BLADE-02 // ORACLE CLOUD VPS
               </p>
               <p className="text-[10px] text-sky-200/70 xl:text-xs">
-                OVH Singapore &bull; Xeon E5 & AMD EPYC &bull; Full Port Allocated
+                Oracle Cloud &bull; vCPU / RAM / SSD &bull; Burstable 50%
               </p>
             </div>
           </div>

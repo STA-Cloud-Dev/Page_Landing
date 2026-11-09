@@ -1,3 +1,4 @@
+import { oracleServicePlans, formatOraclePrice, oracleVpsPackages } from '@/components/shared/oracle-vps';
 import { freePlans, donaterPlan, freePolicy, communitySpecs } from '@/components/shared/free-plans';
 import { gamePlans, paidPlans, paidPlanSpecs, formatCredit, backupSchedule } from '@/components/shared/paid-plans';
 
@@ -11,15 +12,15 @@ export const homeConfig = {
   freeServerUrl: '/free-server',
   logoAlt: 'STACloud Logo',
   summary:
-    'Free hosting cho bot Discord, web nhỏ và project sinh viên; kèm Portal quản trị game server, OpenClaw Beta và VPS OVH Singapore chống DDoS.',
+    'Free hosting cho bot Discord, web nhỏ và project sinh viên; kèm Portal quản trị game server, OpenClaw Beta và VPS Oracle Cloud.',
   testerAlertMessage:
     '⚠️ Cảnh báo gói NODE TEST (tên cũ: TESTER): Gói miễn phí không hỗ trợ backup. Vui lòng tự tải dữ liệu quan trọng về máy; tài khoản vi phạm quy định sử dụng sẽ bị khóa vĩnh viễn.',
 };
 
 export const heroStats = [
-  { value: '24', label: 'Gói dịch vụ đang công bố', tone: 'cyan' },
+  { value: '19', label: 'Cấu hình VPS Oracle', tone: 'cyan' },
   { value: '10', label: 'Gói Linux Egg & Dev', tone: 'sky' },
-  { value: 'L3/L4', label: 'Bảo vệ mạng OVH', tone: 'emerald' },
+  { value: 'OCI', label: 'VPS Oracle Cloud', tone: 'emerald' },
   { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
 ] as const;
 
@@ -34,8 +35,7 @@ export const heroStatusStrip = [
   { label: 'Dev 1', detail: '50% CPU • 256 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
   { label: 'Game Servers 1', detail: 'Gói máy chủ game trả phí', value: '50.000 Credit / 28 ngày', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
-  { label: 'STA-XEON-01', detail: 'OVH Singapore 6GB RAM', value: '146.000đ / tháng', tone: 'cyan', status: 'preorder' },
-  { label: 'STA-AMD-EPYC-01', detail: 'AMD EPYC 7GB RAM', value: '249.000đ / tháng', tone: 'blue', status: 'preorder' },
+  { label: 'VPS Oracle Starter 1', detail: '2 vCPU • 1 GB RAM • 20 GB SSD', value: `${formatOraclePrice(oracleVpsPackages[0].monthlyVnd)} / tháng • chưa VAT`, tone: 'cyan', status: 'check' },
 ] as const;
 
 export const allServicePlans = [
@@ -128,64 +128,10 @@ export const allServicePlans = [
     specs: ['0.5 vCore CPU', '512 MB RAM', '1 GB SSD', 'Hong Kong Routing', 'Shield AntiDDoS'],
     upsizeAvailable: false,
     upsizeNotes: 'Theo dõi thông báo Discord khi có thêm tài nguyên.',
+    warning: '',
     ctaText: 'Hết Slot',
   },
-  {
-    id: 'sta-xeon-01',
-    category: 'vps',
-    name: 'STA-XEON-01',
-    badge: 'Economy OVH SG',
-    status: 'preorder',
-    price: '146.000 VNĐ',
-    period: 'Tháng',
-    description: 'VPS Intel Xeon E5-26xx v3 tại OVH Singapore. Giá tốt nhất cho sinh viên, treo tool, bot 24/7 và môi trường dev.',
-    specs: ['2 vCore Intel Xeon', '6 GB RAM', '40 GB NVMe/SSD', 'Full Port theo yêu cầu', 'OVH Anti-DDoS Layer 3/4'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Đặt trước 3 ngày để phân bổ slot tối ưu.',
-    ctaText: 'Đặt Trước VPS Xeon',
-  },
-  {
-    id: 'sta-xeon-02',
-    category: 'vps',
-    name: 'STA-XEON-02',
-    badge: 'Economy Plus',
-    status: 'preorder',
-    price: '209.000 VNĐ',
-    period: 'Tháng',
-    description: 'VPS Xeon nâng cấp với dung lượng 14GB RAM và 90GB lưu trữ cho workload nhiều RAM, đa dịch vụ.',
-    specs: ['4 vCore Intel Xeon', '14 GB RAM', '90 GB NVMe/SSD', 'Full Port theo yêu cầu', 'Anti-DDoS cao cấp'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Đặt trước 3 ngày để khởi tạo.',
-    ctaText: 'Đặt Trước STA-XEON-02',
-  },
-  {
-    id: 'sta-epyc-01',
-    category: 'vps',
-    name: 'STA-AMD-EPYC-01',
-    badge: 'High Perf EPYC',
-    status: 'preorder',
-    price: '249.000 VNĐ',
-    period: 'Tháng',
-    description: 'Cụm máy chủ AMD EPYC Milan Gen 3 cực mạnh cho game server đông người chơi, ứng dụng tải nặng và database.',
-    specs: ['2 vCore AMD Milan', '7 GB RAM High-Speed', '40 GB SSD Fast I/O', 'Hỗ trợ chia nhiều Server', 'OVH Singapore'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Có thể linh hoạt đổi sang AMD Gen 4/5 theo hạ tầng.',
-    ctaText: 'Đặt Trước STA-AMD-01',
-  },
-  {
-    id: 'sta-epyc-02',
-    category: 'vps',
-    name: 'STA-AMD-EPYC-02',
-    badge: 'Ultra EPYC 15GB',
-    status: 'preorder',
-    price: '333.000 VNĐ',
-    period: 'Tháng',
-    description: 'Phiên bản cao cấp nhất với 4 Core AMD EPYC và 15GB RAM, xử lý mượt mà mọi hệ thống lớn.',
-    specs: ['4 vCore AMD Milan', '15 GB RAM High-Speed', '90 GB SSD Fast I/O', 'Chia nhiều Port/Node', 'OVH Singapore Anti-DDoS'],
-    upsizeAvailable: true,
-    upsizeNotes: 'Đặt trước 3 ngày để kỹ thuật viên thiết lập riêng.',
-    ctaText: 'Đặt Trước STA-AMD-02',
-  },
+  ...oracleServicePlans,
 ];
 
 export const comprehensiveFaqs = [
@@ -211,8 +157,8 @@ export const comprehensiveFaqs = [
     a: 'NODE TEST là gói miễn phí và không hỗ trợ backup. Người dùng cần chủ động tải và lưu trữ bản sao dữ liệu trên thiết bị của mình.',
   },
   {
-    q: 'Các gói VPS OVH Singapore (Xeon, EPYC) cần đặt trước bao lâu?',
-    a: 'Thời gian đặt trước tiêu chuẩn là 3 ngày. Việc này giúp đội ngũ kỹ thuật viên STACloud phân bổ dedicated core, dọn dẹp phân vùng ổ cứng NVMe và cấu hình firewall Anti-DDoS tối ưu nhất cho bạn.',
+    q: 'Đăng ký VPS Oracle Cloud và tính giá như thế nào?',
+    a: 'Giá VPS Oracle theo tháng chưa gồm VAT 10%, bản quyền Windows và các tùy chọn bổ sung. CPU Burstable 50%. Tạo ticket để xác nhận khu vực, slot, tổng chi phí và thời gian bàn giao.',
   },
   {
     q: 'Làm thế nào để nhận hỗ trợ nhanh nhất khi cần trợ giúp?',
@@ -225,7 +171,7 @@ export const homeBenefits = [
     icon: '💎',
     title: 'Đầy Đủ Gói Free, Beta & Trả Phí',
     description:
-      'Từ nhóm FREE mua hoàn 100% và OpenClaw Beta, đến DEV, MC, Xeon và EPYC đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
+      'Từ nhóm FREE mua hoàn 100% và OpenClaw Beta, đến DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
   },
   {
     icon: '📊',
@@ -235,9 +181,9 @@ export const homeBenefits = [
   },
   {
     icon: '🛡️',
-    title: 'Hạ Tầng OVH Singapore Chống DDoS',
+    title: 'VPS Oracle Cloud Theo Nhu Cầu',
     description:
-      'Cụm máy chủ chuyên dụng đặt tại OVH Singapore với lớp lọc Anti-DDoS Layer 3/4/7 bảo vệ toàn diện các cuộc tấn công flood.',
+      'Lựa chọn VPS Oracle Cloud theo vCPU, RAM và SSD. Xác nhận khu vực triển khai và yêu cầu bảo vệ mạng trước khi đặt mua.',
   },
   {
     icon: '⚡',
@@ -252,7 +198,7 @@ export const homeQuickSteps = [
     step: '01',
     title: 'Chọn Gói Dịch Vụ',
     description:
-      'Chọn gói FREE / OpenClaw nếu muốn thử nghiệm miễn phí, Dev 1–5 / Game Servers cho bot/game, hoặc VPS Xeon / EPYC cho hệ thống lớn.',
+      'Chọn gói FREE / OpenClaw nếu muốn thử nghiệm miễn phí, Dev 1–5 / Game Servers cho bot/game, hoặc VPS Oracle Cloud cho hệ thống lớn.',
   },
   {
     step: '02',
