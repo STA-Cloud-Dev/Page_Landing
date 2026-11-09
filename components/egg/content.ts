@@ -59,9 +59,9 @@ const linuxFamilies: EggItem[] = [
 export const eggGroups: EggGroup[] = [
   {
     title: 'Website Egg',
-    subtitle: 'Môi trường triển khai website PHP và ứng dụng web',
+    subtitle: 'Môi trường triển khai website PHP, ứng dụng web và quản trị MySQL/MariaDB',
     accent: 'blue',
-    items: [{ name: 'WordPress' }, { name: 'PHPweb' }, { name: 'Laravel' }],
+    items: [{ name: 'WordPress' }, { name: 'PHPweb' }, { name: 'Laravel' }, { name: 'phpMyAdmin' }],
   },
   {
     title: 'AI',

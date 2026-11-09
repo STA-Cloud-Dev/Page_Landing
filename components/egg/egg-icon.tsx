@@ -1,7 +1,7 @@
 import { sitePath } from '@/lib/site-path';
 
 const iconNames: Record<string, string> = {
-  WordPress: 'wordpress', PHPweb: 'php', Laravel: 'laravel',
+  WordPress: 'wordpress', PHPweb: 'php', Laravel: 'laravel', phpMyAdmin: 'php',
   OpenClaw: 'openclaw', LavaLink: 'lavalink',
   Python: 'python', 'Node.js': 'nodejs', Bun: 'bun', C: 'c', Golang: 'go', Java: 'java',
   Ubuntu: 'ubuntu', Debian: 'debian', 'Arch Linux': 'archlinux', 'Kali Linux': 'kalilinux',

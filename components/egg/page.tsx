@@ -173,7 +173,7 @@ function Summary({
                 Kho Môi Trường Chạy Ứng Dụng & Game Engine
               </h1>
               <p className="max-w-2xl text-xs leading-relaxed text-sky-100 sm:text-base">
-                Hệ thống Template sẵn sàng triển khai cho Website Egg (WordPress, PHPweb, Laravel), AI (OpenClaw), ngôn ngữ lập trình, hệ điều hành Linux, Windows Server, Minecraft & Proxy.
+                Hệ thống Template sẵn sàng triển khai cho Website Egg (WordPress, PHPweb, Laravel, phpMyAdmin), AI (OpenClaw), ngôn ngữ lập trình, hệ điều hành Linux, Windows Server, Minecraft & Proxy.
               </p>
 
               <div className="flex flex-wrap gap-2 pt-2">
