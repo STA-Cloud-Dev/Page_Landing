@@ -41,6 +41,7 @@ Runtime and Linux distribution icons in `public/egg-icons/` come from Devicon
 The Minecraft grass block and generic server symbols are local illustrations.
 OpenClaw uses the favicon from its official repository (openclaw/openclaw).
 The LavaLink icon was supplied by the site owner and resized for the catalog.
+The phpMyAdmin logo comes from its official website (https://www.phpmyadmin.net/static/images/logo.svg).
 The circular Ubuntu symbol comes from Simple Icons (simple-icons/simple-icons);
 its license is included in `public/egg-icons/LICENSE-simple-icons.md`.
 
