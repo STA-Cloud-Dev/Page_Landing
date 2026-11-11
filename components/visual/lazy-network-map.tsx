@@ -3,14 +3,15 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { getVisualQuality } from '@/lib/visual-quality';
+import { allDatacenterLocations } from './network-regions';
 
 function MapPlaceholder() {
   return (
     <div className="rounded-3xl border border-cyan-300/30 bg-[#153e5c] p-6 sm:p-8">
       <h3 className="text-2xl font-bold text-white">Mạng lưới hạ tầng toàn cầu</h3>
-      <p className="mt-3 text-sky-100">Canada, Châu Âu, Singapore, Việt Nam, Thailand và Hong Kong.</p>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {['Singapore', 'Việt Nam', 'Hong Kong', 'Thailand', 'Châu Âu', 'Canada'].map(name => <li key={name} className="rounded-2xl border border-cyan-200/20 bg-white/5 px-5 py-4 text-sky-100">{name}</li>)}
+      <p className="mt-3 text-sky-100">Danh mục các khu vực trên sơ đồ minh họa: các region thương mại Oracle Cloud, Việt Nam và Hong Kong. Ping trên bản đồ là mô phỏng ngẫu nhiên theo khu vực.</p>
+      <ul className="mt-6 grid max-h-80 overflow-y-auto gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {allDatacenterLocations.map(location => <li key={location.id} className="rounded-2xl border border-cyan-200/20 bg-white/5 px-5 py-4 text-sky-100">{location.name}{location.status === 'planned' ? ' • Sắp mở' : ''}</li>)}
       </ul>
       <p className="mt-5 text-sm text-sky-100/80">Liên hệ hỗ trợ để xác nhận khu vực và tình trạng slot cho gói bạn chọn.</p>
     </div>
@@ -26,6 +27,7 @@ export function LazyNetworkMap() {
   const container = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [lite, setLite] = useState(true);
+  const [requestedMap, setRequestedMap] = useState(false);
 
   useEffect(() => {
     const update = () => setLite(getVisualQuality() === 'lite');
@@ -49,5 +51,5 @@ export function LazyNetworkMap() {
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={container}>{ready && !lite ? <NetworkMap /> : <MapPlaceholder />}</div>;
+  return <div ref={container}>{(ready && !lite) || requestedMap ? <NetworkMap /> : <><MapPlaceholder /><button type="button" onClick={() => setRequestedMap(true)} className="mt-4 rounded-xl border border-cyan-300/40 bg-cyan-400/15 px-5 py-3 text-sm font-bold text-cyan-100">Mở bản đồ tương tác & ping mô phỏng</button></>}</div>;
 }

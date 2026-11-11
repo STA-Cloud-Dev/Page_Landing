@@ -5,169 +5,8 @@ import Image from 'next/image';
 import { sitePath } from '@/lib/site-path';
 import { WORLD_COUNTRIES_PATHS, CountryPathData } from '@/components/visual/world-paths-data';
 
-export interface DatacenterLocation {
-  id: string;
-  name: string;
-  city: string;
-  country: string;
-  flagSrc: string;
-  basePing: number;
-  speed: string;
-  shield: string;
-  availability: string;
-  status: 'optimal' | 'stable' | 'paused';
-  description: string;
-  lat: number;
-  lng: number;
-  svgX: number;
-  svgY: number;
-  zoomLevel: number;
-  color: string;
-  countryCode: string;
-  labelOffsetX: number;
-  labelOffsetY: number;
-}
-
-export const allDatacenterLocations: DatacenterLocation[] = [
-  {
-    id: 'ca-bhs',
-    name: 'CA-BHS-01 (Canada Edge Hub)',
-    city: 'Beauharnois / Montreal',
-    country: 'Canada',
-    flagSrc: sitePath('/flags/canada.svg?v=20261024-2'),
-    basePing: 255,
-    speed: '10 Gbps Backbone',
-    shield: 'Bảo vệ mạng theo dịch vụ',
-    availability: 'North America Edge',
-    status: 'optimal',
-    description:
-      'Khu vực kết nối Bắc Mỹ. Khả năng cung cấp dịch vụ và bảo vệ mạng cần được xác nhận qua ticket.',
-    lat: 45.31,
-    lng: -73.87,
-    svgX: 294.8,
-    svgY: 124.1,
-    zoomLevel: 2.2,
-    color: '#38bdf8',
-    countryCode: 'CAN',
-    labelOffsetX: 8,
-    labelOffsetY: -14,
-  },
-  {
-    id: 'eu-fra',
-    name: 'EU-FRA-01 (European Hub)',
-    city: 'Frankfurt & Paris',
-    country: 'Châu Âu (EU)',
-    flagSrc: sitePath('/flags/europe.svg?v=20261024-2'),
-    basePing: 205,
-    speed: '10 Gbps Backbone',
-    shield: 'European Multi-Tier Shield 10Gbps',
-    availability: 'Global Edge Relay',
-    status: 'optimal',
-    description:
-      'Hạ tầng Gateway tại châu Âu với kết nối peering trực tiếp các sàn giao dịch lưu lượng lớn (DE-CIX), bảo vệ DDoS toàn diện cho traffic quốc tế.',
-    lat: 50.11,
-    lng: 8.68,
-    svgX: 524.1,
-    svgY: 110.8,
-    zoomLevel: 2.5,
-    color: '#a855f7',
-    countryCode: 'DEU',
-    labelOffsetX: 8,
-    labelOffsetY: -14,
-  },
-  {
-    id: 'sg-sin',
-    name: 'SG-SIN-01 (Singapore)',
-    city: 'Singapore',
-    country: 'Singapore',
-    flagSrc: sitePath('/flags/singapore.svg?v=20261024-2'),
-    basePing: 27,
-    speed: '10 Gbps Anti-DDoS',
-    shield: 'Bảo vệ mạng theo dịch vụ',
-    availability: 'Free & Paid (Trọng Tâm)',
-    status: 'optimal',
-    description:
-      'Khu vực Singapore cho hosting và game server theo tình trạng tài nguyên. Với VPS Oracle Cloud, xác nhận khu vực và cấu hình qua ticket.',
-    lat: 1.35,
-    lng: 103.82,
-    svgX: 788.4,
-    svgY: 246.3,
-    zoomLevel: 2.8,
-    color: '#10b981',
-    countryCode: 'SGP',
-    labelOffsetX: 8,
-    labelOffsetY: 10,
-  },
-  {
-    id: 'vn-sgn',
-    name: 'VN-SGN-01 (Việt Nam Local Hub)',
-    city: 'Hồ Chí Minh & Hà Nội',
-    country: 'Việt Nam',
-    flagSrc: sitePath('/flags/vietnam.svg?v=20261024-2'),
-    basePing: 4,
-    speed: '1 Gbps Dedicated Uplink',
-    shield: 'Domestic Firewall & VNIX Filter',
-    availability: 'Only Paid (Nội Địa)',
-    status: 'optimal',
-    description:
-      'Location đặt máy chủ tại Việt Nam với đường truyền peering trực tiếp các nhà mạng lớn (FPT, Viettel, VNPT) cho độ trễ nội địa siêu thấp 3-5ms.',
-    lat: 14.05,
-    lng: 108.27,
-    svgX: 800.8,
-    svgY: 211.0,
-    zoomLevel: 2.8,
-    color: '#00f0ff',
-    countryCode: 'VNM',
-    labelOffsetX: 8,
-    labelOffsetY: -5,
-  },
-  {
-    id: 'th-bkk',
-    name: 'TH-BKK-01 (Thailand Gateway)',
-    city: 'Bangkok',
-    country: 'Thailand',
-    flagSrc: sitePath('/flags/thailand.svg?v=20261024-2'),
-    basePing: 23,
-    speed: '30 Gbps Bandwidth',
-    shield: 'Southeast Asia AntiDDoS Gateway',
-    availability: 'Free & Paid',
-    status: 'optimal',
-    description:
-      'Proxy Thailand hỗ trợ cả gói miễn phí và trả phí, tối ưu lưu lượng kết nối chuyển tiếp trong khu vực Đông Nam Á với băng thông backbone 30 Gbps.',
-    lat: 13.75,
-    lng: 100.5,
-    svgX: 779.2,
-    svgY: 211.8,
-    zoomLevel: 2.8,
-    color: '#06b6d4',
-    countryCode: 'THA',
-    labelOffsetX: -76,
-    labelOffsetY: -5,
-  },
-  {
-    id: 'hk-01',
-    name: 'HKG-01 (Hong Kong Route)',
-    city: 'Hong Kong',
-    country: 'Hong Kong',
-    flagSrc: sitePath('/flags/hong-kong.svg?v=20261024-2'),
-    basePing: 36,
-    speed: '30 Gbps Shield',
-    shield: 'Dedicated Shield AntiDDoS',
-    availability: 'Proxy Paused (Hết slot)',
-    status: 'paused',
-    description:
-      'Proxy Hong Kong dành cho kết nối quốc tế với lưu lượng Shield AntiDDoS riêng biệt. Hiện đã kín slot đăng ký mới.',
-    lat: 22.32,
-    lng: 114.17,
-    svgX: 817.1,
-    svgY: 188.0,
-    zoomLevel: 2.8,
-    color: '#fbbf24',
-    countryCode: 'HKG',
-    labelOffsetX: 8,
-    labelOffsetY: -28,
-  },
-];
+import { allDatacenterLocations, oracleRegionsSource, randomSimulatedPing, type DatacenterLocation } from './network-regions';
+export { allDatacenterLocations } from './network-regions';
 
 function LocationFlag({
   location,
@@ -191,34 +30,33 @@ function LocationFlag({
 }
 
 // Highlighted country ISO codes matching user reference cartographic style
-const HIGHLIGHTED_COUNTRIES = new Set([
-  'USA',
-  'BRA',
-  'AUS',
-  'RUS',
-  'IND',
-  'DEU',
-  'FRA',
-  'GBR',
-  'THA',
-]);
-
-// Laser interconnect lines between global datacenter nodes
-const LASER_CONDUITS = [
-  { id: 'ca-eu', d: 'M 294.8 124.1 Q 409 75 524.1 110.8' },
-  { id: 'eu-sg', d: 'M 524.1 110.8 Q 656 160 788.4 246.3' },
-  { id: 'sg-vn', d: 'M 788.4 246.3 L 800.8 211.0' },
-  { id: 'sg-th', d: 'M 788.4 246.3 L 779.2 211.8' },
-  { id: 'vn-hk', d: 'M 800.8 211.0 L 817.1 188.0' },
-  { id: 'ca-sg', d: 'M 294.8 124.1 Q 540 290 788.4 246.3' },
-];
+const HIGHLIGHTED_COUNTRIES = new Set(allDatacenterLocations.map((location) => location.countryCode));
+// Illustrative connections from Vietnam, not measured network routes.
+const LASER_CONDUITS = allDatacenterLocations.slice(1).filter((location) => location.status !== 'planned').map((location) => ({
+  id: `vn-${location.id}`,
+  d: `M ${allDatacenterLocations[0].svgX} ${allDatacenterLocations[0].svgY} Q ${(allDatacenterLocations[0].svgX + location.svgX) / 2} ${Math.min(allDatacenterLocations[0].svgY, location.svgY) - 35} ${location.svgX} ${location.svgY}`,
+}));
 
 export function NetworkMapVector() {
   const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(allDatacenterLocations[0]);
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
-  const [simulatedPings] = useState<Record<string, number>>(() =>
+  const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(() =>
     Object.fromEntries(allDatacenterLocations.map((location) => [location.id, location.basePing]))
   );
+
+  useEffect(() => {
+    const updatePings = () => {
+      if (document.visibilityState !== 'visible') return;
+      setSimulatedPings(Object.fromEntries(allDatacenterLocations.map((location) => [location.id, randomSimulatedPing(location.basePing)])));
+    };
+    updatePings();
+    const timer = window.setInterval(updatePings, 4000);
+    document.addEventListener('visibilitychange', updatePings);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', updatePings);
+    };
+  }, []);
 
   // Native SVG ViewBox Zoom and Pan coordinates (1000 x 500 world extent)
   const [zoom, setZoom] = useState<number>(1.0);
@@ -432,7 +270,7 @@ export function NetworkMapVector() {
     if (hasMovedRef.current) return; // Ignore clicks if dragging
 
     const matchingLoc = allDatacenterLocations.find(
-      (l) => l.countryCode === country.id || (country.id === 'FRA' && l.id === 'eu-fra')
+      (l) => l.countryCode === country.id
     );
 
     if (matchingLoc) {
@@ -466,13 +304,13 @@ export function NetworkMapVector() {
             Bản đồ hạ tầng và kết nối khu vực
           </h3>
           <p className="mt-1 text-xs text-sky-100/90 sm:text-sm">
-            Sơ đồ minh họa 6 khu vực: Canada, châu Âu, Singapore, Việt Nam, Thái Lan và Hong Kong. Độ trễ hiển thị mang tính tham khảo; kết quả thực tế phụ thuộc đường truyền và vị trí kết nối.
+            Sơ đồ các region thương mại Oracle Cloud cùng Việt Nam và Hong Kong. Ping mô phỏng ngẫu nhiên theo từng khu vực, cập nhật mỗi 4 giây; không phải phép đo mạng thực tế. Xác nhận khu vực cung cấp VPS qua ticket.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <span className="status-pill-cyber">
-            <span className="font-bold text-xs">6 KHU VỰC THAM KHẢO</span>
+            <span className="font-bold text-xs">{allDatacenterLocations.length} KHU VỰC THAM KHẢO</span>
           </span>
           <span className="hidden sm:inline-flex rounded-xl border border-cyan-300/30 bg-black/40 px-3 py-1 font-mono text-xs text-cyan-300">
             Sơ đồ tương tác
@@ -480,8 +318,9 @@ export function NetworkMapVector() {
         </div>
       </div>
 
+      <p className="mt-3 text-xs leading-6 text-sky-200">Nguồn: <a className="text-cyan-200 underline" href={oracleRegionsSource} target="_blank" rel="noopener noreferrer">Oracle Public Cloud Regions</a> (11/11/2026): 45 region thương mại đang hoạt động, 2 khu vực sắp mở. Các realm Government, Sovereign và dịch vụ Database trên cloud đối tác có điều kiện riêng và không thuộc danh mục VPS này.</p>
       {/* Fast Jump Filter Bar */}
-      <div className="mt-4 grid grid-cols-2 gap-2 border-b border-cyan-300/15 pb-4 sm:flex sm:flex-wrap sm:items-center">
+      <div className="mt-4 grid max-h-64 overflow-y-auto grid-cols-2 gap-2 border-b border-cyan-300/15 pb-4 sm:flex sm:flex-wrap sm:items-center">
         <span className="col-span-2 mr-1 text-xs font-bold uppercase tracking-wider text-cyan-200 sm:col-span-1">
           Khu vực:
         </span>
@@ -494,7 +333,7 @@ export function NetworkMapVector() {
               : 'border border-cyan-300/20 bg-black/30 text-slate-200 hover:bg-cyan-400/25 hover:text-white'
           }`}
         >
-          🌐 Toàn Cầu (All 6)
+          🌐 Toàn Cầu ({allDatacenterLocations.length})
         </button>
 
         {allDatacenterLocations.map((loc) => {
@@ -511,7 +350,7 @@ export function NetworkMapVector() {
               }`}
             >
               <LocationFlag location={loc} className="h-4 w-6" />
-              <span className="min-w-0 flex-1 truncate text-left">{loc.country}</span>
+              <span className="min-w-0 flex-1 truncate text-left">{loc.name}</span>
               <span className="shrink-0 font-mono text-[10px] opacity-80">~{simulatedPings[loc.id]}ms*</span>
             </button>
           );
@@ -611,28 +450,6 @@ export function NetworkMapVector() {
                 );
               })}
 
-              {/* Singapore Island Dot */}
-              <circle
-                cx={788.4}
-                cy={246.3}
-                r={2.5}
-                fill="#10b981"
-                stroke="#ffffff"
-                strokeWidth={0.6}
-                className="cursor-pointer"
-                onClick={() => focusOnNode(allDatacenterLocations[2])}
-              />
-              {/* Hong Kong Island Dot */}
-              <circle
-                cx={817.1}
-                cy={188.0}
-                r={2.2}
-                fill="#fbbf24"
-                stroke="#ffffff"
-                strokeWidth={0.6}
-                className="cursor-pointer"
-                onClick={() => focusOnNode(allDatacenterLocations[5])}
-              />
             </g>
 
             {/* Animated Laser Interconnect Conduits */}
@@ -658,7 +475,7 @@ export function NetworkMapVector() {
               ))}
             </g>
 
-            {/* Datacenter Beacon Markers for the 6 Locations */}
+            {/* Datacenter region markers */}
             <g className="datacenter-beacons-layer">
               {allDatacenterLocations.map((loc) => {
                 const isSelected = activeLocation.id === loc.id;
@@ -712,11 +529,12 @@ export function NetworkMapVector() {
                     <g
                       transform={`translate(${loc.svgX + loc.labelOffsetX}, ${loc.svgY + loc.labelOffsetY})`}
                       className="pointer-events-none"
+                      style={{ display: isSelected ? undefined : 'none' }}
                     >
                       <rect
                         x={0}
                         y={0}
-                        width={68}
+                        width={115}
                         height={18}
                         rx={5}
                         fill="#091322"
@@ -740,7 +558,7 @@ export function NetworkMapVector() {
                         fontWeight="bold"
                         fontFamily="monospace"
                       >
-                        {loc.id.toUpperCase()}
+                        {loc.city}
                       </text>
                     </g>
                   </g>
@@ -872,7 +690,7 @@ export function NetworkMapVector() {
                 <p className="shrink-0 font-mono text-xl font-black text-emerald-300">
                   ~{simulatedPings[activeLocation.id]}ms*
                 </p>
-                <span className="text-[10px] text-sky-200/80 font-mono">*Ước tính, không đo trực tiếp</span>
+                <span className="text-[10px] text-sky-200/80 font-mono">*Ping mô phỏng ngẫu nhiên</span>
               </div>
             </div>
 
@@ -898,7 +716,7 @@ export function NetworkMapVector() {
           </div>
 
           {/* Quick Node Switcher Buttons */}
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid max-h-64 overflow-y-auto grid-cols-2 gap-2 sm:grid-cols-3">
             {allDatacenterLocations.map((loc) => (
               <button
                 key={loc.id}
@@ -911,7 +729,7 @@ export function NetworkMapVector() {
                 }`}
               >
                 <LocationFlag location={loc} className="mx-auto h-4 w-6" />
-                <p className="mt-1.5 truncate text-xs font-bold">{loc.country}</p>
+                <p className="mt-1.5 truncate text-xs font-bold">{loc.name}</p>
                 <p className="text-[10px] font-mono text-emerald-300">
                   ~{simulatedPings[loc.id]}ms*
                 </p>
@@ -921,11 +739,11 @@ export function NetworkMapVector() {
         </div>
       </div>
 
-      {/* 6 Datacenter Locations Cards Grid (Including Canada & Europe!) */}
+      {/* Region catalog */}
       <div className="mt-8 border-t border-cyan-300/20 pt-6">
         <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-            Danh mục 6 khu vực trên sơ đồ minh họa
+            Danh mục các khu vực trên sơ đồ minh họa
           </span>
           <span className="text-xs font-mono text-emerald-300">
             Tình trạng thực tế: xác nhận qua ticket
@@ -954,21 +772,21 @@ export function NetworkMapVector() {
                     </div>
                     <span
                       className={`rounded-full px-2 py-0.5 font-mono text-[9px] font-bold ${
-                        loc.status === 'paused'
+                        (loc.status === 'paused' || loc.status === 'planned')
                           ? 'border border-amber-300/30 bg-amber-400/15 text-amber-200'
                           : 'border border-emerald-300/30 bg-emerald-400/15 text-emerald-200'
                       }`}
                     >
-                      {loc.status === 'paused' ? 'Kín Slot' : 'Tham khảo'}
+                      {loc.status === 'planned' ? 'Sắp mở' : loc.status === 'paused' ? 'Kín Slot' : 'Tham khảo'}
                     </span>
                   </div>
 
-                  <p className="mt-3 text-base font-extrabold text-white">{loc.country}</p>
+                  <p className="mt-3 text-base font-extrabold text-white">{loc.name}</p>
                   <p className="mt-1 text-xs text-cyan-200">{loc.city}</p>
                 </div>
 
                 <div className="mt-3 border-t border-cyan-300/15 pt-2.5 flex items-baseline justify-between font-mono text-xs">
-                  <span className="text-[10px] text-sky-200/70">Ping tham khảo:</span>
+                  <span className="text-[10px] text-sky-200/70">Ping mô phỏng:</span>
                   <span className="font-bold text-emerald-300">~{pingVal}ms*</span>
                 </div>
               </div>
