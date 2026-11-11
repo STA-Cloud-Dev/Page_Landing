@@ -9,12 +9,14 @@ export function AmbientParticles() {
   useEffect(() => {
     const canvas = ref.current;
     const quality = getVisualQuality();
-    if (quality === 'lite') return;
+    // Keep touch/mobile views static: a continuously repainted full-screen
+    // canvas consumes CPU and delays visual completion on slower phones.
+    if (quality !== 'full') return;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
     let width = 1, height = 1, frame = 0, last = 0, time = 0;
     let color = '103,232,249';
-    const particles = Array.from({ length: quality === 'balanced' ? 40 : 160 }, (_, i) => ({
+    const particles = Array.from({ length: 160 }, (_, i) => ({
       x: ((i * 0.61803398875) % 1), y: ((i * 0.41421356237) % 1), size: .4 + (i % 5) * .22,
     }));
     const resize = () => {

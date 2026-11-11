@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
+import { getVisualQuality } from '@/lib/visual-quality';
 
 function SculptureShell() {
   return <div className="particle-sculpture" aria-hidden="true"><div className="sculpture-halo" /><div className="sculpture-orbit" /></div>;
@@ -17,6 +18,9 @@ export function LazyParticleCloud({ lost = false }: { lost?: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   useEffect(() => {
+    // The CSS shell preserves the composition without loading or drawing the
+    // decorative particle renderer on mobile and reduced-motion devices.
+    if (getVisualQuality() !== 'full') return;
     let observer: IntersectionObserver | undefined;
     let frame = 0;
     let secondFrame = 0;

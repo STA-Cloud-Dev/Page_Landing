@@ -254,6 +254,16 @@ html[data-visual-quality='balanced'] .cyber-background-decor .ambient-orb { disp
 html[data-visual-quality='balanced'] .landing-depth-content section::before { animation: none; }
 html.visuals-hidden *, html.visuals-hidden *::before, html.visuals-hidden *::after { animation-play-state: paused !important; }
 
+/* Paint the mobile composition once instead of continuously repainting
+   decorative backgrounds while the first screen is still loading. */
+@media (max-width: 767px), (pointer: coarse) {
+  .cyber-background-decor *, .hero-core-ring, .depth-light-trails span::after,
+  .landing-depth-content section::before, .border-beam::after,
+  #free-hosting > div::after, #openclaw > div::after {
+    animation: none !important;
+  }
+}
+
 /* Secondary pages use the same rounded ocean surfaces, with readable legal text. */
 .cosmic-subpage { isolation: isolate; background: linear-gradient(155deg,#0d314e,#103b59 45%,#0b2944); font-family: var(--font-cosmic),sans-serif; }
 .cosmic-subpage > section,.cosmic-subpage > footer,.cosmic-subpage > .mx-auto { position: relative; z-index: 1; }
