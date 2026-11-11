@@ -304,7 +304,7 @@ export function NetworkMapVector() {
             Bản đồ hạ tầng và kết nối khu vực
           </h3>
           <p className="mt-1 text-xs text-sky-100/90 sm:text-sm">
-            Sơ đồ các region thương mại Oracle Cloud cùng Việt Nam và Hong Kong. Ping mô phỏng ngẫu nhiên theo từng khu vực, cập nhật mỗi 4 giây; không phải phép đo mạng thực tế. Xác nhận khu vực cung cấp VPS qua ticket.
+            Sơ đồ các region thương mại Oracle Cloud cùng Hà Nội, TP. Hồ Chí Minh và Hong Kong. Ping mô phỏng ngẫu nhiên theo từng khu vực, cập nhật mỗi 4 giây; không phải phép đo mạng thực tế. Xác nhận khu vực cung cấp VPS qua ticket.
           </p>
         </div>
 
@@ -351,7 +351,7 @@ export function NetworkMapVector() {
             >
               <LocationFlag location={loc} className="h-4 w-6" />
               <span className="min-w-0 flex-1 truncate text-left">{loc.name}</span>
-              <span className="shrink-0 font-mono text-[10px] opacity-80">~{simulatedPings[loc.id]}ms*</span>
+              <span className="shrink-0 font-mono text-[10px] opacity-80">~{simulatedPings[loc.id]} ms</span>
             </button>
           );
         })}
@@ -688,9 +688,9 @@ export function NetworkMapVector() {
 
               <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-cyan-300/20 pt-2">
                 <p className="shrink-0 font-mono text-xl font-black text-emerald-300">
-                  ~{simulatedPings[activeLocation.id]}ms*
+                  ~{simulatedPings[activeLocation.id]} ms
                 </p>
-                <span className="text-[10px] text-sky-200/80 font-mono">*Ping mô phỏng ngẫu nhiên</span>
+                <span className="text-[10px] text-sky-200/80 font-mono">Ping mô phỏng ngẫu nhiên</span>
               </div>
             </div>
 
@@ -731,7 +731,7 @@ export function NetworkMapVector() {
                 <LocationFlag location={loc} className="mx-auto h-4 w-6" />
                 <p className="mt-1.5 truncate text-xs font-bold">{loc.name}</p>
                 <p className="text-[10px] font-mono text-emerald-300">
-                  ~{simulatedPings[loc.id]}ms*
+                  ~{simulatedPings[loc.id]} ms
                 </p>
               </button>
             ))}
@@ -740,15 +740,15 @@ export function NetworkMapVector() {
       </div>
 
       {/* Region catalog */}
-      <div className="mt-8 border-t border-cyan-300/20 pt-6">
-        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <details className="group/regions mt-8 border-t border-cyan-300/20 pt-6">
+        <summary className="mb-4 cursor-pointer rounded-xl border border-cyan-300/25 bg-cyan-400/10 px-4 py-3 text-cyan-200 marker:text-cyan-300">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
             Danh mục các khu vực trên sơ đồ minh họa
           </span>
-          <span className="text-xs font-mono text-emerald-300">
-            Tình trạng thực tế: xác nhận qua ticket
-          </span>
-        </div>
+          <span className="ml-3 text-xs text-sky-200 group-open/regions:hidden">Bấm để mở {allDatacenterLocations.length} khu vực</span>
+          <span className="ml-3 hidden text-xs text-sky-200 group-open/regions:inline">Bấm để thu gọn</span>
+        </summary>
+        <p className="mb-4 text-xs text-emerald-300">Tình trạng thực tế: xác nhận qua ticket</p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {allDatacenterLocations.map((loc) => {
@@ -787,13 +787,13 @@ export function NetworkMapVector() {
 
                 <div className="mt-3 border-t border-cyan-300/15 pt-2.5 flex items-baseline justify-between font-mono text-xs">
                   <span className="text-[10px] text-sky-200/70">Ping mô phỏng:</span>
-                  <span className="font-bold text-emerald-300">~{pingVal}ms*</span>
+                  <span className="font-bold text-emerald-300">~{pingVal} ms</span>
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
+      </details>
     </div>
   );
 }
