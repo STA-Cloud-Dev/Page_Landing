@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { sitePath } from '@/lib/site-path';
 import { WORLD_COUNTRIES_PATHS, CountryPathData } from '@/components/visual/world-paths-data';
 
 import { allDatacenterLocations, oracleRegionsSource, randomSimulatedPing, type DatacenterLocation } from './network-regions';
+import { clusterMapLocations, filterMapLocations } from './map-clusters';
 export { allDatacenterLocations } from './network-regions';
 
 function LocationFlag({
@@ -39,6 +40,10 @@ const LASER_CONDUITS = allDatacenterLocations.slice(1).filter((location) => loca
 
 export function NetworkMapVector() {
   const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(allDatacenterLocations[0]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [countryFilter, setCountryFilter] = useState('all');
+  const filteredLocations = useMemo(() => filterMapLocations(allDatacenterLocations, searchQuery, countryFilter), [searchQuery, countryFilter]);
+  const countries = useMemo(() => [...new Map(allDatacenterLocations.map(location => [location.countryCode, location.country])).entries()].sort((a, b) => a[1].localeCompare(b[1])), []);
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
   const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(() =>
     Object.fromEntries(allDatacenterLocations.map((location) => [location.id, location.basePing]))
@@ -61,6 +66,9 @@ export function NetworkMapVector() {
   // Native SVG ViewBox Zoom and Pan coordinates (1000 x 500 world extent)
   const [zoom, setZoom] = useState<number>(1.0);
   const [center, setCenter] = useState<{ x: number; y: number }>({ x: 500, y: 250 });
+
+  const mapClusters = useMemo(() => clusterMapLocations(filteredLocations.filter(location => location.id !== activeLocation.id), zoom), [filteredLocations, activeLocation.id, zoom]);
+  const visibleMarkers = [activeLocation, ...mapClusters.filter(cluster => cluster.locations.length === 1).map(cluster => cluster.locations[0])];
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -319,43 +327,21 @@ export function NetworkMapVector() {
       </div>
 
       <p className="mt-3 text-xs leading-6 text-sky-200">Nguồn: <a className="text-cyan-200 underline" href={oracleRegionsSource} target="_blank" rel="noopener noreferrer">Oracle Public Cloud Regions</a> (11/11/2026): 45 region thương mại đang hoạt động, 2 khu vực sắp mở. Các realm Government, Sovereign và dịch vụ Database trên cloud đối tác có điều kiện riêng và không thuộc danh mục VPS này.</p>
-      {/* Fast Jump Filter Bar */}
-      <div className="mt-4 grid max-h-64 overflow-y-auto grid-cols-2 gap-2 border-b border-cyan-300/15 pb-4 sm:flex sm:flex-wrap sm:items-center">
-        <span className="col-span-2 mr-1 text-xs font-bold uppercase tracking-wider text-cyan-200 sm:col-span-1">
-          Khu vực:
-        </span>
-        <button
-          type="button"
-          onClick={handleResetWorld}
-          className={`col-span-2 min-h-10 rounded-lg px-3 py-2 text-xs font-bold transition sm:col-span-1 sm:min-h-0 sm:py-1.5 ${
-            zoom === 1.0 && center.x === 500 && center.y === 250
-              ? 'bg-gradient-to-r from-sky-400 to-cyan-300 text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]'
-              : 'border border-cyan-300/20 bg-black/30 text-slate-200 hover:bg-cyan-400/25 hover:text-white'
-          }`}
-        >
-          🌐 Toàn Cầu ({allDatacenterLocations.length})
-        </button>
-
-        {allDatacenterLocations.map((loc) => {
-          const isActive = activeLocation.id === loc.id;
-          return (
-            <button
-              key={loc.id}
-              type="button"
-              onClick={() => focusOnNode(loc)}
-              className={`flex min-h-10 min-w-0 items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-bold transition sm:min-h-0 sm:px-3 sm:py-1.5 ${
-                isActive
-                  ? 'bg-gradient-to-r from-sky-400 to-cyan-300 text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]'
-                  : 'border border-cyan-300/20 bg-black/30 text-slate-200 hover:text-white'
-              }`}
-            >
-              <LocationFlag location={loc} className="h-4 w-6" />
-              <span className="min-w-0 flex-1 truncate text-left">{loc.name}</span>
-              <span className="shrink-0 font-mono text-[10px] opacity-80">~{simulatedPings[loc.id]} ms</span>
-            </button>
-          );
-        })}
+      <div className="mt-5 grid gap-3 rounded-2xl border border-cyan-300/20 bg-[#071b30] p-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto]">
+        <label className="min-w-0 text-xs font-semibold text-sky-100">
+          Tìm khu vực
+          <input type="search" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} placeholder="Tokyo, Toronto, Hà Nội..." className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-cyan-300" />
+        </label>
+        <label className="min-w-0 text-xs font-semibold text-sky-100">
+          Quốc gia / vùng lãnh thổ
+          <select value={countryFilter} onChange={event => setCountryFilter(event.target.value)} className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white focus:outline-cyan-300">
+            <option value="all">Tất cả quốc gia</option>
+            {countries.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+          </select>
+        </label>
+        <button type="button" onClick={() => { setSearchQuery(''); setCountryFilter('all'); handleResetWorld(); }} className="self-end rounded-xl border border-cyan-300/40 bg-cyan-400/15 px-5 py-3 text-sm font-bold text-cyan-100">Xem toàn cầu</button>
       </div>
+      <p className="mt-3 text-xs text-sky-200">Chọn cụm có số để phóng to, hoặc chọn region trong danh sách kết quả. Hà Nội và TP.HCM được đánh dấu riêng.</p>
 
       {/* Main Grid: Interactive GIS Native SVG World Map + Simulated Ping Detail */}
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.55fr)] xl:items-start">
@@ -369,7 +355,7 @@ export function NetworkMapVector() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="relative min-h-[280px] overflow-hidden rounded-2xl border border-cyan-300/35 bg-[#131720] shadow-[inset_0_0_60px_rgba(0,0,0,0.85)] sm:min-h-[420px] xl:min-h-[500px] select-none cursor-grab active:cursor-grabbing"
+          className="relative min-h-[280px] overflow-hidden rounded-2xl border border-cyan-300/35 bg-[#0c2035] shadow-[inset_0_0_40px_rgba(0,0,0,0.35)] sm:min-h-[420px] xl:min-h-[500px] select-none cursor-grab active:cursor-grabbing"
         >
           {/* Geographic Background Grid Pattern */}
           <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(to_right,#38bdf815_1px,transparent_1px),linear-gradient(to_bottom,#38bdf815_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -413,8 +399,8 @@ export function NetworkMapVector() {
                 const isCanada = country.id === 'CAN';
                 const isHighlighted = HIGHLIGHTED_COUNTRIES.has(country.id);
 
-                let fill = '#536275';
-                let stroke = '#18202c';
+                let fill = '#60778e';
+                let stroke = '#253e56';
                 let strokeWidth = 0.5;
                 let filter = undefined;
 
@@ -429,7 +415,7 @@ export function NetworkMapVector() {
                   strokeWidth = 0.9;
                   filter = 'url(#canadaGlow)';
                 } else if (isHighlighted) {
-                  fill = '#687a8e';
+                  fill = '#8299ad';
                   stroke = '#242f3e';
                   strokeWidth = 0.6;
                 }
@@ -454,7 +440,7 @@ export function NetworkMapVector() {
 
             {/* Animated Laser Interconnect Conduits */}
             <g className="laser-conduits-layer pointer-events-none">
-              {LASER_CONDUITS.map((conduit) => (
+              {LASER_CONDUITS.filter(conduit => conduit.id === `vn-${activeLocation.id}`).map((conduit) => (
                 <g key={conduit.id}>
                   <path
                     d={conduit.d}
@@ -477,7 +463,16 @@ export function NetworkMapVector() {
 
             {/* Datacenter region markers */}
             <g className="datacenter-beacons-layer">
-              {allDatacenterLocations.map((loc) => {
+              {mapClusters.filter(cluster => cluster.locations.length > 1).map(cluster => (
+                <g key={cluster.locations.map(location => location.id).join('-')} role="button" tabIndex={0}
+                  aria-label={`Phóng to cụm ${cluster.locations.length} khu vực: ${cluster.locations.map(location => location.city).join(', ')}`}
+                  onClick={event => { event.stopPropagation(); smoothFlyTo(cluster.x, cluster.y, Math.min(4.5, Math.max(3.2, zoom * 1.8))); }}
+                  onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); smoothFlyTo(cluster.x, cluster.y, Math.min(4.5, Math.max(3.2, zoom * 1.8))); } }} className="cursor-pointer outline-none focus:opacity-70">
+                  <circle cx={cluster.x} cy={cluster.y} r={15 / Math.sqrt(zoom)} fill="#0e4566" stroke="#8de7ff" strokeWidth={1.5 / zoom} />
+                  <text x={cluster.x} y={cluster.y} textAnchor="middle" dominantBaseline="central" fill="#fff" fontSize={12 / Math.sqrt(zoom)} fontWeight="bold">{cluster.locations.length}</text>
+                </g>
+              ))}
+              {visibleMarkers.map((loc) => {
                 const isSelected = activeLocation.id === loc.id;
 
                 return (
@@ -489,8 +484,8 @@ export function NetworkMapVector() {
                     }}
                     className="cursor-pointer group"
                   >
-                    {/* Pulsing outer waves */}
-                    <circle
+                    {/* Selected region halo */}
+                    {isSelected && <circle
                       cx={loc.svgX}
                       cy={loc.svgY}
                       r={isSelected ? 16 : 11}
@@ -499,19 +494,9 @@ export function NetworkMapVector() {
                       className="animate-ping"
                       style={{
                         transformOrigin: `${loc.svgX}px ${loc.svgY}px`,
-                        animationDuration: isSelected ? '1.5s' : '2.5s',
+                        animationDuration: '2.5s',
                       }}
-                    />
-
-                    {/* Halo ring */}
-                    <circle cx={loc.svgX} cy={loc.svgY} r={isSelected ? 16 : 11} fill="none" stroke={loc.color} strokeWidth={0.7} opacity={0.3} className="animate-ping" style={{ transformOrigin: `${loc.svgX}px ${loc.svgY}px`, animationDuration: '3s', animationDelay: '-1.5s' }} />
-                    <circle
-                      cx={loc.svgX}
-                      cy={loc.svgY}
-                      r={isSelected ? 10 : 7}
-                      fill={loc.color}
-                      opacity={0.4}
-                    />
+                    />}
 
                     {/* Solid inner point */}
                     <circle
@@ -715,26 +700,29 @@ export function NetworkMapVector() {
             </div>
           </div>
 
-          {/* Quick Node Switcher Buttons */}
-          <div className="grid max-h-64 overflow-y-auto grid-cols-2 gap-2 sm:grid-cols-3">
-            {allDatacenterLocations.map((loc) => (
+          <div className="rounded-2xl border border-cyan-300/20 bg-[#071b30] p-3">
+          <p className="mb-3 text-sm font-bold text-white" role="status">{filteredLocations.length} khu vực phù hợp</p>
+          <div className="grid max-h-72 overflow-y-auto gap-2">
+            {filteredLocations.map((loc) => (
               <button
                 key={loc.id}
                 type="button"
                 onClick={() => focusOnNode(loc)}
-                className={`min-w-0 rounded-xl border p-2.5 text-center transition ${
+                className={`flex min-w-0 items-center gap-3 rounded-xl border p-3 text-left transition ${
                   activeLocation.id === loc.id
                     ? 'border-cyan-300 bg-cyan-400/25 text-white shadow-[0_0_15px_rgba(0,240,255,0.4)]'
                     : 'border-cyan-300/20 bg-[#052140]/60 text-slate-300 hover:border-cyan-300/40 hover:bg-[#072a50]/80'
                 }`}
               >
-                <LocationFlag location={loc} className="mx-auto h-4 w-6" />
-                <p className="mt-1.5 truncate text-xs font-bold">{loc.name}</p>
+                <LocationFlag location={loc} className="h-4 w-6" />
+                <p className="min-w-0 flex-1 text-xs font-bold leading-5">{loc.name}</p>
                 <p className="text-[10px] font-mono text-emerald-300">
                   ~{simulatedPings[loc.id]} ms
                 </p>
               </button>
             ))}
+            {filteredLocations.length === 0 && <p className="p-3 text-sm text-sky-200">Không tìm thấy khu vực. Thử tên thành phố hoặc chọn tất cả quốc gia.</p>}
+          </div>
           </div>
         </div>
       </div>
