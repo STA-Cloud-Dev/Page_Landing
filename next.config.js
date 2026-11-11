@@ -4,6 +4,9 @@ const basePath = configuredBasePath === '/' ? '' : configuredBasePath.replace(/\
 
 const nextConfig = {
   output: 'export',
+  // Ship styles with each static document to remove the mobile render-blocking
+  // stylesheet round trip. Recheck exported pages when upgrading Next.js.
+  experimental: { inlineCss: true },
   // GitHub Pages serves static routes as directories (for example /egg/).
   // This keeps links and refreshes working without server-side rewrites.
   trailingSlash: true,
