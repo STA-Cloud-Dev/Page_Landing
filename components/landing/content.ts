@@ -44,7 +44,7 @@ export const servicePlans = [
     name: plan.name,
     description: plan.requirement,
     price: `${formatCredit(plan.credit)} Credit / ${plan.days} ngày`,
-    highlight: plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Mua hoàn 100%',
+    highlight: plan.credit === 0 ? 'FREE • Gia hạn 0đ' : plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Mua hoàn 100%',
     specs: communitySpecs(plan),
     addOns: [`Sao lưu thủ công: ${plan.backups} vị trí. Người dùng tự quản lý bản sao; không bao gồm backup tự động.`],
     status: 'check',
@@ -158,7 +158,7 @@ export const benefits = [
   {
     title: 'Có đủ gói free, beta và trả phí',
     description:
-      'Nhóm FREE mua hoàn 100% và OpenClaw phục vụ trải nghiệm cộng đồng, trong khi DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành ổn định hơn.',
+      'Các gói FREE cộng đồng và OpenClaw phục vụ trải nghiệm cộng đồng, trong khi DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành ổn định hơn.',
   },
   {
     title: 'Cấu hình và giá rõ ràng',
@@ -212,9 +212,9 @@ export const policyGroups = [
   {
     title: 'Gói Miễn Phí Và Beta',
     points: [
-      'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM. Nhóm FREE trên Portal áp dụng mức thanh toán và hoàn 100% riêng.',
+      'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM. Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; các gói FREE khác theo điều kiện riêng.',
       freePolicy,
-      'Free Gamming + AI và Free DEV: 9.990 Credit / 5 ngày; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày.',
+      'Free Gamming + AI và Free DEV: 0 Credit / 5 ngày, gia hạn 0đ; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày.',
       'Nhóm FREE không hỗ trợ backup; người dùng phải chủ động tải bản sao dữ liệu về máy.',
       'Cấm DDoS, mining, scan port, botnet, mã độc và nội dung vi phạm pháp luật; tài khoản vi phạm bị khóa vĩnh viễn.',
       'OpenClaw Beta miễn phí và hiện không cần domain riêng.',
@@ -224,11 +224,11 @@ export const policyGroups = [
   {
     title: 'Dev, Linux Egg & Game Servers',
     points: [
-      'Dev 1: 50% CPU, 256 MB RAM, 1024 MB ổ đĩa; 7.000 Credit / 28 ngày.',
-      'Dev 2: 75% CPU, 512 MB RAM, 2048 MB ổ đĩa; 12.000 Credit / 28 ngày.',
-      'Dev 3: 75% CPU, 1024 MB RAM, 3072 MB ổ đĩa; 20.000 Credit / 28 ngày.',
-      'Dev 4: 100% CPU, 1536 MB RAM, 4096 MB ổ đĩa; 35.000 Credit / 28 ngày.',
-      'Dev 5: 100% CPU, 2048 MB RAM, 5120 MB ổ đĩa; 50.000 Credit / 28 ngày.',
+      'Dev 1: 50% CPU, 512 MB RAM, 1024 MB ổ đĩa; 7.000 Credit / 28 ngày.',
+      'Dev 2: 60% CPU, 1024 MB RAM, 2048 MB ổ đĩa; 12.000 Credit / 28 ngày.',
+      'Dev 3: 75% CPU, 1536 MB RAM, 3072 MB ổ đĩa; 20.000 Credit / 28 ngày.',
+      'Dev 4: 100% CPU, 2048 MB RAM, 5120 MB ổ đĩa; 35.000 Credit / 28 ngày.',
+      'Dev 5: 100% CPU, 3072 MB RAM, 8192 MB ổ đĩa; 50.000 Credit / 28 ngày.',
       'Game Servers 1–2 có giá 50.000 / 65.000 Credit cho chu kỳ 28 ngày.',
       'Linux Egg dành cho người trả phí và có chu kỳ 12 ngày.',
       'Egg Linux 1, 2, 3 và 5 có backup dự phòng vào Thứ 3, Thứ 6 và Chủ nhật.',

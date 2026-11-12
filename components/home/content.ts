@@ -32,7 +32,7 @@ export const heroSignals = [
 
 export const heroStatusStrip = [
   { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: 'Free Forever', tone: 'emerald', status: 'active' },
-  { label: 'Dev 1', detail: '50% CPU • 256 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
+  { label: 'Dev 1', detail: '50% CPU • 512 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
   { label: 'Game Servers 1', detail: 'Gói máy chủ game trả phí', value: '50.000 Credit / 28 ngày', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
   { label: 'VPS Oracle Starter 1', detail: '2 vCPU • 1 GB RAM • 20 GB SSD', value: `${formatOraclePrice(oracleVpsPackages[0].monthlyVnd)} / tháng • chưa VAT`, tone: 'cyan', status: 'check' },
@@ -58,7 +58,7 @@ export const allServicePlans = [
     id: plan.id,
     category: 'community',
     name: plan.name,
-    badge: plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Hoàn 100%',
+    badge: plan.credit === 0 ? 'FREE • Gia hạn 0đ' : plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Hoàn 100%',
     status: 'check',
     price: `${formatCredit(plan.credit)} Credit`,
     period: `${plan.days} ngày`,
@@ -135,7 +135,7 @@ export const allServicePlans = [
 ];
 
 export const comprehensiveFaqs = [
-  { q: 'Nhóm FREE trên Portal khác NODE TEST thế nào?', a: `${freePolicy} Free Gamming + AI và Free DEV: 9.990 Credit / 5 ngày; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày. NODE TEST vẫn giữ 0 Credit / Free Forever.` },
+  { q: 'Nhóm FREE trên Portal khác NODE TEST thế nào?', a: `${freePolicy} Free Gamming + AI và Free DEV: 0 Credit / 5 ngày, gia hạn 0đ; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày. NODE TEST vẫn giữ 0 Credit / Free Forever.` },
   {
     q: 'NODE TEST có thực sự miễn phí lâu dài không?',
     a: 'Có. NODE TEST được công bố là Free Forever với 75% CPU và 2 GB RAM. Mỗi lần tạo plan hiển thị 0 Credit; người dùng chỉ cần tuân thủ chính sách sử dụng và chủ động lưu bản sao dữ liệu.',
@@ -171,7 +171,7 @@ export const homeBenefits = [
     icon: '💎',
     title: 'Đầy Đủ Gói Free, Beta & Trả Phí',
     description:
-      'Từ nhóm FREE mua hoàn 100% và OpenClaw Beta, đến DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
+      'Từ các gói FREE cộng đồng và OpenClaw Beta, đến DEV, MC và VPS Oracle đáp ứng nhu cầu vận hành server ổn định, dài hạn.',
   },
   {
     icon: '📊',

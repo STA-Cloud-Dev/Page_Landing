@@ -18,7 +18,7 @@ export const slaLastUpdated = '24/10/2026';
 export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
-  { title: 'Chính sách nhóm FREE trên Portal', paragraphs: [freePolicy, 'Nhóm FREE trên Portal có thanh toán Credit và áp dụng hoàn 100% riêng, khác gói NODE TEST 0 Credit / Free Forever. Chính sách này được ưu tiên khi có sự khác biệt với quy định chung về dịch vụ miễn phí; không bao gồm khôi phục dữ liệu.'] },
+  { title: 'Chính sách nhóm FREE trên Portal', paragraphs: [freePolicy, 'Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; NODE TEST có chu kỳ Free Forever. Chỉ các gói FREE khác có thanh toán Credit mới áp dụng chính sách hoàn riêng. Chính sách này được ưu tiên khi có sự khác biệt với quy định chung về dịch vụ miễn phí; không bao gồm khôi phục dữ liệu.'] },
   {
     title: '1. Thanh toán',
     bullets: [

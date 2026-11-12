@@ -198,8 +198,7 @@ export function PlansSection() {
         </div>
 
         <p className="mt-5 text-sm leading-7 text-sky-100">
-          Nhóm FREE dành cho tài khoản đã xác minh: mua hoàn 100%, không hỗ trợ backup hoặc khôi phục dữ liệu;
-          sập hoặc xóa máy chủ sẽ hoàn 100% khoản đã thanh toán. Giá và slot được xác nhận trên Portal lúc đăng ký.
+          Free DEV và Free Gamming + AI: 0 Credit / 5 ngày, gia hạn 0đ, không hỗ trợ backup hoặc khôi phục dữ liệu. Các gói FREE khác giữ điều kiện riêng; kiểm tra slot trên Portal lúc đăng ký.
         </p>
 
         <PlanFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
