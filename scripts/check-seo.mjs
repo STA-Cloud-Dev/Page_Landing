@@ -14,6 +14,7 @@ assert.ok(urls.includes(`${origin}/about/`), 'Missing factual brand/service page
 assert.ok(urls.includes(`${origin}/history/`), 'Missing brand history page');
 assert.ok(urls.includes(`${origin}/vps-hosting/`), 'Missing VPS/hosting service page');
 assert.equal(new Set(urls).size, urls.length, 'Duplicate sitemap URLs');
+assert.deepEqual(read('sitemap.txt').trim().split(/\r?\n/), urls, 'Text sitemap must match XML exactly');
 assert.equal(read('CNAME').trim(), 'stacloud.eu.cc');
 assert.ok(read('robots.txt').includes(`Sitemap: ${origin}/sitemap.xml`));
 

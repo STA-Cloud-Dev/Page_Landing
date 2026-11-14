@@ -11,6 +11,8 @@ out/
 *.txt
 !app/llms.txt/
 !app/llms.txt/route.ts
+!app/sitemap.txt/
+!app/sitemap.txt/route.ts
 
 # logs
 npm-debug.log*
