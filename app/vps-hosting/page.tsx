@@ -1,4 +1,4 @@
-import { oraclePricingSource, oraclePricingDate } from '@/components/shared/oracle-vps';
+import { oraclePricingSource, oraclePricingDate, oracleVpsPackages } from '@/components/shared/oracle-vps';
 import type { Metadata } from 'next';
 import { allServicePlans, homeConfig } from '@/components/home/content';
 import { SiteFooter } from '@/components/shared/site-footer';
@@ -27,10 +27,30 @@ const breadcrumbs = {
   ],
 };
 
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${canonical}#oracle-vps`,
+  name: 'VPS Oracle Cloud tại STA Cloud',
+  serviceType: 'Cloud VPS',
+  url: canonical,
+  provider: { '@id': `${siteUrl}/#organization` },
+  description: 'VPS Oracle Cloud với CPU Burstable 50%. Giá tham khảo theo tháng chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung; xác nhận khu vực, slot và tổng chi phí qua ticket.',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog', name: 'Cấu hình VPS Oracle Cloud',
+    itemListElement: oracleVpsPackages.map(plan => ({
+      '@type': 'Offer', name: `STA Oracle ${plan.name}`, url: canonical,
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: Math.round(plan.monthlyVnd), priceCurrency: 'VND', unitCode: 'MON', valueAddedTaxIncluded: false },
+      itemOffered: { '@type': 'Service', name: `STA Oracle ${plan.name}`, description: `${plan.cpu}, ${plan.ram}, ${plan.storage}, CPU Burstable 50%, băng thông 300 Mbps.`, provider: { '@id': `${siteUrl}/#organization` } },
+    })),
+  },
+};
+
 export default function VpsHostingPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, '\\u003c') }} />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
         <nav aria-label="Đường dẫn" className="flex flex-wrap gap-2 text-sm text-cyan-200">
           <a href={sitePath('/')} className="min-h-11 content-center hover:text-white">STACloud</a>

@@ -278,6 +278,10 @@ export function HomePage() {
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-sky-100">
             STA Cloud Hosting cung cấp hosting website, server hosting và game hosting. Chọn VPS hoặc hosting theo tài nguyên, khu vực Việt Nam / Singapore và tình trạng slot; xác nhận cấu hình qua ticket trước khi đăng ký.
           </p>
+          <p className="mt-3 text-sm leading-7 text-sky-100">
+            Hosting và Linux Egg dùng môi trường container theo gói; VPS Oracle Cloud là dịch vụ máy chủ ảo riêng.
+            {' '}<a href={sitePath('/about/')} className="inline-flex min-h-11 items-center font-semibold text-cyan-200 underline">STA Cloud là gì? Thông tin dịch vụ, gói miễn phí và hỗ trợ</a>
+          </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {siteServices.map((service) => (
               <article key={service.name} className="flex flex-col rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">

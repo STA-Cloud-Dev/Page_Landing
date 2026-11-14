@@ -101,6 +101,9 @@ export function SiteFooter() {
               <a href={sitePath('/history/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Lịch sử STACloud
               </a>
+              <a href={sitePath('/about/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
+                Giới thiệu & thông tin STA Cloud
+              </a>
             </div>
           </div>
 

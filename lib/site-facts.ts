@@ -1,0 +1,9 @@
+// Factual summaries shared by the public About page and the optional text index.
+export const factsReviewedAt = '2026-11-14';
+export const brandSummary = 'STA Cloud (STACloud, STA Cloud Hosting) cung cấp hosting website, bot Discord, game server và tư vấn VPS Oracle Cloud. Website chính thức là https://stacloud.eu.cc/; Portal quản trị dịch vụ là https://portal.stacloud.eu.cc/.';
+export const serviceFacts = [
+  { question: 'STA Cloud cung cấp dịch vụ gì?', answer: 'Hosting cho website, bot Discord, ứng dụng Node.js/Python, game hosting như Minecraft, Linux Egg và VPS Oracle Cloud. Chọn loại dịch vụ theo runtime, CPU, RAM, dung lượng và nhu cầu quản trị.', path: '/egg/', label: 'Runtime và các Egg hỗ trợ' },
+  { question: 'Hosting và VPS khác nhau thế nào tại STA Cloud?', answer: 'Hosting và Linux Egg chạy trong môi trường container theo giới hạn từng gói; Linux Egg không mặc nhiên là VPS có quyền quản trị host. VPS Oracle Cloud là nhóm máy chủ ảo riêng, cần xác nhận hệ điều hành, quyền truy cập và cấu hình bàn giao qua ticket.', path: '/vps-hosting/', label: 'So sánh hosting và VPS' },
+  { question: 'STA Cloud có những khu vực nào?', answer: 'Hosting Việt Nam có mục Hà Nội và TP. Hồ Chí Minh; Singapore và các khu vực khác tùy gói và slot. Danh mục Oracle trên bản đồ là các region do Oracle công bố, không bảo đảm STA Cloud luôn có tài nguyên ở mọi region. Ping trên sơ đồ là số mô phỏng ngẫu nhiên, không phải kết quả đo mạng hay cam kết độ trễ.', path: '/#network', label: 'Bản đồ và điều kiện khu vực' },
+  { question: 'Đăng ký và nhận hỗ trợ bằng cách nào?', answer: 'Xem cấu hình trên website, kiểm tra gói trên Portal và mở ticket trong Discord STA Cloud để xác nhận slot, khu vực, giá và lịch cấp phát. Đọc điều khoản, SLA, giới hạn sao lưu và chính sách hoàn Credit trước khi đăng ký.', path: '/terms/', label: 'Điều khoản đăng ký dịch vụ' },
+] as const;

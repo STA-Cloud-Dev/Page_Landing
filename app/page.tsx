@@ -40,6 +40,7 @@ const homeSchema = {
       url: `${siteUrl}/`,
       logo: { '@type': 'ImageObject', url: siteImage.url, width: 500, height: 500 },
       description: siteDescription,
+      mainEntityOfPage: `${siteUrl}/about/`,
       sameAs: ['https://github.com/STA-Cloud-Dev'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
