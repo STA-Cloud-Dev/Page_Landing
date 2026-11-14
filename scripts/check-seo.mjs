@@ -72,16 +72,12 @@ const llms = read('llms.txt');
 assert.ok(llms.includes(`${origin}/about/`) && llms.includes(`${origin}/free-server/`), 'Missing public facts links in text index');
 assert.ok(!/https?:\/\/(?:www\.)?stacloud\.dev(?:[\/\s]|$)/i.test(llms), 'Old web domain in text index');
 const vpsHtml = read('vps-hosting/index.html');
-const vpsService = [...vpsHtml.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)]
-  .map(match => JSON.parse(match[1])).find(node => node['@type'] === 'Service');
-assert.equal(vpsService?.provider?.['@id'], `${origin}/#organization`);
-assert.equal(vpsService?.hasOfferCatalog?.itemListElement?.length, 19);
-for (const offer of vpsService.hasOfferCatalog.itemListElement) {
-  assert.ok(vpsHtml.includes(offer.name), `Schema offer must be visible: ${offer.name}`);
-  const specification = offer.priceSpecification;
-  assert.equal(specification.valueAddedTaxIncluded, false);
-  assert.equal(specification.unitCode, 'MON');
-  assert.equal(specification.priceCurrency, 'VND');
-  assert.ok(vpsHtml.includes(`${specification.price.toLocaleString('vi-VN')} VNĐ`), `Schema price must match visible price: ${offer.name}`);
+const vpsCatalog = [...vpsHtml.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)]
+  .map(match => JSON.parse(match[1])).find(node => node['@type'] === 'ItemList');
+assert.equal(vpsCatalog?.itemListElement?.length, 37);
+for (const entry of vpsCatalog.itemListElement) {
+  assert.ok(vpsHtml.includes(entry.item.name), `Catalog item must be visible: ${entry.item.name}`);
+  assert.equal(entry.item.provider.name, 'ICS');
+  assert.equal(entry.item.url, 'https://oci.ics.vn/cloud/pricing');
 }
 console.log('GEO checks passed: visible facts, AboutPage identity, public discovery links.');

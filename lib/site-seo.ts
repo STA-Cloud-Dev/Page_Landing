@@ -14,7 +14,7 @@ export const siteServices = [
   },
   {
     name: 'VPS & máy chủ theo nhu cầu',
-    description: 'Cloud VPS Oracle với cấu hình vCPU, RAM và SSD theo gói; tư vấn nhu cầu VPS, hosting Việt Nam và Singapore theo khu vực sử dụng, cấu hình và tình trạng hạ tầng.',
+    description: 'STA Cloud giới thiệu VPS và GPU Oracle Cloud do ICS cung cấp. Mua trực tiếp tại oci.ics.vn hoặc liên hệ STA Cloud tư vấn; hosting FREE và Dev là dịch vụ riêng.',
     path: '/vps-hosting/',
     action: 'Chọn VPS & khu vực hosting',
   },

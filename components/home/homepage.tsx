@@ -29,7 +29,7 @@ import { siteServices } from '@/lib/site-seo';
 const featuredTiers = [
   { id: 'node-test', eyebrow: '01 / Học tập & trải nghiệm', title: 'Khởi đầu miễn phí', action: 'Nhận gói miễn phí', emphasis: false },
   { id: 'dev-1', eyebrow: '02 / Bot & ứng dụng web', title: 'Phát triển mỗi ngày', action: 'Chọn gói Dev 1', emphasis: true },
-  { id: 'oracle-starter-1', eyebrow: '03 / VPS Oracle Cloud', title: 'Sẵn sàng mở rộng', action: 'Tư vấn VPS Oracle', emphasis: false },
+  { id: 'oracle-starter-1', eyebrow: '03 / VPS Oracle Cloud', title: 'Sẵn sàng mở rộng', action: 'Xem sản phẩm tại ICS', emphasis: false },
 ] as const;
 
 function getStatusBadge(status: string) {
@@ -415,11 +415,11 @@ export function HomePage() {
                       <li key={spec} className="flex items-start gap-2"><span className="font-bold text-emerald-300" aria-hidden="true">✓</span>{spec}</li>
                     ))}
                   </ul>
-                  <a href={plan.category === 'vps' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'} target="_blank" rel="noopener noreferrer"
+                  <a href={plan.category === 'vps' ? oraclePricingSource : plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'} target="_blank" rel="noopener noreferrer"
                     className={`mt-7 flex min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition ${tier.emphasis ? 'bg-cyan-300 text-[#031b32] hover:bg-cyan-100' : 'border border-cyan-300/50 bg-cyan-400/15 text-white hover:bg-cyan-400/25'}`}>
                     {tier.action}
                   </a>
-                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.category === 'vps' ? 'Xác nhận cấu hình, slot và giá qua ticket' : plan.id === 'node-test' ? 'Xác nhận tình trạng slot qua Discord' : 'Kiểm tra slot hiện tại trên Portal'}</p>
+                  <p className="mt-3 text-center text-[11px] text-sky-200/80">{plan.category === 'vps' ? 'Sản phẩm ICS • STA Cloud giới thiệu' : plan.id === 'node-test' ? 'Xác nhận tình trạng slot qua Discord' : 'Kiểm tra slot hiện tại trên Portal'}</p>
                 </TiltCard>
               );
             })}
@@ -479,7 +479,7 @@ export function HomePage() {
                     : 'border border-cyan-300/30 bg-[#072a4e]/70 text-slate-200 hover:border-cyan-300/50 hover:text-white'
                 }`}
               >
-                VPS Oracle Cloud
+                Oracle VPS & GPU (ICS)
               </button>
               <button
                 type="button"
@@ -575,13 +575,14 @@ export function HomePage() {
                   {/* Card CTA */}
                   <div className="mt-6 border-t border-cyan-300/20 pt-4">
                     <a
-                      href={plan.category === 'vps' || plan.id === 'proxy-hk' || plan.id === 'openclaw' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'}
+                      href={plan.category === 'vps' ? oraclePricingSource : plan.id === 'proxy-hk' || plan.id === 'openclaw' || plan.id === 'node-test' ? homeConfig.discordUrl : 'https://portal.stacloud.eu.cc/store/create'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-cyber-primary w-full rounded-xl py-2.5 text-xs font-bold text-center block"
                     >
                       <span>{plan.ctaText}</span>
                     </a>
+                    {plan.category === 'vps' && <a href={homeConfig.discordUrl} target="_blank" rel="noopener noreferrer" className="mt-3 flex min-h-11 items-center justify-center text-sm text-cyan-200 underline">Liên hệ STA Cloud tư vấn</a>}
                   </div>
                 </TiltCard>
               );
@@ -614,7 +615,7 @@ export function HomePage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>
-                    <span><strong>VPS Oracle Cloud:</strong> Xác nhận khu vực, slot và lịch bàn giao qua ticket</span>
+                    <span><strong>VPS Oracle Cloud:</strong> Sản phẩm ICS; mua trực tiếp tại ICS hoặc liên hệ STA Cloud tư vấn</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-cyan-300 font-bold">✔</span>

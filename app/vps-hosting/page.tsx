@@ -1,4 +1,4 @@
-import { oraclePricingSource, oraclePricingDate, oracleVpsPackages } from '@/components/shared/oracle-vps';
+import { oraclePricingSource, oraclePricingDate, oracleServicePlans } from '@/components/shared/oracle-vps';
 import type { Metadata } from 'next';
 import { allServicePlans, homeConfig } from '@/components/home/content';
 import { SiteFooter } from '@/components/shared/site-footer';
@@ -28,22 +28,14 @@ const breadcrumbs = {
 };
 
 const serviceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${canonical}#oracle-vps`,
-  name: 'VPS Oracle Cloud tại STA Cloud',
-  serviceType: 'Cloud VPS',
+  '@context': 'https://schema.org', '@type': 'ItemList',
+  name: 'Sản phẩm VPS và GPU Oracle Cloud do ICS cung cấp',
   url: canonical,
-  provider: { '@id': `${siteUrl}/#organization` },
-  description: 'VPS Oracle Cloud với CPU Burstable 50%. Giá tham khảo theo tháng chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung; xác nhận khu vực, slot và tổng chi phí qua ticket.',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog', name: 'Cấu hình VPS Oracle Cloud',
-    itemListElement: oracleVpsPackages.map(plan => ({
-      '@type': 'Offer', name: `STA Oracle ${plan.name}`, url: canonical,
-      priceSpecification: { '@type': 'UnitPriceSpecification', price: Math.round(plan.monthlyVnd), priceCurrency: 'VND', unitCode: 'MON', valueAddedTaxIncluded: false },
-      itemOffered: { '@type': 'Service', name: `STA Oracle ${plan.name}`, description: `${plan.cpu}, ${plan.ram}, ${plan.storage}, CPU Burstable 50%, băng thông 300 Mbps.`, provider: { '@id': `${siteUrl}/#organization` } },
-    })),
-  },
+  itemListElement: oracleServicePlans.map((plan, index) => ({
+    '@type': 'ListItem', position: index + 1,
+    item: { '@type': 'Service', name: plan.name, url: oraclePricingSource,
+      description: plan.specs.join(', '), provider: { '@type': 'Organization', name: 'ICS', url: 'https://oci.ics.vn/' } },
+  })),
 };
 
 export default function VpsHostingPage() {
@@ -61,10 +53,11 @@ export default function VpsHostingPage() {
           <p className="text-sm font-semibold uppercase tracking-widest text-cyan-200">STA Cloud Hosting</p>
           <h1 className="mt-4 max-w-4xl text-3xl font-bold leading-tight text-white sm:text-5xl">VPS & Hosting Việt Nam, Singapore</h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-sky-100">
-            STA Cloud (STACloud) cung cấp VPS, hosting website, bot Discord và game hosting cho cá nhân, cộng đồng và dự án phát triển ứng dụng. Chọn khu vực Việt Nam hoặc Singapore theo nhu cầu sử dụng; cấu hình, giá và slot được xác nhận theo từng gói.
+            STA Cloud (STACloud) cung cấp hosting website, bot Discord và game hosting; đồng thời giới thiệu VPS/GPU Oracle Cloud do ICS cung cấp cho cá nhân, cộng đồng và dự án phát triển ứng dụng. Chọn khu vực Việt Nam hoặc Singapore theo nhu cầu sử dụng; cấu hình, giá và slot được xác nhận theo từng gói.
           </p>
+          <p className="mt-5 text-sm leading-7 text-sky-100">Oracle VPS và GPU trên trang này là sản phẩm của ICS được STA Cloud giới thiệu. Hosting FREE, Dev và các gói hosting STA Cloud là dịch vụ riêng.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#vps-plans" className="btn-cyber-primary inline-flex min-h-12 items-center rounded-xl px-5 py-3 font-semibold">Xem cấu hình VPS</a>
+            <a href="#vps-plans" className="btn-cyber-primary inline-flex min-h-12 items-center rounded-xl px-5 py-3 font-semibold">Xem cấu hình VPS & GPU</a>
             <a href={homeConfig.discordUrl} target="_blank" rel="noopener noreferrer" className="btn-cyber-outline inline-flex min-h-12 items-center rounded-xl px-5 py-3">Tư vấn gói & khu vực</a>
           </div>
         </header>
@@ -102,9 +95,9 @@ export default function VpsHostingPage() {
         </section>
 
         <section id="vps-plans" aria-labelledby="vps-title" className="scroll-mt-8 py-8">
-          <h2 id="vps-title" className="text-2xl font-bold text-white">Bảng giá VPS Oracle Cloud</h2>
-          <p className="mt-3 text-sm leading-7 text-sky-100">So sánh vCPU, RAM và SSD để chọn cấu hình phù hợp. CPU Burstable 50%; khu vực, slot và lịch bàn giao được xác nhận qua ticket. Giá theo tháng chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung.</p>
-          <p className="mt-3 text-sm text-sky-200">Giá cập nhật {oraclePricingDate}, tham khảo <a href={oraclePricingSource} target="_blank" rel="noopener noreferrer" className="underline">bảng giá Oracle Cloud ICS</a>. STA Cloud tiếp nhận tư vấn và đăng ký qua ticket.</p>
+          <h2 id="vps-title" className="text-2xl font-bold text-white">Giới thiệu VPS & GPU Oracle Cloud của ICS</h2>
+          <p className="mt-3 text-sm leading-7 text-sky-100">So sánh VPS tiêu chuẩn và GPU AI theo CPU, RAM, SSD và loại GPU. Chỉ VPS tiêu chuẩn dùng CPU Burstable 50%; cấu hình GPU theo từng gói do ICS công bố. Giá theo tháng chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung.</p>
+          <p className="mt-3 text-sm text-sky-200">Giá cập nhật {oraclePricingDate}, tham khảo <a href={oraclePricingSource} target="_blank" rel="noopener noreferrer" className="underline">bảng giá Oracle Cloud ICS</a>. ICS là bên cung cấp và tiếp nhận mua hàng. Khách có thể liên hệ ICS trực tiếp hoặc nhờ STA Cloud tư vấn.</p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {vpsPlans.map((plan) => (
               <article key={plan.id} className="rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">
@@ -113,13 +106,15 @@ export default function VpsHostingPage() {
                 <ul className="mt-4 list-inside list-disc space-y-2 text-sm text-sky-100">
                   {plan.specs.map((spec) => <li key={spec}>{spec}</li>)}
                 </ul>
+                <a href={oraclePricingSource} className="mt-4 inline-flex min-h-11 items-center text-cyan-200 underline">Xem & mua trực tiếp tại ICS</a>
+                <a href={homeConfig.discordUrl} className="mt-2 flex min-h-11 items-center text-cyan-200 underline">Liên hệ STA Cloud tư vấn</a>
               </article>
             ))}
           </div>
         </section>
 
         <section aria-labelledby="register-title" className="py-8">
-          <h2 id="register-title" className="text-2xl font-bold text-white">Đăng ký VPS hoặc hosting tại STA Cloud</h2>
+          <h2 id="register-title" className="text-2xl font-bold text-white">Mua Oracle tại ICS hoặc đăng ký hosting STA Cloud</h2>
           <ol className="mt-5 list-inside list-decimal space-y-3 text-sm leading-7 text-sky-100">
             <li>Chọn hosting, VPS hoặc game server; ghi lại khu vực Việt Nam / Singapore và ngân sách dự kiến.</li>
             <li>Mở ticket Discord với nhu cầu CPU, RAM, lưu trữ, runtime hoặc game và yêu cầu backup.</li>

@@ -158,7 +158,7 @@ export const comprehensiveFaqs = [
   },
   {
     q: 'Đăng ký VPS Oracle Cloud và tính giá như thế nào?',
-    a: 'Giá VPS Oracle theo tháng chưa gồm VAT 10%, bản quyền Windows và các tùy chọn bổ sung. CPU Burstable 50%. Tạo ticket để xác nhận khu vực, slot, tổng chi phí và thời gian bàn giao.',
+    a: 'Giá VPS Oracle theo tháng chưa gồm VAT 10%, bản quyền Windows và các tùy chọn bổ sung. CPU Burstable 50%. Mua trực tiếp tại https://oci.ics.vn/ hoặc liên hệ STA Cloud tư vấn. ICS xác nhận khu vực, slot, tổng chi phí và bàn giao sản phẩm Oracle.',
   },
   {
     q: 'Làm thế nào để nhận hỗ trợ nhanh nhất khi cần trợ giúp?',

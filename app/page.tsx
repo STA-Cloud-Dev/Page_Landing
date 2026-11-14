@@ -55,7 +55,9 @@ const homeSchema = {
               name: service.name,
               description: service.description,
               url: `${siteUrl}${service.path}`,
-              provider: { '@id': `${siteUrl}/#organization` },
+              provider: service.path === '/vps-hosting/'
+                ? { '@type': 'Organization', name: 'ICS', url: 'https://oci.ics.vn/' }
+                : { '@id': `${siteUrl}/#organization` },
             },
           }],
         })),

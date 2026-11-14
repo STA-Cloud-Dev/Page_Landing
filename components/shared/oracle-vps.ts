@@ -1,8 +1,8 @@
-// Price snapshot from the public ICS pricing API, checked 2026-11-09.
+// Price snapshot from the public ICS pricing API, checked 2026-11-14.
 // Monthly Linux/base prices exclude 10% VAT, Windows licenses and optional extras.
 export const oraclePricingSource = 'https://oci.ics.vn/cloud/pricing';
-export const oraclePricingDate = '09/11/2026';
-export const oraclePricingNote = 'Giá tham khảo theo tháng, chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung. CPU Burstable 50%; xác nhận khu vực, slot và báo giá qua ticket trước khi đặt mua.';
+export const oraclePricingDate = '14/11/2026';
+export const oraclePricingNote = 'Giá tham khảo theo tháng, chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung. VPS tiêu chuẩn dùng CPU Burstable 50%; gói GPU có cấu hình riêng. Sản phẩm do ICS cung cấp; STA Cloud giới thiệu thông tin. Mua trực tiếp tại oci.ics.vn hoặc liên hệ STA Cloud để được tư vấn.';
 export const oracleVpsPackages = [
   {
     "name": "Starter 1",
@@ -141,18 +141,182 @@ export const oracleVpsPackages = [
 export function formatOraclePrice(value: number) {
   return `${Math.round(value).toLocaleString('vi-VN')} VNĐ`;
 }
-export const oracleServicePlans = oracleVpsPackages.map((plan) => ({
+export const oracleGpuPackages = [
+  {
+    "name": "VM.GPU2.1",
+    "cpu": "24 vCPU",
+    "ram": "72GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 26102677.2,
+    "gpu": "1 GPU NVIDIA Tesla P100 16GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "VM.GPU.A10.1",
+    "cpu": "30 vCPU",
+    "ram": "240GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 40294291.2,
+    "gpu": "1 GPU NVIDIA A10 24GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU2.2",
+    "cpu": "56 vCPU",
+    "ram": "192GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 51060343.2,
+    "gpu": "2 GPU NVIDIA Tesla P100 16GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "VM.GPU.A10.2",
+    "cpu": "60 vCPU",
+    "ram": "480GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 79443571.2,
+    "gpu": "2 GPU NVIDIA A10 24GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.A10.4",
+    "cpu": "128 vCPU",
+    "ram": "1024GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 157742131.2,
+    "gpu": "4 GPU NVIDIA A10 24GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.L40S.4",
+    "cpu": "224 vCPU",
+    "ram": "1024GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 275189971.2,
+    "gpu": "4 GPU NVIDIA L40S 48GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU4.8",
+    "cpu": "128 vCPU",
+    "ram": "2048GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 478766227.2,
+    "gpu": "8 GPU NVIDIA A100 40GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU3.8",
+    "cpu": "104 vCPU",
+    "ram": "768GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 478766227.2,
+    "gpu": "8 GPU NVIDIA Tesla V100 16GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.A100-v2.8",
+    "cpu": "256 vCPU",
+    "ram": "2048GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 627533491.2,
+    "gpu": "8 GPU NVIDIA A100 80GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.RTXPRO.8",
+    "cpu": "288 vCPU",
+    "ram": "3072GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 705832051.2,
+    "gpu": "8 GPU NVIDIA RTX PRO 6000 96GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.MI300X.8",
+    "cpu": "224 vCPU",
+    "ram": "2048GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 940727731.2,
+    "gpu": "8 GPU AMD MI300X 192GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.GB200.4",
+    "cpu": "288 vCPU",
+    "ram": "960GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 1253921971.2,
+    "gpu": "4 GPU NVIDIA GB200 192GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.MI355X.8",
+    "cpu": "256 vCPU",
+    "ram": "3072GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 1347880243.2,
+    "gpu": "8 GPU AMD MI355X 288GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.GB300.4",
+    "cpu": "288 vCPU",
+    "ram": "960GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 1410519091.2,
+    "gpu": "4 GPU NVIDIA GB300 278GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.H200.8",
+    "cpu": "224 vCPU",
+    "ram": "3072GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 1567116211.2,
+    "gpu": "8 GPU NVIDIA H200 141GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.H100.8",
+    "cpu": "224 vCPU",
+    "ram": "2048GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 1567116211.2,
+    "gpu": "8 GPU NVIDIA H100 80GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.B200.8",
+    "cpu": "256 vCPU",
+    "ram": "4096GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 2193504691.2,
+    "gpu": "8 GPU NVIDIA B200 180GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  },
+  {
+    "name": "BM.GPU.B300.8",
+    "cpu": "256 vCPU",
+    "ram": "4096GB RAM",
+    "storage": "1024GB SSD Storage",
+    "monthlyVnd": 2350101811.2,
+    "gpu": "8 GPU NVIDIA B300 263GB",
+    "bandwidth": "Dedicated AI infrastructure"
+  }
+];
+export const oracleServicePlans = [...oracleVpsPackages.map(plan => ({ ...plan, gpu: '' })), ...oracleGpuPackages].map((plan) => ({
   id: `oracle-${plan.name.toLowerCase().replaceAll(' ', '-')}`,
   category: 'vps',
-  name: `STA Oracle ${plan.name}`,
-  badge: 'Oracle Cloud • Chưa VAT',
+  name: `ICS Oracle ${plan.name}`,
+  badge: plan.gpu ? 'ICS • Oracle GPU' : 'ICS • Oracle VPS',
   status: 'consult',
   price: formatOraclePrice(plan.monthlyVnd),
   period: 'Tháng • chưa VAT 10%',
-  description: 'VPS Oracle Cloud cho website, ứng dụng và dịch vụ tự quản trị. Khu vực triển khai được xác nhận theo nhu cầu và tài nguyên sẵn có.',
-  specs: [plan.cpu, plan.ram, plan.storage, 'CPU Burstable 50%', 'Băng thông 300 Mbps'],
+  description: 'Sản phẩm Oracle Cloud do ICS cung cấp, được STA Cloud giới thiệu. Liên hệ ICS để mua trực tiếp hoặc STA Cloud để được tư vấn.',
+  specs: [plan.cpu, plan.ram, plan.storage, ...(plan.gpu ? [plan.gpu, 'Hạ tầng AI chuyên dụng'] : ['CPU Burstable 50%', 'Băng thông 300 Mbps'])],
   upsizeAvailable: true,
   upsizeNotes: oraclePricingNote,
-  warning: 'Liên hệ STA Cloud để xác nhận cấu hình và tổng chi phí trước khi thanh toán.',
-  ctaText: 'Tư vấn VPS Oracle',
+  warning: 'Giá tham khảo từ ICS; xác nhận cấu hình, khu vực và tổng thanh toán với ICS.',
+  ctaText: 'Xem & mua tại ICS',
 }));
