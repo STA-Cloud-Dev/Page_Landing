@@ -257,6 +257,8 @@ html.visuals-hidden *, html.visuals-hidden *::before, html.visuals-hidden *::aft
 /* Shared depth styling survives the split into dedicated service pages.
    Mouse effects are decorative; touch and reduced-motion views stay static. */
 .site-motion { overflow-x: clip; }
+.site-motion > .cyber-background-decor { position: fixed; inset: 0; z-index: 0; contain: strict; }
+.site-motion > .ambient-particle-field { contain: strict; }
 .site-motion article { position: relative; isolation: isolate; }
 .site-motion > .landing-header > div { height: 56px; padding-top: 0; padding-bottom: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
 .site-motion > .landing-depth-content { overflow: visible; }

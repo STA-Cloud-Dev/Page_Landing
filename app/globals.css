@@ -667,8 +667,8 @@ body {
 }
 
 @keyframes scanlineMove {
-  0% { top: -35%; }
-  100% { top: 125%; }
+  0% { transform: translate3d(0, 0, 0) skewY(-8deg); }
+  100% { transform: translate3d(0, 160vh, 0) skewY(-8deg); }
 }
 
 @keyframes edgeGlint {
