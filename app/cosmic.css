@@ -254,6 +254,30 @@ html[data-visual-quality='balanced'] .cyber-background-decor .ambient-orb { disp
 html[data-visual-quality='balanced'] .landing-depth-content section::before { animation: none; }
 html.visuals-hidden *, html.visuals-hidden *::before, html.visuals-hidden *::after { animation-play-state: paused !important; }
 
+/* Shared depth styling survives the split into dedicated service pages.
+   Mouse effects are decorative; touch and reduced-motion views stay static. */
+.site-motion { overflow-x: clip; }
+.site-motion article { position: relative; isolation: isolate; }
+.site-motion > .landing-header > div { height: 56px; padding-top: 0; padding-bottom: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.site-motion > .landing-depth-content { overflow: visible; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .site-motion article { transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease; transform-style: preserve-3d; }
+  .site-motion article:hover, .site-motion article:focus-within {
+    transform: perspective(1200px) translateY(-5px) rotateX(1deg) rotateY(-1deg);
+    border-color: rgba(103,232,249,.8);
+    box-shadow: 0 20px 45px rgba(0,20,45,.35), 0 0 25px rgba(34,211,238,.16), inset 0 1px rgba(224,242,254,.2);
+  }
+  .site-motion article::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(120deg, transparent 25%, rgba(165,243,252,.08) 48%, transparent 70%);
+    opacity: 0; transition: opacity .3s ease; pointer-events: none;
+  }
+  .site-motion article:hover::after { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-motion article { transform: none !important; transition: none !important; }
+}
+
 /* Paint the mobile composition once instead of continuously repainting
    decorative backgrounds while the first screen is still loading. */
 @media (max-width: 767px), (pointer: coarse) {
