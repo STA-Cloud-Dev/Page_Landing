@@ -15,7 +15,7 @@ export const siteServices = [
   {
     name: 'VPS & máy chủ theo nhu cầu',
     description: 'STA Cloud giới thiệu VPS và GPU Oracle Cloud do ICS cung cấp. Mua trực tiếp tại oci.ics.vn hoặc liên hệ STA Cloud tư vấn; hosting FREE và Dev là dịch vụ riêng.',
-    path: '/vps-hosting/',
+    path: '/vps/',
     action: 'Chọn VPS & khu vực hosting',
   },
   {

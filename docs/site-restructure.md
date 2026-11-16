@@ -4,7 +4,7 @@
 - `/pricing/`: own STA Cloud plans, filters and a collapsible comparison table. Render all plans in initial HTML; client filters refine the view. Oracle products do not belong to this catalog.
 - `/free-server/`: existing canonical URL retained; focuses on Node Test, Free DEV, Free Gamming + AI, OpenClaw and free-service rules. Old `#plans`, `#free-hosting`, `#openclaw` and `#service-rules` anchors remain useful.
 - `/network/`: existing region map, filters, clusters, separately listed Hanoi/HCMC and random simulated latency. Region names are present in initial HTML through the lightweight catalog.
-- `/vps-hosting/`: existing ICS referral products, VPS and GPU, retained. ICS remains the provider; customers can buy directly from ICS or contact STA Cloud.
+- `/vps/`: ICS referral products grouped into Tiêu chuẩn (Starter), Cao cấp (Professional), Doanh nghiệp (Enterprise) and AI/GPU. ICS remains the provider; customers can buy directly from ICS or contact STA Cloud. `/vps-hosting/` is a legacy static redirect fallback with canonical to `/vps/` and noindex; an edge 301 is preferred when available.
 - `/about/`, `/history/`, `/egg/`, policy pages and 404 remain at their existing URLs. Reduced-motion and mobile static effects remain respected.
 
 Main navigation, footer, legal page back links, Egg pricing links and mobile dock now point to the dedicated pricing/network routes. Existing homepage fragments (`#plans`, `#network`, `#free-hosting`, `#openclaw`, `#benefits`, `#faq`, `#policies`) remain present as summaries so old backlinks are not broken. No catch-all redirect was added. Native bottom-sheet mobile menu keeps Escape, focus trap and focus restoration plus Discord/Zalo/Messenger.

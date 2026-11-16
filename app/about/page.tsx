@@ -63,7 +63,7 @@ export default function AboutPage() {
       </section>
       <section aria-labelledby="oracle-title" className="py-8">
         <h2 id="oracle-title" className="text-2xl font-semibold text-white">Mua VPS và GPU Oracle Cloud của ICS ở đâu?</h2>
-        <p className="mt-4 text-sm leading-7">{oraclePricingNote} Bảng giá tham khảo lấy từ <a href={oraclePricingSource} className="text-cyan-200 underline">Oracle Cloud ICS</a>, snapshot ngày {oraclePricingDate}. <a href={sitePath('/vps-hosting/')} className="text-cyan-200 underline">Xem sản phẩm ICS do STA Cloud giới thiệu</a>.</p>
+        <p className="mt-4 text-sm leading-7">{oraclePricingNote} Bảng giá tham khảo lấy từ <a href={oraclePricingSource} className="text-cyan-200 underline">Oracle Cloud ICS</a>, snapshot ngày {oraclePricingDate}. <a href={sitePath('/vps/')} className="text-cyan-200 underline">Xem sản phẩm ICS do STA Cloud giới thiệu</a>.</p>
       </section>
       <aside className="my-6 rounded-2xl border border-cyan-300/25 p-5 text-sm leading-7" aria-label="Nguồn và chính sách">
         <p>Nguồn cho cấu hình hosting là dữ liệu STA Cloud công bố trên <a href={homeConfig.panelUrl} className="text-cyan-200 underline">Portal</a> và các trang dịch vụ liên kết ở trên. Bản đồ đối chiếu <a href="https://www.oracle.com/cloud/public-cloud-regions/" className="text-cyan-200 underline">danh mục region Oracle</a>; vị trí và ping minh họa không chứng minh tình trạng tài nguyên hiện tại.</p>

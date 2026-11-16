@@ -8,7 +8,7 @@ import { SiteFooter } from './site-footer';
 import { ContactLinks } from './contact-links';
 import { sitePath } from '@/lib/site-path';
 
-const navigation = [ ['/', 'Trang chủ'], ['/pricing/', 'Bảng giá'], ['/free-server/', 'Hosting miễn phí'], ['/vps-hosting/', 'Oracle ICS'], ['/network/', 'Khu vực'], ['/egg/', 'Kho Egg'] ];
+const navigation = [ ['/', 'Trang chủ'], ['/pricing/', 'Bảng giá'], ['/free-server/', 'Hosting miễn phí'], ['/vps/', 'Oracle ICS'], ['/network/', 'Khu vực'], ['/egg/', 'Kho Egg'] ];
 
 export function SiteShell({ children, home = false }: { children: ReactNode; home?: boolean }) {
   const [open, setOpen] = useState(false);

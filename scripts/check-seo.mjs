@@ -13,7 +13,7 @@ assert.equal(urls.length, 15, 'Review the public sitemap when routes change');
 assert.ok(urls.includes(`${origin}/pricing/`) && urls.includes(`${origin}/network/`), 'Missing dedicated catalog/map routes');
 assert.ok(urls.includes(`${origin}/about/`), 'Missing factual brand/service page');
 assert.ok(urls.includes(`${origin}/history/`), 'Missing brand history page');
-assert.ok(urls.includes(`${origin}/vps-hosting/`), 'Missing VPS/hosting service page');
+assert.ok(urls.includes(`${origin}/vps/`), 'Missing VPS/hosting service page');
 assert.equal(new Set(urls).size, urls.length, 'Duplicate sitemap URLs');
 assert.deepEqual(read('sitemap.txt').trim().split(/\r?\n/), urls, 'Text sitemap must match XML exactly');
 assert.equal(read('CNAME').trim(), 'stacloud.eu.cc');
@@ -72,12 +72,12 @@ assert.ok(home.includes('href="/about/"'), 'Brand facts must be linked from home
 const llms = read('llms.txt');
 assert.ok(llms.includes(`${origin}/about/`) && llms.includes(`${origin}/free-server/`), 'Missing public facts links in text index');
 assert.ok(!/https?:\/\/(?:www\.)?stacloud\.dev(?:[\/\s]|$)/i.test(llms), 'Old web domain in text index');
-const vpsHtml = read('vps-hosting/index.html');
+const vpsHtml = read('vps/index.html');
 const vpsCatalog = [...vpsHtml.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)]
-  .map(match => JSON.parse(match[1])).find(node => node['@type'] === 'ItemList');
+  .flatMap(match => { const node = JSON.parse(match[1]); return node['@graph'] || [node]; }).find(node => node['@type'] === 'ItemList');
 assert.equal(vpsCatalog?.itemListElement?.length, 37);
 for (const entry of vpsCatalog.itemListElement) {
-  assert.ok(vpsHtml.includes(entry.item.name), `Catalog item must be visible: ${entry.item.name}`);
+  assert.ok(vpsHtml.includes(entry.item.name) || vpsHtml.includes(entry.item.name.replace('ICS Oracle ', '')),  `Catalog item must be visible: ${entry.item.name}`);
   assert.equal(entry.item.provider.name, 'ICS');
   assert.equal(entry.item.url, 'https://oci.ics.vn/cloud/pricing');
 }
@@ -91,3 +91,10 @@ for (const anchor of ['plans', 'network', 'free-hosting', 'openclaw', 'benefits'
   assert.ok(home.includes(`id="${anchor}"`), `Preserve existing home anchor: ${anchor}`);
 }
 assert.ok(home.includes('href="/pricing/"') && home.includes('href="/network/"'), 'Missing home links to dedicated pages');
+assert.ok(urls.includes(`${origin}/vps/`) && !urls.includes(`${origin}/vps-hosting/`), 'Only new VPS canonical belongs in sitemap');
+for (const group of ['standard', 'premium', 'enterprise', 'gpu']) {
+  assert.ok(vpsHtml.includes(`id="${group}"`), `Missing VPS product group: ${group}`);
+}
+const legacyVps = read('vps-hosting/index.html');
+assert.ok(legacyVps.includes(`0;url=${origin}/vps/`), 'Legacy VPS path must forward to new URL on static host');
+assert.ok(legacyVps.includes('noindex'), 'Legacy fallback must not create duplicate indexed content');

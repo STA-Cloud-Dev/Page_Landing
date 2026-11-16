@@ -39,7 +39,7 @@ export function SiteFooter() {
               ⚡ Dịch Vụ
             </p>
             <div className="mt-3 text-sm text-sky-100 sm:mt-4 sm:space-y-2.5">
-              <a href={sitePath('/vps-hosting/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
+              <a href={sitePath('/vps/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 VPS & Hosting Việt Nam / Singapore
               </a>
               <a href={sitePath('/pricing/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">

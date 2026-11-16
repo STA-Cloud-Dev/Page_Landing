@@ -1,0 +1,35 @@
+import type { Metadata } from 'next';
+import { SiteShell } from '@/components/shared/site-shell';
+import { homeConfig } from '@/components/home/content';
+import { oracleVpsPackages, oracleGpuPackages, oracleServicePlans, oraclePricingDate, oraclePricingSource, formatOraclePrice } from '@/components/shared/oracle-vps';
+import { siteUrl } from '@/lib/site-seo';
+import { sitePath } from '@/lib/site-path';
+
+const canonical = `${siteUrl}/vps/`;
+const title = 'VPS & GPU Oracle Cloud ICS: Tiêu chuẩn, Cao cấp, Doanh nghiệp | STA Cloud';
+const description = 'STA Cloud giới thiệu sản phẩm Oracle Cloud ICS: VPS Starter, Professional, Enterprise và GPU AI. So sánh cấu hình, giá tham khảo; mua tại ICS hoặc liên hệ STA Cloud.';
+export const metadata: Metadata = { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical, locale: 'vi_VN', type: 'website' } };
+const groups = [
+  { id: 'standard', name: 'Tiêu chuẩn', sourceName: 'Starter', description: 'VPS cho website nhỏ, môi trường phát triển và dịch vụ nhẹ.', packages: oracleVpsPackages.filter(plan => plan.name.startsWith('Starter')) },
+  { id: 'premium', name: 'Cao cấp', sourceName: 'Professional', description: 'Thêm CPU, RAM và lưu trữ cho ứng dụng có nhu cầu tài nguyên lớn hơn.', packages: oracleVpsPackages.filter(plan => plan.name.startsWith('Professional')) },
+  { id: 'enterprise', name: 'Doanh nghiệp', sourceName: 'Enterprise', description: 'Các cấu hình CPU và bộ nhớ lớn; trao đổi yêu cầu vận hành với ICS.', packages: oracleVpsPackages.filter(plan => plan.name.startsWith('Enterprise')) },
+  { id: 'gpu', name: 'AI / GPU', sourceName: 'GPU Compute', description: 'Máy chủ tăng tốc GPU; so sánh đúng loại GPU, số lượng và bộ nhớ mỗi GPU.', packages: oracleGpuPackages },
+];
+const schema = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'STACloud', item: `${siteUrl}/` }, { '@type': 'ListItem', position: 2, name: 'Oracle VPS & GPU ICS', item: canonical }] },
+  { '@type': 'ItemList', name: 'Sản phẩm VPS và GPU Oracle Cloud do ICS cung cấp', url: canonical, itemListElement: oracleServicePlans.map((plan,index) => ({ '@type': 'ListItem', position: index+1, item: { '@type': 'Service', name: plan.name, url: oraclePricingSource, description: plan.specs.join(', '), provider: { '@type': 'Organization', name: 'ICS', url: 'https://oci.ics.vn/' } } })) },
+] };
+export default function VpsPage() {
+  return <SiteShell><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g,'\\u003c') }} /><div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
+    <header className="max-w-4xl"><p className="text-xs font-bold uppercase tracking-[.2em] text-cyan-200">Sản phẩm ICS · STA Cloud giới thiệu</p><h1 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-5xl">Oracle Cloud.<br />VPS & GPU cho từng nhu cầu.</h1><p className="mt-5 text-sm leading-7">Chọn cấu hình theo nhóm bên dưới. ICS là bên cung cấp sản phẩm và tiếp nhận mua hàng; bạn có thể mua trực tiếp tại ICS hoặc liên hệ STA Cloud để được tư vấn.</p><div className="mt-5 flex flex-wrap gap-3"><a href={oraclePricingSource} className="inline-flex min-h-12 items-center rounded-xl bg-cyan-300 px-5 font-bold text-[#031c34]">Đến bảng giá ICS ↗</a><a href={homeConfig.discordUrl} className="inline-flex min-h-12 items-center rounded-xl border border-cyan-300/40 px-5 font-semibold text-white">Liên hệ STA Cloud</a></div></header>
+    <nav aria-label="Nhóm sản phẩm Oracle ICS" className="sticky top-20 z-20 mt-8 flex gap-2 overflow-x-auto rounded-2xl border border-cyan-300/25 bg-[#06243d] p-2">{groups.map(group => <a key={group.id} href={`#${group.id}`} className="flex min-h-12 shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-bold text-white hover:bg-cyan-400/15">{group.name}<span className="rounded-full bg-white/10 px-2 py-1 text-xs text-cyan-100">{group.packages.length}</span></a>)}</nav>
+    <p className="mt-4 text-xs leading-6 text-sky-200">Giá tham khảo theo tháng, chưa gồm VAT 10%, bản quyền Windows và dịch vụ bổ sung. Nguồn ICS cập nhật {oraclePricingDate}; cấu hình, khu vực và tổng chi phí phải được ICS xác nhận. CPU Burstable 50% áp dụng VPS tiêu chuẩn, không áp mặc định cho GPU.</p>
+    {groups.map(group => <section key={group.id} id={group.id} className="scroll-mt-40 py-8 sm:py-10" aria-labelledby={`${group.id}-title`}><div className="mb-5 flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-cyan-200">{group.sourceName}</p><h2 id={`${group.id}-title`} className="mt-2 text-2xl font-bold text-white sm:text-3xl">{group.name}</h2><p className="mt-2 max-w-2xl text-sm leading-7">{group.description}</p></div><span className="text-sm text-sky-200">{group.packages.length} cấu hình</span></div>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{group.packages.map(plan => <article key={plan.name} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-sky-200/25 bg-[#0b2b46]"><div className="border-b border-sky-200/15 bg-[#103650] p-5"><p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-200">ICS · {group.sourceName}</p><h3 className="mt-2 break-words text-xl font-bold text-white"><span className="sr-only">ICS Oracle </span>{plan.name}</h3></div><div className="flex flex-1 flex-col p-5"><p className="text-2xl font-bold tabular-nums tracking-tight text-white">{formatOraclePrice(plan.monthlyVnd)}</p><p className="mt-1 text-xs text-sky-200">/ tháng · chưa VAT 10%</p>
+      {'gpu' in plan && <p className="mt-4 rounded-xl border border-violet-200/25 bg-violet-300/10 p-3 text-sm font-bold leading-6 text-violet-100">{String(plan.gpu)}</p>}
+      <dl className="my-5 grid grid-cols-2 gap-3">{[['CPU',plan.cpu],['RAM',plan.ram],['Lưu trữ',plan.storage],['Loại tài nguyên',group.id==='gpu'?'GPU Compute':'Burstable 50%']].map(([label,value]) => <div key={label} className="min-w-0 rounded-xl bg-black/15 p-3"><dt className="text-[11px] text-sky-200">{label}</dt><dd className="mt-1 break-words text-sm font-semibold text-white">{value}</dd></div>)}</dl>
+      <p className="mb-5 text-xs leading-6 text-sky-200">{group.id==='gpu'?'Hạ tầng AI chuyên dụng; xác nhận mức sử dụng với ICS.':'Băng thông công bố 300 Mbps; khu vực và slot theo ICS.'}</p><a href={oraclePricingSource} className="mt-auto flex min-h-12 items-center justify-center rounded-xl bg-cyan-300 px-4 text-sm font-bold text-[#031c34]">Xem & mua tại ICS ↗</a><a href={homeConfig.discordUrl} className="mt-2 flex min-h-12 items-center justify-center text-sm font-semibold text-cyan-200 underline">Nhờ STA Cloud tư vấn</a></div></article>)}</div>
+    </section>)}
+    <aside className="rounded-2xl border border-cyan-300/25 p-5 text-sm leading-7">Hosting FREE, Dev và Game Servers là dịch vụ riêng của STA Cloud. <a href={sitePath('/pricing/')} className="inline-flex min-h-12 items-center font-semibold text-cyan-200 underline">Xem bảng giá hosting STA Cloud →</a></aside>
+  </div></SiteShell>;
+}
