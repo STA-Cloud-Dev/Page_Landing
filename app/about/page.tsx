@@ -52,9 +52,9 @@ export default function AboutPage() {
       </section>
       <section aria-labelledby="free-title" className="py-5">
         <h2 id="free-title" className="text-2xl font-semibold text-white">STA Cloud có hosting miễn phí không?</h2>
-        <p className="mt-4 text-sm leading-7">Có. NODE TEST công bố 0 Credit / Free Forever với 75% CPU và 2 GB RAM. Hai gói FREE dưới đây có chu kỳ 5 ngày, gia hạn 0đ, dành cho tài khoản đã xác minh; không hỗ trợ sao lưu hoặc khôi phục dữ liệu.</p>
+        <p className="mt-4 text-sm leading-7">Có. Hai gói FREE dưới đây đều Free Forever, không thu phí, chu kỳ quản lý 5 ngày và gia hạn 0đ. Cấu hình có thể điều chỉnh trong tương lai. Dịch vụ dành cho tài khoản đã xác minh; không hỗ trợ sao lưu hoặc khôi phục dữ liệu.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">{freeHosting.map(plan => <article key={plan.id} className="rounded-xl border border-cyan-300/25 p-4"><h3 className="font-bold text-white">{plan.name}</h3><p className="mt-2 text-sm leading-7">{formatCredit(plan.credit)} Credit / {plan.days} ngày · Gia hạn 0đ<br />{resourceSpecs(plan).join(' · ')}<br />{plan.ports} cổng · {plan.backups} bản sao lưu · 0 cơ sở dữ liệu</p></article>)}</div>
-        <p className="mt-4 text-sm leading-7">Cấu hình FREE do STA Cloud cập nhật ngày 12/11/2026. <a href={sitePath('/pricing/')} className="text-cyan-200 underline">Xem toàn bộ gói, điều kiện và giới hạn gia hạn</a>.</p>
+        <p className="mt-4 text-sm leading-7">Chính sách Free Forever được STA Cloud cập nhật ngày 16/11/2026. <a href={sitePath('/pricing/')} className="text-cyan-200 underline">Xem toàn bộ gói, điều kiện và giới hạn gia hạn</a>.</p>
       </section>
       <section aria-labelledby="dev-title" className="py-8">
         <h2 id="dev-title" className="text-2xl font-semibold text-white">Bảng tóm tắt hosting Dev trả phí</h2>

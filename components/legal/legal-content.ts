@@ -18,7 +18,7 @@ export const slaLastUpdated = '24/10/2026';
 export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
-  { title: 'Chính sách nhóm FREE trên Portal', paragraphs: [freePolicy, 'Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; NODE TEST có chu kỳ Free Forever. Chỉ các gói FREE khác có thanh toán Credit mới áp dụng chính sách hoàn riêng. Chính sách này được ưu tiên khi có sự khác biệt với quy định chung về dịch vụ miễn phí; không bao gồm khôi phục dữ liệu.'] },
+  { title: 'Chính sách nhóm FREE trên Portal', paragraphs: [freePolicy, 'Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; cả hai đều Free Forever, cấu hình có thể điều chỉnh trong tương lai. Chỉ các gói FREE khác có thanh toán Credit mới áp dụng chính sách hoàn riêng. Chính sách này được ưu tiên khi có sự khác biệt với quy định chung về dịch vụ miễn phí; không bao gồm khôi phục dữ liệu.'] },
   {
     title: '1. Thanh toán',
     bullets: [
@@ -111,12 +111,12 @@ export const termsSections: LegalSection[] = [
         ],
       },
       {
-        title: '7.6 Điều khoản riêng cho Node Test',
+        title: '7.6 Điều khoản riêng cho hosting FREE',
         bullets: [
-          'NODE TEST (tên cũ: TESTER) là gói miễn phí cho bot Discord, web nhỏ và project học tập; cấu hình công bố gồm 75% CPU và 2 GB RAM.',
-          'NODE TEST được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
-          'Người dùng tạo ticket Discord để đăng ký và chờ đội ngũ kiểm tra khả năng cấp phát tài nguyên.',
-          'NODE TEST không hỗ trợ backup. Người dùng phải tự tải bản sao lưu về máy trước khi có sự cố.',
+          'STA Cloud Free Gamming + AI: 75% CPU, 2048 MB RAM, 3072 MB ổ đĩa. STA Cloud Free DEV: 50% CPU, 1024 MB RAM, 1024 MB ổ đĩa. Cả hai đều Free Forever, không thu phí; cấu hình có thể điều chỉnh trong tương lai.',
+          'Hosting FREE được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
+          'Người dùng kiểm tra slot và đăng ký trên Portal; có thể tạo ticket Discord để được hỗ trợ.',
+          'Hosting FREE không hỗ trợ backup. Người dùng phải tự tải bản sao lưu về máy trước khi có sự cố.',
           'Nghiêm cấm DDoS, mining, scan port, botnet, mã độc, nội dung độc hại hoặc vi phạm pháp luật. Tài khoản vi phạm bị khóa vĩnh viễn và không hỗ trợ mở lại.',
         ],
       },
@@ -131,7 +131,7 @@ export const termsSections: LegalSection[] = [
   {
     title: '9. Dịch vụ miễn phí và Free Forever',
     bullets: [
-      'Free Forever mô tả chính sách giá 0 Credit của NODE TEST tại thời điểm công bố, không phải cam kết tài nguyên vô hạn hoặc không bao giờ thay đổi cấu hình.',
+      'Free Forever mô tả chính sách giá 0 Credit của hosting FREE tại thời điểm công bố, không phải cam kết tài nguyên vô hạn hoặc không bao giờ thay đổi cấu hình.',
       'STACloud có thể giới hạn số lượng plan, thời gian cấp phát hoặc tạm dừng đăng ký mới khi hạ tầng không còn đủ tài nguyên.',
       'Dịch vụ miễn phí không thuộc phạm vi bồi hoàn SLA, không hỗ trợ backup và được cung cấp theo khả năng hiện có.',
     ],
@@ -265,7 +265,7 @@ export const slaSections: LegalSection[] = [
       'SLA này áp dụng cho các dịch vụ trả phí do STACloud trực tiếp vận hành và cấp phát cho khách hàng, bao gồm các gói compute trả phí và quyền truy cập panel đi kèm dịch vụ đó.',
     ],
     bullets: [
-      'Không áp dụng cho các gói miễn phí như NODE TEST, OpenClaw Beta hoặc bất kỳ dịch vụ community nào được ghi chú là free/sponsored.',
+      'Không áp dụng cho các gói miễn phí như hosting FREE, OpenClaw Beta hoặc bất kỳ dịch vụ community nào được ghi chú là free/sponsored.',
       'Không áp dụng cho Discord, Zalo, email support hoặc các nền tảng cộng đồng của bên thứ ba.',
       'SLA chỉ áp dụng cho thời gian sau khi dịch vụ đã được kích hoạt hợp lệ và thanh toán đầy đủ.',
     ],
@@ -363,7 +363,7 @@ export const partnerSections: LegalSection[] = [
     title: '4. Phạm vi giảm giá 20%',
     bullets: [
       'Ưu đãi 20% chỉ áp dụng cho phí dịch vụ trả phí chính được STACloud xác nhận là đủ điều kiện.',
-      'Ưu đãi không áp dụng cho NODE TEST, OpenClaw Beta miễn phí, phí setup riêng, phí khôi phục dữ liệu, phí xử lý khẩn cấp, phụ phí tài nguyên, dịch vụ tùy chỉnh hoặc các khoản phí phát sinh khác nếu không có thỏa thuận trước.',
+      'Ưu đãi không áp dụng cho hosting FREE, OpenClaw Beta miễn phí, phí setup riêng, phí khôi phục dữ liệu, phí xử lý khẩn cấp, phụ phí tài nguyên, dịch vụ tùy chỉnh hoặc các khoản phí phát sinh khác nếu không có thỏa thuận trước.',
       'Ưu đãi không được cộng dồn với mã giảm giá, chương trình khuyến mãi hoặc thỏa thuận riêng khác, trừ khi STACloud xác nhận bằng văn bản.',
       'STACloud có quyền điều chỉnh danh sách dịch vụ được áp dụng ưu đãi nếu chi phí hạ tầng, chính sách nhà cung cấp hoặc tình trạng vận hành thay đổi.',
       'Ưu đãi Partner không có giá trị quy đổi thành tiền mặt, không hoàn lại và không chuyển nhượng cho bên thứ ba nếu chưa được STACloud đồng ý.',
@@ -384,7 +384,7 @@ export const partnerSections: LegalSection[] = [
     bullets: [
       'Partner cần sử dụng dịch vụ đúng mục đích, đúng pháp luật và không gây ảnh hưởng đến hệ thống, người dùng khác hoặc uy tín của STACloud.',
       'Partner cần cung cấp thông tin chính xác khi mở ticket, gồm mã dịch vụ, mô tả lỗi, thời điểm phát sinh, log nếu có, ảnh chụp màn hình nếu cần và các bước đã thử.',
-      'Partner có trách nhiệm tự backup dữ liệu quan trọng, đặc biệt với NODE TEST, dịch vụ miễn phí, Beta hoặc dịch vụ thử nghiệm.',
+      'Partner có trách nhiệm tự backup dữ liệu quan trọng, đặc biệt với hosting FREE, dịch vụ miễn phí, Beta hoặc dịch vụ thử nghiệm.',
       'Partner không được công khai token, mật khẩu, thông tin đăng nhập, dữ liệu khách hàng, IP nhạy cảm, log riêng tư hoặc thông tin bảo mật trên kênh công cộng.',
       'Partner cần thông báo sớm cho STACloud nếu phát hiện lỗi bảo mật, lạm dụng tài nguyên, truy cập trái phép hoặc vấn đề có thể ảnh hưởng đến hạ tầng.',
     ],
@@ -449,7 +449,7 @@ export const partnerSections: LegalSection[] = [
     title: '10. Phạm vi SLA hỗ trợ',
     bullets: [
       'SLA hỗ trợ ưu tiên áp dụng cho dịch vụ trả phí ổn định và đủ điều kiện của Partner.',
-      'SLA hỗ trợ ưu tiên không áp dụng cho NODE TEST, OpenClaw Beta miễn phí hoặc dịch vụ thử nghiệm, trừ khi STACloud có thông báo riêng.',
+      'SLA hỗ trợ ưu tiên không áp dụng cho hosting FREE, OpenClaw Beta miễn phí hoặc dịch vụ thử nghiệm, trừ khi STACloud có thông báo riêng.',
       'Các yêu cầu không có đủ thông tin, gửi sai kênh, gửi trùng lặp hoặc thay đổi nội dung liên tục có thể làm chậm thời gian xử lý.',
       'STACloud có thể hạ mức ưu tiên nếu sự cố được xác định đến từ cấu hình, mã nguồn, plugin, bot, game server, domain, DNS hoặc phần mềm bên thứ ba do Partner quản lý.',
     ],
@@ -478,7 +478,7 @@ export const partnerSections: LegalSection[] = [
     bullets: [
       'STACloud vận hành hạ tầng theo khả năng kỹ thuật hợp lý, nhưng Partner vẫn là bên chịu trách nhiệm chính với dữ liệu của mình.',
       'Partner cần duy trì bản backup riêng đối với dữ liệu quan trọng, bao gồm website, bot, server game, database, file cấu hình và dữ liệu người dùng.',
-      'STACloud không chịu trách nhiệm với mất mát dữ liệu trên NODE TEST hoặc dịch vụ Beta.',
+      'STACloud không chịu trách nhiệm với mất mát dữ liệu trên hosting FREE hoặc dịch vụ Beta.',
       'Với dịch vụ trả phí, STACloud sẽ hỗ trợ kiểm tra và khôi phục trong khả năng có thể, nhưng không cam kết khôi phục thành công nếu Partner không có backup hoặc dữ liệu đã bị ghi đè, xóa, mã hóa, lỗi do phần mềm hoặc lỗi do người dùng.',
       'Partner cần kiểm tra định kỳ khả năng khôi phục backup, vì việc có file backup nhưng không thể restore vẫn được xem là rủi ro vận hành của Partner.',
     ],
@@ -546,7 +546,7 @@ export const partnerSections: LegalSection[] = [
     bullets: [
       'STACloud không chịu trách nhiệm cho thiệt hại gián tiếp, mất doanh thu, mất dữ liệu, mất người dùng, gián đoạn cộng đồng hoặc thiệt hại phát sinh từ việc Partner không backup, cấu hình sai, dùng phần mềm lỗi hoặc vi phạm điều khoản.',
       'Trong mọi trường hợp, mức bồi hoàn tối đa nếu có sẽ không vượt quá phí dịch vụ mà Partner đã thanh toán cho dịch vụ bị ảnh hưởng trong chu kỳ xảy ra sự cố.',
-      'NODE TEST 0 Credit và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime hoặc khôi phục dữ liệu. Nhóm FREE có thanh toán trên Portal áp dụng riêng chính sách mua hoàn 100%, kể cả khi máy chủ sập hoặc bị xóa.',
+      'Hosting FREE 0 Credit và OpenClaw Beta được cung cấp theo khả năng hiện có, không kèm cam kết uptime hoặc khôi phục dữ liệu. Nhóm FREE có thanh toán trên Portal áp dụng riêng chính sách mua hoàn 100%, kể cả khi máy chủ sập hoặc bị xóa.',
       'Service credit, nếu được áp dụng, là biện pháp khắc phục duy nhất cho sự cố downtime thuộc phạm vi SLA.',
     ],
   },

@@ -61,7 +61,7 @@ function matchesFilter(plan: ServicePlan, filter: PlanFilter) {
   }
 
   if (filter === 'free') {
-    return plan.name === 'NODE TEST' || plan.name === 'OPENCLAW' || freePlans.some((free) => free.name === plan.name);
+    return plan.name === 'OPENCLAW' || freePlans.some((free) => free.name === plan.name);
   }
 
   if (filter === 'minecraft') {
@@ -157,7 +157,7 @@ function ComparisonTable({ plans }: { plans: ServicePlan[] }) {
                 </td>
                 <td className="px-4 py-4">
                   <a
-                    href={plan.name.startsWith('ICS Oracle') ? 'https://oci.ics.vn/cloud/pricing' : plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' || plan.name === 'NODE TEST' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
+                    href={plan.name.startsWith('ICS Oracle') ? 'https://oci.ics.vn/cloud/pricing' : plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex min-h-9 items-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 px-3 text-xs font-semibold text-cyan-100 transition hover:border-cyan-300/35 hover:text-white"
@@ -316,7 +316,7 @@ export function PlansSection() {
                 ) : null}
 
                 <a
-                  href={plan.name.startsWith('ICS Oracle') ? 'https://oci.ics.vn/cloud/pricing' : plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' || plan.name === 'NODE TEST' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
+                  href={plan.name.startsWith('ICS Oracle') ? 'https://oci.ics.vn/cloud/pricing' : plan.name === 'PROXY HK' || plan.name === 'OPENCLAW' ? 'https://discord.gg/nq8B4JXmnm' : 'https://portal.stacloud.eu.cc/store/create'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex w-full items-center justify-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:border-cyan-300/35 hover:text-white"

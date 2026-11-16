@@ -52,7 +52,7 @@ export const securitySections: LegalSection[] = [
     'Khách hàng chịu trách nhiệm với người được mình chia sẻ quyền. Báo ngay khi phát hiện truy cập lạ để phối hợp khóa phiên, cô lập và khôi phục.',
   ] },
   { title: '4. Backup và khôi phục', paragraphs: [
-    'NODE TEST, nhóm FREE và OpenClaw Beta không được cam kết backup tự động. Người dùng phải chủ động giữ bản sao bên ngoài hệ thống.',
+    'Nhóm FREE và OpenClaw Beta không được cam kết backup tự động. Người dùng phải chủ động giữ bản sao bên ngoài hệ thống.',
     'Gói trả phí có công bố Backup được sao lưu dự phòng vào Thứ 3, Thứ 6 và Chủ nhật. Chỉ áp dụng cho gói có ghi rõ quyền lợi này; không mặc nhiên áp dụng cho mọi gói Linux, Dev hoặc Game Servers.',
     'Backup hạ tầng không thay thế bản sao độc lập của khách hàng; khả năng khôi phục phụ thuộc bản sao còn hợp lệ. Nêu rõ mốc dữ liệu cần khôi phục khi tạo ticket.',
   ] },

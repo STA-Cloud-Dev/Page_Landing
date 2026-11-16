@@ -18,7 +18,7 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
         { value: '19', label: 'Cấu hình VPS Oracle' },
         { value: '10', label: 'Gói Linux Egg & Dev' },
         { value: 'OCI', label: 'VPS Oracle Cloud' },
-        { value: '0đ', label: 'Node Test Free Forever' },
+        { value: '0đ', label: 'Hosting Free Forever' },
       ];
 
   return (
@@ -109,16 +109,16 @@ export function CloudConsoleDisplay({ stats }: CloudConsoleDisplayProps) {
           </div>
         </div>
 
-        {/* Blade 3: Community & Node Test Free */}
+        {/* Blade 3: Community & Hosting miễn phí */}
         <div className="server-rack-row group">
           <div className="flex items-center gap-3">
             <span className="server-rack-led" />
             <div>
               <p className="text-xs font-bold text-white group-hover:text-cyan-200 transition xl:text-sm">
-                BLADE-03 // NODE TEST & COMMUNITY
+                BLADE-03 // hosting FREE & COMMUNITY
               </p>
               <p className="text-[10px] text-sky-200/70 xl:text-xs">
-                Free Forever &bull; 75% CPU &bull; 2 GB RAM &bull; Discord Bot & Web
+                Free DEV &bull; Free Gamming + AI &bull; Gia hạn 0đ
               </p>
             </div>
           </div>

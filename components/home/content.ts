@@ -14,24 +14,24 @@ export const homeConfig = {
   summary:
     'Free hosting cho bot Discord, web nhỏ và project sinh viên; kèm Portal quản trị game server, OpenClaw Beta và VPS Oracle Cloud.',
   testerAlertMessage:
-    '⚠️ Cảnh báo gói NODE TEST (tên cũ: TESTER): Gói miễn phí không hỗ trợ backup. Vui lòng tự tải dữ liệu quan trọng về máy; tài khoản vi phạm quy định sử dụng sẽ bị khóa vĩnh viễn.',
+    '⚠️ Cảnh báo gói hosting FREE: Gói miễn phí không hỗ trợ backup. Vui lòng tự tải dữ liệu quan trọng về máy; tài khoản vi phạm quy định sử dụng sẽ bị khóa vĩnh viễn.',
 };
 
 export const heroStats = [
   { value: '19', label: 'Cấu hình VPS Oracle', tone: 'cyan' },
   { value: '10', label: 'Gói Linux Egg & Dev', tone: 'sky' },
   { value: 'OCI', label: 'VPS Oracle Cloud', tone: 'emerald' },
-  { value: '0đ', label: 'Node Test & OpenClaw Free', tone: 'indigo' },
+  { value: '0đ', label: 'hosting FREE & OpenClaw Free', tone: 'indigo' },
 ] as const;
 
 export const heroSignals = [
-  '🎁 Node Test 100% Free cho bot Discord, web nhỏ và project sinh viên',
-  '⚡ Free Forever • 75% CPU • 2 GB RAM',
+  '🎁 Hosting miễn phí lâu dài cho bot Discord, web nhỏ và project sinh viên',
+  '⚡ Free DEV & Gamming + AI • Free Forever • Gia hạn 0đ',
   '🦞 OpenClaw Beta miễn phí - Trải nghiệm AI & Web không cần domain riêng',
 ] as const;
 
 export const heroStatusStrip = [
-  { label: 'NODE TEST', detail: '75% CPU • 2 GB RAM', value: 'Free Forever', tone: 'emerald', status: 'active' },
+  { label: 'Free DEV & Gamming + AI', detail: 'Hai cấu hình hosting miễn phí', value: 'Free Forever • Gia hạn 0đ', tone: 'emerald', status: 'check' },
   { label: 'Dev 1', detail: '50% CPU • 512 MB RAM', value: '7.000 Credit / 28 ngày', tone: 'emerald', status: 'active' },
   { label: 'Game Servers 1', detail: 'Gói máy chủ game trả phí', value: '50.000 Credit / 28 ngày', tone: 'cyan', status: 'active' },
   { label: 'OPENCLAW', detail: 'Free Beta AI & Web', value: '0đ / Không cần Domain', tone: 'blue', status: 'beta' },
@@ -39,30 +39,15 @@ export const heroStatusStrip = [
 ] as const;
 
 export const allServicePlans = [
-  {
-    id: 'node-test',
-    category: 'community',
-    name: 'NODE TEST',
-    badge: '100% Free',
-    status: 'active',
-    price: '0 Credit',
-    period: 'Mỗi lần tạo plan',
-    description: 'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên.',
-    specs: [],
-    upsizeAvailable: false,
-    upsizeNotes: '',
-    warning: '',
-    ctaText: 'Đăng Ký NODE TEST',
-  },
   ...[...freePlans, donaterPlan].map((plan) => ({
     id: plan.id,
     category: 'community',
     name: plan.name,
-    badge: plan.credit === 0 ? 'FREE • Gia hạn 0đ' : plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Hoàn 100%',
+    badge: plan.credit === 0 ? 'Free Forever • Gia hạn 0đ' : plan.id === 'donater' ? 'Donater • Gia hạn 0đ' : 'FREE • Hoàn 100%',
     status: 'check',
     price: `${formatCredit(plan.credit)} Credit`,
     period: `${plan.days} ngày`,
-    description: plan.requirement,
+    description: plan.credit === 0 ? `${plan.requirement}. Miễn phí lâu dài, không thu phí; cấu hình có thể điều chỉnh trong tương lai.` : plan.requirement,
     specs: communitySpecs(plan),
     upsizeAvailable: false,
     upsizeNotes: `Sao lưu thủ công: ${plan.backups} vị trí. Người dùng tự quản lý bản sao; không bao gồm backup tự động.`,
@@ -135,14 +120,14 @@ export const allServicePlans = [
 ];
 
 export const comprehensiveFaqs = [
-  { q: 'Nhóm FREE trên Portal khác NODE TEST thế nào?', a: `${freePolicy} Free Gamming + AI và Free DEV: 0 Credit / 5 ngày, gia hạn 0đ; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày. NODE TEST vẫn giữ 0 Credit / Free Forever.` },
+  { q: 'STA Cloud có những gói hosting miễn phí nào?', a: 'STA Cloud Free DEV và STA Cloud Free Gamming + AI đều Free Forever, 0 Credit, gia hạn 0đ. Chu kỳ quản lý là 5 ngày; tài khoản cần xác minh và cấu hình có thể được điều chỉnh trong tương lai. Các gói cộng đồng khác có điều kiện riêng.' },
   {
-    q: 'NODE TEST có thực sự miễn phí lâu dài không?',
-    a: 'Có. NODE TEST được công bố là Free Forever với 75% CPU và 2 GB RAM. Mỗi lần tạo plan hiển thị 0 Credit; người dùng chỉ cần tuân thủ chính sách sử dụng và chủ động lưu bản sao dữ liệu.',
+    q: 'Hai gói FREE có miễn phí lâu dài không?',
+    a: 'Có. Free DEV và Free Gamming + AI là Free Forever, không thu phí, gia hạn 0đ. Chu kỳ 5 ngày dùng để quản lý/gia hạn dịch vụ, không phải giá dùng thử. Cấu hình tài nguyên có thể được điều chỉnh trong tương lai theo thông báo của STA Cloud.',
   },
   {
     q: 'Tôi là người mới, nên chọn gói nào để bắt đầu?',
-    a: 'Bạn có thể bắt đầu miễn phí với NODE TEST hoặc OpenClaw Beta. Dev 1–5 có giá 7.000, 12.000, 20.000, 35.000 và 50.000 Credit cho 28 ngày; Linux Egg là các gói trả phí theo chu kỳ 12 ngày.',
+    a: 'Bạn có thể bắt đầu miễn phí với hosting FREE hoặc OpenClaw Beta. Dev 1–5 có giá 7.000, 12.000, 20.000, 35.000 và 50.000 Credit cho 28 ngày; Linux Egg là các gói trả phí theo chu kỳ 12 ngày.',
   },
   {
     q: 'OpenClaw Beta hoạt động như thế nào và có mất phí không?',
@@ -153,8 +138,8 @@ export const comprehensiveFaqs = [
     a: 'Dev 1–5 và Egg Linux 1–5 có cấu hình và chu kỳ riêng ghi trong bảng giá. Nhu cầu nâng cấp riêng cần xác nhận qua ticket.',
   },
   {
-    q: 'Vì sao NODE TEST lại có cảnh báo về dữ liệu?',
-    a: 'NODE TEST là gói miễn phí và không hỗ trợ backup. Người dùng cần chủ động tải và lưu trữ bản sao dữ liệu trên thiết bị của mình.',
+    q: 'Vì sao hosting FREE lại có cảnh báo về dữ liệu?',
+    a: 'Hai gói hosting FREE đều miễn phí và không hỗ trợ backup. Người dùng cần chủ động tải và lưu trữ bản sao dữ liệu trên thiết bị của mình.',
   },
   {
     q: 'Đăng ký VPS Oracle Cloud và tính giá như thế nào?',

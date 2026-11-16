@@ -40,7 +40,7 @@ const home = read('index.html');
 const graph = [...home.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)]
   .flatMap((match) => JSON.parse(match[1])['@graph'] || []);
 for (const type of ['Organization', 'WebSite', 'WebPage', 'Service']) {
-  assert.equal(graph.filter((node) => node['@type'] === type).length, 1, `Missing/duplicate ${type}`);
+  assert.equal(graph.filter((node) => node['@type'] === type).length, type === 'Service' ? 2 : 1, `Missing/duplicate ${type}`);
 }
 const website = graph.find((node) => node['@type'] === 'WebSite');
 assert.equal(website.url, `${origin}/`);
@@ -98,3 +98,8 @@ for (const group of ['standard', 'premium', 'enterprise', 'gpu']) {
 const legacyVps = read('vps-hosting/index.html');
 assert.ok(legacyVps.includes(`0;url=${origin}/vps/`), 'Legacy VPS path must forward to new URL on static host');
 assert.ok(legacyVps.includes('noindex'), 'Legacy fallback must not create duplicate indexed content');
+
+for (const file of ['index.html', 'pricing/index.html', 'free-server/index.html', 'about/index.html', 'llms.txt']) {
+  assert.ok(!/node[ -]?test/i.test(read(file)), `Retired free plan mentioned: ${file}`);
+}
+assert.ok(read('free-server/index.html').includes('Free Forever') && read('free-server/index.html').includes('Cấu hình'), 'Missing Free Forever policy');

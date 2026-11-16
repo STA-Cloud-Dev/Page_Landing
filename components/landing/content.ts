@@ -27,19 +27,6 @@ export const heroStats = [
 ] as const;
 
 export const servicePlans = [
-  {
-    name: 'NODE TEST',
-    description:
-      'Gói miễn phí ưu tiên cho bot Discord, web nhỏ và project học tập của sinh viên.',
-    price: '0 Credit / Mỗi lần tạo plan',
-    highlight: 'Free Forever',
-    specs: [],
-    addOns: [],
-    status: 'active',
-    statusLabel: 'Đang Mở Slot',
-    accent: 'from-emerald-400/25 to-cyan-300/10',
-    warnings: [],
-  },
   ...[...freePlans, donaterPlan].map((plan) => ({
     name: plan.name,
     description: plan.requirement,
@@ -200,7 +187,7 @@ export const quickSteps = [
 
 export const notes = [
   freePolicy,
-  'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM.',
+  'Free DEV và Free Gamming + AI đều Free Forever, không thu phí, gia hạn 0đ; cấu hình có thể điều chỉnh trong tương lai.',
   'OpenClaw Beta miễn phí và hiện không cần domain riêng; nếu cần hỗ trợ có thể liên hệ Discord, Zalo hoặc Messenger Group.',
   'Dev 1–5: 7.000 / 12.000 / 20.000 / 35.000 / 50.000 Credit cho 28 ngày. Game Servers 1–2: 50.000 / 65.000 Credit cho 28 ngày. Egg Linux 1–5 dành cho người trả phí, chu kỳ 12 ngày.',
   'PROXY HK hiện tạm ngưng do hết slot; Shield AntiDDoS tính 20.000 VNĐ / 1 GB.',
@@ -212,7 +199,7 @@ export const policyGroups = [
   {
     title: 'Gói Miễn Phí Và Beta',
     points: [
-      'NODE TEST giữ nguyên 0 Credit / Free Forever, 75% CPU và 2 GB RAM. Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; các gói FREE khác theo điều kiện riêng.',
+      'Free DEV và Free Gamming + AI đều Free Forever, không thu phí, chu kỳ quản lý 5 ngày, gia hạn 0đ; cấu hình có thể điều chỉnh trong tương lai. Các gói cộng đồng khác theo điều kiện riêng.',
       freePolicy,
       'Free Gamming + AI và Free DEV: 0 Credit / 5 ngày, gia hạn 0đ; Linux Free: 9.990 Credit / 3 ngày; Booster Discord: 50.000 Credit / 15 ngày.',
       'Nhóm FREE không hỗ trợ backup; người dùng phải chủ động tải bản sao dữ liệu về máy.',

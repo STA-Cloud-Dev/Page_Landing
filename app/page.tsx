@@ -1,3 +1,4 @@
+import { freePlans, resourceSpecs } from '@/components/shared/free-plans';
 import type { Metadata } from 'next';
 import { HomePage } from '@/components/home/homepage';
 import { sitePath } from '@/lib/site-path';
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     'free hosting bot discord',
     'free web hosting sinh viên',
     'free hosting project nhỏ',
-    'Node Test miễn phí',
+    'hosting miễn phí',
     'hosting miễn phí Việt Nam',
     'VPS Singapore',
     'game server hosting',
@@ -88,20 +89,13 @@ const homeSchema = {
       isPartOf: { '@id': `${siteUrl}/#website` },
       about: { '@id': `${siteUrl}/#organization` },
     },
-    {
-      '@type': 'Service',
-      '@id': `${siteUrl}/#node-test`,
-      name: 'STACloud Node Test Free Hosting',
+    ...freePlans.filter(plan => plan.credit === 0).map(plan => ({
+      '@type': 'Service', '@id': `${siteUrl}/#${plan.id}`, name: plan.name,
       provider: { '@id': `${siteUrl}/#organization` },
-      serviceType: 'Free hosting cho bot Discord, web nhỏ và project sinh viên',
-      description: 'Node Test Free Forever với 75% CPU, 2 GB RAM và 0 Credit mỗi lần tạo plan.',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'VND',
-        url: `${siteUrl}/#free-hosting`,
-      },
-    },
+      serviceType: 'Hosting miễn phí Free Forever',
+      description: `${resourceSpecs(plan).join(', ')}. Free Forever, không thu phí, chu kỳ quản lý 5 ngày, gia hạn 0đ. Cấu hình có thể điều chỉnh trong tương lai.`,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'VND', url: `${siteUrl}/free-server/` },
+    })),
   ],
 };
 

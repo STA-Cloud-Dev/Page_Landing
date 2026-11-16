@@ -102,7 +102,7 @@ export function MobileDrawer({
             className="flex items-center gap-3 rounded-lg bg-emerald-400/10 px-3 py-2.5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/20 hover:text-white"
           >
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-400/20 text-emerald-100">0đ</span>
-            Node Test 100% Free
+            Hosting miễn phí lâu dài
           </a>
 
           <a

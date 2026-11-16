@@ -1,5 +1,5 @@
-// FREE DEV / Gamming + AI updated by the owner on 12/11/2026. Other plans retain their published terms.
-export const freePolicy = 'Dành cho tài khoản đã xác minh. Free DEV và Free Gamming + AI có giá 0 Credit / 5 ngày, gia hạn 0đ; không có khoản thanh toán để hoàn và không hỗ trợ backup hoặc khôi phục dữ liệu. Các gói FREE khác có thanh toán Credit giữ chính sách hoàn 100% theo điều kiện riêng.';
+// FREE DEV / Gamming + AI Free Forever policy updated by the owner on 16/11/2026. Other plans retain their published terms.
+export const freePolicy = 'Dành cho tài khoản đã xác minh. Free DEV và Free Gamming + AI đều Free Forever, không thu phí, 0 Credit / chu kỳ quản lý 5 ngày, gia hạn 0đ; cấu hình tài nguyên có thể được điều chỉnh trong tương lai; không có khoản thanh toán để hoàn và không hỗ trợ backup hoặc khôi phục dữ liệu. Các gói FREE khác có thanh toán Credit giữ chính sách hoàn 100% theo điều kiện riêng.';
 
 export const freePlans = [
   { id: 'free-gaming-ai', name: 'STA Cloud Free Gamming + AI', cpu: 75, ram: 2048, disk: 3072, credit: 0, days: 5, renewalDays: 4, ports: 1, backups: 0, slots: 1, requirement: 'Tài khoản đã xác minh' },
@@ -12,7 +12,7 @@ export const donaterPlan = {
   id: 'donater', name: 'STA Cloud Free cho Donater 200k trở lên',
   cpu: 200, ram: 4096, disk: 5120, credit: 200000, days: 15,
   renewalDays: 10, ports: 2, backups: 1, slots: 2,
-  requirement: 'Dành cho user đã donate trên 200.000 VNĐ. Gia hạn 0đ như Node Test.',
+  requirement: 'Dành cho user đã donate trên 200.000 VNĐ. Gia hạn 0đ theo điều kiện Donater.',
 } as const;
 
 export function resourceSpecs(plan: { cpu: number; ram: number; disk: number }) {
@@ -20,5 +20,5 @@ export function resourceSpecs(plan: { cpu: number; ram: number; disk: number }) 
 }
 
 export function communitySpecs(plan: (typeof freePlans)[number] | typeof donaterPlan) {
-  return [...resourceSpecs(plan), ...(plan.credit === 0 ? ['Host Free', 'Gia hạn 0đ', `${plan.backups} bản sao lưu`, '0 cơ sở dữ liệu'] : []), `${plan.ports} cổng`, `${plan.slots} suất server tối đa`, `Gia hạn tối đa ${plan.renewalDays} ngày`];
+  return [...resourceSpecs(plan), ...(plan.credit === 0 ? ['Host Free', 'Free Forever', 'Gia hạn 0đ', 'Cấu hình có thể điều chỉnh trong tương lai', `${plan.backups} bản sao lưu`, '0 cơ sở dữ liệu'] : []), `${plan.ports} cổng`, `${plan.slots} suất server tối đa`, `Gia hạn tối đa ${plan.renewalDays} ngày`];
 }

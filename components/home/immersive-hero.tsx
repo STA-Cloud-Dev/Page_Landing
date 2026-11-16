@@ -17,7 +17,7 @@ export function ImmersiveHero() {
             <a className="cosmic-button cosmic-button-primary" href={sitePath('/pricing/')}>Khám phá hạ tầng <ArrowUpRight size={18} aria-hidden="true" /></a>
             <a className="cosmic-text-link" href={homeConfig.panelUrl} target="_blank" rel="noopener noreferrer">Mở Control Portal <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
-          <a className="hero-community-link" href={sitePath('/free-server/')}><span>CHO CỘNG ĐỒNG</span> Khởi đầu miễn phí với Node Test <ArrowUpRight size={14} aria-hidden="true" /></a>
+          <a className="hero-community-link" href={sitePath('/free-server/')}><span>CHO CỘNG ĐỒNG</span> Khởi đầu miễn phí với hosting FREE <ArrowUpRight size={14} aria-hidden="true" /></a>
           <ContactLinks />
         </div>
         <div className="hero-sculpture-wrap">

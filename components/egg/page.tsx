@@ -109,7 +109,7 @@ function Header({ onOpenDrawer }: { onOpenDrawer: () => void }) {
             href={sitePath('/free-server')}
             className="rounded-lg bg-emerald-400/15 px-3 py-1.5 text-emerald-200 transition hover:bg-emerald-400/25 hover:text-white"
           >
-            Node Test Free
+            Hosting miễn phí
           </a>
           <a
             href={homeConfig.panelUrl}

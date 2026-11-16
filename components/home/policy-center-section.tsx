@@ -60,7 +60,7 @@ export function PolicyCenterSection() {
           ))}
         </div>
         <a href={sitePath('/free-server#service-rules')} className="mt-5 inline-flex text-sm font-semibold text-cyan-200 underline-offset-4 hover:underline">
-          Xem thêm chính sách áp dụng cho NODE TEST, Beta và từng gói máy chủ →
+          Xem thêm chính sách áp dụng cho hosting FREE, Beta và từng gói máy chủ →
         </a>
       </div>
     </section>
