@@ -7,7 +7,6 @@ import { MobileDrawer } from '@/components/ui/mobile-drawer';
 import { SiteFooter } from './site-footer';
 import { ContactLinks } from './contact-links';
 import { sitePath } from '@/lib/site-path';
-import { CyberBackgroundDecor } from '@/components/visual/cyber-background-decor';
 import { LandingDepthEffects } from '@/components/visual/landing-depth-effects';
 import { AmbientParticles } from '@/components/visual/ambient-particles';
 
@@ -16,7 +15,7 @@ const navigation = [ ['/', 'Trang chủ'], ['/pricing/', 'Bảng giá'], ['/free
 export function SiteShell({ children, home = false }: { children: ReactNode; home?: boolean }) {
   const [open, setOpen] = useState(false);
   return <div className={`${home ? 'cosmic-home' : 'cosmic-subpage'} site-motion relative min-h-screen pt-20 text-sky-100`}>
-    <CyberBackgroundDecor />
+    <div className="site-atmosphere" aria-hidden="true" />
     <AmbientParticles />
     <header className="landing-header fixed inset-x-0 top-0 z-40 h-20 border-b border-cyan-300/20 bg-[#06243d] px-4 py-3 sm:px-6">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">

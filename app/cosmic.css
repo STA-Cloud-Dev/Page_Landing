@@ -257,6 +257,14 @@ html.visuals-hidden *, html.visuals-hidden *::before, html.visuals-hidden *::aft
 /* Shared depth styling survives the split into dedicated service pages.
    Mouse effects are decorative; touch and reduced-motion views stay static. */
 .site-motion { overflow-x: clip; }
+.site-atmosphere {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; contain: strict;
+  background: radial-gradient(ellipse at 8% 12%, rgba(0,180,216,.16), transparent 48%), radial-gradient(ellipse at 90% 35%, rgba(37,99,235,.14), transparent 52%), radial-gradient(ellipse at 35% 90%, rgba(16,185,129,.09), transparent 48%);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .site-atmosphere { animation: atmosphereBreath 12s ease-in-out infinite alternate; }
+}
+@keyframes atmosphereBreath { from { opacity: .65; } to { opacity: 1; } }
 .site-motion > .cyber-background-decor { position: fixed; inset: 0; z-index: 0; contain: strict; }
 .site-motion > .ambient-particle-field { contain: strict; }
 .site-motion article { position: relative; isolation: isolate; }
