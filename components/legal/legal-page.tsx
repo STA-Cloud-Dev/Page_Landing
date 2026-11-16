@@ -59,7 +59,7 @@ export function LegalPage({ eyebrow, title, intro, lastUpdated, sections }: Lega
               Trang Chủ
             </a>
             <a
-              href={sitePath('/#plans')}
+              href={sitePath('/pricing/')}
               className="rounded-lg px-3 py-1.5 transition hover:bg-cyan-400/20 hover:text-white"
             >
               Bảng Giá

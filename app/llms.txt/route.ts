@@ -14,8 +14,10 @@ Thông tin giới thiệu rà soát ngày ${factsReviewedAt}. Ngôn ngữ chính
 ## Thông tin chính thức
 
 - [Giới thiệu và thông tin dịch vụ](${siteUrl}/about/): tên thương hiệu, câu trả lời ngắn, tóm tắt FREE/Dev và nguồn dữ liệu.
+- [Bảng giá hosting STA Cloud](${siteUrl}/pricing/): các gói riêng FREE, Dev, Linux Egg và Game Servers; cấu hình, chu kỳ và so sánh.
+- [Khu vực và bản đồ](${siteUrl}/network/): danh mục region và ping mô phỏng, điều kiện slot.
 - [VPS Oracle Cloud và hosting](${siteUrl}/vps-hosting/): cấu hình, giá tham khảo, VAT và điều kiện khu vực.
-- [Hosting FREE, Dev, Linux Egg và game server](${siteUrl}/free-server/): giá, tài nguyên, chu kỳ, giới hạn và điều kiện đăng ký.
+- [Hosting miễn phí](${siteUrl}/free-server/): Node Test, Free DEV, Free Gamming + AI, OpenClaw và điều kiện sử dụng.
 - [Danh mục Egg](${siteUrl}/egg/): runtime, WordPress, PHPweb, Laravel, phpMyAdmin, Minecraft và các môi trường hỗ trợ.
 - [Lịch sử thương hiệu](${siteUrl}/history/): các tên gọi trong lịch sử STA Cloud.
 

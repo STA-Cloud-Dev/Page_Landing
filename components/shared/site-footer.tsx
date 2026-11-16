@@ -42,7 +42,7 @@ export function SiteFooter() {
               <a href={sitePath('/vps-hosting/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 VPS & Hosting Việt Nam / Singapore
               </a>
-              <a href={sitePath('/#plans')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
+              <a href={sitePath('/pricing/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Bảng giá & Gói dịch vụ
               </a>
               <a href={sitePath('/#benefits')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
@@ -101,6 +101,7 @@ export function SiteFooter() {
               <a href={sitePath('/history/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Lịch sử STACloud
               </a>
+              <a href={sitePath('/network/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">Bản đồ & khu vực</a>
               <a href={sitePath('/about/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
                 Giới thiệu & thông tin STA Cloud
               </a>

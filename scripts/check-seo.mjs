@@ -9,7 +9,8 @@ const origin = 'https://stacloud.eu.cc';
 const read = (file) => readFileSync(path.join(output, file), 'utf8');
 const sitemap = read('sitemap.xml');
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-assert.equal(urls.length, 13, 'Review the public sitemap when routes change');
+assert.equal(urls.length, 15, 'Review the public sitemap when routes change');
+assert.ok(urls.includes(`${origin}/pricing/`) && urls.includes(`${origin}/network/`), 'Missing dedicated catalog/map routes');
 assert.ok(urls.includes(`${origin}/about/`), 'Missing factual brand/service page');
 assert.ok(urls.includes(`${origin}/history/`), 'Missing brand history page');
 assert.ok(urls.includes(`${origin}/vps-hosting/`), 'Missing VPS/hosting service page');
@@ -81,3 +82,12 @@ for (const entry of vpsCatalog.itemListElement) {
   assert.equal(entry.item.url, 'https://oci.ics.vn/cloud/pricing');
 }
 console.log('GEO checks passed: visible facts, AboutPage identity, public discovery links.');
+
+const pricing = read('pricing/index.html');
+assert.ok(pricing.includes('Dev 3') && pricing.includes('1536 MB RAM'), 'Current Dev plans must be rendered in catalog HTML');
+assert.ok(!pricing.includes('ICS Oracle VM.GPU'), 'ICS products must remain separate from own hosting catalog');
+assert.ok(read('network/index.html').includes('Canada Southeast (Toronto)'), 'Region catalog must remain crawlable');
+for (const anchor of ['plans', 'network', 'free-hosting', 'openclaw', 'benefits', 'faq', 'policies']) {
+  assert.ok(home.includes(`id="${anchor}"`), `Preserve existing home anchor: ${anchor}`);
+}
+assert.ok(home.includes('href="/pricing/"') && home.includes('href="/network/"'), 'Missing home links to dedicated pages');

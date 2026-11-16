@@ -3,7 +3,7 @@
 Landing page chính thức của STACloud, giới thiệu portal, VPS, các gói dịch vụ cộng đồng, hướng dẫn đăng ký và chính sách sử dụng.
 
 Website công khai: `https://stacloud.eu.cc`. Portal riêng tư:
-`https://portal.stacloud.eu.cc`. Sitemap gồm 13 trang công khai; không thêm
+`https://portal.stacloud.eu.cc`. Sitemap gồm 15 trang công khai; không thêm
 Admin, account hoặc server khách vào sitemap. Robots, metadata và canonical
 phải dùng domain mới khi build. Favicon PNG hiện có kích thước 500×500, ICO có
 đường dẫn dự phòng `/favicon.ico`.

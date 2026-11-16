@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
-import './illustrations.css';
-import { FreeServerPage } from '@/components/free-server/page';
+import { SiteShell } from '@/components/shared/site-shell';
+import { ContactLinks } from '@/components/shared/contact-links';
+import { freePlans, resourceSpecs } from '@/components/shared/free-plans';
+import { homeConfig } from '@/components/home/content';
+import { OpenClawSpotlight } from '@/components/shared/openclaw-spotlight';
+import { siteUrl } from '@/lib/site-seo';
 import { sitePath } from '@/lib/site-path';
-
-export const metadata: Metadata = {
-  title: 'Node Test FREE Hosting & Bảng Giá | STACloud',
-  description:
-    'NODE TEST 0 Credit / Free Forever và Free DEV, Free Gamming + AI 0 Credit / 5 ngày, gia hạn 0đ; cấu hình và giá Linux Egg, Dev, Game Servers và VPS STACloud.',
-  alternates: { canonical: sitePath('/free-server') },
-};
-
+export const metadata: Metadata = { title: 'Hosting miễn phí: Node Test, Free DEV & Gamming AI | STA Cloud', description: 'Hosting miễn phí STA Cloud: Node Test Free Forever, Free DEV và Free Gamming + AI 0 Credit / 5 ngày, gia hạn 0đ. Cấu hình, điều kiện, sao lưu và cách đăng ký.', alternates: { canonical: `${siteUrl}/free-server/` } };
 export default function FreeServerRoute() {
-  return <FreeServerPage />;
+  return <SiteShell><div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12"><h1 className="text-3xl font-bold text-white sm:text-5xl">Hosting miễn phí tại STA Cloud</h1><p className="mt-5 max-w-3xl text-sm leading-7">Dành cho học tập, bot Discord, website nhỏ và thử nghiệm. Tài khoản cần xác minh; slot và điều kiện được xác nhận trên Portal hoặc qua ticket. Gói miễn phí không hỗ trợ sao lưu hoặc khôi phục dữ liệu.</p><ContactLinks />
+    <section id="free-hosting" className="scroll-mt-24 py-8"><h2 className="text-2xl font-bold text-white">Node Test & gói FREE</h2><div className="mt-5 grid gap-4 md:grid-cols-3"><article className="rounded-2xl border border-cyan-300/30 p-5"><h3 className="text-xl font-bold text-white">NODE TEST</h3><p className="mt-4 text-xl text-cyan-200">0 Credit / Free Forever</p><ul className="my-4 space-y-2 text-sm"><li>75% CPU</li><li>2 GB RAM</li><li>Không hỗ trợ backup</li></ul><a href={homeConfig.discordUrl} className="inline-flex min-h-12 items-center text-cyan-200 underline">Tạo ticket nhận slot</a></article>{freePlans.filter(plan => plan.credit===0).map(plan => <article key={plan.id} className="rounded-2xl border border-cyan-300/30 p-5"><h3 className="text-xl font-bold text-white">{plan.name}</h3><p className="mt-4 text-xl text-cyan-200">0 Credit / {plan.days} ngày</p><p className="mt-2 text-sm">Gia hạn 0đ</p><ul className="my-4 space-y-2 text-sm">{resourceSpecs(plan).map(spec => <li key={spec}>{spec}</li>)}<li>{plan.ports} cổng · 0 bản sao lưu · 0 cơ sở dữ liệu</li><li>Gia hạn tối đa {plan.renewalDays} ngày theo cấu hình gói</li></ul><a href={`${homeConfig.panelUrl}store/create`} className="inline-flex min-h-12 items-center text-cyan-200 underline">Kiểm tra slot trên Portal</a></article>)}</div></section>
+    <section id="plans" className="scroll-mt-24 rounded-2xl border border-cyan-300/25 p-5"><h2 className="text-2xl font-bold text-white">Cần thêm tài nguyên hoặc gói khác?</h2><p className="mt-3 text-sm leading-7">Dev, Linux Egg, Game Servers, Booster và Donater có bảng cấu hình và điều kiện riêng.</p><a href={sitePath('/pricing/')} className="mt-3 inline-flex min-h-12 items-center font-semibold text-cyan-200 underline">Xem đầy đủ bảng giá STA Cloud →</a></section>
+    <div id="openclaw" className="scroll-mt-24"><OpenClawSpotlight discordUrl={homeConfig.discordUrl} zaloUrl={homeConfig.zaloUrl} messengerUrl={homeConfig.messengerUrl} /></div>
+    <section id="service-rules" className="scroll-mt-24 py-8"><h2 className="text-2xl font-bold text-white">Điều kiện và trách nhiệm dữ liệu</h2><ol className="mt-4 list-inside list-decimal space-y-3 text-sm leading-7"><li>Kiểm tra slot và xác minh tài khoản trước khi tạo dịch vụ.</li><li>Gia hạn đúng giới hạn của từng gói; không tự động hiểu chu kỳ 5 ngày là thời hạn gia hạn tối đa.</li><li>Tự tải bản sao dữ liệu; gói FREE không bao gồm backup hoặc khôi phục.</li><li>Không DDoS, mining, botnet, mã độc, lạm dụng tài nguyên hoặc nội dung vi phạm pháp luật.</li></ol><p className="mt-4 text-sm leading-7">Đọc <a href={sitePath('/terms/')} className="text-cyan-200 underline">điều khoản</a> và <a href={sitePath('/privacy/')} className="text-cyan-200 underline">quyền riêng tư</a>. Các gói trả phí áp dụng <a href={sitePath('/sla/')} className="text-cyan-200 underline">SLA theo điều kiện</a>.</p></section>
+  </div></SiteShell>;
 }

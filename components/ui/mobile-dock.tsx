@@ -15,7 +15,7 @@ export function MobileDock({ panelUrl, discordUrl, zaloUrl }: MobileDockProps) {
   const pathname = usePathname();
   const items = [
     { label: 'Trang chủ', href: sitePath('/'), icon: Home, active: pathname === '/' },
-    { label: 'Bảng giá', href: sitePath('/#plans'), icon: Tags },
+    { label: 'Bảng giá', href: sitePath('/pricing/'), icon: Tags },
     { label: 'Portal', href: panelUrl, icon: LayoutDashboard, external: true, primary: true },
     { label: 'Zalo', href: zaloUrl, icon: MessageCircle, external: true },
     { label: 'Ticket', href: discordUrl, icon: Ticket, external: true },

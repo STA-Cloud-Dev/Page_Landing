@@ -9,7 +9,7 @@ export const siteServices = [
   {
     name: 'Hosting Việt Nam & Singapore',
     description: 'Hosting cho website, bot Discord, ứng dụng Node.js và Python. Chọn khu vực Việt Nam hoặc Singapore theo gói và slot được xác nhận; có Node Test miễn phí để trải nghiệm.',
-    path: '/free-server/',
+    path: '/pricing/',
     action: 'Xem hosting & bảng giá',
   },
   {

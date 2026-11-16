@@ -66,8 +66,8 @@ export default function VpsHostingPage() {
           <h2 id="choose-service" className="text-2xl font-bold text-white">Nên thuê VPS, hosting hay game server?</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {[
-              { name: 'Hosting website & bot', text: 'Phù hợp website, bot Discord, ứng dụng Node.js hoặc Python có nhu cầu tài nguyên rõ ràng. Xem gói Dev và Linux Egg, runtime được hỗ trợ và giới hạn của từng gói.', href: '/free-server/', action: 'Xem bảng giá hosting' },
-              { name: 'Cloud VPS', text: 'Phù hợp nhu cầu triển khai ứng dụng và dịch vụ trên máy chủ ảo. Gửi yêu cầu hệ điều hành, CPU, RAM, dung lượng và port để chọn VPS Oracle Cloud.', href: '/#plans', action: 'Xem toàn bộ gói dịch vụ' },
+              { name: 'Hosting website & bot', text: 'Phù hợp website, bot Discord, ứng dụng Node.js hoặc Python có nhu cầu tài nguyên rõ ràng. Xem gói Dev và Linux Egg, runtime được hỗ trợ và giới hạn của từng gói.', href: '/pricing/', action: 'Xem bảng giá hosting' },
+              { name: 'Cloud VPS', text: 'Phù hợp nhu cầu triển khai ứng dụng và dịch vụ trên máy chủ ảo. Gửi yêu cầu hệ điều hành, CPU, RAM, dung lượng và port để chọn VPS Oracle Cloud.', href: '/pricing/', action: 'Xem toàn bộ gói dịch vụ' },
               { name: 'Game hosting / server hosting', text: 'Dành cho máy chủ game như Minecraft. Chọn môi trường trong kho Egg, sau đó xác nhận tài nguyên theo phiên bản game, plugin, mod và số người chơi dự kiến.', href: '/egg/', action: 'Xem game & runtime hỗ trợ' },
             ].map((service) => (
               <article key={service.name} className="flex flex-col rounded-2xl border border-cyan-300/25 bg-[#06335a]/60 p-5">

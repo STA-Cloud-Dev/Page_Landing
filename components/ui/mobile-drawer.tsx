@@ -57,7 +57,7 @@ export function MobileDrawer({
       />
 
       {/* Drawer Container (Ocean Blue Theme) */}
-      <div ref={dialog} role="dialog" aria-modal="true" aria-label="Menu điều hướng" className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto border-l border-cyan-300/30 bg-[#06335a] p-5 shadow-2xl">
+      <div ref={dialog} role="dialog" aria-modal="true" aria-label="Menu điều hướng" className="fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[85dvh] w-full max-w-lg flex-col overflow-y-auto rounded-t-3xl border-t border-cyan-300/30 bg-[#06335a] p-5 shadow-2xl">
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-cyan-300/20 pb-5">
           <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href={sitePath('/#free-hosting')}
+            href={sitePath('/free-server/')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg bg-emerald-400/10 px-3 py-2.5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/20 hover:text-white"
           >
@@ -106,7 +106,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href={sitePath('/#plans')}
+            href={sitePath('/pricing/')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -133,7 +133,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href={sitePath('/#openclaw')}
+            href={sitePath('/free-server/#openclaw')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
@@ -142,7 +142,7 @@ export function MobileDrawer({
           </a>
 
           <a
-            href={sitePath('/#network')}
+            href={sitePath('/network/')}
             onClick={onClose}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-100 transition hover:bg-cyan-400/20 hover:text-cyan-200"
           >
