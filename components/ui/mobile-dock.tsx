@@ -1,35 +1,100 @@
-'use client';
-
-import { Home, Tags, LayoutDashboard, Ticket, MessageCircle } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { sitePath } from '@/lib/site-path';
-
+"use client";
+import {
+  Home,
+  Tags,
+  LayoutDashboard,
+  Menu,
+  MessagesSquare,
+} from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useLocale } from "@/lib/i18n/use-locale";
+import { localizedPath } from "@/lib/i18n/config";
 interface MobileDockProps {
   panelUrl: string;
   discordUrl: string;
   zaloUrl: string;
   messengerUrl: string;
+  onMenu?: () => void;
+  onSupport?: () => void;
 }
-
-export function MobileDock({ panelUrl, discordUrl, zaloUrl }: MobileDockProps) {
-  const pathname = usePathname();
-  const items = [
-    { label: 'Trang chủ', href: sitePath('/'), icon: Home, active: pathname === '/' },
-    { label: 'Bảng giá', href: sitePath('/pricing/'), icon: Tags },
-    { label: 'Portal', href: panelUrl, icon: LayoutDashboard, external: true, primary: true },
-    { label: 'Zalo', href: zaloUrl, icon: MessageCircle, external: true },
-    { label: 'Ticket', href: discordUrl, icon: Ticket, external: true },
-  ];
-
-  return <nav aria-label="Lối tắt di động" className="mobile-dock fixed inset-x-3 z-40 lg:hidden">
-    <div className="mx-auto grid max-w-lg grid-cols-5 gap-1 rounded-xl border border-cyan-300/30 bg-[#06243d] p-2 shadow-lg">
-      {items.map(({ label, href, icon: Icon, active, primary, external }) => (
-        <a key={label} href={href} aria-current={active ? 'page' : undefined}
-          target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}
-          className={`flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[11px] font-semibold md:min-h-11 ${primary ? 'bg-cyan-300 text-[#031c34]' : active ? 'bg-white/10 text-cyan-200' : 'text-sky-100 hover:bg-white/10'}`}>
-          <Icon size={20} aria-hidden="true" />{label}
+export function MobileDock({
+  panelUrl,
+  discordUrl,
+  onMenu,
+  onSupport,
+}: MobileDockProps) {
+  const { locale, t } = useLocale();
+  const path = usePathname();
+  const linkClass = "dock-item";
+  return (
+    <nav
+      className="mobile-dock fixed inset-x-3 z-40 lg:hidden"
+      aria-label={t.navigation}
+    >
+      <div className="mx-auto grid max-w-lg grid-cols-5 gap-1 rounded-2xl border border-cyan-300/30 bg-[#06243d] p-2 shadow-lg">
+        <a
+          className={linkClass}
+          href={localizedPath("/", locale)}
+          aria-current={
+            path.replace(/\/$/, "") ===
+            localizedPath("/", locale).replace(/\/$/, "")
+              ? "page"
+              : undefined
+          }
+        >
+          <Home size={20} />
+          {t.home}
         </a>
-      ))}
-    </div>
-  </nav>;
+        <a
+          className={linkClass}
+          href={localizedPath("/pricing/", locale)}
+          aria-current={path.includes("/pricing") ? "page" : undefined}
+        >
+          <Tags size={20} />
+          {t.pricing}
+        </a>
+        <a
+          className={`${linkClass} dock-portal`}
+          href={panelUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LayoutDashboard size={20} />
+          Portal
+        </a>
+        {onSupport ? (
+          <button
+            className={linkClass}
+            type="button"
+            onClick={onSupport}
+            aria-haspopup="dialog"
+          >
+            <MessagesSquare size={20} />
+            {t.support}
+          </button>
+        ) : (
+          <a className={linkClass} href={discordUrl}>
+            <MessagesSquare size={20} />
+            {t.support}
+          </a>
+        )}
+        {onMenu ? (
+          <button
+            className={linkClass}
+            type="button"
+            onClick={onMenu}
+            aria-haspopup="dialog"
+          >
+            <Menu size={20} />
+            {t.menu}
+          </button>
+        ) : (
+          <a className={linkClass} href={localizedPath("/egg/", locale)}>
+            <Menu size={20} />
+            {t.egg}
+          </a>
+        )}
+      </div>
+    </nav>
+  );
 }

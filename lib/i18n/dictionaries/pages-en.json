@@ -1,0 +1,62 @@
+{
+  "": {
+    "title": "STA Cloud | Vietnam & Singapore Hosting, Oracle VPS",
+    "description": "Vietnam and Singapore hosting for websites, Discord bots and game servers. Free Forever plans, Dev hosting and Oracle Cloud VPS/GPU products supplied by ICS."
+  },
+  "pricing": {
+    "title": "Hosting plans: Free Forever, Dev, Linux & Game Servers | STA Cloud",
+    "description": "Compare STA Cloud hosting prices, CPU, RAM, storage, renewal cycles and limits. Free Forever, Dev, Linux Egg, game servers and community plans."
+  },
+  "free": {
+    "title": "Free Forever hosting: Free DEV & Gamming + AI | STA Cloud",
+    "description": "Two Free Forever hosting plans: Free DEV and Free Gamming + AI. No charges, free renewals and a 5-day management cycle. Resources may change."
+  },
+  "vps": {
+    "title": "ICS Oracle Cloud VPS & GPU: Standard, Premium, Enterprise | STA Cloud",
+    "description": "Explore ICS Oracle Cloud Starter, Professional, Enterprise and GPU configurations. Reference prices exclude 10% VAT. Buy from ICS or ask STA Cloud for advice."
+  },
+  "network": {
+    "title": "Hosting locations & Oracle Cloud regions | STA Cloud",
+    "description": "Hanoi, Ho Chi Minh City, Hong Kong and the Oracle commercial region directory. Illustrative map and simulated ping; confirm availability by service."
+  },
+  "egg": {
+    "title": "Egg catalog: Website, Linux, Minecraft & bot runtimes | STA Cloud",
+    "description": "Explore WordPress, PHPweb, Laravel, phpMyAdmin, AI, programming runtimes, Linux, Minecraft, proxies and voice server environments."
+  },
+  "about": {
+    "title": "About STA Cloud: hosting services and official links",
+    "description": "STA Cloud service facts, official website and Portal, Free Forever hosting, Dev plans and ICS Oracle Cloud VPS/GPU referrals."
+  },
+  "history": {
+    "title": "STA Cloud history: TACPVN, VietNodes and STA Cloud",
+    "description": "The STA Cloud brand journey: TACPVN in 2018–2019, VietNodes in 2019–2023 and STA Cloud since 2023."
+  },
+  "partner": {
+    "title": "STA Cloud Partner Program: eligible 20% discount and conditions",
+    "description": "Community partnership conditions, 20% off eligible paid services, initial support targets, security responsibilities and SLA scope."
+  },
+  "terms": {
+    "title": "Terms of service | STA Cloud",
+    "description": "STA Cloud service terms: payment, acceptable use, Free Forever conditions, account security, regions and third-party services."
+  },
+  "privacy": {
+    "title": "Privacy policy | STA Cloud",
+    "description": "How STA Cloud handles account, payment, technical and support information, retention, privacy requests and third-party services."
+  },
+  "sla": {
+    "title": "Service level agreement: 99% target | STA Cloud",
+    "description": "STA Cloud eligible paid service SLA: 99% monthly uptime target, exclusions, incident claims and Portal Credit compensation."
+  },
+  "refund": {
+    "title": "Credit refund policy | STA Cloud",
+    "description": "STA Cloud Portal Credit refund eligibility, calculations, exclusions and request process. Zero-price services have no payment to refund."
+  },
+  "security": {
+    "title": "Server security and backups | STA Cloud",
+    "description": "Infrastructure isolation, support access, customer security, backups, data recovery limits and responsible vulnerability reports."
+  },
+  "cookies": {
+    "title": "Cookie policy | STA Cloud",
+    "description": "Browser storage on the public STA Cloud site and Portal: essential sessions, security verification, filters, analytics and browser controls."
+  }
+}

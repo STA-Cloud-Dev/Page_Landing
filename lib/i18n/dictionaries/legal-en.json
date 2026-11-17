@@ -1,0 +1,477 @@
+{
+  "terms": {
+    "title": "Terms of service",
+    "intro": "Conditions for using STA Cloud hosting, accounts and community services. Oracle Cloud products supplied by ICS have their own provider terms.",
+    "sections": [
+      {
+        "title": "FREE plans",
+        "paragraphs": [
+          "Free DEV and Free Gamming + AI are Free Forever: 0 Credit, free renewals and a 5-day management cycle. Verified accounts are required. Resources may change in the future. Neither plan includes backups or data recovery. Paid community plans in the FREE group follow their separate 100% Credit refund conditions. This specific policy takes precedence over general free-service wording."
+        ]
+      },
+      {
+        "title": "1. Payment",
+        "paragraphs": [
+          "Services activate after full payment is received. Eligible refunds are returned to the paying account’s Portal Credit balance, not a bank account or e-wallet, except where law requires otherwise. Free and paid services may be restricted or suspended for abuse. See the Credit refund policy."
+        ]
+      },
+      {
+        "title": "2. Termination",
+        "paragraphs": [
+          "STA Cloud may suspend or terminate accounts when necessary at its discretion. Termination removes access and may result in deletion of service data."
+        ]
+      },
+      {
+        "title": "3. Liability and availability",
+        "paragraphs": [
+          "Services are provided as available and as is. Continuous, error-free operation is not guaranteed. STA Cloud disclaims responsibility for loss, damage and data incidents under the published service terms; eligible downtime is handled through the SLA."
+        ]
+      },
+      {
+        "title": "4. Account security",
+        "paragraphs": [
+          "Keep your account secure. STA Cloud is not responsible for unauthorized access caused by weak passwords or user negligence. Report suspected unauthorized use immediately."
+        ]
+      },
+      {
+        "title": "5. Service use",
+        "paragraphs": [
+          "Do not congest the network or harm other users. Accounts violating these rules or putting the system at risk may be permanently suspended without further notice."
+        ]
+      },
+      {
+        "title": "6. Content",
+        "paragraphs": [
+          "Illegal, copyright-infringing, pornographic and defamatory content is prohibited. STA Cloud may request help verifying content; failure to cooperate may lead to restrictions."
+        ]
+      },
+      {
+        "title": "7. Fair use",
+        "paragraphs": [
+          "All paid plans follow fair-use rules. Use resources lawfully, reasonably and respectfully without harming other users’ performance or security. Excessive bandwidth, server overload, spam bots, selfbots, cryptocurrency mining, abusive VPN/proxy services and harmful tools are prohibited, especially on free services. Free Fire Bot and Minecraft Bot are not allowed on the free tier. Obfuscated, encrypted or deliberately unreadable code must not be uploaded or run on the free tier.",
+          "STA Cloud may monitor technical usage and automatically flag mining, selfbots, proxies and other abuse. Accounts or servers may be suspended without advance notice. Cooperate with investigations. Do not hack, distribute malware or access systems without authorization. Report vulnerabilities privately. Violating content may be removed and accounts suspended or terminated."
+        ]
+      },
+      {
+        "title": "8. FREE hosting conditions",
+        "paragraphs": [
+          "STA Cloud Free Gamming + AI: 75% CPU, 2048 MB RAM, 3072 MB disk. STA Cloud Free DEV: 50% CPU, 1024 MB RAM, 1024 MB disk. Both are Free Forever, with no charge; resources may change. Check availability and register on the Portal, or open a Discord ticket. Keep independent copies: no backup or recovery is included. DDoS, mining, port scanning, botnets, malware and illegal use lead to permanent suspension without reopening."
+        ]
+      },
+      {
+        "title": "9. Changes and Free Forever",
+        "paragraphs": [
+          "Terms may be updated; continued use after changes indicates acceptance. Free Forever describes the published zero-price policy, not unlimited resources or a guarantee that configurations never change. Plan counts, provisioning times and new registrations may be limited by available capacity. Free services are supplied as available and do not qualify for SLA credits."
+        ]
+      },
+      {
+        "title": "10. Regions and uptime",
+        "paragraphs": [
+          "Hosting regions depend on the selected service and confirmed availability. Vietnam locations are Hanoi and Ho Chi Minh City; Singapore and other locations must be confirmed. The Oracle region directory is not a guarantee of retail availability. Eligible STA Cloud paid services have a 99% monthly uptime target subject to SLA scope and exclusions. Latency depends on distance, routes, the user’s ISP and international connectivity. Map ping values are simulated."
+        ]
+      },
+      {
+        "title": "11. Third parties",
+        "paragraphs": [
+          "Portal integrations, Discord, Zalo, Messenger, DNS, domains, AI APIs and infrastructure suppliers may have their own conditions and incidents. STA Cloud does not control third-party content, uptime or policy changes."
+        ]
+      },
+      {
+        "title": "12. Contact",
+        "paragraphs": [
+          "Contact stacloud.dev@gmail.com or open an official STA Cloud Discord ticket."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "intro": "How STA Cloud collects, uses, stores and protects information when you use the website, Portal and services.",
+    "sections": [
+      {
+        "title": "1. Information collected",
+        "paragraphs": [
+          "Account and contact details include email, username and information provided during registration or support. Payment and transaction information is processed to activate services and verify payment; payment providers may process some details without STA Cloud storing them directly. Technical data can include IP addresses, browser/device information, access times, usage logs, support tickets and service configuration."
+        ]
+      },
+      {
+        "title": "2. Purposes",
+        "paragraphs": [
+          "Information is used to provide, activate, operate and improve services; process payments; prevent abuse; maintain stability and security; and communicate about support, important notices and account changes."
+        ]
+      },
+      {
+        "title": "3. Sharing",
+        "paragraphs": [
+          "STA Cloud does not sell personal information. Necessary information may be shared with service providers and infrastructure partners for operations, payments or abuse investigation. Information may be disclosed to comply with law, enforce rules, or protect the platform, users and legitimate interests."
+        ]
+      },
+      {
+        "title": "4. Retention",
+        "paragraphs": [
+          "Information is retained for as long as reasonably necessary for service delivery, legal obligations, disputes and policy enforcement. After termination, data may be deleted without further notice; some logs or backups may remain temporarily."
+        ]
+      },
+      {
+        "title": "5. Security",
+        "paragraphs": [
+          "Reasonable protective measures are used, but no online service can guarantee absolute security. Protect your credentials and maintain independent backups."
+        ]
+      },
+      {
+        "title": "6. Cookies and support access",
+        "paragraphs": [
+          "See the Cookie policy for essential, security and analytics technologies. Public-site catalog filters are held in page memory and do not use cookies to remember choices. Access to server files for support, incidents or valid legal requests is limited by the Server security policy. Source code and database content are not proactively collected for marketing."
+        ]
+      },
+      {
+        "title": "7. User responsibilities",
+        "paragraphs": [
+          "Provide accurate information and keep it current. Do not upload or run content violating the terms or applicable law. You remain responsible for data and content stored or processed through your service."
+        ]
+      },
+      {
+        "title": "8. Your requests",
+        "paragraphs": [
+          "You may request access, correction or deletion of your information, subject to legal, security and operational requirements. Identity verification may be necessary."
+        ]
+      },
+      {
+        "title": "9. Children",
+        "paragraphs": [
+          "Services are not intended for children without appropriate permission or supervision. Contact STA Cloud if personal information about a child appears to have been collected improperly."
+        ]
+      },
+      {
+        "title": "10. Regional processing",
+        "paragraphs": [
+          "Technical data may be processed in the service’s confirmed region or an infrastructure provider’s region where needed for operations, support, security or delivery. You must ensure your uploaded data may lawfully be stored and processed in the selected location."
+        ]
+      },
+      {
+        "title": "11. Automated abuse detection",
+        "paragraphs": [
+          "Technical logs, resource usage and indicators of DDoS, mining, botnets, port scanning, malware or unusual activity may be analyzed automatically. Temporary protective restrictions may follow. Open a ticket to request a review."
+        ]
+      },
+      {
+        "title": "12. Third-party services",
+        "paragraphs": [
+          "Discord, Zalo, Messenger, payment, DNS, domain and upstream providers have independent privacy policies. Following their links subjects your data to their policies and controls."
+        ]
+      },
+      {
+        "title": "13. Updates",
+        "paragraphs": [
+          "This policy may change. Continued service use after an update indicates acceptance of the revised policy."
+        ]
+      },
+      {
+        "title": "14. Contact",
+        "paragraphs": [
+          "Privacy questions and requests: stacloud.dev@gmail.com."
+        ]
+      }
+    ]
+  },
+  "sla": {
+    "title": "Service level agreement",
+    "intro": "A 99% monthly uptime target for eligible paid services directly operated and provisioned by STA Cloud, with defined exclusions and Credit compensation.",
+    "sections": [
+      {
+        "title": "1. Scope",
+        "paragraphs": [
+          "Applies to eligible, fully paid and activated STA Cloud compute services and their accompanying panel access. FREE hosting, OpenClaw Beta, free/sponsored community services and third-party community/support platforms are excluded. ICS products follow ICS conditions."
+        ]
+      },
+      {
+        "title": "2. Monthly uptime",
+        "paragraphs": [
+          "Target uptime is at least 99% for eligible domestic and international paid services. Monthly uptime = (total time in the month − eligible downtime) / total time in the month. Eligible downtime means continuous inaccessibility caused by STA Cloud lasting at least 5 minutes."
+        ]
+      },
+      {
+        "title": "3. Maintenance",
+        "paragraphs": [
+          "Planned maintenance is announced through the Portal, tickets or appropriate community channels when possible. Emergency work may proceed without prior notice if delay risks systems or data. Reasonable planned or emergency maintenance is excluded from eligible downtime."
+        ]
+      },
+      {
+        "title": "4. Exclusions",
+        "paragraphs": [
+          "User configuration, code, containers, game servers, bots and applications; abuse, fair-use violations, terms violations and security/operational suspensions; upstream provider failures, public Internet, third-party DNS, large DDoS and force majeure; and data loss, backup failures or interruptions affecting free/sponsored services are excluded."
+        ]
+      },
+      {
+        "title": "5. Claims",
+        "paragraphs": [
+          "Open a ticket or email within 7 days after the incident ends. Include the affected service, incident window, impact and evidence for log verification. STA Cloud verifies system logs before confirming eligibility."
+        ]
+      },
+      {
+        "title": "6. Service credits",
+        "paragraphs": [
+          "Confirmed compensation is added to the paying account’s Portal Credit balance after verification, not cash, except where law requires otherwise. Uptime 98.0% to below 99.0%: 10% of the current cycle fee. Uptime 95.0% to below 98.0%: 25%. Uptime below 95.0%: 50%. Total credits for a cycle cannot exceed that cycle’s fee."
+        ]
+      },
+      {
+        "title": "7. Liability",
+        "paragraphs": [
+          "SLA service credits are the sole remedy for covered downtime. This SLA does not create a cash-refund obligation or replace the liability limits in the terms. It may be updated to reflect infrastructure and operating policy changes."
+        ]
+      },
+      {
+        "title": "8. Contact",
+        "paragraphs": [
+          "Submit requests through the official Discord support ticket system or stacloud.dev@gmail.com."
+        ]
+      }
+    ]
+  },
+  "refund": {
+    "title": "Credit refund policy",
+    "intro": "Eligible payments are returned as Portal Credit. Free services have no payment to refund.",
+    "sections": [
+      {
+        "title": "1. Scope",
+        "paragraphs": [
+          "No cash refund to bank accounts or e-wallets is provided unless law requires otherwise. Eligible refunds return to the paying Portal account and cannot be transferred or cashed out. Paid community products in the FREE group have a separate 100% Credit refund policy, including when a server goes down or is deleted; data recovery is not included. Zero-price Free DEV, Free Gamming + AI and OpenClaw Beta have no payment to refund."
+        ]
+      },
+      {
+        "title": "2. Eligibility",
+        "paragraphs": [
+          "Requests may be considered if a paid service cannot be created within 24 hours of valid payment confirmation, except preorders with an announced 3-day provisioning period or a separate agreement; or resources cannot be supplied and the customer rejects alternatives. During the first 48 hours of a monthly paid service, cancellation may be requested if published technical specifications are not met. Other cycles do not automatically include a 48-hour trial. Covered outages follow the SLA."
+        ]
+      },
+      {
+        "title": "3. Calculation",
+        "paragraphs": [
+          "Refund Credit = max(0, Credit actually paid − daily rate × days used − special setup fees disclosed and accepted in advance). Daily rate = Credit actually paid / purchased cycle days. Usage runs from activation to confirmed stop, rounded up to whole days. Unactivated services that cannot be provisioned receive all Credit actually paid; STA Cloud-caused provisioning waits are not deducted. Cancellation for personal preference may be declined after more than 50% of the cycle has been used. Separate eligible SLA claims remain reviewable. No double refund is given for the same fee or loss. SLA credits are 10%, 25% or 50% according to the uptime thresholds."
+        ]
+      },
+      {
+        "title": "4. Exclusions",
+        "paragraphs": [
+          "Abuse, DDoS, mining, botnets, unauthorized scanning, malware, phishing and illegal activity; user software, configuration, plugins, scripts, deleted data or leaked credentials; registered domains, activated dedicated IPs, consumed Shield traffic and unrecoverable accepted special setup fees are excluded. Partner plans discounted by more than 20% do not qualify for preference-based cancellation refunds; SLA incidents and separate agreements are reviewed independently."
+        ]
+      },
+      {
+        "title": "5. Requests",
+        "paragraphs": [
+          "Use an official Discord ticket or stacloud.dev@gmail.com. Include the Portal account ID, transaction reference, plan, activation time, reason and sanitized logs/screenshots. Remove passwords, API keys and private data. Complete requests are reviewed within 24–48 business hours; this is a review period, not automatic approval. The calculation and Credit posting time are confirmed through the ticket."
+        ]
+      }
+    ]
+  },
+  "security": {
+    "title": "Server security and backups",
+    "intro": "Infrastructure isolation, support access, customer responsibilities and incident reporting.",
+    "sections": [
+      {
+        "title": "1. Isolation and network protection",
+        "paragraphs": [
+          "Virtualization or containers isolate services according to the allocated plan and infrastructure. Do not access or interfere with another customer’s environment. Isolation reduces risk and is not a guarantee against every vulnerability. Anti-DDoS capabilities depend on the location and provider. Oracle Cloud protection must be confirmed for the configuration and region; complete immunity and application-layer filtering are not promised unless explicitly included."
+        ]
+      },
+      {
+        "title": "2. Administration and support access",
+        "paragraphs": [
+          "Root/SSH or console access depends on the service. Containers do not automatically grant host or physical-machine administration. Technicians do not independently browse customer code, files or databases. Support access requires a confirmed ticket and is limited to what is needed. Intervention may be necessary to isolate serious security threats or comply with valid authority requests, with notice when permitted. Prefer temporary credentials and revoke access, change passwords and rotate keys after support."
+        ]
+      },
+      {
+        "title": "3. Customer security",
+        "paragraphs": [
+          "Use a unique password of at least 12 characters, SSH keys and MFA where supported. Restrict public management ports. Update operating systems, dependencies and plugins; protect bot tokens, API keys, .env files and payment information. Never share secrets publicly. You are responsible for people granted access. Report unfamiliar activity promptly."
+        ]
+      },
+      {
+        "title": "4. Backups and recovery",
+        "paragraphs": [
+          "FREE and OpenClaw Beta services do not include guaranteed automated backups. Maintain an independent copy outside the service. Eligible paid services explicitly listing Backup have infrastructure backups on Tuesday, Friday and Sunday. This does not apply automatically to every Linux, Dev or Game Servers plan. Infrastructure backups do not replace your independent copies; recovery depends on a valid available backup. Specify the required recovery point in your ticket."
+        ]
+      },
+      {
+        "title": "5. Vulnerability reports",
+        "paragraphs": [
+          "Report privately through a Discord ticket or stacloud.dev@gmail.com, with scope, reproduction steps and impact. Do not download customer data, damage systems, disrupt services or publish exploit details before coordinating remediation. Reporter information is protected within legal and operational limits. Valid reports may receive discretionary Credit rewards after verification; no automatic bounty or unauthorized testing permission is granted."
+        ]
+      }
+    ]
+  },
+  "cookies": {
+    "title": "Cookie policy",
+    "intro": "Browser storage on the public STA Cloud website and the separate service Portal.",
+    "sections": [
+      {
+        "title": "1. Scope",
+        "paragraphs": [
+          "Cookies are small pieces of browser data. The public stacloud.eu.cc website and portal.stacloud.eu.cc have distinct functions and storage requirements. Actual processing depends on enabled features."
+        ]
+      },
+      {
+        "title": "2. Essential and security cookies",
+        "paragraphs": [
+          "The Portal may use session cookies and CSRF tokens for authentication, sessions and account protection; expiry follows Portal configuration. Cloudflare Challenge/Turnstile, when enabled, may process security signals or verification cookies such as cf_clearance. These are not created on every visit. Blocking essential cookies may prevent login or verification; public pages remain readable without an account."
+        ]
+      },
+      {
+        "title": "3. Preferences and analytics",
+        "paragraphs": [
+          "Catalog filters, comparison selections and public-site search are currently held in page memory, with no preference cookie. Reloading may reset them. Language selection follows the requested URL. Infrastructure analytics, if enabled, may process URLs, browser details, loading times and errors. Do not assume every analytics tool uses cookies or every record is anonymous. Where non-essential cookies need consent, an appropriate choice mechanism must be provided before activation. This policy does not itself grant consent."
+        ]
+      },
+      {
+        "title": "4. Browser controls",
+        "paragraphs": [
+          "In Chrome, Firefox, Safari or Edge, open privacy/site-data settings and search for stacloud.eu.cc and portal.stacloud.eu.cc to inspect, block or clear data. Clearing may require login or verification again. Third-party-cookie restrictions and private windows may limit integrations. Sign in only on the official Portal domain."
+        ]
+      },
+      {
+        "title": "5. Contact",
+        "paragraphs": [
+          "Ask through an official Discord ticket or stacloud.dev@gmail.com. The Privacy policy explains collection, use and sharing; the Server security policy covers server protection."
+        ]
+      }
+    ]
+  },
+  "partner": {
+    "title": "STA Cloud Partner Program",
+    "intro": "Community cooperation, a 20% discount on eligible services, responsibilities and support targets.",
+    "sections": [
+      {
+        "title": "1. Purpose",
+        "paragraphs": [
+          "For Discord communities, user groups, game servers, development teams, creators and individuals seeking long-term cooperation. Partners accept these conditions, service terms, privacy policy, SLA and operational notices. A written, confirmed separate agreement takes precedence where it conflicts."
+        ]
+      },
+      {
+        "title": "2. Status",
+        "paragraphs": [
+          "A partner is not automatically an employee, legal agent, official distributor or authorized representative. Do not imply legal representation through names, logos or service claims. STA Cloud may approve, reject or withdraw status according to fit, reputation, service history and compliance. Status takes effect only after official confirmation."
+        ]
+      },
+      {
+        "title": "3. Benefits",
+        "paragraphs": [
+          "20% off eligible paid STA Cloud services, priority ticket support where arranged, early operational/service notices and configuration advice. Priority does not mean immediate resolution of upstream, user configuration, DDoS, third-party software or other matters outside reasonable control."
+        ]
+      },
+      {
+        "title": "4. Discount scope",
+        "paragraphs": [
+          "The 20% discount applies only to eligible core paid-service fees confirmed by STA Cloud. FREE hosting, free OpenClaw Beta, separate setup, recovery, emergency handling, resource surcharges, custom services and other additional charges are excluded without prior agreement. Discounts do not stack unless confirmed in writing. Eligibility can change with supplier costs or operations. Benefits cannot be exchanged for cash, refunded or transferred without agreement."
+        ]
+      },
+      {
+        "title": "5. Payments",
+        "paragraphs": [
+          "Pay on time to maintain services and benefits. Late payment may suspend benefits or services or restore standard pricing. Multiple services may require verification of the registered cooperation purpose. Fees are not automatically refunded following violations, termination or early cancellation. Raise billing disputes through a ticket within a reasonable time."
+        ]
+      },
+      {
+        "title": "6. Responsibilities",
+        "paragraphs": [
+          "Use services lawfully and do not harm systems, users or STA Cloud’s reputation. Tickets must provide service IDs, times, symptoms, sanitized logs and troubleshooting steps. Maintain independent backups, especially for FREE/beta services. Do not expose credentials, tokens, customer information, sensitive IPs or private logs. Report security and abuse issues promptly."
+        ]
+      },
+      {
+        "title": "7. Communication",
+        "paragraphs": [
+          "Communicate respectfully and cooperate. Priority support may be declined for insults, threats, ticket spam, undue pressure or false information. Do not mobilize attacks, disruption or false reviews. Try official dispute channels first and nominate one main representative to avoid conflicting requests."
+        ]
+      },
+      {
+        "title": "8. Prohibited conduct",
+        "paragraphs": [
+          "No spam, phishing, scams, malware, botnets, DDoS, unauthorized scanning, illegal content or harmful activity. No official resale without a separate reseller agreement, unsupported uptime/price/refund promises, benefit exploitation, limit evasion or processing data without lawful rights."
+        ]
+      },
+      {
+        "title": "9. Initial support targets",
+        "paragraphs": [
+          "These targets concern initial response, not resolution. They depend on severity, team availability and sufficient ticket information. P1: a completely inaccessible paid service affecting multiple users without a workaround, target 15–30 minutes while the team is online. P2: instability or significant partial degradation, within 2 hours. P3: routine configuration, non-urgent diagnosis or operational advice, within 24 hours. P4: general questions, feedback or non-disruptive changes, within 48 hours."
+        ]
+      },
+      {
+        "title": "10. Support scope",
+        "paragraphs": [
+          "Priority targets apply to stable eligible paid partner services. FREE hosting, free OpenClaw Beta and experimental services are excluded unless separately announced. Incomplete, duplicate or conflicting tickets may delay handling; requests arising from customer code, plugins, bots, domains, DNS or third-party software may receive lower priority."
+        ]
+      },
+      {
+        "title": "11. Service SLA",
+        "paragraphs": [
+          "Eligible paid domestic/international services have the same 99% monthly target, exclusions and service-credit process as the published SLA. Support response targets do not replace the service SLA or guarantee continuous support availability."
+        ]
+      },
+      {
+        "title": "12. Maintenance and infrastructure changes",
+        "paragraphs": [
+          "Planned changes are announced when possible. Emergency work may proceed without prior notice to protect systems and data. Plan configurations, regions, prices and policies may change with infrastructure and supplier conditions."
+        ]
+      },
+      {
+        "title": "13. Data and backups",
+        "paragraphs": [
+          "Partners remain responsible for important data and independent backups. FREE/beta data loss is not covered by a recovery guarantee. Paid-service recovery is assisted where possible, without a success guarantee where copies are absent, deleted, overwritten, encrypted or damaged. Test backup restoration periodically."
+        ]
+      },
+      {
+        "title": "14. OpenClaw Beta",
+        "paragraphs": [
+          "OpenClaw is a free beta with possible bugs, limits, interruptions or changes. Third-party AI API and account policies apply. Do not use it for critical data without independent copies. Hong Kong nodes are not recommended for AI workloads where upstream APIs restrict access."
+        ]
+      },
+      {
+        "title": "15. Security and abuse",
+        "paragraphs": [
+          "STA Cloud may restrict or isolate services to address suspected abuse, security risks or valid legal requests. Automated detection can lead to a suspension; request a review through an official ticket and cooperate with verification."
+        ]
+      },
+      {
+        "title": "16. Branding and communications",
+        "paragraphs": [
+          "Use STA Cloud branding and service information accurately and within confirmed permission. Do not imply legal representation, publish misleading claims or promise unapproved prices, refunds or uptime. Correct inaccurate public information when notified."
+        ]
+      },
+      {
+        "title": "17. Confidentiality and privacy",
+        "paragraphs": [
+          "Protect private operational information and personal data. Do not disclose credentials, customer data or private discussions without a legitimate authorized basis. Follow the published Privacy and Server security policies."
+        ]
+      },
+      {
+        "title": "18. Transfer and resale",
+        "paragraphs": [
+          "Do not transfer partner benefits, accounts or services or resell as an official STA Cloud reseller without a separate approved agreement. You remain responsible for authorized users and their compliance."
+        ]
+      },
+      {
+        "title": "19. Suspension and termination",
+        "paragraphs": [
+          "STA Cloud may suspend or end cooperation for violations, abuse, misleading representation, reputational harm or operational needs. Benefits and priority support end with status; remaining paid-service rights are determined by the relevant service terms and confirmed agreements."
+        ]
+      },
+      {
+        "title": "20. Liability",
+        "paragraphs": [
+          "Indirect damage, lost revenue/users, community disruption and losses caused by missing backups, user error, vulnerable software or violations are excluded. Any compensation is capped at the affected service’s paid cycle fee. FREE zero-Credit and OpenClaw Beta services are provided as available without uptime or recovery guarantees. Paid FREE-group products retain their separate 100% Credit refund policy. Covered downtime is remedied solely by eligible SLA service credits."
+        ]
+      },
+      {
+        "title": "21. Changes",
+        "paragraphs": [
+          "Partner conditions may change with service and operational requirements. Continuing cooperation after changes means accepting the updated conditions. Separate confirmed written agreements remain applicable within their scope."
+        ]
+      },
+      {
+        "title": "22. Contact",
+        "paragraphs": [
+          "Use official STA Cloud Discord tickets or stacloud.dev@gmail.com for cooperation, billing and policy questions."
+        ]
+      }
+    ]
+  }
+}

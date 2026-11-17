@@ -9,7 +9,7 @@ export const homeConfig = {
   discordUrl: 'https://discord.gg/nq8B4JXmnm',
   zaloUrl: 'https://zalo.me/g/ekaldlnq5sqdn37lvikk',
   messengerUrl: 'https://m.me/j/AbaXFRAcUrDjgFCN/?send_source=gc%3Acopy_invite_link_c',
-  freeServerUrl: '/free-server',
+  freeServerUrl: '/free',
   logoAlt: 'STACloud Logo',
   summary:
     'Free hosting cho bot Discord, web nhỏ và project sinh viên; kèm Portal quản trị game server, OpenClaw Beta và VPS Oracle Cloud.',

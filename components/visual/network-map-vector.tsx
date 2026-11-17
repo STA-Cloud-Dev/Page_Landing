@@ -1,23 +1,42 @@
-'use client';
+"use client";
+import { useLocale } from "@/lib/i18n/use-locale";
+import { localizedLocations, networkText } from "@/lib/i18n/network";
 
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import Image from 'next/image';
-import { sitePath } from '@/lib/site-path';
-import { WORLD_COUNTRIES_PATHS, CountryPathData } from '@/components/visual/world-paths-data';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
+import Image from "next/image";
+import { sitePath } from "@/lib/site-path";
+import {
+  WORLD_COUNTRIES_PATHS,
+  CountryPathData,
+} from "@/components/visual/world-paths-data";
 
-import { allDatacenterLocations, oracleRegionsSource, randomSimulatedPing, type DatacenterLocation } from './network-regions';
-import { clusterMapLocations, filterMapLocations } from './map-clusters';
-export { allDatacenterLocations } from './network-regions';
+import {
+  allDatacenterLocations as rawLocations,
+  oracleRegionsSource,
+  randomSimulatedPing,
+  type DatacenterLocation,
+} from "./network-regions";
+const allDatacenterLocations = rawLocations;
+import { clusterMapLocations, filterMapLocations } from "./map-clusters";
+export { allDatacenterLocations } from "./network-regions";
 
 function LocationFlag({
   location,
-  className = 'h-4 w-6',
+  className = "h-4 w-6",
 }: {
   location: DatacenterLocation;
   className?: string;
 }) {
   return (
-    <span className={`relative block aspect-[3/2] shrink-0 overflow-hidden ${className}`}>
+    <span
+      className={`relative block aspect-[3/2] shrink-0 overflow-hidden ${className}`}
+    >
       <Image
         src={location.flagSrc}
         alt={`${location.country} flag`}
@@ -31,49 +50,112 @@ function LocationFlag({
 }
 
 // Highlighted country ISO codes matching user reference cartographic style
-const HIGHLIGHTED_COUNTRIES = new Set(allDatacenterLocations.map((location) => location.countryCode));
+const HIGHLIGHTED_COUNTRIES = new Set(
+  allDatacenterLocations.map((location) => location.countryCode),
+);
 // Illustrative connections from Vietnam, not measured network routes.
-const LASER_CONDUITS = allDatacenterLocations.slice(1).filter((location) => location.status !== 'planned').map((location) => ({
-  id: `vn-${location.id}`,
-  d: `M ${allDatacenterLocations[0].svgX} ${allDatacenterLocations[0].svgY} Q ${(allDatacenterLocations[0].svgX + location.svgX) / 2} ${Math.min(allDatacenterLocations[0].svgY, location.svgY) - 35} ${location.svgX} ${location.svgY}`,
-}));
+const LASER_CONDUITS = allDatacenterLocations
+  .slice(1)
+  .filter((location) => location.status !== "planned")
+  .map((location) => ({
+    id: `vn-${location.id}`,
+    d: `M ${allDatacenterLocations[0].svgX} ${allDatacenterLocations[0].svgY} Q ${(allDatacenterLocations[0].svgX + location.svgX) / 2} ${Math.min(allDatacenterLocations[0].svgY, location.svgY) - 35} ${location.svgX} ${location.svgY}`,
+  }));
 
 export function NetworkMapVector() {
-  const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(allDatacenterLocations[0]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [countryFilter, setCountryFilter] = useState('all');
-  const filteredLocations = useMemo(() => filterMapLocations(allDatacenterLocations, searchQuery, countryFilter), [searchQuery, countryFilter]);
-  const countries = useMemo(() => [...new Map(allDatacenterLocations.map(location => [location.countryCode, location.country])).entries()].sort((a, b) => a[1].localeCompare(b[1])), []);
+  const { locale } = useLocale();
+  const nt = (text: string) => networkText(text, locale);
+  const allDatacenterLocations = useMemo(
+    () => localizedLocations(rawLocations, locale),
+    [locale],
+  );
+  const [activeLocation, setActiveLocation] = useState<DatacenterLocation>(
+    allDatacenterLocations[0],
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [countryFilter, setCountryFilter] = useState("all");
+  const filteredLocations = useMemo(
+    () =>
+      filterMapLocations(allDatacenterLocations, searchQuery, countryFilter),
+    [searchQuery, countryFilter],
+  );
+  const countries = useMemo(
+    () =>
+      [
+        ...new Map(
+          allDatacenterLocations.map((location) => [
+            location.countryCode,
+            location.country,
+          ]),
+        ).entries(),
+      ].sort((a, b) => a[1].localeCompare(b[1])),
+    [],
+  );
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
-  const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(() =>
-    Object.fromEntries(allDatacenterLocations.map((location) => [location.id, location.basePing]))
+  const [simulatedPings, setSimulatedPings] = useState<Record<string, number>>(
+    () =>
+      Object.fromEntries(
+        allDatacenterLocations.map((location) => [
+          location.id,
+          location.basePing,
+        ]),
+      ),
   );
 
   useEffect(() => {
     const updatePings = () => {
-      if (document.visibilityState !== 'visible') return;
-      setSimulatedPings(Object.fromEntries(allDatacenterLocations.map((location) => [location.id, randomSimulatedPing(location.basePing)])));
+      if (document.visibilityState !== "visible") return;
+      setSimulatedPings(
+        Object.fromEntries(
+          allDatacenterLocations.map((location) => [
+            location.id,
+            randomSimulatedPing(location.basePing),
+          ]),
+        ),
+      );
     };
     updatePings();
     const timer = window.setInterval(updatePings, 4000);
-    document.addEventListener('visibilitychange', updatePings);
+    document.addEventListener("visibilitychange", updatePings);
     return () => {
       window.clearInterval(timer);
-      document.removeEventListener('visibilitychange', updatePings);
+      document.removeEventListener("visibilitychange", updatePings);
     };
   }, []);
 
   // Native SVG ViewBox Zoom and Pan coordinates (1000 x 500 world extent)
   const [zoom, setZoom] = useState<number>(1.0);
-  const [center, setCenter] = useState<{ x: number; y: number }>({ x: 500, y: 250 });
+  const [center, setCenter] = useState<{ x: number; y: number }>({
+    x: 500,
+    y: 250,
+  });
 
-  const mapClusters = useMemo(() => clusterMapLocations(filteredLocations.filter(location => location.id !== activeLocation.id), zoom), [filteredLocations, activeLocation.id, zoom]);
-  const visibleMarkers = [activeLocation, ...mapClusters.filter(cluster => cluster.locations.length === 1).map(cluster => cluster.locations[0])];
+  const mapClusters = useMemo(
+    () =>
+      clusterMapLocations(
+        filteredLocations.filter(
+          (location) => location.id !== activeLocation.id,
+        ),
+        zoom,
+      ),
+    [filteredLocations, activeLocation.id, zoom],
+  );
+  const visibleMarkers = [
+    activeLocation,
+    ...mapClusters
+      .filter((cluster) => cluster.locations.length === 1)
+      .map((cluster) => cluster.locations[0]),
+  ];
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const isDraggingRef = useRef<boolean>(false);
-  const dragStartRef = useRef<{ clientX: number; clientY: number; startCenterX: number; startCenterY: number }>({
+  const dragStartRef = useRef<{
+    clientX: number;
+    clientY: number;
+    startCenterX: number;
+    startCenterY: number;
+  }>({
     clientX: 0,
     clientY: 0,
     startCenterX: 500,
@@ -88,7 +170,7 @@ export function NetworkMapVector() {
         cancelAnimationFrame(animationFrameRef.current);
       }
 
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         setCenter({ x: targetX, y: targetY });
         setZoom(targetZoom);
         return;
@@ -121,7 +203,7 @@ export function NetworkMapVector() {
 
       animationFrameRef.current = requestAnimationFrame(step);
     },
-    [center, zoom]
+    [center, zoom],
   );
 
   useEffect(
@@ -130,7 +212,7 @@ export function NetworkMapVector() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     },
-    []
+    [],
   );
 
   // Focus and select node
@@ -139,7 +221,7 @@ export function NetworkMapVector() {
       setActiveLocation(node);
       smoothFlyTo(node.svgX, node.svgY, node.zoomLevel);
     },
-    [smoothFlyTo]
+    [smoothFlyTo],
   );
 
   // Reset to full world view (1.0x)
@@ -189,8 +271,8 @@ export function NetworkMapVector() {
       }
     };
 
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
   // Compute precise SVG ViewBox based on current center and zoom
@@ -226,8 +308,20 @@ export function NetworkMapVector() {
     const factorX = vbWidth / rect.width;
     const factorY = vbHeight / rect.height;
 
-    const newCenterX = Math.max(vbWidth / 2, Math.min(1000 - vbWidth / 2, dragStartRef.current.startCenterX - dx * factorX));
-    const newCenterY = Math.max(vbHeight / 2, Math.min(500 - vbHeight / 2, dragStartRef.current.startCenterY - dy * factorY));
+    const newCenterX = Math.max(
+      vbWidth / 2,
+      Math.min(
+        1000 - vbWidth / 2,
+        dragStartRef.current.startCenterX - dx * factorX,
+      ),
+    );
+    const newCenterY = Math.max(
+      vbHeight / 2,
+      Math.min(
+        500 - vbHeight / 2,
+        dragStartRef.current.startCenterY - dy * factorY,
+      ),
+    );
 
     setCenter({ x: newCenterX, y: newCenterY });
   };
@@ -251,7 +345,12 @@ export function NetworkMapVector() {
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current || e.touches.length !== 1 || !containerRef.current) return;
+    if (
+      !isDraggingRef.current ||
+      e.touches.length !== 1 ||
+      !containerRef.current
+    )
+      return;
     const dx = e.touches[0].clientX - dragStartRef.current.clientX;
     const dy = e.touches[0].clientY - dragStartRef.current.clientY;
 
@@ -263,8 +362,20 @@ export function NetworkMapVector() {
     const factorX = vbWidth / rect.width;
     const factorY = vbHeight / rect.height;
 
-    const newCenterX = Math.max(vbWidth / 2, Math.min(1000 - vbWidth / 2, dragStartRef.current.startCenterX - dx * factorX));
-    const newCenterY = Math.max(vbHeight / 2, Math.min(500 - vbHeight / 2, dragStartRef.current.startCenterY - dy * factorY));
+    const newCenterX = Math.max(
+      vbWidth / 2,
+      Math.min(
+        1000 - vbWidth / 2,
+        dragStartRef.current.startCenterX - dx * factorX,
+      ),
+    );
+    const newCenterY = Math.max(
+      vbHeight / 2,
+      Math.min(
+        500 - vbHeight / 2,
+        dragStartRef.current.startCenterY - dy * factorY,
+      ),
+    );
 
     setCenter({ x: newCenterX, y: newCenterY });
   };
@@ -278,7 +389,7 @@ export function NetworkMapVector() {
     if (hasMovedRef.current) return; // Ignore clicks if dragging
 
     const matchingLoc = allDatacenterLocations.find(
-      (l) => l.countryCode === country.id
+      (l) => l.countryCode === country.id,
     );
 
     if (matchingLoc) {
@@ -305,43 +416,96 @@ export function NetworkMapVector() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-cyan-300/25 pb-5">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-400/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-cyan-200">
-            <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
-            🗺️ Sơ đồ khu vực hạ tầng & định tuyến
+            <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />{" "}
+            {nt("🗺️ Sơ đồ khu vực hạ tầng & định tuyến")}{" "}
           </div>
-          <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
-            Bản đồ hạ tầng và kết nối khu vực
-          </h3>
+          <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+            {" "}
+            {nt("Bản đồ hạ tầng và kết nối khu vực")}{" "}
+          </h2>
           <p className="mt-1 text-xs text-sky-100/90 sm:text-sm">
-            Sơ đồ các region thương mại Oracle Cloud cùng Hà Nội, TP. Hồ Chí Minh và Hong Kong. Ping mô phỏng ngẫu nhiên theo từng khu vực, cập nhật mỗi 4 giây; không phải phép đo mạng thực tế. Xác nhận khu vực cung cấp VPS qua ticket.
+            {" "}
+            {nt(
+              "Sơ đồ các region thương mại Oracle Cloud cùng Hà Nội, TP. Hồ Chí Minh và Hong Kong. Ping mô phỏng ngẫu nhiên theo từng khu vực, cập nhật mỗi 4 giây; không phải phép đo mạng thực tế. Xác nhận khu vực cung cấp VPS qua ticket.",
+            )}{" "}
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <span className="status-pill-cyber">
-            <span className="font-bold text-xs">{allDatacenterLocations.length} KHU VỰC THAM KHẢO</span>
+            <span className="font-bold text-xs">
+              {allDatacenterLocations.length} {nt("KHU VỰC THAM KHẢO")}{" "}
+            </span>
           </span>
           <span className="hidden sm:inline-flex rounded-xl border border-cyan-300/30 bg-black/40 px-3 py-1 font-mono text-xs text-cyan-300">
-            Sơ đồ tương tác
+            {" "}
+            {nt("Sơ đồ tương tác")}{" "}
           </span>
         </div>
       </div>
 
-      <p className="mt-3 text-xs leading-6 text-sky-200">Nguồn: <a className="text-cyan-200 underline" href={oracleRegionsSource} target="_blank" rel="noopener noreferrer">Oracle Public Cloud Regions</a> (11/11/2026): 45 region thương mại đang hoạt động, 2 khu vực sắp mở. Các realm Government, Sovereign và dịch vụ Database trên cloud đối tác có điều kiện riêng và không thuộc danh mục VPS này.</p>
+      <p className="mt-3 text-xs leading-6 text-sky-200">
+        {" "}
+        {nt("Nguồn:")}{" "}
+        <a
+          className="text-cyan-200 underline"
+          href={oracleRegionsSource}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Oracle Public Cloud Regions
+        </a>{" "}
+        {nt(
+          "(11/11/2026): 45 region thương mại đang hoạt động, 2 khu vực sắp mở. Các realm Government, Sovereign và dịch vụ Database trên cloud đối tác có điều kiện riêng và không thuộc danh mục VPS này.",
+        )}{" "}
+      </p>
       <div className="mt-5 grid gap-3 rounded-2xl border border-cyan-300/20 bg-[#071b30] p-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto]">
         <label className="min-w-0 text-xs font-semibold text-sky-100">
-          Tìm khu vực
-          <input type="search" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} placeholder="Tokyo, Toronto, Hà Nội..." className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-cyan-300" />
+          {" "}
+          {nt("Tìm khu vực")}{" "}
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder={nt("Tokyo, Toronto, Hà Nội...")}
+            className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-cyan-300"
+          />
         </label>
         <label className="min-w-0 text-xs font-semibold text-sky-100">
-          Quốc gia / vùng lãnh thổ
-          <select value={countryFilter} onChange={event => setCountryFilter(event.target.value)} className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white focus:outline-cyan-300">
-            <option value="all">Tất cả quốc gia</option>
-            {countries.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+          {" "}
+          {nt("Quốc gia / vùng lãnh thổ")}{" "}
+          <select
+            value={countryFilter}
+            onChange={(event) => setCountryFilter(event.target.value)}
+            className="mt-2 w-full rounded-xl border border-sky-200/30 bg-[#102c45] px-3 py-3 text-sm text-white focus:outline-cyan-300"
+          >
+            <option value="all"> {nt("Tất cả quốc gia")} </option>
+            {countries.map(([code, name]) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
           </select>
         </label>
-        <button type="button" onClick={() => { setSearchQuery(''); setCountryFilter('all'); handleResetWorld(); }} className="self-end rounded-xl border border-cyan-300/40 bg-cyan-400/15 px-5 py-3 text-sm font-bold text-cyan-100">Xem toàn cầu</button>
+        <button
+          type="button"
+          onClick={() => {
+            setSearchQuery("");
+            setCountryFilter("all");
+            handleResetWorld();
+          }}
+          className="self-end rounded-xl border border-cyan-300/40 bg-cyan-400/15 px-5 py-3 text-sm font-bold text-cyan-100"
+        >
+          {" "}
+          {nt("Xem toàn cầu")}{" "}
+        </button>
       </div>
-      <p className="mt-3 text-xs text-sky-200">Chọn cụm có số để phóng to, hoặc chọn region trong danh sách kết quả. Hà Nội và TP.HCM được đánh dấu riêng.</p>
+      <p className="mt-3 text-xs text-sky-200">
+        {" "}
+        {nt(
+          "Chọn cụm có số để phóng to, hoặc chọn region trong danh sách kết quả. Hà Nội và TP.HCM được đánh dấu riêng.",
+        )}{" "}
+      </p>
 
       {/* Main Grid: Interactive GIS Native SVG World Map + Simulated Ping Detail */}
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.55fr)] xl:items-start">
@@ -367,11 +531,23 @@ export function NetworkMapVector() {
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <filter id="vietnamGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <filter
+                id="vietnamGlow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
                 <feGaussianBlur stdDeviation="2.5" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
-              <filter id="canadaGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <filter
+                id="canadaGlow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
                 <feGaussianBlur stdDeviation="2.5" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
@@ -383,40 +559,63 @@ export function NetworkMapVector() {
             </defs>
 
             {/* Latitude & Longitude Reference Grid Lines */}
-            <g stroke="#26354a" strokeWidth="0.4" strokeDasharray="4,6" opacity="0.45">
-              <line x1="0" y1="250" x2="1000" y2="250" stroke="#00f0ff" strokeWidth="0.6" strokeDasharray="6,4" opacity="0.3" />
+            <g
+              stroke="#26354a"
+              strokeWidth="0.4"
+              strokeDasharray="4,6"
+              opacity="0.45"
+            >
+              <line
+                x1="0"
+                y1="250"
+                x2="1000"
+                y2="250"
+                stroke="#00f0ff"
+                strokeWidth="0.6"
+                strokeDasharray="6,4"
+                opacity="0.3"
+              />
               <line x1="0" y1="185" x2="1000" y2="185" />
               <line x1="0" y1="315" x2="1000" y2="315" />
               <line x1="250" y1="0" x2="250" y2="500" />
-              <line x1="500" y1="0" x2="500" y2="500" stroke="#00f0ff" strokeWidth="0.6" strokeDasharray="6,4" opacity="0.3" />
+              <line
+                x1="500"
+                y1="0"
+                x2="500"
+                y2="500"
+                stroke="#00f0ff"
+                strokeWidth="0.6"
+                strokeDasharray="6,4"
+                opacity="0.3"
+              />
               <line x1="750" y1="0" x2="750" y2="500" />
             </g>
 
             {/* Sovereign Nations Country Paths (177 Real GIS Boundaries) */}
             <g className="countries-layer">
               {WORLD_COUNTRIES_PATHS.map((country: CountryPathData) => {
-                const isVietnam = country.id === 'VNM';
-                const isCanada = country.id === 'CAN';
+                const isVietnam = country.id === "VNM";
+                const isCanada = country.id === "CAN";
                 const isHighlighted = HIGHLIGHTED_COUNTRIES.has(country.id);
 
-                let fill = '#60778e';
-                let stroke = '#253e56';
+                let fill = "#60778e";
+                let stroke = "#253e56";
                 let strokeWidth = 0.5;
                 let filter = undefined;
 
                 if (isVietnam) {
-                  fill = '#00f0ff';
-                  stroke = '#e0faff';
+                  fill = "#00f0ff";
+                  stroke = "#e0faff";
                   strokeWidth = 1.2;
-                  filter = 'url(#vietnamGlow)';
+                  filter = "url(#vietnamGlow)";
                 } else if (isCanada) {
-                  fill = '#5a7899';
-                  stroke = '#38bdf8';
+                  fill = "#5a7899";
+                  stroke = "#38bdf8";
                   strokeWidth = 0.9;
-                  filter = 'url(#canadaGlow)';
+                  filter = "url(#canadaGlow)";
                 } else if (isHighlighted) {
-                  fill = '#8299ad';
-                  stroke = '#242f3e';
+                  fill = "#8299ad";
+                  stroke = "#242f3e";
                   strokeWidth = 0.6;
                 }
 
@@ -435,12 +634,13 @@ export function NetworkMapVector() {
                   />
                 );
               })}
-
             </g>
 
             {/* Animated Laser Interconnect Conduits */}
             <g className="laser-conduits-layer pointer-events-none">
-              {LASER_CONDUITS.filter(conduit => conduit.id === `vn-${activeLocation.id}`).map((conduit) => (
+              {LASER_CONDUITS.filter(
+                (conduit) => conduit.id === `vn-${activeLocation.id}`,
+              ).map((conduit) => (
                 <g key={conduit.id}>
                   <path
                     d={conduit.d}
@@ -463,15 +663,57 @@ export function NetworkMapVector() {
 
             {/* Datacenter region markers */}
             <g className="datacenter-beacons-layer">
-              {mapClusters.filter(cluster => cluster.locations.length > 1).map(cluster => (
-                <g key={cluster.locations.map(location => location.id).join('-')} role="button" tabIndex={0}
-                  aria-label={`Phóng to cụm ${cluster.locations.length} khu vực: ${cluster.locations.map(location => location.city).join(', ')}`}
-                  onClick={event => { event.stopPropagation(); smoothFlyTo(cluster.x, cluster.y, Math.min(4.5, Math.max(3.2, zoom * 1.8))); }}
-                  onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); smoothFlyTo(cluster.x, cluster.y, Math.min(4.5, Math.max(3.2, zoom * 1.8))); } }} className="cursor-pointer outline-none focus:opacity-70">
-                  <circle cx={cluster.x} cy={cluster.y} r={15 / Math.sqrt(zoom)} fill="#0e4566" stroke="#8de7ff" strokeWidth={1.5 / zoom} />
-                  <text x={cluster.x} y={cluster.y} textAnchor="middle" dominantBaseline="central" fill="#fff" fontSize={12 / Math.sqrt(zoom)} fontWeight="bold">{cluster.locations.length}</text>
-                </g>
-              ))}
+              {mapClusters
+                .filter((cluster) => cluster.locations.length > 1)
+                .map((cluster) => (
+                  <g
+                    key={cluster.locations
+                      .map((location) => location.id)
+                      .join("-")}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`${locale === "en" ? "Zoom cluster" : "Phóng to cụm"} ${cluster.locations.length} ${locale === "en" ? "regions" : "khu vực"}: ${cluster.locations.map((location) => location.city).join(", ")}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      smoothFlyTo(
+                        cluster.x,
+                        cluster.y,
+                        Math.min(4.5, Math.max(3.2, zoom * 1.8)),
+                      );
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        smoothFlyTo(
+                          cluster.x,
+                          cluster.y,
+                          Math.min(4.5, Math.max(3.2, zoom * 1.8)),
+                        );
+                      }
+                    }}
+                    className="cursor-pointer outline-none focus:opacity-70"
+                  >
+                    <circle
+                      cx={cluster.x}
+                      cy={cluster.y}
+                      r={15 / Math.sqrt(zoom)}
+                      fill="#0e4566"
+                      stroke="#8de7ff"
+                      strokeWidth={1.5 / zoom}
+                    />
+                    <text
+                      x={cluster.x}
+                      y={cluster.y}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="#fff"
+                      fontSize={12 / Math.sqrt(zoom)}
+                      fontWeight="bold"
+                    >
+                      {cluster.locations.length}
+                    </text>
+                  </g>
+                ))}
               {visibleMarkers.map((loc) => {
                 const isSelected = activeLocation.id === loc.id;
 
@@ -485,18 +727,20 @@ export function NetworkMapVector() {
                     className="cursor-pointer group"
                   >
                     {/* Selected region halo */}
-                    {isSelected && <circle
-                      cx={loc.svgX}
-                      cy={loc.svgY}
-                      r={isSelected ? 16 : 11}
-                      fill={loc.color}
-                      opacity={0.3}
-                      className="animate-ping"
-                      style={{
-                        transformOrigin: `${loc.svgX}px ${loc.svgY}px`,
-                        animationDuration: '2.5s',
-                      }}
-                    />}
+                    {isSelected && (
+                      <circle
+                        cx={loc.svgX}
+                        cy={loc.svgY}
+                        r={isSelected ? 16 : 11}
+                        fill={loc.color}
+                        opacity={0.3}
+                        className="animate-ping"
+                        style={{
+                          transformOrigin: `${loc.svgX}px ${loc.svgY}px`,
+                          animationDuration: "2.5s",
+                        }}
+                      />
+                    )}
 
                     {/* Solid inner point */}
                     <circle
@@ -514,7 +758,7 @@ export function NetworkMapVector() {
                     <g
                       transform={`translate(${loc.svgX + loc.labelOffsetX}, ${loc.svgY + loc.labelOffsetY})`}
                       className="pointer-events-none"
-                      style={{ display: isSelected ? undefined : 'none' }}
+                      style={{ display: isSelected ? undefined : "none" }}
                     >
                       <rect
                         x={0}
@@ -524,7 +768,9 @@ export function NetworkMapVector() {
                         rx={5}
                         fill="#091322"
                         fillOpacity={0.9}
-                        stroke={isSelected ? loc.color : 'rgba(56, 189, 248, 0.35)'}
+                        stroke={
+                          isSelected ? loc.color : "rgba(56, 189, 248, 0.35)"
+                        }
                         strokeWidth={isSelected ? 1.2 : 0.8}
                       />
                       <image
@@ -564,7 +810,7 @@ export function NetworkMapVector() {
                 e.stopPropagation();
                 handleZoomIn();
               }}
-              title="Phóng to (+)"
+              title={nt("Phóng to (+)")}
               className="flex h-9 w-9 items-center justify-center text-white transition hover:bg-cyan-400/30 active:bg-cyan-400/50 font-mono text-lg font-bold border-b border-cyan-300/20"
             >
               +
@@ -575,7 +821,7 @@ export function NetworkMapVector() {
                 e.stopPropagation();
                 handleZoomOut();
               }}
-              title="Thu nhỏ (-)"
+              title={nt("Thu nhỏ (-)")}
               className="flex h-9 w-9 items-center justify-center text-white transition hover:bg-cyan-400/30 active:bg-cyan-400/50 font-mono text-lg font-bold border-b border-cyan-300/20"
             >
               −
@@ -586,7 +832,7 @@ export function NetworkMapVector() {
                 e.stopPropagation();
                 handleResetWorld();
               }}
-              title="Khôi phục toàn cảnh (1x)"
+              title={nt("Khôi phục toàn cảnh (1x)")}
               className="flex h-9 w-9 items-center justify-center text-cyan-300 transition hover:bg-cyan-400/30 active:bg-cyan-400/50 font-mono text-xs font-bold"
             >
               ⟲
@@ -606,7 +852,9 @@ export function NetworkMapVector() {
                 smoothFlyTo(500, 250, 1.0);
               }}
               className={`px-2 py-0.5 rounded-lg font-bold transition ${
-                zoom <= 1.1 ? 'bg-cyan-400 text-black' : 'text-slate-200 hover:text-white'
+                zoom <= 1.1
+                  ? "bg-cyan-400 text-black"
+                  : "text-slate-200 hover:text-white"
               }`}
             >
               1.0x
@@ -618,7 +866,9 @@ export function NetworkMapVector() {
                 setZoom(2.0);
               }}
               className={`px-2 py-0.5 rounded-lg font-bold transition ${
-                zoom > 1.8 && zoom < 2.5 ? 'bg-cyan-400 text-black' : 'text-slate-200 hover:text-white'
+                zoom > 1.8 && zoom < 2.5
+                  ? "bg-cyan-400 text-black"
+                  : "text-slate-200 hover:text-white"
               }`}
             >
               2.0x
@@ -630,7 +880,9 @@ export function NetworkMapVector() {
                 setZoom(3.2);
               }}
               className={`px-2 py-0.5 rounded-lg font-bold transition ${
-                zoom >= 3.0 ? 'bg-cyan-400 text-black' : 'text-slate-200 hover:text-white'
+                zoom >= 3.0
+                  ? "bg-cyan-400 text-black"
+                  : "text-slate-200 hover:text-white"
               }`}
             >
               3.2x
@@ -647,7 +899,12 @@ export function NetworkMapVector() {
 
           {/* Bottom Hint */}
           <div className="absolute bottom-3 left-3 right-3 z-20 flex items-center gap-2 rounded-lg border border-cyan-300/30 bg-black/75 px-3 py-2 font-mono text-[10px] text-sky-200 backdrop-blur-md pointer-events-none sm:right-auto sm:text-[11px]">
-            <span>Kéo bản đồ hoặc chọn khu vực; giữ Ctrl và cuộn để zoom</span>
+            <span>
+              {" "}
+              {nt(
+                "Kéo bản đồ hoặc chọn khu vực; giữ Ctrl và cuộn để zoom",
+              )}{" "}
+            </span>
             <span className="hidden sm:inline-block border-l border-cyan-300/30 pl-2 text-cyan-300">
               Zoom: {zoom.toFixed(1)}x
             </span>
@@ -660,14 +917,21 @@ export function NetworkMapVector() {
             <div className="flex flex-col gap-3">
               <div className="flex min-w-0 items-center gap-3">
                 <div className="flex h-11 w-[66px] shrink-0 items-center justify-center overflow-hidden shadow">
-                  <LocationFlag location={activeLocation} className="h-full w-full" />
+                  <LocationFlag
+                    location={activeLocation}
+                    className="h-full w-full"
+                  />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-base font-black leading-snug text-white">
+                  <h3 className="text-base font-black leading-snug text-white">
                     {activeLocation.country}
-                  </h4>
-                  <p className="mt-1 break-words text-xs leading-4 text-sky-100">{activeLocation.name}</p>
-                  <p className="mt-1 text-xs text-cyan-200 font-semibold">{activeLocation.city}</p>
+                  </h3>
+                  <p className="mt-1 break-words text-xs leading-4 text-sky-100">
+                    {activeLocation.name}
+                  </p>
+                  <p className="mt-1 text-xs text-cyan-200 font-semibold">
+                    {activeLocation.city}
+                  </p>
                 </div>
               </div>
 
@@ -675,7 +939,10 @@ export function NetworkMapVector() {
                 <p className="shrink-0 font-mono text-xl font-black text-emerald-300">
                   ~{simulatedPings[activeLocation.id]} ms
                 </p>
-                <span className="text-[10px] text-sky-200/80 font-mono">Ping mô phỏng ngẫu nhiên</span>
+                <span className="text-[10px] text-sky-200/80 font-mono">
+                  {" "}
+                  {nt("Ping mô phỏng ngẫu nhiên")}{" "}
+                </span>
               </div>
             </div>
 
@@ -685,12 +952,22 @@ export function NetworkMapVector() {
 
             <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-mono">
               <div className="rounded-xl border border-cyan-300/20 bg-black/40 p-2.5">
-                <span className="text-[10px] text-sky-200/70">BĂNG THÔNG / BACKBONE</span>
-                <p className="font-bold text-white mt-0.5">{activeLocation.speed}</p>
+                <span className="text-[10px] text-sky-200/70">
+                  {" "}
+                  {nt("BĂNG THÔNG / BACKBONE")}{" "}
+                </span>
+                <p className="font-bold text-white mt-0.5">
+                  {activeLocation.speed}
+                </p>
               </div>
               <div className="rounded-xl border border-cyan-300/20 bg-black/40 p-2.5">
-                <span className="text-[10px] text-sky-200/70">TRẠNG THÁI GÓI</span>
-                <p className="font-bold text-cyan-300 mt-0.5">{activeLocation.availability}</p>
+                <span className="text-[10px] text-sky-200/70">
+                  {" "}
+                  {nt("TRẠNG THÁI GÓI")}{" "}
+                </span>
+                <p className="font-bold text-cyan-300 mt-0.5">
+                  {activeLocation.availability}
+                </p>
               </div>
             </div>
 
@@ -701,28 +978,39 @@ export function NetworkMapVector() {
           </div>
 
           <div className="rounded-2xl border border-cyan-300/20 bg-[#071b30] p-3">
-          <p className="mb-3 text-sm font-bold text-white" role="status">{filteredLocations.length} khu vực phù hợp</p>
-          <div className="grid max-h-72 overflow-y-auto gap-2">
-            {filteredLocations.map((loc) => (
-              <button
-                key={loc.id}
-                type="button"
-                onClick={() => focusOnNode(loc)}
-                className={`flex min-w-0 items-center gap-3 rounded-xl border p-3 text-left transition ${
-                  activeLocation.id === loc.id
-                    ? 'border-cyan-300 bg-cyan-400/25 text-white shadow-[0_0_15px_rgba(0,240,255,0.4)]'
-                    : 'border-cyan-300/20 bg-[#052140]/60 text-slate-300 hover:border-cyan-300/40 hover:bg-[#072a50]/80'
-                }`}
-              >
-                <LocationFlag location={loc} className="h-4 w-6" />
-                <p className="min-w-0 flex-1 text-xs font-bold leading-5">{loc.name}</p>
-                <p className="text-[10px] font-mono text-emerald-300">
-                  ~{simulatedPings[loc.id]} ms
+            <p className="mb-3 text-sm font-bold text-white" role="status">
+              {filteredLocations.length} {nt("khu vực phù hợp")}{" "}
+            </p>
+            <div className="grid max-h-72 overflow-y-auto gap-2">
+              {filteredLocations.map((loc) => (
+                <button
+                  key={loc.id}
+                  type="button"
+                  onClick={() => focusOnNode(loc)}
+                  className={`flex min-w-0 items-center gap-3 rounded-xl border p-3 text-left transition ${
+                    activeLocation.id === loc.id
+                      ? "border-cyan-300 bg-cyan-400/25 text-white shadow-[0_0_15px_rgba(0,240,255,0.4)]"
+                      : "border-cyan-300/20 bg-[#052140]/60 text-slate-300 hover:border-cyan-300/40 hover:bg-[#072a50]/80"
+                  }`}
+                >
+                  <LocationFlag location={loc} className="h-4 w-6" />
+                  <p className="min-w-0 flex-1 text-xs font-bold leading-5">
+                    {loc.name}
+                  </p>
+                  <p className="text-[10px] font-mono text-emerald-300">
+                    ~{simulatedPings[loc.id]} ms
+                  </p>
+                </button>
+              ))}
+              {filteredLocations.length === 0 && (
+                <p className="p-3 text-sm text-sky-200">
+                  {" "}
+                  {nt(
+                    "Không tìm thấy khu vực. Thử tên thành phố hoặc chọn tất cả quốc gia.",
+                  )}{" "}
                 </p>
-              </button>
-            ))}
-            {filteredLocations.length === 0 && <p className="p-3 text-sm text-sky-200">Không tìm thấy khu vực. Thử tên thành phố hoặc chọn tất cả quốc gia.</p>}
-          </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -731,12 +1019,23 @@ export function NetworkMapVector() {
       <details className="group/regions mt-8 border-t border-cyan-300/20 pt-6">
         <summary className="mb-4 cursor-pointer rounded-xl border border-cyan-300/25 bg-cyan-400/10 px-4 py-3 text-cyan-200 marker:text-cyan-300">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-            Danh mục các khu vực trên sơ đồ minh họa
+            {" "}
+            {nt("Danh mục các khu vực trên sơ đồ minh họa")}{" "}
           </span>
-          <span className="ml-3 text-xs text-sky-200 group-open/regions:hidden">Bấm để mở {allDatacenterLocations.length} khu vực</span>
-          <span className="ml-3 hidden text-xs text-sky-200 group-open/regions:inline">Bấm để thu gọn</span>
+          <span className="ml-3 text-xs text-sky-200 group-open/regions:hidden">
+            {" "}
+            {nt("Bấm để mở")} {allDatacenterLocations.length}{" "}
+            {nt("khu vực")}{" "}
+          </span>
+          <span className="ml-3 hidden text-xs text-sky-200 group-open/regions:inline">
+            {" "}
+            {nt("Bấm để thu gọn")}{" "}
+          </span>
         </summary>
-        <p className="mb-4 text-xs text-emerald-300">Tình trạng thực tế: xác nhận qua ticket</p>
+        <p className="mb-4 text-xs text-emerald-300">
+          {" "}
+          {nt("Tình trạng thực tế: xác nhận qua ticket")}{" "}
+        </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {allDatacenterLocations.map((loc) => {
@@ -749,8 +1048,8 @@ export function NetworkMapVector() {
                 onClick={() => focusOnNode(loc)}
                 className={`glass-card-bright min-h-40 cursor-pointer rounded-2xl p-4 transition duration-200 flex flex-col justify-between sm:p-5 ${
                   isSelected
-                    ? 'border-cyan-300 bg-[#07335d]/90 shadow-[0_0_25px_rgba(0,240,255,0.3)] ring-1 ring-cyan-300'
-                    : 'hover:border-cyan-300/40'
+                    ? "border-cyan-300 bg-[#07335d]/90 shadow-[0_0_25px_rgba(0,240,255,0.3)] ring-1 ring-cyan-300"
+                    : "hover:border-cyan-300/40"
                 }`}
               >
                 <div>
@@ -760,22 +1059,39 @@ export function NetworkMapVector() {
                     </div>
                     <span
                       className={`rounded-full px-2 py-0.5 font-mono text-[9px] font-bold ${
-                        (loc.status === 'paused' || loc.status === 'planned')
-                          ? 'border border-amber-300/30 bg-amber-400/15 text-amber-200'
-                          : 'border border-emerald-300/30 bg-emerald-400/15 text-emerald-200'
+                        loc.status === "paused" || loc.status === "planned"
+                          ? "border border-amber-300/30 bg-amber-400/15 text-amber-200"
+                          : "border border-emerald-300/30 bg-emerald-400/15 text-emerald-200"
                       }`}
                     >
-                      {loc.status === 'planned' ? 'Sắp mở' : loc.status === 'paused' ? 'Kín Slot' : 'Tham khảo'}
+                      {loc.status === "planned"
+                        ? locale === "en"
+                          ? "Planned"
+                          : "Sắp mở"
+                        : loc.status === "paused"
+                          ? locale === "en"
+                            ? "No slots"
+                            : "Kín Slot"
+                          : locale === "en"
+                            ? "Reference"
+                            : "Tham khảo"}
                     </span>
                   </div>
 
-                  <p className="mt-3 text-base font-extrabold text-white">{loc.name}</p>
+                  <p className="mt-3 text-base font-extrabold text-white">
+                    {loc.name}
+                  </p>
                   <p className="mt-1 text-xs text-cyan-200">{loc.city}</p>
                 </div>
 
                 <div className="mt-3 border-t border-cyan-300/15 pt-2.5 flex items-baseline justify-between font-mono text-xs">
-                  <span className="text-[10px] text-sky-200/70">Ping mô phỏng:</span>
-                  <span className="font-bold text-emerald-300">~{pingVal} ms</span>
+                  <span className="text-[10px] text-sky-200/70">
+                    {" "}
+                    {nt("Ping mô phỏng:")}{" "}
+                  </span>
+                  <span className="font-bold text-emerald-300">
+                    ~{pingVal} ms
+                  </span>
                 </div>
               </div>
             );

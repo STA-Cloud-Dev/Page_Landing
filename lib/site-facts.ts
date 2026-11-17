@@ -1,5 +1,5 @@
 // Factual summaries shared by the public About page and the optional text index.
-export const factsReviewedAt = '2026-11-14';
+export const factsReviewedAt = '2026-11-17';
 export const brandSummary = 'STA Cloud (STACloud, STA Cloud Hosting) cung cấp hosting website, bot Discord, game server và giới thiệu VPS/GPU Oracle Cloud do ICS cung cấp. Website chính thức là https://stacloud.eu.cc/; Portal quản trị dịch vụ là https://portal.stacloud.eu.cc/.';
 export const serviceFacts = [
   { question: 'STA Cloud cung cấp dịch vụ gì?', answer: 'Hosting cho website, bot Discord, ứng dụng Node.js/Python, game hosting như Minecraft, Linux Egg và giới thiệu VPS/GPU Oracle Cloud của ICS. Chọn loại dịch vụ theo runtime, CPU, RAM, dung lượng và nhu cầu quản trị.', path: '/pricing/', label: 'Bảng giá hosting STA Cloud' },

@@ -139,7 +139,7 @@ export const termsSections: LegalSection[] = [
   {
     title: '10. Hạ tầng trong nước và ngoài nước',
     bullets: [
-      'Dịch vụ có thể được triển khai tại Việt Nam, Singapore, Hong Kong, Thái Lan, EU, Canada hoặc khu vực khác tùy gói và khả năng hạ tầng.',
+      'Dịch vụ hosting được cấp theo khu vực và slot đã xác nhận, gồm Hà Nội, TP. Hồ Chí Minh, Singapore hoặc khu vực phù hợp từng gói. Danh mục region Oracle không phải cam kết tồn kho; VPS/GPU do ICS cung cấp.',
       'Các dịch vụ trả phí đủ điều kiện tại cả location trong nước và ngoài nước có mục tiêu uptime tối thiểu 99% theo tháng, theo phạm vi và loại trừ của SLA.',
       'Độ trễ phụ thuộc khoảng cách địa lý, tuyến mạng, nhà mạng người dùng và trạng thái Internet quốc tế; ping hiển thị trên website chỉ mang tính tham khảo.',
     ],

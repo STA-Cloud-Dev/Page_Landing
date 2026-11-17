@@ -1,132 +1,99 @@
-import { homeConfig } from '@/components/home/content';
-import { sitePath } from '@/lib/site-path';
-import { PolicyLinks } from '@/components/legal/policy-links';
-
+"use client";
+import { homeConfig } from "@/components/home/content";
+import { useLocale } from "@/lib/i18n/use-locale";
+import { localizedPath } from "@/lib/i18n/config";
+import { LanguageSwitcher } from "./language-switcher";
 export function SiteFooter() {
+  const { locale, t } = useLocale();
+  const groups = [
+    {
+      title: t.services,
+      links: [
+        ["pricing", t.pricing],
+        ["free", t.free],
+        ["vps", t.vps],
+        ["egg", t.egg],
+        ["network", t.network],
+      ],
+    },
+    {
+      title: t.policies,
+      links: [
+        ["terms", t.terms],
+        ["privacy", t.privacy],
+        ["sla", t.sla],
+        ["refund", t.refund],
+        ["security", t.security],
+        ["cookies", t.cookies],
+      ],
+    },
+    {
+      title: "STA Cloud",
+      links: [
+        ["about", t.about],
+        ["history", t.history],
+        ["partner", t.partner],
+      ],
+    },
+  ];
   return (
-    <footer className="px-4 pb-20 pt-10 sm:px-6 sm:pb-12">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-cyan-300/30 bg-[#06335a]/90 px-6 py-8 shadow-2xl backdrop-blur-2xl sm:px-10 sm:py-12">
-        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          {/* Brand Info */}
-          <div className="space-y-4">
-            <a href={sitePath('/')} className="group inline-flex flex-col gap-2">
-              <img
-                src={sitePath('/picture/logoSTACloud-204.webp')}
-                srcSet={`${sitePath('/picture/logoSTACloud-204.webp')} 204w, ${sitePath('/picture/logoSTACloud-408.webp')} 408w`}
-                sizes="(min-width: 640px) 140px, 116px"
-                width={204}
-                height={70}
-                decoding="async"
-                loading="lazy"
-                alt={homeConfig.logoAlt}
-                className="h-11 sm:h-12 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.35)] transition group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,0.6)]"
-              />
-              <p className="text-xs text-cyan-200 font-semibold">STA Cloud Hosting • Việt Nam & Singapore</p>
+    <footer className="site-footer px-4 pb-28 pt-12 sm:px-6 xl:pb-12">
+      <div className="mx-auto max-w-7xl border-t border-cyan-300/25 pt-10">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-[1.6fr_1fr_1.2fr_1fr]">
+          <div>
+            <a
+              className="text-xl font-bold text-white"
+              href={localizedPath("/", locale)}
+            >
+              STA<span className="text-cyan-200"> CLOUD</span>
             </a>
-            <p className="max-w-sm text-xs leading-relaxed text-sky-100 sm:text-sm">
-              VPS, hosting Việt Nam và Singapore cho website, bot Discord và game server; cấu hình và chi phí công khai theo từng gói.
-            </p>
-
-            <div className="flex items-center gap-2 text-xs text-cyan-200">
-              <span className="h-2 w-2 rounded-full bg-cyan-300" />
-              <span>SLA mục tiêu 99% cho gói đủ điều kiện • Xem chính sách SLA</span>
+            <p className="mt-4 max-w-sm text-sm leading-7">{t.footerSummary}</p>
+            <a
+              href={localizedPath("/sla/", locale)}
+              className="mt-3 block text-xs leading-6 text-cyan-200"
+            >
+              {t.footerSla}
+            </a>
+            <div className="mt-4">
+              <LanguageSwitcher />
             </div>
           </div>
-
-          {/* Column 1: Services */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-              ⚡ Dịch Vụ
-            </p>
-            <div className="mt-3 text-sm text-sky-100 sm:mt-4 sm:space-y-2.5">
-              <a href={sitePath('/vps/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                VPS & Hosting Việt Nam / Singapore
-              </a>
-              <a href={sitePath('/pricing/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Bảng giá & Gói dịch vụ
-              </a>
-              <a href={sitePath('/#benefits')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Ưu điểm & Hạ tầng Anti-DDoS
-              </a>
-              <a href={sitePath('/egg')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Kho Game & Softwares Eggs
-              </a>
-              <a href={sitePath('/free-server')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Free Server Community
-              </a>
-              <a
-                href={homeConfig.panelUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0"
-              >
-                STACloud Portal Panel
-              </a>
+          {groups.map((group) => (
+            <div key={group.title}>
+              <h2 className="eyebrow">{group.title}</h2>
+              <nav className="mt-3 flex flex-col">
+                {group.links.map(([path, label]) => (
+                  <a
+                    key={path}
+                    href={localizedPath(path, locale)}
+                    className="flex min-h-11 items-center text-sm hover:text-cyan-200"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </nav>
             </div>
-          </div>
-
-          {/* Column 2: Community & Support */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-              💬 Hỗ Trợ & Chat
-            </p>
-            <div className="mt-3 text-sm text-sky-100 sm:mt-4 sm:space-y-2.5">
-              <a
-                href={homeConfig.discordUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 items-center gap-1.5 transition hover:text-cyan-200 sm:min-h-0"
-              >
-                <span>Discord Support Ticket</span>
-              </a>
-              <a
-                href={homeConfig.zaloUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 items-center gap-1.5 transition hover:text-cyan-200 sm:min-h-0"
-              >
-                <span>Zalo Community Group</span>
-              </a>
-              <a
-                href={homeConfig.messengerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 items-center gap-1.5 transition hover:text-cyan-200 sm:min-h-0"
-              >
-                <span>Messenger Group</span>
-              </a>
-              <a href={sitePath('/#faq')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Câu hỏi thường gặp (FAQ)
-              </a>
-              <a href={sitePath('/history/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Lịch sử STACloud
-              </a>
-              <a href={sitePath('/network/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">Bản đồ & khu vực</a>
-              <a href={sitePath('/about/')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Giới thiệu & thông tin STA Cloud
-              </a>
-            </div>
-          </div>
-
-          {/* Column 3: Legal & Policies */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-cyan-200">
-              🛡️ Chính Sách & SLA
-            </p>
-            <div className="mt-3 text-sm text-sky-100 sm:mt-4 sm:space-y-2.5">
-              <a href={sitePath('/partner')} className="flex min-h-11 items-center transition hover:text-cyan-200 sm:min-h-0">
-                Chương trình Partner (Giảm 20%)
-              </a>
-            </div>
-            <div className="mt-3"><PolicyLinks stacked /></div>
-          </div>
+          ))}
         </div>
-
-        {/* Bottom Copyright Bar */}
-        <div className="mt-8 flex flex-col items-center justify-between border-t border-cyan-300/20 pt-6 text-center text-xs text-sky-200/80 sm:flex-row sm:text-left">
-          <p>© 2018 - 2026 STACloud. All rights reserved.</p>
-          <p className="mt-2 sm:mt-0 text-[11px] font-mono text-cyan-300">
-            STACloud Infrastructure &bull; High Performance Cloud & Game Hosting
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-cyan-300/20 py-5 text-sm">
+          {[
+            ["Discord / Ticket", homeConfig.discordUrl],
+            ["Zalo", homeConfig.zaloUrl],
+            ["Messenger", homeConfig.messengerUrl],
+            ["Portal", homeConfig.panelUrl],
+          ].map(([label, href]) => (
+            <a
+              key={href}
+              className="inline-flex min-h-11 items-center text-cyan-200"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label} ↗
+            </a>
+          ))}
+          <p className="w-full text-xs text-sky-200">
+            © 2018–2026 STACloud. All rights reserved.
           </p>
         </div>
       </div>
