@@ -1,3 +1,4 @@
+import { ServerExpiryNotice } from '@/components/shared/server-expiry-notice';
 import { CreditRateNotice } from './credit-rate-notice';
 import { freePlans, freePolicy } from "./free-plans";
 import { homeConfig } from "@/components/home/content";
@@ -146,6 +147,7 @@ export function FreeHosting({ locale = "vi" }: { locale?: Locale }) {
             ? "Do not use free services for DDoS, mining, botnets, unauthorized scanning, selfbots, abusive proxies, malware or illegal content. Free Fire Bot, Minecraft Bot and obfuscated code are not allowed on the free tier. Check renewal limits and keep independent copies of important data."
             : freePolicy}
         </p>
+        <ServerExpiryNotice locale={locale} />
         <div className="mt-3 flex flex-wrap gap-5">
           {[
             ["terms", en ? "Terms of service" : "Điều khoản"],

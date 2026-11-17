@@ -19,6 +19,7 @@ Thông tin giới thiệu rà soát ngày ${factsReviewedAt}. Ngôn ngữ chính
 - [Khu vực và bản đồ](${siteUrl}/network/): danh mục region và ping mô phỏng, điều kiện slot.
 - [VPS Oracle Cloud và hosting](${siteUrl}/vps/): cấu hình, giá tham khảo, VAT và điều kiện khu vực.
 - [Hosting miễn phí](${siteUrl}/free/): Free DEV và Free Gamming + AI Free Forever, gia hạn 0đ, cấu hình có thể điều chỉnh trong tương lai; OpenClaw và điều kiện sử dụng.
+- Server do STA Cloud trực tiếp cung cấp sẽ bị xóa nếu không gia hạn trong vòng 3 ngày sau khi hết hạn; không chịu trách nhiệm về mất dữ liệu do không gia hạn. Nếu backup còn tồn tại khi khách yêu cầu, STA Cloud cung cấp bản sao sau xác minh quyền sở hữu; không bảo đảm luôn có backup hoặc khôi phục được.
 - Quy đổi Credit STA Cloud: ${creditRateLabel("vi")}; English: ${creditRateLabel("en")}.
 - [English services](${siteUrl}/en/): English hosting plans, Free Forever, ICS Oracle VPS/GPU, regions, Egg catalog and policies.
 - [Danh mục Egg](${siteUrl}/egg/): runtime, WordPress, PHPweb, Laravel, phpMyAdmin, Minecraft và các môi trường hỗ trợ.

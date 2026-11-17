@@ -1,4 +1,6 @@
 "use client";
+import { ServerExpiryNotice } from '@/components/shared/server-expiry-notice';
+
 import { CreditRateNotice } from '@/components/shared/credit-rate-notice';
 import { useMemo, useState } from "react";
 import { homeConfig } from "@/components/home/content";
@@ -91,6 +93,7 @@ export function PricingCatalog() {
   return (
     <section className="py-8" aria-label={t.pricing}>
       <CreditRateNotice locale={locale} />
+      <ServerExpiryNotice locale={locale} />
       {selected.length > 0 && (
         <div className="comparison-tray">
           <span className="text-sm">

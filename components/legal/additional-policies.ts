@@ -1,7 +1,8 @@
+import expiryPolicy from '@/lib/i18n/dictionaries/server-expiry.json';
 import { freePolicy } from '@/components/shared/free-plans';
 import type { LegalSection } from './legal-content';
 
-export const policyUpdated = '03/11/2026';
+export const policyUpdated = '17/11/2026';
 
 export const refundSections: LegalSection[] = [
   { title: 'Chính sách riêng cho nhóm FREE', paragraphs: [freePolicy, 'Chính sách FREE được ưu tiên áp dụng cho các gói trong nhóm FREE; không khấu trừ theo số ngày đã sử dụng hoặc áp dụng loại trừ sự cố, xóa máy chủ của gói trả phí bên dưới. Hoàn khoản thanh toán không bao gồm khôi phục dữ liệu.'] },
@@ -61,6 +62,8 @@ export const securitySections: LegalSection[] = [
     'STACloud bảo vệ thông tin người báo cáo trong phạm vi vận hành và pháp luật cho phép. Báo cáo có giá trị có thể được xem xét thưởng Credit sau xác nhận; đây không phải cam kết thưởng tự động hoặc cho phép kiểm thử trái phép.',
   ] },
 ];
+
+securitySections.push({ title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
 
 export const cookieSections: LegalSection[] = [
   { title: '1. Phạm vi và khái niệm', paragraphs: [

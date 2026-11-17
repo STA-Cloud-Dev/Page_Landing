@@ -1,3 +1,4 @@
+import expiryPolicy from '@/lib/i18n/dictionaries/server-expiry.json';
 import { freePolicy } from '@/components/shared/free-plans';
 
 export type LegalSubsection = {
@@ -13,7 +14,7 @@ export type LegalSection = {
   subsections?: LegalSubsection[];
 };
 
-export const legalLastUpdated = '03/11/2026';
+export const legalLastUpdated = '17/11/2026';
 export const slaLastUpdated = '24/10/2026';
 export const partnerLastUpdated = '19/09/2026';
 
@@ -156,6 +157,8 @@ export const termsSections: LegalSection[] = [
     paragraphs: ['Nếu cần hỗ trợ, vui lòng liên hệ qua email: stacloud.dev@gmail.com hoặc ticket Discord chính thức.'],
   },
 ];
+
+termsSections.push({ title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
 
 export const privacySections: LegalSection[] = [
   {
