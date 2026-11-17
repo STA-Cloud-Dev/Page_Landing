@@ -1,3 +1,4 @@
+import { CreditRateNotice } from './credit-rate-notice';
 import { freePlans, freePolicy } from "./free-plans";
 import { homeConfig } from "@/components/home/content";
 import { ContactLinks } from "./contact-links";
@@ -19,6 +20,7 @@ export function FreeHosting({ locale = "vi" }: { locale?: Locale }) {
             ? "Free DEV and Free Gamming + AI are Free Forever: no charges, 0 Credit and free renewals. The 5-day management cycle is not a paid trial. Resources may change in the future. Verified accounts and available capacity are required."
             : "Free DEV và Free Gamming + AI đều Free Forever: không thu phí, 0 Credit và gia hạn 0đ. Chu kỳ quản lý 5 ngày không phải dùng thử có phí. Cấu hình có thể điều chỉnh trong tương lai; dành cho tài khoản đã xác minh và tùy slot."}
         </p>
+        <CreditRateNotice locale={locale} compact />
         <ContactLinks />
       </header>
       <section id="free-hosting" className="scroll-mt-28 py-8">

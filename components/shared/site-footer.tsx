@@ -1,4 +1,5 @@
 "use client";
+import { CreditRateNotice } from './credit-rate-notice';
 import { homeConfig } from "@/components/home/content";
 import { useLocale } from "@/lib/i18n/use-locale";
 import { localizedPath } from "@/lib/i18n/config";
@@ -48,6 +49,7 @@ export function SiteFooter() {
               STA<span className="text-cyan-200"> CLOUD</span>
             </a>
             <p className="mt-4 max-w-sm text-sm leading-7">{t.footerSummary}</p>
+            <CreditRateNotice locale={locale} compact />
             <a
               href={localizedPath("/sla/", locale)}
               className="mt-3 block text-xs leading-6 text-cyan-200"
