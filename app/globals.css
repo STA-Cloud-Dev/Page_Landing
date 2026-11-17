@@ -1393,7 +1393,10 @@ body {
 }
 .legal-article {
   border-top: 1px solid var(--line);
-  padding: 1.5rem 0;
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  overflow-wrap: anywhere;
   scroll-margin-top: 110px;
 }
 .legal-article h2 {
@@ -1512,3 +1515,15 @@ body {
     display: inline-flex;
   }
 }
+
+/* Legal documents need an inset reading surface, without decorative overflow. */
+.legal-content { display: grid; min-width: 0; gap: 1rem; }
+.legal-layout > * { min-width: 0; }
+.legal-toc { padding-right: .75rem; scrollbar-gutter: stable; }
+.legal-toc a { overflow-wrap: anywhere; }
+.site-motion .legal-article,
+.site-motion .legal-article:hover,
+.site-motion .legal-article:focus-within { transform: none; transform-style: flat; }
+.site-motion .legal-article::after,
+.landing-depth-content .legal-article section::before { content: none; }
+.legal-article section { position: relative; min-width: 0; }

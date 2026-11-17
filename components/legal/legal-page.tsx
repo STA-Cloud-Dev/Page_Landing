@@ -57,7 +57,7 @@ export function LegalPage({
               {t.terms}
             </a>
           </aside>
-          <div className="min-w-0">
+          <div className="legal-content">
             {sections.map((s, i) => (
               <article
                 className="legal-article"
