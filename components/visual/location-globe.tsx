@@ -43,6 +43,7 @@ export function LocationGlobe() {
       ),
     [locations],
   );
+  const [clusterCodes, setClusterCodes] = useState<string[]>([]);
   const [selected, setSelected] = useState("VNM");
   const [longitude, setLongitude] = useState(110);
   const drag = useRef<{ x: number; longitude: number } | null>(null);
@@ -62,6 +63,17 @@ export function LocationGlobe() {
         .filter((p) => p.z > 0),
     [longitude],
   );
+  const markers = useMemo(() => {
+    const groups: { x:number; y:number; members: typeof countries }[] = [];
+    for (const place of countries) {
+      const pos = project(place.lat, place.lng, longitude);
+      if (pos.z <= .08) continue;
+      const nearby = groups.find(group => Math.hypot(group.x-pos.x,group.y-pos.y)<72);
+      if (nearby) nearby.members.push(place);
+      else groups.push({ x:pos.x, y:pos.y, members:[place] });
+    }
+    return groups;
+  }, [countries, longitude]);
   return (
     <section
       className="location-globe"
@@ -185,24 +197,12 @@ export function LocationGlobe() {
             ) : null;
           })}
         </svg>
-        {countries.map((p) => {
-          const pos = project(p.lat, p.lng, longitude);
-          if (pos.z <= 0.08) return null;
-          return (
-            <button
-              type="button"
-              className={`globe-location ${selected === p.countryCode ? "globe-location-selected" : ""}`}
-              key={p.countryCode}
-              style={{ left: `${pos.x / 4}%`, top: `${pos.y / 4}%` }}
-              onClick={() => choose(p.countryCode)}
-              aria-label={`${p.country} · ${p.regions.length} ${en ? "regions" : "khu vực"}`}
-              aria-pressed={selected === p.countryCode}
-            >
-              <span className="globe-beacon" />
-              <img src={p.flagSrc} width="20" height="14" alt="" />
-              <span className="sr-only">{p.country}</span>
-            </button>
-          );
+        {markers.map(marker => {
+          const place = marker.members.find(p=>p.countryCode===selected)||marker.members[0];
+          const active=marker.members.some(p=>p.countryCode===selected);
+          return <button type="button" className={`globe-location ${active?'globe-location-selected':''}`} key={marker.members[0].countryCode} style={{left:`${marker.x/4}%`,top:`${marker.y/4}%`}} onClick={()=>{choose(place.countryCode);setClusterCodes(marker.members.map(p=>p.countryCode));}} aria-label={marker.members.map(p=>p.country).join(', ')} aria-pressed={active}>
+            <span className="globe-beacon"/><img src={place.flagSrc} width="20" height="14" alt=""/>{marker.members.length>1&&<span className="globe-cluster-count">+{marker.members.length-1}</span>}
+          </button>;
         })}
       </div>
       <div className="globe-country-panel">
@@ -228,6 +228,7 @@ export function LocationGlobe() {
             ))}
           </select>
         </div>
+        {clusterCodes.length>1&&<div className="globe-country-choices" aria-label={en?'Countries in this cluster':'Các quốc gia trong cụm'}>{countries.filter(p=>clusterCodes.includes(p.countryCode)).map(p=><button type="button" key={p.countryCode} onClick={()=>choose(p.countryCode)} aria-pressed={selected===p.countryCode}><img src={p.flagSrc} width="18" height="12" alt=""/>{p.country}</button>)}</div>}
         <p className="globe-availability">
           {en
             ? "Region directory · confirm availability before ordering."
