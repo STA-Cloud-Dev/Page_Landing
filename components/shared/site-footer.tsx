@@ -39,8 +39,8 @@ export function SiteFooter() {
   ];
   return (
     <footer className="site-footer px-4 pb-28 pt-12 sm:px-6 xl:pb-12">
-      <div className="mx-auto max-w-7xl border-t border-cyan-300/25 pt-10">
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-[1.6fr_1fr_1.2fr_1fr]">
+      <div className="footer-panel mx-auto max-w-7xl border border-cyan-300/25 px-5 pt-8 sm:px-8 sm:pt-10">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)]">
           <div>
             <a
               className="text-xl font-bold text-white"

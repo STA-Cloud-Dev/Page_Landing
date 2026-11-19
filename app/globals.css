@@ -1527,3 +1527,7 @@ body {
 .site-motion .legal-article::after,
 .landing-depth-content .legal-article section::before { content: none; }
 .legal-article section { position: relative; min-width: 0; }
+
+/* Keep footer copy inside its rounded surface at every breakpoint. */
+.site-footer .footer-panel { overflow-wrap: anywhere; }
+.site-footer .footer-panel > .grid > div { min-width: 0; }
