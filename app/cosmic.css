@@ -366,3 +366,6 @@ html[data-visual-quality='lite'] .cosmic-subpage :is(article,.status-panel,.inte
 .globe-country-choices button[aria-pressed='true'] {border-color:#a5f3fc;background:#12415a;}
 
 .globe-country-choices {position:absolute;left:0;right:0;bottom:100%;margin-bottom:8px;max-height:180px;padding:10px;background:#082b45;border:1px solid var(--cosmic-rule);border-radius:14px;}
+
+.location-globe[data-static="true"] .globe-surface {cursor:default;}
+.location-globe[data-static="true"] .globe-toolbar {min-height:44px;}

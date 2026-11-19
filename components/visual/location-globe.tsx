@@ -1,11 +1,12 @@
 "use client";
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Globe2 } from "lucide-react";
 import { allDatacenterLocations } from "./network-regions";
 import { localizedLocations } from "@/lib/i18n/network";
 import { useLocale } from "@/lib/i18n/use-locale";
 import { localizedPath } from "@/lib/i18n/config";
 import land from "./globe-land.json";
+import { getVisualQuality } from "@/lib/visual-quality";
 const rad = Math.PI / 180;
 function project(lat: number, lng: number, longitude: number) {
   const phi = lat * rad,
@@ -43,6 +44,17 @@ export function LocationGlobe() {
       ),
     [locations],
   );
+  const [staticGlobe, setStaticGlobe] = useState(true);
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => { drag.current = null; setStaticGlobe(getVisualQuality() === 'lite'); };
+    update();
+    reducedMotion.addEventListener('change', update);
+    window.addEventListener('visual-quality-change', update);
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributes:true, attributeFilter:['data-visual-quality'] });
+    return () => { observer.disconnect(); reducedMotion.removeEventListener('change', update); window.removeEventListener('visual-quality-change', update); };
+  }, []);
   const [clusterCodes, setClusterCodes] = useState<string[]>([]);
   const [selected, setSelected] = useState("VNM");
   const [longitude, setLongitude] = useState(110);
@@ -53,30 +65,32 @@ export function LocationGlobe() {
     const next = countries.find((p) => p.countryCode === code);
     if (next) {
       setSelected(code);
-      setLongitude(next.lng);
+      if (!staticGlobe) setLongitude(next.lng);
     }
   };
+  const displayLongitude = staticGlobe ? 110 : longitude;
   const dots = useMemo(
     () =>
       land
-        .map(([lat, lng]) => project(lat, lng, longitude))
+        .map(([lat, lng]) => project(lat, lng, displayLongitude))
         .filter((p) => p.z > 0),
-    [longitude],
+    [displayLongitude],
   );
   const markers = useMemo(() => {
     const groups: { x:number; y:number; members: typeof countries }[] = [];
     for (const place of countries) {
-      const pos = project(place.lat, place.lng, longitude);
+      const pos = project(place.lat, place.lng, displayLongitude);
       if (pos.z <= .08) continue;
       const nearby = groups.find(group => Math.hypot(group.x-pos.x,group.y-pos.y)<72);
       if (nearby) nearby.members.push(place);
       else groups.push({ x:pos.x, y:pos.y, members:[place] });
     }
     return groups;
-  }, [countries, longitude]);
+  }, [countries, displayLongitude]);
   return (
     <section
       className="location-globe"
+      data-static={staticGlobe}
       aria-label={
         en
           ? "Explore hosting countries"
@@ -88,7 +102,7 @@ export function LocationGlobe() {
           <Globe2 size={15} />
           {en ? "EXPLORE REGIONS" : "KHÁM PHÁ KHU VỰC"}
         </span>
-        <div>
+        {!staticGlobe && <div>
           <button
             type="button"
             onClick={() => setLongitude((v) => v - 40)}
@@ -103,17 +117,17 @@ export function LocationGlobe() {
           >
             <ChevronRight size={18} />
           </button>
-        </div>
+        </div>}
       </div>
       <div
         className="globe-surface"
         onPointerDown={(event) => {
-          if ((event.target as HTMLElement).closest("button")) return;
+          if (staticGlobe || (event.target as HTMLElement).closest("button")) return;
           drag.current = { x: event.clientX, longitude };
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
-          if (drag.current)
+          if (!staticGlobe && drag.current)
             setLongitude(
               drag.current.longitude - (event.clientX - drag.current.x) * 0.45,
             );
@@ -145,7 +159,7 @@ export function LocationGlobe() {
             <path
               key={`lat-${lat}`}
               d={Array.from({ length: 121 }, (_, i) =>
-                project(lat, longitude - 90 + i * 1.5, longitude),
+                project(lat, displayLongitude - 90 + i * 1.5, displayLongitude),
               )
                 .map(
                   (p, i) =>
@@ -161,7 +175,7 @@ export function LocationGlobe() {
             <path
               key={`lng-${lng}`}
               d={Array.from({ length: 61 }, (_, i) =>
-                project(-90 + i * 3, longitude + lng, longitude),
+                project(-90 + i * 3, displayLongitude + lng, displayLongitude),
               )
                 .map(
                   (p, i) =>
@@ -184,7 +198,7 @@ export function LocationGlobe() {
             />
           ))}
           {countries.map((p) => {
-            const pos = project(p.lat, p.lng, longitude);
+            const pos = project(p.lat, p.lng, displayLongitude);
             return pos.z > 0.08 ? (
               <circle
                 key={p.countryCode}
