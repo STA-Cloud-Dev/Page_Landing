@@ -1,6 +1,6 @@
 import { localizedPath, type Locale } from "@/lib/i18n/config";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { LazyParticleCloud } from "@/components/visual/lazy-particle-cloud";
+import { LazyLocationGlobe } from "@/components/visual/lazy-location-globe";
 import { homeConfig } from "./content";
 import { ContactLinks } from "@/components/shared/contact-links";
 
@@ -57,7 +57,7 @@ export function ImmersiveHero({ locale = "vi" }: { locale?: Locale }) {
           </a>
           <ContactLinks />
         </div>
-        <div className="hero-sculpture-wrap">
+        <div className="hero-sculpture-wrap hero-location-wrap">
           <div
             className="hero-core-ring hero-core-ring-one"
             aria-hidden="true"
@@ -66,7 +66,7 @@ export function ImmersiveHero({ locale = "vi" }: { locale?: Locale }) {
             className="hero-core-ring hero-core-ring-two"
             aria-hidden="true"
           />
-          <LazyParticleCloud />
+          <LazyLocationGlobe />
           <span className="core-label core-label-top" aria-hidden="true">
             01 / COMPUTE
           </span>
