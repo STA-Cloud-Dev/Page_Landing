@@ -15,7 +15,7 @@ export const paidPlans = [
 
 export const gamePlans = [
   { name: 'Game Servers 1', cpu: 200, ram: 4096, disk: 10240, credit: 50000, days: 28, ports: 2, backups: 1, databases: 0, renewalDays: 90 },
-  { name: 'Game Servers 2', cpu: 200, ram: 6144, disk: 15360, credit: 65000, days: 28, ports: 3, backups: 1, databases: 0, renewalDays: 90 },
+  { name: 'Game Servers 2', cpu: 200, ram: 8192, disk: 20480, credit: 69000, days: 28, ports: 3, backups: 1, databases: 0, renewalDays: 90 },
 ] as const;
 
 export const formatCredit = (credit: number) => credit.toLocaleString('vi-VN');
