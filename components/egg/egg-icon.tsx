@@ -3,7 +3,7 @@ import { sitePath } from '@/lib/site-path';
 const iconNames: Record<string, string> = {
   WordPress: 'wordpress', PHPweb: 'php', Laravel: 'laravel', phpMyAdmin: 'phpmyadmin',
   OpenClaw: 'openclaw', LavaLink: 'lavalink',
-  Python: 'python', 'Node.js': 'nodejs', Bun: 'bun', C: 'c', Golang: 'go', Java: 'java',
+  Python: 'python', 'Node.js': 'nodejs', Bun: 'bun', C: 'c', Golang: 'go', Java: 'java', Rust: 'rust',
   Ubuntu: 'ubuntu', Debian: 'debian', 'Arch Linux': 'archlinux', 'Kali Linux': 'kalilinux',
   'Linux Mint': 'linuxmint', 'Rocky Linux': 'rockylinux', AlmaLinux: 'almalinux',
   CentOS: 'centos', 'Oracle Linux': 'oracle', Windows: 'windows11', Linux: 'linux',
@@ -18,7 +18,7 @@ export function EggIcon({ name, group, small = false }: { name: string; group: s
   return (
     <span
       className={small ? 'egg-icon egg-icon-small inline-flex h-5 w-5 shrink-0 items-center justify-center' : 'egg-icon inline-flex h-10 w-10 shrink-0 items-center justify-center'}
-      style={icon === 'wordpress' ? { background: '#f8fafc' } : undefined}
+      style={(icon === 'wordpress' || icon === 'rust') ? { background: '#f8fafc' } : undefined}
       aria-hidden="true"
     >
       <img

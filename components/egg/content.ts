@@ -80,6 +80,7 @@ export const eggGroups: EggGroup[] = [
       { name: 'Java' },
       { name: 'Node.js' },
       { name: 'Python' },
+      { name: 'Rust' },
     ],
   },
   {
