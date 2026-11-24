@@ -62,7 +62,7 @@ export function SiteFooter() {
           </div>
           {groups.map((group) => (
             <div key={group.title}>
-              <h2 className="eyebrow">{group.title}</h2>
+              <h2 className="eyebrow">{group.title === t.policies ? <a className="inline-flex min-h-11 items-center" href={localizedPath("/policies/",locale)}>{locale === "en" ? "Policy center ↗" : "Trung tâm chính sách ↗"}</a> : group.title}</h2>
               <nav className="mt-3 flex flex-col">
                 {group.links.map(([path, label]) => (
                   <a

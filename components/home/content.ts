@@ -172,7 +172,7 @@ export const homeBenefits = [
   },
   {
     icon: '⚡',
-    title: 'Chính Sách An Toàn & Hỗ Trợ 24/7',
+    title: 'Chính Sách Rõ Ràng & Kênh Hỗ Trợ',
     description:
       'Đội ngũ kỹ thuật viên trực tiếp hỗ trợ qua Discord Ticket, Zalo và Messenger; chính sách dữ liệu công khai rõ ràng.',
   },

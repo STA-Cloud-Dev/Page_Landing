@@ -1,3 +1,4 @@
+import supplements from '@/lib/i18n/dictionaries/policy-supplements.json';
 import expiryPolicy from '@/lib/i18n/dictionaries/server-expiry.json';
 import { freePolicy } from '@/components/shared/free-plans';
 
@@ -8,14 +9,15 @@ export type LegalSubsection = {
 };
 
 export type LegalSection = {
+  id?: string;
   title: string;
   paragraphs?: string[];
   bullets?: string[];
   subsections?: LegalSubsection[];
 };
 
-export const legalLastUpdated = '17/11/2026';
-export const slaLastUpdated = '24/10/2026';
+export const legalLastUpdated = '24/11/2026';
+export const slaLastUpdated = '24/11/2026';
 export const partnerLastUpdated = '19/09/2026';
 
 export const termsSections: LegalSection[] = [
@@ -106,7 +108,7 @@ export const termsSections: LegalSection[] = [
         title: '7.5 Thực thi',
         bullets: [
           'Giám sát: Chúng tôi có thể giám sát việc sử dụng để giữ môi trường công bằng và an toàn.',
-          'Phát hiện lạm dụng tự động: Chúng tôi sử dụng hệ thống tự động để phát hiện hành vi lạm dụng như crypto mining, selfbot hoặc proxy. Tài khoản và máy chủ có thể bị tạm ngưng mà không cần thông báo trước nếu bị gắn cờ. Hãy bảo đảm script của bạn tuân thủ quy định.',
+          'Phát hiện lạm dụng tự động: Chúng tôi sử dụng hệ thống tự động để phát hiện hành vi lạm dụng như crypto mining, selfbot hoặc proxy. Tài khoản và máy chủ có thể bị hạn chế tạm thời để bảo vệ hệ thống khi bị gắn cờ; khách hàng có thể yêu cầu kiểm tra lại kết quả. Hãy bảo đảm script của bạn tuân thủ quy định.',
           'Hợp tác từ người dùng: Vui lòng hỗ trợ nếu chúng tôi cần điều tra một vấn đề nào đó.',
           'Vi phạm: Chúng tôi có thể gỡ bỏ nội dung, tạm ngưng hoặc chấm dứt tài khoản nếu các quy định này bị vi phạm.',
         ],
@@ -118,7 +120,7 @@ export const termsSections: LegalSection[] = [
           'Hosting FREE được cung cấp theo chính sách Free Forever và mỗi lần tạo plan có giá 0 Credit.',
           'Người dùng kiểm tra slot và đăng ký trên Portal; có thể tạo ticket Discord để được hỗ trợ.',
           'Hosting FREE không hỗ trợ backup. Người dùng phải tự tải bản sao lưu về máy trước khi có sự cố.',
-          'Nghiêm cấm DDoS, mining, scan port, botnet, mã độc, nội dung độc hại hoặc vi phạm pháp luật. Tài khoản vi phạm bị khóa vĩnh viễn và không hỗ trợ mở lại.',
+          'Nghiêm cấm DDoS, mining, scan port, botnet, mã độc, nội dung độc hại hoặc vi phạm pháp luật. Tài khoản có vi phạm nghiêm trọng đã được xác minh bị khóa vĩnh viễn và không hỗ trợ mở lại; chủ tài khoản có thể yêu cầu kiểm tra lại nếu cho rằng quyết định nhầm lẫn.',
         ],
       },
     ],
@@ -158,7 +160,7 @@ export const termsSections: LegalSection[] = [
   },
 ];
 
-termsSections.push({ title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
+termsSections.push({ id: 'renewal-expiration', title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
 
 export const privacySections: LegalSection[] = [
   {
@@ -569,3 +571,7 @@ export const partnerSections: LegalSection[] = [
     ],
   },
 ];
+
+termsSections.push(...supplements.vi.terms);
+privacySections.push(...supplements.vi.privacy);
+slaSections.push(...supplements.vi.sla);

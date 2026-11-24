@@ -1531,3 +1531,6 @@ body {
 /* Keep footer copy inside its rounded surface at every breakpoint. */
 .site-footer .footer-panel { overflow-wrap: anywhere; }
 .site-footer .footer-panel > .grid > div { min-width: 0; }
+
+.policy-anchor { display:block;position:relative;scroll-margin-top:110px; }
+.policy-directory > article { min-width:0;overflow-wrap:anywhere; }

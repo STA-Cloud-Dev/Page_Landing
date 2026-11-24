@@ -58,5 +58,9 @@
   "cookies": {
     "title": "Cookie policy | STA Cloud",
     "description": "Browser storage on the public STA Cloud site and Portal: essential sessions, security verification, filters, analytics and browser controls."
+  },
+  "policies": {
+    "title": "STA Cloud Policy Center | Terms, Credit, backups & support",
+    "description": "Find all seven STA Cloud policy documents: terms, privacy, SLA, Credit refunds, security, cookies and partners. Resource limits, abuse, appeals, expiry and data retention."
   }
 }

@@ -1,3 +1,5 @@
+import supplements from '@/lib/i18n/dictionaries/policy-supplements.json';
+import { PolicyCenter } from '@/components/legal/policy-center';
 import { SiteShell } from "./site-shell";
 import { ImmersiveHero } from "@/components/home/immersive-hero";
 import { PricingCatalog } from "@/components/pricing/catalog";
@@ -349,6 +351,7 @@ function EnglishAbout() {
   );
 }
 export function EnglishPage({ page }: { page: PublicPage }) {
+  if (page === "policies") return <PolicyCenter locale="en" />;
   if (page === "") return <EnglishHome />;
   if (page === "egg") return <EggPage />;
   if (page === "about") return <EnglishAbout />;
@@ -360,8 +363,8 @@ export function EnglishPage({ page }: { page: PublicPage }) {
         eyebrow="STA Cloud policies"
         title={data.title}
         intro={data.intro}
-        lastUpdated={page === "refund" ? "24/11/2026" : "17/11/2026"}
-        sections={data.sections}
+        lastUpdated={["terms", "privacy", "sla", "refund", "security"].includes(page) ? "24/11/2026" : "17/11/2026"}
+        sections={[...data.sections, ...(page in supplements.en ? supplements.en[page as keyof typeof supplements.en] : [])]}
       />
     );
   }

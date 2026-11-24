@@ -1,0 +1,176 @@
+{
+  "vi": {
+    "terms": [
+      {
+        "id": "fair-use",
+        "title": "Fair Use Policy — CPU, RAM, Disk I/O và Network",
+        "paragraphs": [
+          "Tài nguyên CPU, RAM và dung lượng ổ đĩa áp dụng theo cấu hình gói trên Portal tại thời điểm mua. Phần trăm CPU là giới hạn được cấu hình cho dịch vụ, không mặc nhiên là CPU vật lý riêng hoặc mức hiệu năng được bảo đảm. Khách hàng cần theo dõi mức sử dụng và chọn gói phù hợp.",
+          "Disk I/O, IOPS, băng thông và lưu lượng áp dụng theo giới hạn thực tế của gói, node và nhà cung cấp. Nếu bảng gói không công bố một con số, không được hiểu là không giới hạn. Khách hàng có nhu cầu tải liên tục hoặc lưu lượng lớn cần xác nhận khả năng đáp ứng trước khi mua.",
+          "Không tạo tải kéo dài gây nghẽn ổ đĩa, mạng hoặc ảnh hưởng khách hàng khác; không né giới hạn bằng nhiều tiến trình, tài khoản hoặc dịch vụ. Khi quá tải, STA Cloud có thể giới hạn tài nguyên, yêu cầu tối ưu hoặc nâng gói; rủi ro nghiêm trọng có thể cần cô lập ngay theo quy trình xử lý lạm dụng."
+        ]
+      },
+      {
+        "id": "abuse",
+        "title": "Abuse Policy — Báo cáo và xử lý lạm dụng",
+        "paragraphs": [
+          "Gửi báo cáo qua ticket Discord chính thức hoặc stacloud.dev@gmail.com, kèm IP/domain hoặc mã dịch vụ liên quan, thời điểm và múi giờ, mô tả tác động cùng log hoặc bằng chứng cần thiết đã che bí mật. Không đăng công khai mật khẩu, token hoặc dữ liệu cá nhân.",
+          "STA Cloud đối chiếu dữ liệu kỹ thuật và có thể yêu cầu thông tin bổ sung hoặc liên hệ chủ dịch vụ để xử lý. Không tự động coi mọi cảnh báo tài nguyên là tấn công hay mọi báo cáo là bằng chứng đã xác minh.",
+          "Trường hợp mã độc, DDoS, botnet, phishing, truy cập trái phép hoặc nguy cơ gây hại nghiêm trọng có thể bị giới hạn hoặc cô lập trước khi thông báo. Các trường hợp khác được yêu cầu khắc phục theo thông báo cụ thể. Có thể gỡ nội dung, hạn chế kết nối, khóa dịch vụ hoặc chấm dứt khi vi phạm được xác nhận."
+        ]
+      },
+      {
+        "id": "suspension-appeal",
+        "title": "Suspension & Appeal Policy — Khóa dịch vụ và khiếu nại",
+        "paragraphs": [
+          "Khóa tạm thời/cô lập nhằm bảo vệ hệ thống không đồng nghĩa với xóa server hoặc kết luận vi phạm vĩnh viễn. Lý do có thể gồm hết hạn, thanh toán chưa xác minh, lạm dụng tài nguyên, vi phạm điều khoản hoặc rủi ro an ninh. Khi có thể và được phép, thông báo sẽ nêu lý do, phạm vi hạn chế và cách liên hệ.",
+          "Chủ tài khoản có thể gửi ticket khiếu nại, nêu mã dịch vụ, thông báo đã nhận, lý do đề nghị xem xét, bằng chứng và biện pháp khắc phục. STA Cloud xác minh quyền sở hữu và kiểm tra lại dữ liệu liên quan; cảnh báo tự động có thể được yêu cầu rà soát. Không tạo tài khoản khác hoặc né giới hạn trong lúc đang bị xử lý.",
+          "Kết quả xem xét có thể giữ nguyên hạn chế, mở lại có điều kiện hoặc khôi phục truy cập nếu xác định khóa nhầm. Khiếu nại không bảo đảm được mở lại và không tự kéo dài thời gian giữ server/backup. Quy định vi phạm nghiêm trọng không hỗ trợ mở lại vẫn áp dụng; khách có thể yêu cầu kiểm tra tính chính xác của quyết định."
+        ]
+      },
+      {
+        "id": "network-policy",
+        "title": "Network Policy — IP, port, proxy và băng thông",
+        "paragraphs": [
+          "IP công cộng, IP riêng/dùng chung, NAT và số port được cấp theo từng gói. Không mặc nhiên có IP riêng, mọi port hoặc quyền cấu hình mạng trên host. Chỉ sử dụng IP và port được cấp; không giả mạo địa chỉ, chiếm port hoặc can thiệp lưu lượng của dịch vụ khác.",
+          "Không chạy open proxy, VPN/proxy công cộng hoặc dịch vụ chuyển tiếp nếu gói và đội ngũ chưa xác nhận cho phép; các hạn chế nghiêm ngặt hơn của gói miễn phí vẫn áp dụng. Không spam, tấn công mạng, quét trái phép hoặc phát tán nội dung độc hại.",
+          "Tốc độ cổng mạng, băng thông thực tế, lưu lượng, tuyến quốc tế và Anti-DDoS phụ thuộc dịch vụ, region và upstream. Ping trên sơ đồ là mô phỏng. Việc thay IP/port/location có thể cần thiết khi bảo trì hoặc xử lý sự cố; khả năng giữ địa chỉ cũ phải được xác nhận riêng. VPS/GPU của ICS theo điều kiện mạng do ICS xác nhận."
+        ]
+      }
+    ],
+    "refund": [
+      {
+        "id": "billing",
+        "title": "Billing Policy — Thanh toán, giá và số dư Credit",
+        "paragraphs": [
+          "Giá và chu kỳ của dịch vụ được công bố trên Portal; trước khi xác nhận mua, khách hàng cần kiểm tra đúng gói, tài nguyên, region, giá và điều kiện ưu đãi. Tỷ lệ quy đổi STA Cloud: 1 Credit = 1 VNĐ; bản tiếng Anh công bố US$1 = 25.000 Credit. Credit là số dư dùng cho dịch vụ theo chính sách Portal.",
+          "Chỉ thanh toán qua kênh chính thức; giữ mã giao dịch và tài khoản đã thanh toán. Nếu chuyển khoản sai nội dung, thiếu Credit, giao dịch trùng hoặc chưa ghi nhận, gửi ticket kèm thông tin đối soát đã che dữ liệu nhạy cảm. Không gửi lại thanh toán chỉ vì chưa thấy số dư mà chưa kiểm tra trạng thái giao dịch.",
+          "Giá mới, ưu đãi, thuế và phí bổ sung áp dụng theo thông tin xác nhận cho giao dịch; không tự hiểu ưu đãi được cộng dồn hoặc giá cũ được giữ vĩnh viễn. Chính sách refund 3 giờ và các điều kiện hoàn Credit nằm trong cùng văn bản này. Sản phẩm Oracle của ICS có bảng giá, VAT và thanh toán riêng tại ICS."
+        ]
+      }
+    ],
+    "sla": [
+      {
+        "id": "support",
+        "title": "Support Policy — Phạm vi và thời gian hỗ trợ",
+        "paragraphs": [
+          "Ticket Discord chính thức là kênh xử lý kỹ thuật và giao dịch; có thể gửi email stacloud.dev@gmail.com. Zalo và Messenger phù hợp để hỏi thông tin và tư vấn. Không gửi mật khẩu, khóa API hoặc dữ liệu riêng tư trong nhóm công khai.",
+          "Hỗ trợ bao gồm kiểm tra cấp phát, truy cập Portal, tài nguyên được cấp, sự cố hạ tầng thuộc phạm vi STA Cloud và hướng dẫn sử dụng cơ bản. Viết/sửa code ứng dụng, plugin, mod, quản trị nội dung, chuyển dữ liệu hoặc cấu hình chuyên sâu chỉ được thực hiện khi có thỏa thuận phù hợp. Khách vẫn chịu trách nhiệm với phần mềm và dữ liệu của mình.",
+          "Khách có thể gửi yêu cầu bất cứ lúc nào; phản hồi phụ thuộc đội ngũ đang online, mức độ sự cố và thông tin cung cấp. Đây không phải cam kết nhân sự trực 24/7. Mốc 24–48 giờ làm việc của hồ sơ refund và mục tiêu phản hồi Partner áp dụng theo chính sách tương ứng; không phải thời hạn sửa xong mọi sự cố.",
+          "Ticket cần có mã dịch vụ, thời điểm/múi giờ, lỗi quan sát được, các bước tái hiện và log đã che bí mật. Sự cố upstream hoặc sản phẩm ICS cần phối hợp bên cung cấp, không thể cam kết thời gian khắc phục thay họ."
+        ]
+      }
+    ],
+    "security": [
+      {
+        "id": "backup-restore",
+        "title": "Backup & Restore Policy — Bản sao lưu và khôi phục",
+        "paragraphs": [
+          "Chỉ gói ghi rõ quyền lợi Backup mới có quyền lợi tương ứng. Số vị trí sao lưu thủ công, bản sao dự phòng hạ tầng và khả năng restore là các chức năng khác nhau; không mặc nhiên suy ra quyền lợi từ một con số backup trên gói. FREE và OpenClaw Beta không có cam kết sao lưu/khôi phục.",
+          "Gói trả phí có công bố Backup dự phòng áp dụng lịch Thứ 3, Thứ 6 và Chủ nhật. Số bản giữ lại và thời gian lưu phụ thuộc cấu hình gói/node được xác nhận; không có cam kết giữ mọi phiên bản hoặc lưu vô thời hạn. Bản sao có thể bị thay thế theo chu kỳ; dữ liệu mới phát sinh sau lần sao lưu gần nhất có thể không nằm trong bản đó.",
+          "Gửi ticket từ chủ tài khoản, nêu server, mốc dữ liệu mong muốn và mục đích nhận file hoặc restore. Nếu backup còn tồn tại khi yêu cầu, STA Cloud cung cấp bản sao còn có sau xác minh quyền sở hữu. Việc khôi phục vào server đang có dữ liệu cần xác nhận phạm vi ghi đè trước khi thực hiện.",
+          "Không bảo đảm backup luôn tồn tại, đầy đủ, không hỏng hoặc tương thích để restore; không cam kết khôi phục dữ liệu đã xóa. Khách hàng cần giữ bản sao độc lập và kiểm tra khả năng phục hồi. Yêu cầu nhận backup không dừng quy trình xóa server hết hạn hoặc tự tạo quyền lợi backup cho gói không có."
+        ]
+      }
+    ],
+    "privacy": [
+      {
+        "id": "data-retention",
+        "title": "Data Retention Policy — Lưu trữ và xóa dữ liệu",
+        "paragraphs": [
+          "Server không gia hạn trong vòng 3 ngày kể từ thời điểm hết hạn sẽ bị xóa theo chính sách gia hạn của STA Cloud. Sau khi xóa, không còn cam kết truy cập hoặc khôi phục dữ liệu trên server. FREE Forever vẫn cần tuân thủ chu kỳ quản lý/gia hạn đã công bố.",
+          "Backup nếu còn được lưu theo chu kỳ và cấu hình sao lưu áp dụng cho dịch vụ; có thể được thay thế hoặc xóa độc lập với server. Không cam kết một số ngày lưu backup cố định cho mọi gói. Khách cần xác nhận thời hạn của gói trước khi dựa vào bản sao hạ tầng.",
+          "Dữ liệu tài khoản, giao dịch, ticket và log kỹ thuật được giữ trong khoảng thời gian cần thiết để cung cấp dịch vụ, đối soát, xử lý an ninh, tranh chấp hoặc nghĩa vụ pháp luật. Các nhóm dữ liệu này không mặc nhiên bị xóa cùng server và không có chung mốc 3 ngày. STA Cloud không công bố một thời hạn số ngày chung khi chưa có lịch lưu giữ áp dụng được xác nhận.",
+          "Chủ tài khoản có thể yêu cầu truy cập, chỉnh sửa hoặc xóa dữ liệu cá nhân qua ticket/email; yêu cầu được xác minh danh tính và xem xét theo nghĩa vụ pháp lý, bảo mật và vận hành. Khi còn căn cứ phải lưu, STA Cloud thông báo phạm vi có thể xử lý thay vì cam kết xóa ngay mọi bản ghi. Không gửi giấy tờ hoặc bí mật vào nhóm công khai."
+        ]
+      }
+    ]
+  },
+  "en": {
+    "terms": [
+      {
+        "id": "fair-use",
+        "title": "Fair Use Policy — CPU, RAM, disk I/O and network",
+        "paragraphs": [
+          "CPU, RAM and disk capacity follow the plan configuration on the Portal at purchase. CPU percentages describe the configured service limit, not a dedicated physical processor or guaranteed benchmark. Monitor usage and choose resources appropriate to your workload.",
+          "Disk I/O, IOPS, bandwidth and traffic limits depend on the plan, node and provider. An unpublished numerical limit does not mean unlimited usage. Confirm suitability before buying a service for sustained load or high traffic.",
+          "Do not create sustained disk/network congestion or harm other users, or evade limits using multiple processes, accounts or services. STA Cloud may limit resources, request optimization or recommend an upgrade. Serious risks may require immediate isolation under the abuse process."
+        ]
+      },
+      {
+        "id": "abuse",
+        "title": "Abuse Policy — Reporting and response",
+        "paragraphs": [
+          "Report through an official Discord ticket or stacloud.dev@gmail.com. Provide the relevant IP/domain or service ID, incident time and timezone, impact and necessary sanitized logs/evidence. Do not publish credentials, tokens or personal data.",
+          "STA Cloud checks technical evidence and may request more information or contact the service owner. A resource warning is not automatically an attack, and a report alone does not establish a confirmed violation.",
+          "Malware, DDoS, botnets, phishing, unauthorized access or serious ongoing harm may require restrictions or isolation before notice. Other issues may receive a specific remediation request. Confirmed violations can result in content removal, network restrictions, suspension or termination."
+        ]
+      },
+      {
+        "id": "suspension-appeal",
+        "title": "Suspension & Appeal Policy — Restrictions and review",
+        "paragraphs": [
+          "Temporary suspension or isolation protects systems and does not itself mean server deletion or a permanent violation finding. Reasons may include expiry, unverified payment, resource abuse, terms violations or security risks. When possible and permitted, a notice explains the reason, scope and contact route.",
+          "Account owners may appeal through a ticket, providing the service ID, notice received, grounds for review, evidence and remediation. STA Cloud verifies ownership and reviews relevant records; automated alerts may be challenged. Do not evade restrictions using other accounts.",
+          "Review may uphold restrictions, allow conditional reopening or restore access after an incorrect suspension. An appeal does not guarantee reopening or automatically extend server/backup retention. Published no-reopening rules for serious confirmed violations still apply; the accuracy of a decision may be reviewed."
+        ]
+      },
+      {
+        "id": "network-policy",
+        "title": "Network Policy — IP addresses, ports, proxies and bandwidth",
+        "paragraphs": [
+          "Public, dedicated/shared IPs, NAT and port allocations follow the chosen plan. A service does not automatically include a dedicated IP, all ports or host network administration. Use only allocated addresses and ports; do not spoof addresses, occupy others’ ports or interfere with their traffic.",
+          "Do not run open proxies, public VPN/proxy or forwarding services without explicit plan/support approval. Stricter free-tier restrictions continue to apply. Spam, network attacks, unauthorized scanning and malicious content are prohibited.",
+          "Port speed, actual bandwidth, traffic allowances, international routing and Anti-DDoS depend on the service, region and upstream. Map pings are simulated. IP/port/location changes may be needed for maintenance or incidents; retention of an old address must be confirmed separately. ICS Oracle products follow network conditions confirmed by ICS."
+        ]
+      }
+    ],
+    "refund": [
+      {
+        "id": "billing",
+        "title": "Billing Policy — Payments, pricing and Portal Credit",
+        "paragraphs": [
+          "Check the Portal plan, resources, region, price, cycle and promotion conditions before confirming a purchase. STA Cloud conversion: 1 Credit = 1 VND; the English site publishes US$1 = 25,000 Credit. Credit is a service balance governed by Portal policies.",
+          "Use official payment channels and retain the transaction reference and paying account. Report incorrect transfer references, missing Credit, duplicate or unrecorded transactions through a ticket with sanitized reconciliation details. Check payment status before paying again because a balance has not yet appeared.",
+          "Updated prices, discounts, taxes and additional fees follow the confirmed transaction terms. Do not assume discounts stack or historic prices remain fixed forever. The 3-hour Credit refund window and refund conditions appear in this same document. ICS Oracle products have separate ICS prices, VAT and payment arrangements."
+        ]
+      }
+    ],
+    "sla": [
+      {
+        "id": "support",
+        "title": "Support Policy — Scope and response availability",
+        "paragraphs": [
+          "Official Discord tickets handle technical and billing matters; stacloud.dev@gmail.com is also available. Zalo and Messenger are suitable for advice and general questions. Never send credentials, API keys or private data in public groups.",
+          "Support covers provisioning checks, Portal access, allocated resources, STA Cloud infrastructure incidents and basic usage guidance. Application coding, plugins, mods, content administration, migrations and advanced configuration require a suitable separate agreement. Customers remain responsible for their software and data.",
+          "Requests may be submitted at any time. Responses depend on team availability, severity and sufficient information; staffing is not guaranteed 24/7. Refund review periods of 24–48 business hours and partner initial-response targets follow their respective policies and are not guaranteed resolution times for every incident.",
+          "Provide the service ID, time/timezone, observed error, reproduction steps and sanitized logs. Upstream incidents and ICS products require provider coordination; STA Cloud cannot promise another provider’s repair time."
+        ]
+      }
+    ],
+    "security": [
+      {
+        "id": "backup-restore",
+        "title": "Backup & Restore Policy — Copies and recovery",
+        "paragraphs": [
+          "Backup benefits apply only where explicitly included. Manual backup slots, infrastructure backup copies and restore capability are distinct features; a plan’s backup count does not automatically grant every benefit. FREE and OpenClaw Beta have no backup/recovery guarantee.",
+          "Eligible paid plans explicitly listing infrastructure backups follow the Tuesday, Friday and Sunday schedule. Retained copy counts and storage periods depend on the confirmed plan/node configuration. Not every historical version is kept, and retention is not indefinite. New data after a backup may be absent from that copy.",
+          "The account owner must open a ticket identifying the server, desired recovery point and whether they need files or restoration. If a backup still exists at request time, STA Cloud supplies the remaining copy after ownership verification. Restoration over existing server data requires confirmation of the overwrite scope first.",
+          "Backup availability, completeness, integrity and restore compatibility are not guaranteed. Deleted-data recovery is not promised. Keep independent copies and test recovery. A backup request does not stop expiry deletion or create backup benefits for an ineligible plan."
+        ]
+      }
+    ],
+    "privacy": [
+      {
+        "id": "data-retention",
+        "title": "Data Retention Policy — Storage and deletion",
+        "paragraphs": [
+          "A server not renewed within 3 days after expiry is deleted under STA Cloud’s renewal policy. Access or restoration of server data is not guaranteed afterwards. Free Forever services must still follow their published management/renewal cycle.",
+          "Any remaining backups follow the service’s configured retention cycle and may be replaced or deleted independently of the server. No universal fixed number of backup-retention days is promised. Confirm plan-specific retention before relying on infrastructure copies.",
+          "Account, payment, ticket and technical-log records are retained as needed for service delivery, reconciliation, security, disputes or legal obligations. They are not automatically deleted with the server and do not share its 3-day deadline. No single day count is published without a confirmed applicable retention schedule.",
+          "Account owners may request access, correction or deletion of personal data through a ticket/email. Identity, legal, security and operational requirements are checked. Where records must be retained, STA Cloud explains the scope it can process rather than promising immediate deletion of every record. Do not send identity documents or secrets in public groups."
+        ]
+      }
+    ]
+  }
+}

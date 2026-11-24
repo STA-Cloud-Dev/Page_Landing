@@ -24,6 +24,7 @@ export function LegalPage({
     <SiteShell>
       <div className="page-container">
         <header className="page-heading">
+          <a className="action-link mb-3" href={localizedPath("/policies/", locale)}>{en ? "← Policy center" : "← Trung tâm chính sách"}</a>
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
           <p>{intro}</p>
@@ -42,7 +43,7 @@ export function LegalPage({
                 {sections.map((s, i) => (
                   <a
                     key={s.title}
-                    href={`#muc-${i + 1}`}
+                    href={`#${s.id || `muc-${i + 1}`}`}
                     className="flex min-h-11 items-center py-2 text-sm"
                   >
                     {s.title}
@@ -64,6 +65,7 @@ export function LegalPage({
                 id={`muc-${i + 1}`}
                 key={s.title}
               >
+                {s.id && <span id={s.id} className="policy-anchor" aria-hidden="true" />}
                 <h2>{s.title}</h2>
                 {s.paragraphs?.map((p, j) => (
                   <p key={j}>{p}</p>

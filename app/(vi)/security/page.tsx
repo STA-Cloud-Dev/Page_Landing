@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/legal-page";
 import {
   securitySections,
-  policyUpdated,
+  securityUpdated,
 } from "@/components/legal/additional-policies";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function PolicyPage() {
       eyebrow="Chính sách dịch vụ"
       title="Điều khoản bảo mật máy chủ"
       intro="Quyền truy cập hỗ trợ, trách nhiệm bảo mật và sao lưu dữ liệu."
-      lastUpdated={policyUpdated}
+      lastUpdated={securityUpdated}
       sections={securitySections}
     />
   );

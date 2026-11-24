@@ -47,6 +47,7 @@ export function MobileDrawer({
     ["/egg/", t.egg],
     ["/about/", t.about],
     ["/history/", t.history],
+    ["/policies/", locale === "en" ? "Policy center" : "Trung tâm chính sách"],
   ];
   const policies = [
     ["terms", t.terms],

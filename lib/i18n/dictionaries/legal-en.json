@@ -55,7 +55,7 @@
       {
         "title": "8. FREE hosting conditions",
         "paragraphs": [
-          "STA Cloud Free Gamming + AI: 75% CPU, 2048 MB RAM, 3072 MB disk. STA Cloud Free DEV: 50% CPU, 1024 MB RAM, 1024 MB disk. Both are Free Forever, with no charge; resources may change. Check availability and register on the Portal, or open a Discord ticket. Keep independent copies: no backup or recovery is included. DDoS, mining, port scanning, botnets, malware and illegal use lead to permanent suspension without reopening."
+          "STA Cloud Free Gamming + AI: 75% CPU, 2048 MB RAM, 3072 MB disk. STA Cloud Free DEV: 50% CPU, 1024 MB RAM, 1024 MB disk. Both are Free Forever, with no charge; resources may change. Check availability and register on the Portal, or open a Discord ticket. Keep independent copies: no backup or recovery is included. DDoS, mining, port scanning, botnets, malware and illegal use lead to permanent suspension without reopening when a serious violation is confirmed; owners may request review if they believe the finding is incorrect."
         ]
       },
       {
@@ -87,7 +87,8 @@
         "paragraphs": [
           "For servers supplied directly by STA Cloud: if a server is not renewed within 3 days after its expiry time, the server and its data will be deleted. STA Cloud is not responsible for data loss caused by failure to renew on time. Customers must renew promptly and keep independent copies of their data.",
           "If a backup of the server still exists in the backup system when the customer requests it, STA Cloud will provide that remaining backup after verifying ownership. Backup availability, completeness and usability are not guaranteed, and restoration of a deleted server or its data is not promised. This policy does not add backup benefits to plans that do not include backups."
-        ]
+        ],
+        "id": "renewal-expiration"
       }
     ]
   },
@@ -312,7 +313,8 @@
         "paragraphs": [
           "For servers supplied directly by STA Cloud: if a server is not renewed within 3 days after its expiry time, the server and its data will be deleted. STA Cloud is not responsible for data loss caused by failure to renew on time. Customers must renew promptly and keep independent copies of their data.",
           "If a backup of the server still exists in the backup system when the customer requests it, STA Cloud will provide that remaining backup after verifying ownership. Backup availability, completeness and usability are not guaranteed, and restoration of a deleted server or its data is not promised. This policy does not add backup benefits to plans that do not include backups."
-        ]
+        ],
+        "id": "renewal-expiration"
       }
     ]
   },

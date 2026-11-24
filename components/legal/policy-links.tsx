@@ -7,6 +7,7 @@ export const policyLinks = [
   { path: '/refund', label: 'Hoàn Credit' },
   { path: '/security', label: 'Bảo mật máy chủ' },
   { path: '/cookies', label: 'Chính sách Cookie' },
+  { path: '/partner', label: 'Chính sách Partner' },
 ] as const;
 
 export function PolicyLinks({ stacked = false }: { stacked?: boolean }) {

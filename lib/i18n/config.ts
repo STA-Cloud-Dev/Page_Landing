@@ -19,6 +19,7 @@ export const publicPages = [
   "refund",
   "security",
   "cookies",
+  "policies",
 ] as const;
 export type PublicPage = (typeof publicPages)[number];
 export function localizedPath(path: string, locale: Locale) {

@@ -1,8 +1,10 @@
+import supplements from '@/lib/i18n/dictionaries/policy-supplements.json';
 import expiryPolicy from '@/lib/i18n/dictionaries/server-expiry.json';
 import { freePolicy } from '@/components/shared/free-plans';
 import type { LegalSection } from './legal-content';
 
 export const policyUpdated = '17/11/2026';
+export const securityUpdated = '24/11/2026';
 export const refundUpdated = '24/11/2026';
 
 export const refundSections: LegalSection[] = [
@@ -66,7 +68,7 @@ export const securitySections: LegalSection[] = [
   ] },
 ];
 
-securitySections.push({ title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
+securitySections.push({ id: 'renewal-expiration', title: expiryPolicy.vi.title, paragraphs: [expiryPolicy.vi.text, expiryPolicy.vi.backup] });
 
 export const cookieSections: LegalSection[] = [
   { title: '1. Phạm vi và khái niệm', paragraphs: [
@@ -90,3 +92,6 @@ export const cookieSections: LegalSection[] = [
     'Gửi câu hỏi qua Ticket Discord hoặc stacloud.dev@gmail.com. Nội dung thu thập, sử dụng và chia sẻ dữ liệu được giải thích thêm tại Chính sách quyền riêng tư; biện pháp bảo vệ máy chủ nằm trong Điều khoản bảo mật.',
   ] },
 ];
+
+refundSections.push(...supplements.vi.refund);
+securitySections.push(...supplements.vi.security);

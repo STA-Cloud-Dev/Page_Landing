@@ -11,7 +11,7 @@ const sitemap = read("sitemap.xml");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(
   (match) => match[1],
 );
-assert.equal(urls.length, 30, "Review the public sitemap when routes change");
+assert.equal(urls.length, 32, "Review the public sitemap when routes change");
 assert.ok(
   urls.includes(`${origin}/pricing/`) && urls.includes(`${origin}/network/`),
   "Missing dedicated catalog/map routes",
@@ -270,5 +270,16 @@ for (const fact of [
 ])
   assert.ok(enFree.includes(fact), `Missing English FREE fact: ${fact}`);
 console.log(
-  "International SEO checks passed: 30 canonical pages, static VI/EN, reciprocal hreflang, legacy FREE forwarding.",
+  "International SEO checks passed: 32 canonical pages, static VI/EN, reciprocal hreflang, legacy FREE forwarding.",
 );
+
+for (const prefix of ['', 'en/']) {
+ const hub=read(`${prefix}policies/index.html`);
+ const policySchema=[...hub.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map(m=>JSON.parse(m[1])).find(n=>n['@type']==='CollectionPage');
+ assert.equal(policySchema?.mainEntity?.numberOfItems,7,'Policy hub must contain exactly seven documents');
+ for(const [page,anchors]of Object.entries({terms:['fair-use','abuse','suspension-appeal','network-policy','renewal-expiration'],refund:['billing'],sla:['support'],security:['backup-restore'],privacy:['data-retention']})){
+  const html=read(`${prefix}${page}/index.html`);
+  for(const anchor of anchors){assert.ok(html.includes(`id="${anchor}"`),`Missing policy anchor ${prefix}${page}#${anchor}`);assert.ok(hub.includes(`/${prefix}${page}/#${anchor}`),`Missing policy discovery link ${anchor}`);}
+ }
+}
+console.log('Policy checks passed: seven documents per language and all nine policy topics linked.');

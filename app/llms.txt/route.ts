@@ -31,6 +31,7 @@ ${serviceFacts.map((fact) => `### ${fact.question}\n\n${fact.answer}\n\nNguồn:
 
 ## Chính sách
 
+- [Trung tâm chính sách](${siteUrl}/policies/): 7 văn bản; Fair Use, Abuse, Suspension & Appeal, Billing, Renewal, Backup, Network, Support và Data Retention được phân vào từng văn bản.
 - [Điều khoản](${siteUrl}/terms/)
 - [SLA](${siteUrl}/sla/)
 - [Bảo mật và sao lưu](${siteUrl}/security/)
