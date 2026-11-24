@@ -360,7 +360,7 @@ export function EnglishPage({ page }: { page: PublicPage }) {
         eyebrow="STA Cloud policies"
         title={data.title}
         intro={data.intro}
-        lastUpdated="17/11/2026"
+        lastUpdated={page === "refund" ? "24/11/2026" : "17/11/2026"}
         sections={data.sections}
       />
     );

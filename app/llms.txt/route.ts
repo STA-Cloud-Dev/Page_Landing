@@ -34,7 +34,7 @@ ${serviceFacts.map((fact) => `### ${fact.question}\n\n${fact.answer}\n\nNguồn:
 - [Điều khoản](${siteUrl}/terms/)
 - [SLA](${siteUrl}/sla/)
 - [Bảo mật và sao lưu](${siteUrl}/security/)
-- [Hoàn Credit](${siteUrl}/refund/)
+- [Hoàn Credit](${siteUrl}/refund/): yêu cầu trong 3 giờ đầu sau khi mua gói server STA Cloud nếu chọn sai gói, mua nhầm hoặc không phù hợp nhu cầu; hoàn vào Credit Portal theo điều kiện công bố.
 - [Quyền riêng tư](${siteUrl}/privacy/)
 
 ## Phạm vi thông tin

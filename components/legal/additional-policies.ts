@@ -3,6 +3,7 @@ import { freePolicy } from '@/components/shared/free-plans';
 import type { LegalSection } from './legal-content';
 
 export const policyUpdated = '17/11/2026';
+export const refundUpdated = '24/11/2026';
 
 export const refundSections: LegalSection[] = [
   { title: 'Chính sách riêng cho nhóm FREE', paragraphs: [freePolicy, 'Chính sách FREE được ưu tiên áp dụng cho các gói trong nhóm FREE; không khấu trừ theo số ngày đã sử dụng hoặc áp dụng loại trừ sự cố, xóa máy chủ của gói trả phí bên dưới. Hoàn khoản thanh toán không bao gồm khôi phục dữ liệu.'] },
@@ -12,12 +13,14 @@ export const refundSections: LegalSection[] = [
     'Credit hoàn dùng để mua mới, nâng cấp hoặc gia hạn dịch vụ, không hết hạn; không được rút thành tiền mặt, chuyển nhượng hay chuyển sang tài khoản khác.',
   ] },
   { title: '2. Điều kiện xem xét', bullets: [
+    'Trong 3 giờ đầu kể từ thời điểm mua gói server trên Portal STA Cloud, khách hàng có thể yêu cầu hoàn Credit nếu chọn sai gói, gói không phù hợp nhu cầu hoặc mua nhầm. Khoản hoàn được cộng vào số dư Credit của chính tài khoản đã mua; không hoàn tiền mặt. Mốc 3 giờ được tính theo thời điểm gửi ticket hoặc email yêu cầu, không phải thời điểm đội ngũ phản hồi. Áp dụng cho gói server do STA Cloud trực tiếp cung cấp; sản phẩm ICS theo chính sách của ICS.',
     'Dịch vụ trả phí không khởi tạo thành công sau 24 giờ kể từ khi xác nhận thanh toán hợp lệ, trừ gói đặt trước đã công bố thời gian cấp phát 3 ngày hoặc thỏa thuận riêng.',
     'STACloud không còn tài nguyên hoặc không thể cấp phát đúng gói và khách hàng không đồng ý phương án thay thế.',
     'Trong 48 giờ đầu sau kích hoạt dịch vụ trả phí theo tháng, khách hàng có thể yêu cầu hủy khi dịch vụ không đáp ứng thông số kỹ thuật đã công bố. Các chu kỳ khác áp dụng điều kiện cấp phát và SLA tương ứng, không mặc nhiên có thời gian dùng thử 48 giờ.',
     'Gián đoạn thuộc trách nhiệm hạ tầng STACloud được xử lý theo phạm vi, loại trừ và tỷ lệ trong SLA.',
   ] },
   { title: '3. Cách tính số Credit được hoàn', paragraphs: [
+    'Yêu cầu chọn sai gói, mua nhầm hoặc không phù hợp nhu cầu được gửi trong 3 giờ đầu: hoàn toàn bộ Credit thực trả cho gói server đủ điều kiện, không khấu trừ theo ngày sử dụng. Các khoản phí riêng không thuộc diện hoàn và các trường hợp loại trừ tại mục 4 vẫn áp dụng. Công thức theo ngày bên dưới áp dụng cho các yêu cầu hoàn theo tỷ lệ khác.',
     'Credit hoàn = max(0, Credit thực trả − đơn giá ngày × số ngày đã sử dụng − phí thiết lập đặc biệt đã công bố và được chấp thuận trước). Đơn giá ngày = Credit thực trả / số ngày của chu kỳ gói đã mua.',
     'Thời gian sử dụng được tính từ kích hoạt đến thời điểm dừng dịch vụ được xác nhận, làm tròn lên ngày nguyên. Dịch vụ chưa kích hoạt do không thể cấp phát được hoàn toàn bộ Credit thực trả. Không khấu trừ ngày chờ cấp phát do lỗi STACloud.',
     'Nếu đã sử dụng trên 50% chu kỳ, STACloud có thể từ chối yêu cầu hủy theo nhu cầu cá nhân; quyền yêu cầu service credit cho sự cố đủ điều kiện theo SLA vẫn được xét riêng.',
@@ -31,7 +34,7 @@ export const refundSections: LegalSection[] = [
     'Gói Partner đã hưởng ưu đãi trên 20% không thuộc chính sách hủy hoàn Credit theo nhu cầu; sự cố đủ điều kiện vẫn được xét theo SLA và thỏa thuận riêng.',
   ] },
   { title: '5. Gửi và xử lý yêu cầu', paragraphs: [
-    'Tạo Ticket Discord chính thức hoặc gửi email stacloud.dev@gmail.com, kèm ID tài khoản Portal, mã giao dịch, tên gói, thời gian kích hoạt, lý do và log/ảnh lỗi đã che mật khẩu, khóa API hoặc dữ liệu riêng tư.',
+    'Tạo Ticket Discord chính thức hoặc gửi email stacloud.dev@gmail.com, kèm ID tài khoản Portal, mã giao dịch, tên gói, thời điểm mua và kích hoạt, thời điểm gửi yêu cầu, lý do và log/ảnh lỗi đã che mật khẩu, khóa API hoặc dữ liệu riêng tư.',
     'STACloud xem xét hồ sơ đầy đủ trong 24–48 giờ làm việc. Kết quả, cách tính và thời điểm ghi Credit được xác nhận qua ticket; thời gian xử lý không phải cam kết tự động chấp thuận.',
   ] },
 ];

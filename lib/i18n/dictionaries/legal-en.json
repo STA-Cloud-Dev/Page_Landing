@@ -237,7 +237,7 @@
   },
   "refund": {
     "title": "Credit refund policy",
-    "intro": "Eligible payments are returned as Portal Credit. Free services have no payment to refund.",
+    "intro": "Request a Credit refund within 3 hours of purchasing a server plan if you chose the wrong plan or it does not fit your needs. Eligible payments return to your Portal Credit balance.",
     "sections": [
       {
         "title": "1. Scope",
@@ -248,12 +248,14 @@
       {
         "title": "2. Eligibility",
         "paragraphs": [
+          "Within the first 3 hours after purchasing a server plan on the STA Cloud Portal, customers may request a Credit refund if they selected the wrong plan, purchased by mistake or find the plan unsuitable for their needs. Refunds return to the purchasing account’s Portal Credit balance, not cash. The 3-hour deadline is based on when the ticket or email is submitted, not when support replies. This applies to server plans supplied directly by STA Cloud; ICS products follow ICS policies.",
           "Requests may be considered if a paid service cannot be created within 24 hours of valid payment confirmation, except preorders with an announced 3-day provisioning period or a separate agreement; or resources cannot be supplied and the customer rejects alternatives. During the first 48 hours of a monthly paid service, cancellation may be requested if published technical specifications are not met. Other cycles do not automatically include a 48-hour trial. Covered outages follow the SLA."
         ]
       },
       {
         "title": "3. Calculation",
         "paragraphs": [
+          "Eligible wrong-plan, mistaken-purchase or unsuitable-plan requests submitted within the first 3 hours receive the full Credit actually paid for the server plan, with no daily usage deduction. Separately charged non-refundable items and the exclusions in section 4 still apply. The daily-rate formula below applies to other prorated refund requests.",
           "Refund Credit = max(0, Credit actually paid − daily rate × days used − special setup fees disclosed and accepted in advance). Daily rate = Credit actually paid / purchased cycle days. Usage runs from activation to confirmed stop, rounded up to whole days. Unactivated services that cannot be provisioned receive all Credit actually paid; STA Cloud-caused provisioning waits are not deducted. Cancellation for personal preference may be declined after more than 50% of the cycle has been used. Separate eligible SLA claims remain reviewable. No double refund is given for the same fee or loss. SLA credits are 10%, 25% or 50% according to the uptime thresholds."
         ]
       },
@@ -266,7 +268,7 @@
       {
         "title": "5. Requests",
         "paragraphs": [
-          "Use an official Discord ticket or stacloud.dev@gmail.com. Include the Portal account ID, transaction reference, plan, activation time, reason and sanitized logs/screenshots. Remove passwords, API keys and private data. Complete requests are reviewed within 24–48 business hours; this is a review period, not automatic approval. The calculation and Credit posting time are confirmed through the ticket."
+          "Use an official Discord ticket or stacloud.dev@gmail.com. Include the Portal account ID, transaction reference, plan, purchase and activation times, request submission time, reason and sanitized logs/screenshots. Remove passwords, API keys and private data. Complete requests are reviewed within 24–48 business hours; this is a review period, not automatic approval. The calculation and Credit posting time are confirmed through the ticket."
         ]
       }
     ]
