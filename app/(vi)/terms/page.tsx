@@ -3,7 +3,7 @@ import { localizedAlternates } from "@/lib/site-seo";
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/legal-page";
 import {
-  legalLastUpdated,
+  termsLastUpdated,
   termsSections,
 } from "@/components/legal/legal-content";
 
@@ -23,7 +23,7 @@ export default function TermsPage() {
       eyebrow="Pháp Lý"
       title="Điều Khoản Dịch Vụ"
       intro="Khi sử dụng dịch vụ của STACloud, bạn đồng ý với các điều khoản dưới đây. Vui lòng đọc kỹ trước khi tiếp tục."
-      lastUpdated={legalLastUpdated}
+      lastUpdated={termsLastUpdated}
       sections={termsSections}
     />
   );

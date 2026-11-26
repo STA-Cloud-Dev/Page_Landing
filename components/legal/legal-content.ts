@@ -16,6 +16,7 @@ export type LegalSection = {
   subsections?: LegalSubsection[];
 };
 
+export const termsLastUpdated = '26/11/2026';
 export const legalLastUpdated = '24/11/2026';
 export const slaLastUpdated = '24/11/2026';
 export const partnerLastUpdated = '19/09/2026';
@@ -45,8 +46,13 @@ export const termsSections: LegalSection[] = [
     ],
   },
   {
-    title: '4. Bảo mật tài khoản',
+    id: 'account-policy',
+    title: '4. Tài khoản & trách nhiệm sử dụng',
     bullets: [
+      'Mỗi người chỉ được đăng ký và sử dụng 01 tài khoản STA Cloud, trừ trường hợp được đội ngũ chấp thuận trước. Không tạo hoặc sử dụng nhiều tài khoản để nhận thêm ưu đãi, vượt giới hạn gói FREE, né giới hạn tài nguyên hoặc tránh quyết định khóa tài khoản.',
+      'Quy định 01 tài khoản không đồng nghĩa chỉ được mua 01 server. Số server và số lần mua áp dụng theo giới hạn của từng gói.',
+      'Khi có dấu hiệu nhiều tài khoản cùng một người, STA Cloud có thể tạm hạn chế các tài khoản liên quan để xác minh. Không coi việc trùng IP là đủ bằng chứng vi phạm, vì người cùng nhà, ký túc xá hoặc công ty có thể dùng chung mạng.',
+      'Trường hợp xác nhận cố tình vi phạm quy định nhiều tài khoản có thể bị khóa các tài khoản và dịch vụ liên quan. Chủ tài khoản có thể gửi ticket yêu cầu kiểm tra lại nếu cho rằng xử lý nhầm, theo quy trình khóa dịch vụ và khiếu nại.',
       'Bạn có trách nhiệm giữ an toàn cho tài khoản của mình.',
       'Chúng tôi không chịu trách nhiệm cho các truy cập trái phép do mật khẩu yếu hoặc do sự bất cẩn của người dùng.',
       'Nếu bạn cho rằng có người đang sử dụng tài khoản của mình mà không được phép, hãy liên hệ với chúng tôi ngay lập tức.',

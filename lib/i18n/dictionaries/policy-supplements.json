@@ -7,7 +7,8 @@
         "paragraphs": [
           "Tài nguyên CPU, RAM và dung lượng ổ đĩa áp dụng theo cấu hình gói trên Portal tại thời điểm mua. Phần trăm CPU là giới hạn được cấu hình cho dịch vụ, không mặc nhiên là CPU vật lý riêng hoặc mức hiệu năng được bảo đảm. Khách hàng cần theo dõi mức sử dụng và chọn gói phù hợp.",
           "Disk I/O, IOPS, băng thông và lưu lượng áp dụng theo giới hạn thực tế của gói, node và nhà cung cấp. Nếu bảng gói không công bố một con số, không được hiểu là không giới hạn. Khách hàng có nhu cầu tải liên tục hoặc lưu lượng lớn cần xác nhận khả năng đáp ứng trước khi mua.",
-          "Không tạo tải kéo dài gây nghẽn ổ đĩa, mạng hoặc ảnh hưởng khách hàng khác; không né giới hạn bằng nhiều tiến trình, tài khoản hoặc dịch vụ. Khi quá tải, STA Cloud có thể giới hạn tài nguyên, yêu cầu tối ưu hoặc nâng gói; rủi ro nghiêm trọng có thể cần cô lập ngay theo quy trình xử lý lạm dụng."
+          "Không tạo tải kéo dài gây nghẽn ổ đĩa, mạng hoặc ảnh hưởng khách hàng khác; không né giới hạn bằng nhiều tiến trình, tài khoản hoặc dịch vụ. Khi quá tải, STA Cloud có thể giới hạn tài nguyên, yêu cầu tối ưu hoặc nâng gói; rủi ro nghiêm trọng có thể cần cô lập ngay theo quy trình xử lý lạm dụng.",
+          "Mỗi người chỉ dùng 01 tài khoản trừ khi được chấp thuận trước, theo mục Tài khoản & trách nhiệm sử dụng. Không tạo nhiều tài khoản để lấy thêm gói FREE hoặc né giới hạn; số server được mua vẫn theo điều kiện từng gói."
         ]
       },
       {
@@ -94,7 +95,8 @@
         "paragraphs": [
           "CPU, RAM and disk capacity follow the plan configuration on the Portal at purchase. CPU percentages describe the configured service limit, not a dedicated physical processor or guaranteed benchmark. Monitor usage and choose resources appropriate to your workload.",
           "Disk I/O, IOPS, bandwidth and traffic limits depend on the plan, node and provider. An unpublished numerical limit does not mean unlimited usage. Confirm suitability before buying a service for sustained load or high traffic.",
-          "Do not create sustained disk/network congestion or harm other users, or evade limits using multiple processes, accounts or services. STA Cloud may limit resources, request optimization or recommend an upgrade. Serious risks may require immediate isolation under the abuse process."
+          "Do not create sustained disk/network congestion or harm other users, or evade limits using multiple processes, accounts or services. STA Cloud may limit resources, request optimization or recommend an upgrade. Serious risks may require immediate isolation under the abuse process.",
+          "Each person may use only one account unless approved in advance, under Accounts and user responsibilities. Do not create extra accounts to obtain more FREE plans or evade limits; server purchase counts still follow each plan."
         ]
       },
       {

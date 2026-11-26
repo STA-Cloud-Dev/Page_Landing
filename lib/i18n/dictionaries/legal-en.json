@@ -28,10 +28,15 @@
         ]
       },
       {
-        "title": "4. Account security",
+        "title": "4. Accounts and user responsibilities",
         "paragraphs": [
+          "Each person may register and use only one STA Cloud account unless approved by the team in advance. Do not create or use multiple accounts to obtain extra promotions, exceed FREE-plan limits, evade resource limits or circumvent an account suspension.",
+          "One account does not mean only one server may be purchased. Server counts and purchase limits follow the conditions of each plan.",
+          "Where multiple accounts appear to belong to one person, STA Cloud may temporarily restrict the related accounts for verification. A shared IP address alone is not sufficient evidence of a violation: households, dormitories and workplaces may share a network.",
+          "Confirmed deliberate violations of the multiple-account rule may result in suspension of the related accounts and services. Account owners may open a ticket to request review if they believe enforcement was mistaken, under the suspension and appeal process.",
           "Keep your account secure. STA Cloud is not responsible for unauthorized access caused by weak passwords or user negligence. Report suspected unauthorized use immediately."
-        ]
+        ],
+        "id": "account-policy"
       },
       {
         "title": "5. Service use",

@@ -32,7 +32,7 @@ ${serviceFacts.map((fact) => `### ${fact.question}\n\n${fact.answer}\n\nNguồn:
 ## Chính sách
 
 - [Trung tâm chính sách](${siteUrl}/policies/): 7 văn bản; Fair Use, Abuse, Suspension & Appeal, Billing, Renewal, Backup, Network, Support và Data Retention được phân vào từng văn bản.
-- [Điều khoản](${siteUrl}/terms/)
+- [Điều khoản](${siteUrl}/terms/): mỗi người 01 tài khoản trừ khi được chấp thuận trước; số server theo từng gói, trùng IP không đủ để kết luận vi phạm.
 - [SLA](${siteUrl}/sla/)
 - [Bảo mật và sao lưu](${siteUrl}/security/)
 - [Hoàn Credit](${siteUrl}/refund/): yêu cầu trong 3 giờ đầu sau khi mua gói server STA Cloud nếu chọn sai gói, mua nhầm hoặc không phù hợp nhu cầu; hoàn vào Credit Portal theo điều kiện công bố.

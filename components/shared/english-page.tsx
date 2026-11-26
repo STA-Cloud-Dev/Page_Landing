@@ -363,7 +363,7 @@ export function EnglishPage({ page }: { page: PublicPage }) {
         eyebrow="STA Cloud policies"
         title={data.title}
         intro={data.intro}
-        lastUpdated={["terms", "privacy", "sla", "refund", "security"].includes(page) ? "24/11/2026" : "17/11/2026"}
+        lastUpdated={page === "terms" ? "26/11/2026" : ["privacy", "sla", "refund", "security"].includes(page) ? "24/11/2026" : "17/11/2026"}
         sections={[...data.sections, ...(page in supplements.en ? supplements.en[page as keyof typeof supplements.en] : [])]}
       />
     );
