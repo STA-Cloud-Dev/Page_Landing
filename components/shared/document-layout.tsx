@@ -65,15 +65,8 @@ export const baseMetadata: Metadata = {
     images: [siteImage.url],
   },
   icons: {
-    apple: [{ url: sitePath("/picture/iconSTACloud.png") }],
-    icon: [
-      {
-        url: sitePath("/picture/iconSTACloud.png"),
-        type: "image/png",
-        sizes: "500x500",
-      },
-      { url: sitePath("/favicon.ico"), type: "image/x-icon", sizes: "any" },
-    ],
+    apple: [{ url: sitePath("/picture/logo.png") }],
+    icon: [{ url: sitePath("/picture/logo.ico"), type: "image/x-icon", sizes: "any" }],
   },
   robots: { index: true, follow: true, "max-image-preview": "large" },
 };

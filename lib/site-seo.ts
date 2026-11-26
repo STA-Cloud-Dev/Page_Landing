@@ -31,7 +31,7 @@ export const siteServices = [
 ] as const;
 
 export const siteImage = {
-  url: `${siteUrl}/picture/iconSTACloud.png`,
+  url: `${siteUrl}/picture/logo.png`,
   width: 500,
   height: 500,
   alt: "STACloud — STA Cloud Hosting",

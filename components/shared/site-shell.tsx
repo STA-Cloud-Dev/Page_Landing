@@ -45,11 +45,11 @@ export function SiteShell({
             className="shrink-0"
           >
             <img
-              src={sitePath("/picture/logoSTACloud-204.webp")}
-              width={204}
-              height={70}
+              src={sitePath("/picture/logosta.png")}
+              width={500}
+              height={500}
               alt="STACloud"
-              className="h-9 w-auto sm:h-11"
+              className="h-20 w-20 object-contain"
               decoding="async"
             />
           </a>
