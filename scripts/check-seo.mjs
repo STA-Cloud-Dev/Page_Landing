@@ -285,6 +285,7 @@ for (const prefix of ['', 'en/']) {
 console.log('Policy checks passed: seven documents per language and all nine policy topics linked.');
 
 const minimalSitemap = read('sitemap-pages.xml');
+assert.ok(!minimalSitemap.includes(String.fromCharCode(92) + 'n'), 'XML must contain real line breaks');
 const minimalUrls = [...minimalSitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match=>match[1]);
 assert.deepEqual(minimalUrls, urls, 'Minimal XML must use the same canonical inventory');
 assert.ok(!minimalSitemap.includes('xhtml:link'), 'Keep fallback XML minimal');
