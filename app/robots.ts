@@ -5,7 +5,7 @@ export const dynamic = 'force-static';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://stacloud.eu.cc/sitemap.xml',
+    sitemap: ['https://stacloud.eu.cc/sitemap.xml', 'https://stacloud.eu.cc/sitemap-pages.xml'],
     host: 'https://stacloud.eu.cc',
   };
 }

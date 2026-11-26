@@ -283,3 +283,10 @@ for (const prefix of ['', 'en/']) {
  }
 }
 console.log('Policy checks passed: seven documents per language and all nine policy topics linked.');
+
+const minimalSitemap = read('sitemap-pages.xml');
+const minimalUrls = [...minimalSitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match=>match[1]);
+assert.deepEqual(minimalUrls, urls, 'Minimal XML must use the same canonical inventory');
+assert.ok(!minimalSitemap.includes('xhtml:link'), 'Keep fallback XML minimal');
+assert.ok(read('robots.txt').includes(`${origin}/sitemap-pages.xml`), 'Discover minimal sitemap through robots');
+console.log('Minimal sitemap checks passed: canonical inventory matches multilingual XML.');
